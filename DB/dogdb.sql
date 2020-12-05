@@ -571,8 +571,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `general_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `user_id`) VALUES (1, '2020-10-10 ', 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'What shampoo to use?', NULL, 1);
-INSERT INTO `general_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `user_id`) VALUES (2, '2020-10-11', 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'Dog Food', 1, 1);
+INSERT INTO `general_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `user_id`) VALUES (1, '2020-10-10 12:30:16', 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'What shampoo to use?', NULL, 1);
+INSERT INTO `general_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `user_id`) VALUES (2, '2020-10-10 12:50:16', 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'Dog Food', 1, 1);
 
 COMMIT;
 
