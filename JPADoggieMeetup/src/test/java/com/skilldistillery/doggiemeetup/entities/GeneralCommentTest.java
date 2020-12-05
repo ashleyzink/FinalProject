@@ -33,7 +33,7 @@ class GeneralCommentTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		generalComment = em.find(GeneralComment.class, 1);
+		generalComment = em.find(GeneralComment.class, 2);
 	}
 
 	@AfterEach
@@ -46,7 +46,7 @@ class GeneralCommentTest {
 	@DisplayName("test generalComment entity")
 	void test() {
 		assertNotNull(generalComment);
-		assertEquals("What shampoo to use?", generalComment.getTitle());
+		assertEquals("Dog Food", generalComment.getTitle());
 	}
 	
 	@Test
