@@ -57,8 +57,8 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List <Route> routes;
 	
-//	@OneToMany(mappedBy="user")
-//	private List <MeetupComment> meetupComments;
+	@OneToMany(mappedBy="user")
+	private List <MeetupComment> meetupComments;
 	
 	@OneToMany(mappedBy="user")
 	private List <Meetup> meetups;
@@ -259,14 +259,14 @@ public class User {
 		this.routes = routes;
 	}
 	
-//	public List<MeetupComment> getMeetupComments() {
-//		return meetupComments;
-//	}
-//	
-//	
-//	public void setMeetupComments(List<MeetupComment> meetupComments) {
-//		this.meetupComments = meetupComments;
-//	}
+	public List<MeetupComment> getMeetupComments() {
+		return meetupComments;
+	}
+	
+	
+	public void setMeetupComments(List<MeetupComment> meetupComments) {
+		this.meetupComments = meetupComments;
+	}
 	
 	public List<Meetup> getMeetups() {
 		return meetups;

@@ -79,9 +79,9 @@ class UserTest {
 		
 	}
 	
-//	@Test
-//	@DisplayName("One to Many User to Meetup Comment")
-//	void test4() {
+	@Test
+	@DisplayName("One to Many User to Meetup Comment")
+	void test4() {
 ////		SELECT user.username, meetup_comment.* FROM meetup_comment JOIN user ON meetup_comment.user_id = user.id where user.id = 1;
 ////		+----------+----+---------------------+-------------------+-------------------------+---------------------+-----------+---------+
 ////		| username | id | comment_date        | comment_text      | title                   | reply_to_comment_id | meetup_id | user_id |
@@ -89,13 +89,13 @@ class UserTest {
 ////		| admin    |  1 | 2020-10-10 12:30:16 | Lorem ipsum dolor | My Dog has fleas, Help? |                NULL |         1 |       1 |
 ////		+----------+----+---------------------+-------------------+-------------------------+---------------------+-----------+---------+
 //		
-//		assertNotNull(user);
-//		assertNotNull(user.getMeetupComments());
-//		assertTrue(user.getMeetupComments().size()>0);
-//		assertEquals(2020, user.getMeetupComments().get(0).getCommentDate().getYear());
-//		assertEquals("My Dog has fleas, Help?", user.getMeetupComments().get(0).getTitle());
-//		
-//	}
+		assertNotNull(user);
+		assertNotNull(user.getMeetupComments());
+		assertTrue(user.getMeetupComments().size()>0);
+		assertEquals(2020, user.getMeetupComments().get(0).getCommentDate().getYear());
+		assertEquals("My Dog has fleas, Help?", user.getMeetupComments().get(0).getTitle());
+		
+	}
 
 	@Test
 	@DisplayName("One to Many User to Meetup")
