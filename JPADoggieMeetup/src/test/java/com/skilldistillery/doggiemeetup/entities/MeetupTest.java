@@ -58,9 +58,16 @@ class MeetupTest {
 	}
 	@Test
 	@DisplayName("test mapping meetup entity to dogpark")
-	void meetupToDog() {
+	void meetupToDogPark() {
 		assertNotNull(meetup);
 		assertNotNull(meetup.getDogPark());
+//		assertEquals();
+	}
+	@Test
+	@DisplayName("test mapping meetup entity to dog")
+	void meetupToDog() {
+		assertNotNull(meetup);
+		assertNotNull(meetup.getDogs());
 //		assertEquals();
 	}
 
