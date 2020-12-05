@@ -553,7 +553,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `dog_park_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `dog_park_id`, `user_id`) VALUES (DEFAULT, '2020-10-10 ', 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'Big Field', NULL, 1, 1);
+INSERT INTO `dog_park_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `dog_park_id`, `user_id`) VALUES (1, '2020-10-10 ', 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'Big Field', NULL, 1, 1);
+INSERT INTO `dog_park_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `dog_park_id`, `user_id`) VALUES (2, '2020-10-09 12:30:16', 'this is a great coversation', 'Doggie Stations', 1, 1, 1);
+INSERT INTO `dog_park_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `dog_park_id`, `user_id`) VALUES (3, '2020-10-08 12:30:16', 'i love talking soo much!', 'Date night?', 2, 1, 1);
 
 COMMIT;
 
