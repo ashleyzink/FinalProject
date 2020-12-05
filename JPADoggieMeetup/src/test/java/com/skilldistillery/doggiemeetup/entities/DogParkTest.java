@@ -42,10 +42,18 @@ class DogParkTest {
 	}
 
 	@Test
-	@DisplayName("User entity test")
+	@DisplayName("DogPark entity test")
 	void test1() {
 		assertNotNull(dogPark);
 		assertEquals("Redwood", dogPark.getName());
 	}
 
+	@Test
+	@DisplayName("testing DogPark to Address mapping")
+	void test2() {
+		assertNotNull(dogPark);
+		assertEquals("1234 dog st.", dogPark.getAddress().getStreet());
+		assertEquals("dogwood", dogPark.getAddress().getCity());
+	}
+	
 }
