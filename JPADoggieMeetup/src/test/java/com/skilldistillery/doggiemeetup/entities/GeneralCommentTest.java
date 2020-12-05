@@ -48,5 +48,21 @@ class GeneralCommentTest {
 		assertNotNull(generalComment);
 		assertEquals("What shampoo to use?", generalComment.getTitle());
 	}
+	
+	@Test
+	@DisplayName("test generalComment mapping to user")
+	void test2() {
+		assertNotNull(generalComment);
+		assertNotNull(generalComment.getUser());
+		assertEquals("admin", generalComment.getUser().getUsername());
+	}
+	
+	@Test
+	@DisplayName("test generalComment mapping to reply to comment")
+	void test3() {
+		assertNotNull(generalComment);
+		assertNotNull(generalComment.getReplyToComment());
+		assertEquals("What shampoo to use?", generalComment.getReplyToComment().getTitle());
+	}
 
 }

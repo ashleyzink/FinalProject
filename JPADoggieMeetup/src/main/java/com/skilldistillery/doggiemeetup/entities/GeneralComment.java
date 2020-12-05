@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,6 +28,12 @@ public class GeneralComment {
 	private String commentText;
 	
 	private String title;
+	
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@JoinColumn(name="reply_to_comment_id")
+	private GeneralComment replyToComment;
 
 	public int getId() {
 		return id;
@@ -93,11 +100,31 @@ public class GeneralComment {
 		builder.append(commentText);
 		builder.append(", title=");
 		builder.append(title);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", replyToComment=");
+		builder.append(replyToComment);
 		builder.append("]");
 		return builder.toString();
 	}
 
 	public GeneralComment() {
 		super();
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public GeneralComment getReplyToComment() {
+		return replyToComment;
+	}
+
+	public void setReplyToComment(GeneralComment replyToComment) {
+		this.replyToComment = replyToComment;
 	}
 }
