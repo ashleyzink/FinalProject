@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,6 +29,16 @@ public class DogParkReview {
 	@Column(name="review_date")
 	@CreationTimestamp
 	private LocalDateTime reviewDate;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id") // DB column name
+	@MapsId(value = "userId")     // Field in ID class
+	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name = "dog_park_id") // DB column name
+	@MapsId(value = "dogParkId")     // Field in ID class
+	private DogPark dogPark;
 
 	public DogParkReviewId getId() {
 		return id;
