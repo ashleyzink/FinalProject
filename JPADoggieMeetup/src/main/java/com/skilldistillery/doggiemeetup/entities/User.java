@@ -40,8 +40,8 @@ public class User {
 	@Column(name="create_date")
 	private LocalDateTime createDate;
 	
-	@Column(name="private_profile")
-	private Boolean privateProfile;
+	@Column(name="profile_private")
+	private Boolean profilePrivate;
 	
 	@Column(name="location_private")
 	private Boolean locationPrivate;
@@ -193,14 +193,14 @@ public class User {
 
 
 
-	public Boolean getPrivateProfile() {
-		return privateProfile;
+	public Boolean getProfilePrivate() {
+		return profilePrivate;
 	}
 
 
 
-	public void setPrivateProfile(Boolean privateProfile) {
-		this.privateProfile = privateProfile;
+	public void setProfilePrivate(Boolean profilePrivate) {
+		this.profilePrivate = profilePrivate;
 	}
 
 
@@ -273,8 +273,8 @@ public class User {
 		builder.append(bio);
 		builder.append(", createDate=");
 		builder.append(createDate);
-		builder.append(", privateProfile=");
-		builder.append(privateProfile);
+		builder.append(", profilePrivate=");
+		builder.append(profilePrivate);
 		builder.append(", locationPrivate=");
 		builder.append(locationPrivate);
 		builder.append("]");
