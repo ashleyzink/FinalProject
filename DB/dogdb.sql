@@ -502,6 +502,8 @@ COMMIT;
 START TRANSACTION;
 USE `dogdb`;
 INSERT INTO `meetup_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `meetup_id`, `user_id`) VALUES (1, '2020-10-10 12:30:16', 'Lorem ipsum dolor', 'My Dog has fleas, Help?', NULL, 1, 1);
+INSERT INTO `meetup_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `meetup_id`, `user_id`) VALUES (2, '2020-10-11 12:30:16', 'Lorem ipsum dolor', 'Lets go for a run!', 1, 1, 1);
+INSERT INTO `meetup_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `meetup_id`, `user_id`) VALUES (3, '2020-10-09 12:30:16', 'Lorem ipsum dolor', 'Trails near by?', 2, 1, 1);
 
 COMMIT;
 
