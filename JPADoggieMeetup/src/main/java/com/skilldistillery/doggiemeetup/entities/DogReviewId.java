@@ -22,6 +22,11 @@ public class DogReviewId implements Serializable {
 		this.dogId = dogId;
 	}
 
+	public DogReviewId() {
+		super();
+		
+	}
+
 	public int getUserId() {
 		return userId;
 	}
