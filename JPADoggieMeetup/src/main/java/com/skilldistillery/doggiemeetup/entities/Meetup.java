@@ -1,12 +1,14 @@
 package com.skilldistillery.doggiemeetup.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -16,17 +18,28 @@ public class Meetup {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String title;
-	
+
 	private String description;
-	
-	@Column(name="meetup_date")
+
+	@Column(name = "meetup_date")
 	private LocalDateTime meetupDate;
-	
+
 	@CreationTimestamp
-	@Column(name="create_date")
+	@Column(name = "create_date")
 	private LocalDateTime createDate;
+
+	@ManyToMany(mappedBy = "meetups")
+	private List<Dog> dogs;
+
+	public List<Dog> getDogs() {
+		return dogs;
+	}
+
+	public void setDogs(List<Dog> dogs) {
+		this.dogs = dogs;
+	}
 
 	public int getId() {
 		return id;
