@@ -5,10 +5,12 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
+@Table(name="dog_park_review")
 public class DogParkReview {
 	
 	@EmbeddedId
