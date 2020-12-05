@@ -441,7 +441,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `role`, `enabled`, `profile_photo_url`, `bio`, `create_date`, `date_option`, `profile_private`, `location_private`, `address_id`) VALUES (1, '', '', 'admin', 'admin', 'admin@mail.com', 'admin', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `role`, `enabled`, `profile_photo_url`, `bio`, `create_date`, `date_option`, `profile_private`, `location_private`, `address_id`) VALUES (1, '', '', 'admin', 'admin', 'admin@mail.com', 'admin', 1, NULL, NULL, '2020-10-10 ', NULL, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -451,7 +451,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `dog` (`id`, `name`, `breed`, `temperament`, `dog_profile_pic_url`, `activity_level`, `size`, `bio`, `birthday`, `rainbow_bridge`, `create_date`, `user_id`, `gender`) VALUES (1, 'Kona', 'Australian Kelpie', NULL, 'https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/14153642/Kelpie.4.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL);
+INSERT INTO `dog` (`id`, `name`, `breed`, `temperament`, `dog_profile_pic_url`, `activity_level`, `size`, `bio`, `birthday`, `rainbow_bridge`, `create_date`, `user_id`, `gender`) VALUES (1, 'Kona', 'Australian Kelpie', NULL, 'https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/14153642/Kelpie.4.jpg', NULL, NULL, NULL, NULL, NULL, '2020-10-10 ', 1, NULL);
 
 COMMIT;
 
@@ -471,7 +471,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (5, 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555439209/shape/mentalfloss/345eyrhfj.png?itok=WBbnAek5', 1, 1, NULL);
+INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (5, 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555439209/shape/mentalfloss/345eyrhfj.png?itok=WBbnAek5', 1, 1, '2020-10-10 12:30:16');
 
 COMMIT;
 
@@ -491,7 +491,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `meetup` (`id`, `title`, `description`, `meetup_date`, `create_date`, `user_id_creator`, `dog_park_id`) VALUES (1, 'dog and chill', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\n\n', NULL, NULL, 1, 1);
+INSERT INTO `meetup` (`id`, `title`, `description`, `meetup_date`, `create_date`, `user_id_creator`, `dog_park_id`) VALUES (1, 'dog and chill', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\n\n', '2020-10-10 12:30:16', '2020-09-10 12:30:17', 1, 1);
 
 COMMIT;
 
@@ -501,7 +501,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `meetup_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `meetup_id`, `user_id`) VALUES (1, NULL, 'Lorem ipsum dolor', 'My Dog has fleas, Help?', NULL, 1, 1);
+INSERT INTO `meetup_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `meetup_id`, `user_id`) VALUES (1, '2020-10-10 12:30:16', 'Lorem ipsum dolor', 'My Dog has fleas, Help?', NULL, 1, 1);
 
 COMMIT;
 
@@ -531,7 +531,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `location` (`id`, `lat`, `lng`, `point_time`, `route_id`, `user_id`) VALUES (1, 33.47532343320456, -117.10128305844954, NULL, 1, 1);
+INSERT INTO `location` (`id`, `lat`, `lng`, `point_time`, `route_id`, `user_id`) VALUES (1, 33.47532343320456, -117.10128305844954, '2020-10-10 12:30:16', 1, 1);
 
 COMMIT;
 
@@ -551,7 +551,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `dog_park_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `dog_park_id`, `user_id`) VALUES (DEFAULT, NULL, 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'Big Field', NULL, 1, 1);
+INSERT INTO `dog_park_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `dog_park_id`, `user_id`) VALUES (DEFAULT, '2020-10-10 ', 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'Big Field', NULL, 1, 1);
 
 COMMIT;
 
@@ -561,7 +561,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `dog_park_review` (`rating`, `review`, `img_url`, `user_id`, `review_date`, `dog_park_id`) VALUES (5, 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'https://lh5.googleusercontent.com/p/AF1QipNTi44jKHG3HEtKPMv23pV7LupFneqUtx1MTksO=w408-h306-k-no', 1, NULL, 1);
+INSERT INTO `dog_park_review` (`rating`, `review`, `img_url`, `user_id`, `review_date`, `dog_park_id`) VALUES (5, 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'https://lh5.googleusercontent.com/p/AF1QipNTi44jKHG3HEtKPMv23pV7LupFneqUtx1MTksO=w408-h306-k-no', 1, '2020-10-10 ', 1);
 
 COMMIT;
 

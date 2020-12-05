@@ -44,9 +44,9 @@ class DogReviewTest {
 	@DisplayName("testing entity mapping for dog review")
 	@Test
 	void location() {
-//		assertNotNull(dogReview);
-//		assertEquals("5", dogReview.getRating());
-//		assertEquals("Nam semper maximus elit id porta. Phasellus eu velit purus.", dogReview.getReview());
+		assertNotNull(dogReview);
+		assertEquals("5", dogReview.getRating());
+		assertEquals("Nam semper maximus elit id porta. Phasellus eu velit purus.", dogReview.getReview());
 
 	}
 

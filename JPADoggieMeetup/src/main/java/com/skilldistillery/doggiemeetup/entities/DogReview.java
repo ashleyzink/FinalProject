@@ -3,6 +3,7 @@ package com.skilldistillery.doggiemeetup.entities;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,9 @@ import javax.persistence.Table;
 @Table(name = "dog_review")
 @Entity
 public class DogReview {
+
+	@EmbeddedId
+	private DogReview id;
 
 	private int rating;
 
