@@ -2,6 +2,7 @@ package com.skilldistillery.doggiemeetup.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -48,5 +49,33 @@ class DogTest {
 		assertNotNull(dog);
 		assertEquals("Kona", dog.getName());
 	}
+	
+	@Test
+	@DisplayName("test dog mapping to user")
+	void test2() {
+		assertNotNull(dog);
+		assertNotNull(dog.getUser());
+		assertEquals("admin", dog.getUser().getUsername());
+	}
+	
+	@Test
+	@DisplayName("test dog mapping to dog reviews")
+	void test3() {
+		assertNotNull(dog);
+		assertNotNull(dog.getDogReviews());
+		assertTrue(dog.getDogReviews().size() > 0);
+		assertEquals(5, dog.getDogReviews().get(0).getRating());
+	}
+	
+	@Test
+	@DisplayName("test dog mapping to meetup")
+	void test4() {
+		assertNotNull(dog);
+		assertNotNull(dog.getMeetups());
+		assertTrue(dog.getMeetups().size() > 0);
+		assertEquals("dog and chill", dog.getMeetups().get(0).getTitle());
+	}
+	
+	
 
 }
