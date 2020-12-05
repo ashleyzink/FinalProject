@@ -1,6 +1,7 @@
 package com.skilldistillery.doggiemeetup.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,11 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class DogParkReviewTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private DogParkReview dogParkReview;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,20 +33,36 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		dogParkReview = em.find(DogParkReview.class, new DogParkReviewId(1,1));
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		dogParkReview = null;
 	}
 
 	@Test
-	@DisplayName("User entity test")
-	void test1() {
-		assertNotNull(user);
-		assertEquals("admin", user.getUsername());
+	@DisplayName("test dogParkReview entity")
+	void test() {
+		assertNotNull(dogParkReview);
+		assertEquals(5, dogParkReview.getRating());
+	}
+	
+	@Test
+	@DisplayName("test dog park review map to user")
+	void test2() {
+		assertNotNull(dogParkReview);
+		assertNotNull(dogParkReview.getUser());
+		assertEquals("admin", dogParkReview.getUser().getUsername());
+	}
+	
+	@Test
+	@DisplayName("test dog park review map to dog park")
+	void test3() {
+		assertNotNull(dogParkReview);
+		assertNotNull(dogParkReview.getDogPark());
+		assertEquals("Redwood", dogParkReview.getDogPark().getName());
 	}
 
 }

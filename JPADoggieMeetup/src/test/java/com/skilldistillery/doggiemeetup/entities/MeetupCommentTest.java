@@ -1,6 +1,7 @@
 package com.skilldistillery.doggiemeetup.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,11 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class MeetupCommentTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private MeetupComment meetupComment;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,20 +33,20 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		meetupComment = em.find(MeetupComment.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		meetupComment = null;
 	}
 
 	@Test
-	@DisplayName("User entity test")
-	void test1() {
-		assertNotNull(user);
-		assertEquals("admin", user.getUsername());
+	@DisplayName("test meetupComment entity")
+	void test() {
+		assertNotNull(meetupComment);
+		assertEquals("My Dog has fleas, Help?", meetupComment.getTitle());
 	}
 
 }
