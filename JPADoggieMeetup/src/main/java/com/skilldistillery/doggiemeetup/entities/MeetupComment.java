@@ -1,31 +1,82 @@
 package com.skilldistillery.doggiemeetup.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name="meetup_comment")
+@Table(name = "meetup_comment")
 public class MeetupComment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@CreationTimestamp
-	@Column(name="comment_date")
+	@Column(name = "comment_date")
 	private LocalDateTime commentDate;
-	
-	@Column(name="comment_text")
+
+	@Column(name = "comment_text")
 	private String commentText;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "meetup_id")
+	private Meetup meetUp;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "reply_to_comment_id")
+	private MeetupComment replyToComment;
+
+	@OneToMany(mappedBy = "replyToComment")
+	private List<MeetupComment> replies;
+
+	public MeetupComment getReplyToComment() {
+		return replyToComment;
+	}
+
+	public void setReplyToComment(MeetupComment replyToComment) {
+		this.replyToComment = replyToComment;
+	}
+
+	public List<MeetupComment> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<MeetupComment> replies) {
+		this.replies = replies;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Meetup getMeetUp() {
+		return meetUp;
+	}
+
+	public void setMeetUp(Meetup meetUp) {
+		this.meetUp = meetUp;
+	}
+
 	private String title;
 
 	public int getId() {
