@@ -52,13 +52,12 @@ class UserTest {
 	@DisplayName("One to One User to Address Test")
 	void test2() {
 		assertNotNull(user);
-		Address address = user.getAddress();
-		assertNotNull(address);
-		assertEquals(1, address.getId());
-		assertEquals("1234 dog st.", address.getStreet());
-		assertEquals("dogwood", address.getCity());
-		assertEquals("CA", address.getStateAbbrv());
-		assertEquals(12345, address.getZipcode());
+		assertNotNull(user.getAddress());
+		assertEquals(2, user.getAddress().getId());
+		assertEquals("123 happy st", user.getAddress().getStreet());
+		assertEquals("dogwood", user.getAddress().getCity());
+		assertEquals("CA", user.getAddress().getStateAbbrv());
+		assertEquals("12345", user.getAddress().getZipcode());
 	}
 
 }
