@@ -9,39 +9,39 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Route {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="start_time")
-	private LocalDateTime startTime;
-	
-	@Column(name="end_time")
-	private LocalDateTime endTime;
-	
-	@OneToOne
-	@JoinColumn(name="user_id")
-	private User user;
-	
-	@OneToMany(mappedBy = "location")
-	private List<Location> locations;
-	
-	
 
-	//CONSTRUCTORS -------------------------------------------------------------------------------------------------------------------------
-	
+	@Column(name = "start_time")
+	private LocalDateTime startTime;
+
+	@Column(name = "end_time")
+	private LocalDateTime endTime;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	@OneToMany(mappedBy = "route")
+	private List<Location> locations;
+
+	// CONSTRUCTORS
+	// -------------------------------------------------------------------------------------------------------------------------
+
 	public Route() {
 		super();
 	}
 
-	//GETTERS/SETTERS ----------------------------------------------------------------------------------------------------------------------
-	
+	// GETTERS/SETTERS
+	// ----------------------------------------------------------------------------------------------------------------------
+
 	public int getId() {
 		return id;
 	}
@@ -66,7 +66,6 @@ public class Route {
 		this.endTime = endTime;
 	}
 
-	
 	public User getUser() {
 		return user;
 	}
@@ -82,8 +81,9 @@ public class Route {
 	public void setLocations(List<Location> locations) {
 		this.locations = locations;
 	}
-	
-	//HASHCODE/EQUALS -----------------------------------------------------------------------------------------------------------------------
+
+	// HASHCODE/EQUALS
+	// -----------------------------------------------------------------------------------------------------------------------
 
 	@Override
 	public int hashCode() {
@@ -107,9 +107,9 @@ public class Route {
 		return true;
 	}
 
-	//TOSTRING -------------------------------------------------------------------------------------------------------------------------------
+	// TOSTRING
+	// -------------------------------------------------------------------------------------------------------------------------------
 
-	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
