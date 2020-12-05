@@ -12,8 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name="general_comment")
-public class GeneralComment {
+@Table(name="meetup_comment")
+public class MeetupComment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,7 +76,7 @@ public class GeneralComment {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GeneralComment other = (GeneralComment) obj;
+		MeetupComment other = (MeetupComment) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -97,7 +97,7 @@ public class GeneralComment {
 		return builder.toString();
 	}
 
-	public GeneralComment() {
+	public MeetupComment() {
 		super();
 	}
 }
