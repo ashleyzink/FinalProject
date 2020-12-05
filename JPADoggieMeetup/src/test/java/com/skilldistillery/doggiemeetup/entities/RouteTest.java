@@ -42,12 +42,44 @@ class RouteTest {
 	}
 
 	@Test
-	@DisplayName("User entity test")
+	@DisplayName("Route entity test")
 	void test1() {
 		assertNotNull(route);
 		assertEquals(2020, route.getStartTime().getYear());
 		assertEquals(10, route.getStartTime().getMonthValue());
 		assertEquals(10, route.getStartTime().getDayOfMonth());
 	}
+	
+//	mysql> SELECT route.*, user.username FROM route JOIN user ON user.id = route.user_id WHERE route.id = 1; 
+//	+----+---------------------+---------------------+---------+----------+
+//	| id | start_time          | end_time            | user_id | username |
+//	+----+---------------------+---------------------+---------+----------+
+//	|  1 | 2020-10-10 12:30:16 | 2020-10-11 12:30:40 |       1 | admin    |
+//	+----+---------------------+---------------------+---------+----------+
 
+	@Test
+	@DisplayName("testing Route to User many to one relationship mapping")
+	void test2() {
+		assertNotNull(route);
+		assertEquals(2020, route.getStartTime().getYear());
+		assertEquals("admin", route.getUser().getUsername());
+	}
+	
+//	mysql> SELECT route.*, location.lat, location.lng FROM location JOIN route ON route.id = location.route_id WHERE route.id = 1;
+//	+----+---------------------+---------------------+---------+-------------------+---------------------+
+//	| id | start_time          | end_time            | user_id | lat               | lng                 |
+//	+----+---------------------+---------------------+---------+-------------------+---------------------+
+//	|  1 | 2020-10-10 12:30:16 | 2020-10-11 12:30:40 |       1 | 33.47532343320456 | -117.10128305844954 |
+//	+----+---------------------+---------------------+---------+-------------------+---------------------+
+	
+	@Test
+	@DisplayName("testing Route to Location one to many relationship mapping")
+	void test3() {
+		assertNotNull(route);
+		assertEquals(2020, route.getStartTime().getYear());
+		assertTrue(route.getLocations().size() > 0);
+		assertEquals(33.47532343320456, route.getLocations().get(0).getLat());
+		assertEquals(-117.10128305844954, route.getLocations().get(0).getLng());
+	}
+	
 }
