@@ -1,12 +1,16 @@
 package com.skilldistillery.doggiemeetup.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,6 +31,17 @@ public class DogParkComment {
 	private String commentText;
 	
 	private String title;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="reply_to_comment_id")
+	private DogParkComment replyToComment;
+	
+	@OneToMany(mappedBy="replyToComment")
+	private List<DogParkComment> replies;
 
 	public int getId() {
 		return id;
@@ -85,7 +100,7 @@ public class DogParkComment {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("GeneralComment [id=");
+		builder.append("DogParkComment [id=");
 		builder.append(id);
 		builder.append(", commentDate=");
 		builder.append(commentDate);
@@ -93,11 +108,39 @@ public class DogParkComment {
 		builder.append(commentText);
 		builder.append(", title=");
 		builder.append(title);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", replyToComment=");
+		builder.append(replyToComment);
 		builder.append("]");
 		return builder.toString();
 	}
 
 	public DogParkComment() {
 		super();
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public DogParkComment getReplyToComment() {
+		return replyToComment;
+	}
+
+	public void setReplyToComment(DogParkComment replyToComment) {
+		this.replyToComment = replyToComment;
+	}
+
+	public List<DogParkComment> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<DogParkComment> replies) {
+		this.replies = replies;
 	}
 }
