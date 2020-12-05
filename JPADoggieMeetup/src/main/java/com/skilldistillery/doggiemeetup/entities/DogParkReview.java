@@ -118,12 +118,32 @@ public class DogParkReview {
 		builder.append(imgUrl);
 		builder.append(", reviewDate=");
 		builder.append(reviewDate);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", dogPark=");
+		builder.append(dogPark);
 		builder.append("]");
 		return builder.toString();
 	}
 
 	public DogParkReview() {
 		super();
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public DogPark getDogPark() {
+		return dogPark;
+	}
+
+	public void setDogPark(DogPark dogPark) {
+		this.dogPark = dogPark;
 	}
 
 }

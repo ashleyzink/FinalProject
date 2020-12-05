@@ -48,5 +48,13 @@ class DogParkReviewTest {
 		assertNotNull(dogParkReview);
 		assertEquals(5, dogParkReview.getRating());
 	}
+	
+	@Test
+	@DisplayName("test dog park review map to user")
+	void test2() {
+		assertNotNull(dogParkReview);
+		assertNotNull(dogParkReview.getUser());
+		assertEquals("admin", dogParkReview.getUser().getUsername());
+	}
 
 }
