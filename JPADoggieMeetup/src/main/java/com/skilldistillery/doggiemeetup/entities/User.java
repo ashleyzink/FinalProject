@@ -72,6 +72,8 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List <DogParkReview> dogParkReviews;
 	
+	@OneToMany(mappedBy="user")
+	private List <GeneralComment> generalComments;
 	
 	//CONSTRUCTORS -------------------------------------------------------------------------------------
 	 
@@ -303,8 +305,20 @@ public class User {
 	public void setDogParkReviews(List<DogParkReview> dogParkReviews) {
 		this.dogParkReviews = dogParkReviews;
 	}
+	
+	public List<GeneralComment> getGeneralComments() {
+		return generalComments;
+	}
+	
+	
+	public void setGeneralComments(List<GeneralComment> generalComments) {
+		this.generalComments = generalComments;
+	}
+	
 
 	//HASHCODE/EQUALS (ID ONLY) ------------------------------------------------------------------------
+
+
 
 	@Override
 	public int hashCode() {

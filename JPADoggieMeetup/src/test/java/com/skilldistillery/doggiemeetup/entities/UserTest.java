@@ -154,4 +154,23 @@ class UserTest {
 		assertTrue(user.getDogParkReviews().size()>0);
 		assertEquals("Nam semper maximus elit id porta. Phasellus eu velit purus.", user.getDogParkReviews().get(0).getReview());
 	}
+	@Test
+	@DisplayName("One to Many User to General Comment")
+	void test9() {
+//		SELECT user.username, general_comment.* FROM general_comment JOIN user ON general_comment.user_id = user.id where user.id = 1;
+//		+----------+----+---------------------+-------------------------------------------------------------+----------------------+---------------------+---------+
+//		| username | id | comment_date        | comment_text                                                | title                | reply_to_comment_id | user_id |
+//		+----------+----+---------------------+-------------------------------------------------------------+----------------------+---------------------+---------+
+//		| admin    |  1 | 2020-10-10 12:30:16 | Nam semper maximus elit id porta. Phasellus eu velit purus. | What shampoo to use? |                NULL |       1 |
+//		| admin    |  2 | 2020-10-10 12:50:16 | Nam semper maximus elit id porta. Phasellus eu velit purus. | Dog Food             |                   1 |       1 |
+//		+----------+----+---------------------+-------------------------------------------------------------+----------------------+---------------------+---------+
+//		
+		assertNotNull(user);
+		assertNotNull(user.getGeneralComments());
+		assertTrue(user.getGeneralComments().size()>0);
+		assertEquals(2020, user.getGeneralComments().get(0).getCommentDate().getYear());
+		assertEquals("What shampoo to use?", user.getGeneralComments().get(0).getTitle());
+		
+	}
+	
 }
