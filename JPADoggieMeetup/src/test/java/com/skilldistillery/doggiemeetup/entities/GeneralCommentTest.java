@@ -43,6 +43,7 @@ class GeneralCommentTest {
 	void tearDown() throws Exception {
 		em.close();
 		generalComment = null;
+		generalComment2 = null;
 	}
 
 	@Test
