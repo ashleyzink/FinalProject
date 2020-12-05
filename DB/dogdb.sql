@@ -441,7 +441,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `role`, `enabled`, `profile_photo_url`, `bio`, `create_date`, `date_option`, `profile_private`, `location_private`, `address_id`) VALUES (1, '', '', 'admin', 'admin', 'admin@mail.com', 'admin', 1, NULL, NULL, '2020-10-10 ', NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `role`, `enabled`, `profile_photo_url`, `bio`, `create_date`, `date_option`, `profile_private`, `location_private`, `address_id`) VALUES (1, '', '', 'admin', 'admin', 'admin@mail.com', 'admin', 1, NULL, NULL, '2020-10-10 ', NULL, NULL, NULL, 2);
 
 COMMIT;
 
@@ -561,7 +561,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `dog_park_review` (`rating`, `review`, `img_url`, `user_id`, `review_date`, `dog_park_id`) VALUES (5, 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'https://lh5.googleusercontent.com/p/AF1QipNTi44jKHG3HEtKPMv23pV7LupFneqUtx1MTksO=w408-h306-k-no', 1, '2020-10-10 ', 1);
+INSERT INTO `dog_park_review` (`rating`, `review`, `img_url`, `user_id`, `review_date`, `dog_park_id`) VALUES (5, 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'https://lh5.googleusercontent.com/p/AF1QipNTi44jKHG3HEtKPMv23pV7LupFneqUtx1MTksO=w408-h306-k-no', 1, '2020-10-10 12:30:16', 1);
 
 COMMIT;
 
