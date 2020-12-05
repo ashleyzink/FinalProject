@@ -45,7 +45,9 @@ class RouteTest {
 	@DisplayName("User entity test")
 	void test1() {
 		assertNotNull(route);
-		assertEquals("", route.getStartTime());
+		assertEquals(2020, route.getStartTime().getYear());
+		assertEquals(10, route.getStartTime().getMonthValue());
+		assertEquals(10, route.getStartTime().getDayOfMonth());
 	}
 
 }

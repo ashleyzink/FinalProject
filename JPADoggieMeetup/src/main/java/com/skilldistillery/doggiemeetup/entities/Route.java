@@ -1,12 +1,16 @@
 package com.skilldistillery.doggiemeetup.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Route {
@@ -20,6 +24,15 @@ public class Route {
 	
 	@Column(name="end_time")
 	private LocalDateTime endTime;
+	
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@OneToMany(mappedBy = "location")
+	private List<Location> locations;
+	
+	
 
 	//CONSTRUCTORS -------------------------------------------------------------------------------------------------------------------------
 	
@@ -53,9 +66,25 @@ public class Route {
 		this.endTime = endTime;
 	}
 
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Location> getLocations() {
+		return locations;
+	}
+
+	public void setLocations(List<Location> locations) {
+		this.locations = locations;
+	}
+	
 	//HASHCODE/EQUALS -----------------------------------------------------------------------------------------------------------------------
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
