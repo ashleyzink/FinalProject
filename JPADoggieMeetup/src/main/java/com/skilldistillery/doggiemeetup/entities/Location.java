@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Location {
@@ -19,8 +22,36 @@ public class Location {
 
 	private Double lng;
 
-	@Column (name = "point_time")
+	@Column(name = "point_time")
 	private LocalDateTime pointTime;
+
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "route_id")
+	private Route route;
+
+	public Location() {
+		super();
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Route getRoute() {
+		return route;
+	}
+
+	public void setRoute(Route route) {
+		this.route = route;
+	}
 
 	public int getId() {
 		return id;
@@ -78,7 +109,8 @@ public class Location {
 
 	@Override
 	public String toString() {
-		return "Location [id=" + id + ", lat=" + lat + ", lng=" + lng + ", pointTime=" + pointTime + "]";
+		return "Location [id=" + id + ", lat=" + lat + ", lng=" + lng + ", pointTime=" + pointTime + ", user=" + user
+				+ ", route=" + route + "]";
 	}
 
 }
