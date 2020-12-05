@@ -31,22 +31,26 @@ public class Location {
 
 	@ManyToOne
 	@JoinColumn(name = "route_id")
-	private Route routeId;
+	private Route route;
+
+	public Location() {
+		super();
+	}
 
 	public User getUser() {
 		return user;
 	}
 
-	public void setUserId(User userId) {
-		this.user = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Route getRouteId() {
-		return routeId;
+	public Route getRoute() {
+		return route;
 	}
 
-	public void setRouteId(Route routeId) {
-		this.routeId = routeId;
+	public void setRoute(Route route) {
+		this.route = route;
 	}
 
 	public int getId() {
@@ -106,7 +110,7 @@ public class Location {
 	@Override
 	public String toString() {
 		return "Location [id=" + id + ", lat=" + lat + ", lng=" + lng + ", pointTime=" + pointTime + ", user=" + user
-				+ ", routeId=" + routeId + "]";
+				+ ", route=" + route + "]";
 	}
 
 }
