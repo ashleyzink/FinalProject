@@ -9,7 +9,18 @@
     </provider>
 
 		<!-- List Entities Here -->
-		<class>package com.skilldistillery.doggiemeetup.entities;</class>
+		<class>package com.skilldistillery.doggiemeetup.entities.User</class>
+		<class>package com.skilldistillery.doggiemeetup.entities.Dog</class>
+		<class>package com.skilldistillery.doggiemeetup.entities.Location</class>
+		<class>package com.skilldistillery.doggiemeetup.entities.MeetupComment</class>
+		<class>package com.skilldistillery.doggiemeetup.entities.DogParkComment</class>
+		<class>package com.skilldistillery.doggiemeetup.entities.MeetUp</class>
+		<class>package com.skilldistillery.doggiemeetup.entities.GeneralComment</class>
+		<class>package com.skilldistillery.doggiemeetup.entities.DogPark</class>
+		<class>package com.skilldistillery.doggiemeetup.entities.Address</class>
+		<class>package com.skilldistillery.doggiemeetup.entities.Route</class>
+		<class>package com.skilldistillery.doggiemeetup.entities.DogReview</class>
+		<class>package com.skilldistillery.doggiemeetup.entities.DogParkReview</class>
 		
 
 		<properties>
