@@ -1,6 +1,7 @@
 package com.skilldistillery.doggiemeetup.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -51,6 +53,25 @@ public class User {
 	@OneToOne
 	@JoinColumn(name="address_id")
 	private Address address;
+	
+	@OneToMany(mappedBy="user")
+	private List <Route> routes;
+	
+//	@OneToMany(mappedBy="user")
+//	private List <MeetupComment> meetupComments;
+	
+	@OneToMany(mappedBy="user")
+	private List <Meetup> meetups;
+	
+	@OneToMany(mappedBy="user")
+	private List<Dog> dogs;
+	
+	@OneToMany(mappedBy="user")
+	private List <DogReview> dogReviews;
+	
+	@OneToMany(mappedBy="user")
+	private List <DogParkReview> dogParkReviews;
+	
 	
 	//CONSTRUCTORS -------------------------------------------------------------------------------------
 	 
@@ -229,12 +250,61 @@ public class User {
 		this.address = address;
 	}
 
+	public List<Route> getRoutes() {
+		return routes;
+	}
 	
 	
+	public void setRoutes(List<Route> routes) {
+		this.routes = routes;
+	}
+	
+//	public List<MeetupComment> getMeetupComments() {
+//		return meetupComments;
+//	}
+//	
+//	
+//	public void setMeetupComments(List<MeetupComment> meetupComments) {
+//		this.meetupComments = meetupComments;
+//	}
+	
+	public List<Meetup> getMeetups() {
+		return meetups;
+	}
+
+
+	public void setMeetups(List<Meetup> meetups) {
+		this.meetups = meetups;
+	}
+	
+	public List<Dog> getDogs() {
+		return dogs;
+	}
+	
+	
+	public void setDogs(List<Dog> dogs) {
+		this.dogs = dogs;
+	}
+	
+	public List<DogReview> getDogReviews() {
+		return dogReviews;
+	}
+	
+	
+	public void setDogReviews(List<DogReview> dogReviews) {
+		this.dogReviews = dogReviews;
+	}
+
+	public List<DogParkReview> getDogParkReviews() {
+		return dogParkReviews;
+	}
+
+
+	public void setDogParkReviews(List<DogParkReview> dogParkReviews) {
+		this.dogParkReviews = dogParkReviews;
+	}
 
 	//HASHCODE/EQUALS (ID ONLY) ------------------------------------------------------------------------
-
-
 
 	@Override
 	public int hashCode() {
@@ -244,6 +314,7 @@ public class User {
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {

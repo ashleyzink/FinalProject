@@ -1,6 +1,8 @@
 package com.skilldistillery.doggiemeetup.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -59,5 +61,97 @@ class UserTest {
 		assertEquals("CA", user.getAddress().getStateAbbrv());
 		assertEquals("12345", user.getAddress().getZipcode());
 	}
+	
+	@Test
+	@DisplayName("One to Many User to Route Test")
+	void test3() {
+//		SELECT user.username, route.* FROM route JOIN user ON route.user_id = user.id where user.id = 1;
+//		+----------+----+---------------------+---------------------+---------+
+//		| username | id | start_time          | end_time            | user_id |
+//		+----------+----+---------------------+---------------------+---------+
+//		| admin    |  1 | 2020-10-10 12:30:16 | 2020-10-11 12:30:40 |       1 |
+//		+----------+----+---------------------+---------------------+---------+
+		
+		assertNotNull(user);
+		assertNotNull(user.getRoutes());
+		assertTrue(user.getRoutes().size()>0);
+		assertEquals(2020, user.getRoutes().get(0).getStartTime().getYear());
+		
+	}
+	
+//	@Test
+//	@DisplayName("One to Many User to Meetup Comment")
+//	void test4() {
+////		SELECT user.username, meetup_comment.* FROM meetup_comment JOIN user ON meetup_comment.user_id = user.id where user.id = 1;
+////		+----------+----+---------------------+-------------------+-------------------------+---------------------+-----------+---------+
+////		| username | id | comment_date        | comment_text      | title                   | reply_to_comment_id | meetup_id | user_id |
+////		+----------+----+---------------------+-------------------+-------------------------+---------------------+-----------+---------+
+////		| admin    |  1 | 2020-10-10 12:30:16 | Lorem ipsum dolor | My Dog has fleas, Help? |                NULL |         1 |       1 |
+////		+----------+----+---------------------+-------------------+-------------------------+---------------------+-----------+---------+
+//		
+//		assertNotNull(user);
+//		assertNotNull(user.getMeetupComments());
+//		assertTrue(user.getMeetupComments().size()>0);
+//		assertEquals(2020, user.getMeetupComments().get(0).getCommentDate().getYear());
+//		assertEquals("My Dog has fleas, Help?", user.getMeetupComments().get(0).getTitle());
+//		
+//	}
 
+	@Test
+	@DisplayName("One to Many User to Meetup")
+	void test5() {
+		
+//		SELECT user.username, meetup.title FROM meetup JOIN user ON meetup.user_id_creator = user.id where user.id = 1;
+//		+----------+---------------+
+//		| username | title         |
+//		+----------+---------------+
+//		| admin    | dog and chill |
+//		+----------+---------------+
+		assertNotNull(user);
+		assertNotNull(user.getMeetups());
+		assertTrue(user.getMeetups().size()>0);
+		assertEquals("dog and chill", user.getMeetups().get(0).getTitle());
+	}
+	@Test
+	@DisplayName("One to Many User to Dog")
+	void test6() {
+//		SELECT user.username, dog.* FROM dog JOIN user ON dog.user_id = user.id where user.id = 1;
+//		+----------+----+------+-------------------+-------------+--------------------------------------------------------------------------------------------------+----------------+------+------+----------+----------------+---------------------+---------+--------+
+//		| username | id | name | breed             | temperament | dog_profile_pic_url                                                                              | activity_level | size | bio  | birthday | rainbow_bridge | create_date         | user_id | gender |
+//		+----------+----+------+-------------------+-------------+--------------------------------------------------------------------------------------------------+----------------+------+------+----------+----------------+---------------------+---------+--------+
+//		| admin    |  1 | Kona | Australian Kelpie | NULL        | https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/14153642/Kelpie.4.jpg | NULL           | NULL | NULL | NULL     | NULL           | 2020-10-10 00:00:00 |       1 | NULL   |
+//		+----------+----+------+-------------------+-------------+--------------------------------------------------------------------------------------------------+----------------+------+------+----------+----------------+---------------------+---------+--------+
+		assertNotNull(user);
+		assertNotNull(user.getDogs());
+		assertTrue(user.getDogs().size()>0);
+		assertEquals("Australian Kelpie", user.getDogs().get(0).getBreed());
+	}
+	@Test
+	@DisplayName("One to Many User to Dog Review")
+	void test7() {
+//		SELECT user.username, dog_review.rating, dog_review.review FROM dog_review JOIN user ON dog_review.user_id = user.id where user.id = 1;
+//		+----------+--------+-------------------------------------------------------------+
+//		| username | rating | review                                                      |
+//		+----------+--------+-------------------------------------------------------------+
+//		| admin    |      5 | Nam semper maximus elit id porta. Phasellus eu velit purus. |
+//		+----------+--------+-------------------------------------------------------------+
+		assertNotNull(user);
+		assertNotNull(user.getDogReviews());
+		assertTrue(user.getDogReviews().size()>0);
+		assertEquals("Nam semper maximus elit id porta. Phasellus eu velit purus.", user.getDogReviews().get(0).getReview());
+	}
+	@Test
+	@DisplayName("One to Many User to Dog Park Review")
+	void test8() {
+/// SELECT user.username, dog_park_review.rating, dog_park_review.review FROM dog_park_review JOIN user ON dog_park_review.user_id = user.id where user.id = 1;
+//+----------+--------+-------------------------------------------------------------+
+//| username | rating | review                                                      |
+//+----------+--------+-------------------------------------------------------------+
+//| admin    |      5 | Nam semper maximus elit id porta. Phasellus eu velit purus. |
+//+----------+--------+-------------------------------------------------------------+
+		assertNotNull(user);
+		assertNotNull(user.getDogParkReviews());
+		assertTrue(user.getDogParkReviews().size()>0);
+		assertEquals("Nam semper maximus elit id porta. Phasellus eu velit purus.", user.getDogParkReviews().get(0).getReview());
+	}
 }
