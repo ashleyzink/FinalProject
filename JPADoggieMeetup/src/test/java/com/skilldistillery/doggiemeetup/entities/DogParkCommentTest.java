@@ -75,7 +75,7 @@ class DogParkCommentTest {
 		assertNotNull(dogParkComment);
 		assertNotNull(dogParkComment.getReplies());
 		assertTrue(dogParkComment.getReplies().size() > 0);
-		assertEquals("this is a great coversation", dogParkComment.getReplyToComment().getTitle());
+		assertEquals("Doggie Stations", dogParkComment.getReplies().get(0).getTitle());
 	}
 
 }
