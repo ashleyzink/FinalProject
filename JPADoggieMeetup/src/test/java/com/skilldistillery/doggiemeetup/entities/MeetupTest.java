@@ -14,11 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class DogTest {
+class MeetupTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Dog dog;
+	private Meetup meetup;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,20 +33,20 @@ class DogTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		dog = em.find(Dog.class, 1);
+		meetup = em.find(Meetup.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		dog = null;
+		meetup = null;
 	}
 
 	@Test
-	@DisplayName("test dog entity")
+	@DisplayName("test meetup entity")
 	void test() {
-		assertNotNull(dog);
-		assertEquals("Kona", dog.getName());
+		assertNotNull(meetup);
+		assertEquals("dog and chill", meetup.getTitle());
 	}
 
 }
