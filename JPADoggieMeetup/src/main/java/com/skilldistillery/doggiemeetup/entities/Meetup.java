@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -32,6 +34,30 @@ public class Meetup {
 
 	@ManyToMany(mappedBy = "meetups")
 	private List<Dog> dogs;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id_creator")
+	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "dog_park_id")
+	private DogPark dogPark;
+
+	public DogPark getDogPark() {
+		return dogPark;
+	}
+
+	public void setDogPark(DogPark dogPark) {
+		this.dogPark = dogPark;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public List<Dog> getDogs() {
 		return dogs;
