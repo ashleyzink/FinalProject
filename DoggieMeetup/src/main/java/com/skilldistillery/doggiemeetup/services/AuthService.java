@@ -2,8 +2,10 @@ package com.skilldistillery.doggiemeetup.services;
 
 import com.skilldistillery.doggiemeetup.entities.User;
 
-public interface UserService {
+public interface AuthService {
+	
+	public User register(User user);
 
-	User register(User user);
+	public User getUser(String username);
 
 }
