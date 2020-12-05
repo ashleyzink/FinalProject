@@ -49,4 +49,19 @@ class LocationTest {
 		assertEquals(-117.10128305844954, location.getLng());
 	}
 
+	@DisplayName("testing entity mapping for one to one location to user")
+	@Test
+	void locationToUser() {
+		assertNotNull(location);
+		assertNotNull(location.getLat());
+		assertEquals("admin", location.getUser().getUsername());
+	}
+	@DisplayName("testing entity mapping for one to many location to route")
+	@Test
+	void locationToRoute() {
+//		assertNotNull(location);
+//		assertNotNull(location.getLat());
+//		assertEquals("admin", location.getUser().getUsername());
+	}
+
 }
