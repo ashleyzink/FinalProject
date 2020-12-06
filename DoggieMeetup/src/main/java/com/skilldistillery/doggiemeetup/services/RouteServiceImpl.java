@@ -53,6 +53,7 @@ public class RouteServiceImpl implements RouteService {
 		if (managedRoute != null) {
 			managedRoute.setStartTime(route.getStartTime());
 			managedRoute.setEndTime(route.getEndTime());
+			routeRepo.saveAndFlush(managedRoute);
 		}
 		return managedRoute;
 	}
