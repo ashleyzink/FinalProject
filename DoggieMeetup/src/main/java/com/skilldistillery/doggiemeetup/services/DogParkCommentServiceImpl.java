@@ -53,7 +53,6 @@ public class DogParkCommentServiceImpl implements DogParkCommentService {
 	public DogParkComment update(String username, int dogParkCommentId, DogParkComment dogParkComment) {
 		DogParkComment managedDogParkComment = dogParkCommentRepo.findByUser_UsernameAndId(username, dogParkCommentId);
 		if(managedDogParkComment != null) {
-			managedDogParkComment.setCommentDate(dogParkComment.getCommentDate());
 			managedDogParkComment.setCommentText(dogParkComment.getCommentText());
 			managedDogParkComment.setTitle(dogParkComment.getTitle());
 			managedDogParkComment.setReplyToComment(dogParkComment.getReplyToComment());
