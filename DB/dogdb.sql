@@ -68,8 +68,8 @@ DROP TABLE IF EXISTS `dog` ;
 
 CREATE TABLE IF NOT EXISTS `dog` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `breed` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(45) NOT NULL DEFAULT 'dog',
+  `breed` VARCHAR(45) NOT NULL DEFAULT 'breed',
   `temperament` VARCHAR(45) NULL,
   `dog_profile_pic_url` VARCHAR(5000) NULL,
   `activity_level` VARCHAR(45) NULL,
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `dog` (
   `birthday` DATE NULL,
   `rainbow_bridge` DATE NULL,
   `create_date` DATETIME NULL,
-  `user_id` INT NOT NULL,
+  `user_id` INT NOT NULL DEFAULT 1,
   `gender` VARCHAR(10) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_dog_user1_idx` (`user_id` ASC),
@@ -432,6 +432,9 @@ START TRANSACTION;
 USE `dogdb`;
 INSERT INTO `address` (`id`, `street`, `city`, `state_abbrv`, `zipcode`) VALUES (1, '1234 dog st.', 'dogwood', 'CA', '12345');
 INSERT INTO `address` (`id`, `street`, `city`, `state_abbrv`, `zipcode`) VALUES (2, '123 happy st', 'dogwood', 'CA', '12345');
+INSERT INTO `address` (`id`, `street`, `city`, `state_abbrv`, `zipcode`) VALUES (3, '5500 laramie st', 'chicago', 'IL', '43322');
+INSERT INTO `address` (`id`, `street`, `city`, `state_abbrv`, `zipcode`) VALUES (4, '145 boulder rd.', 'denver', 'CO', '24956');
+INSERT INTO `address` (`id`, `street`, `city`, `state_abbrv`, `zipcode`) VALUES (5, '1332 alpine blvd.', 'san diego', 'CA', '49245');
 
 COMMIT;
 
@@ -442,6 +445,10 @@ COMMIT;
 START TRANSACTION;
 USE `dogdb`;
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `role`, `enabled`, `profile_photo_url`, `bio`, `create_date`, `date_option`, `profile_private`, `location_private`, `address_id`) VALUES (1, '', '', 'admin', 'admin', 'admin@mail.com', 'admin', 1, NULL, NULL, '2020-10-10 ', NULL, NULL, NULL, 2);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `role`, `enabled`, `profile_photo_url`, `bio`, `create_date`, `date_option`, `profile_private`, `location_private`, `address_id`) VALUES (2, NULL, NULL, 'tonysdog', 'dog', 'tony@mail.com', NULL, 1, NULL, NULL, '2020-10-12', NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `role`, `enabled`, `profile_photo_url`, `bio`, `create_date`, `date_option`, `profile_private`, `location_private`, `address_id`) VALUES (3, NULL, NULL, 'ashleysdogpark', 'dog', 'dog@mail.com', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `role`, `enabled`, `profile_photo_url`, `bio`, `create_date`, `date_option`, `profile_private`, `location_private`, `address_id`) VALUES (4, NULL, NULL, 'danielsfundog', 'dog', 'fundog@mail.com', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `role`, `enabled`, `profile_photo_url`, `bio`, `create_date`, `date_option`, `profile_private`, `location_private`, `address_id`) VALUES (5, NULL, NULL, 'jourdansdoglover', 'dog', 'doglover@mail.com', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -451,7 +458,12 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `dog` (`id`, `name`, `breed`, `temperament`, `dog_profile_pic_url`, `activity_level`, `size`, `bio`, `birthday`, `rainbow_bridge`, `create_date`, `user_id`, `gender`) VALUES (1, 'Kona', 'Australian Kelpie', NULL, 'https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/14153642/Kelpie.4.jpg', NULL, NULL, NULL, NULL, NULL, '2020-10-10 ', 1, NULL);
+INSERT INTO `dog` (`id`, `name`, `breed`, `temperament`, `dog_profile_pic_url`, `activity_level`, `size`, `bio`, `birthday`, `rainbow_bridge`, `create_date`, `user_id`, `gender`) VALUES (1, 'Kona', 'Australian Kelpie', 'happy and go lucky', 'https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/14153642/Kelpie.4.jpg', NULL, NULL, NULL, NULL, NULL, '2020-10-10 ', 1, NULL);
+INSERT INTO `dog` (`id`, `name`, `breed`, `temperament`, `dog_profile_pic_url`, `activity_level`, `size`, `bio`, `birthday`, `rainbow_bridge`, `create_date`, `user_id`, `gender`) VALUES (2, 'Afa', 'Afador', 'As an athletic mixed breed.', 'https://www.dogtime.com/assets/uploads/2019/08/afador-mixed-dog-breed-pictures-1-1442x1328.jpg', NULL, NULL, NULL, NULL, NULL, '2020-10-10 ', 2, NULL);
+INSERT INTO `dog` (`id`, `name`, `breed`, `temperament`, `dog_profile_pic_url`, `activity_level`, `size`, `bio`, `birthday`, `rainbow_bridge`, `create_date`, `user_id`, `gender`) VALUES (3, 'Bassie', 'Basset Hound\n', NULL, 'https://www.dogtime.com/assets/uploads/2011/01/file_23010_basset-hound-460x290.jpg', NULL, NULL, NULL, NULL, NULL, '2020-10-10 ', 3, NULL);
+INSERT INTO `dog` (`id`, `name`, `breed`, `temperament`, `dog_profile_pic_url`, `activity_level`, `size`, `bio`, `birthday`, `rainbow_bridge`, `create_date`, `user_id`, `gender`) VALUES (4, 'Boxo', 'Boston Boxer\n', NULL, 'https://www.dogtime.com/assets/uploads/2020/01/boston-boxer-mixed-dog-breed-pictures-1.jpg', NULL, NULL, NULL, NULL, NULL, '2020-10-10 ', 4, NULL);
+INSERT INTO `dog` (`id`, `name`, `breed`, `temperament`, `dog_profile_pic_url`, `activity_level`, `size`, `bio`, `birthday`, `rainbow_bridge`, `create_date`, `user_id`, `gender`) VALUES (5, 'Massie', 'Mastiff', NULL, 'https://d17fnq9dkz9hgj.cloudfront.net/breed-uploads/2018/08/mastiff-card-medium.jpg?bust=1535568273&width=560', NULL, NULL, NULL, NULL, NULL, '2020-10-10 ', 5, NULL);
+INSERT INTO `dog` (`id`, `name`, `breed`, `temperament`, `dog_profile_pic_url`, `activity_level`, `size`, `bio`, `birthday`, `rainbow_bridge`, `create_date`, `user_id`, `gender`) VALUES (DEFAULT, DEFAULT, DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-10-10 ', DEFAULT, NULL);
 
 COMMIT;
 
@@ -461,7 +473,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dogdb`;
-INSERT INTO `dog_park` (`id`, `address_id`, `name`, `description`, `off_leash`, `image_url`) VALUES (1, 1, 'Redwood', 'Nam semper maximus elit id porta. Phasellus eu velit purus.', NULL, NULL);
+INSERT INTO `dog_park` (`id`, `address_id`, `name`, `description`, `off_leash`, `image_url`) VALUES (1, 1, 'Redwood', 'There are separate fenced in areas, one for big dogs that weigh over 26 pounds, and one for small dogs that weigh less that 26 pounds. There is another smaller area which is closed off for maintenance. There are benches scattered around the area for dog owners to sit. There are water fountains with dog level water bowls (people level too, if you care to use them). There are stations of doggy poop bags in each area.', 1, 'https://s3-media0.fl.yelpcdn.com/bphoto/3ySbLEGIIHOXMnzk9Sc_iQ/180s.jpg');
+INSERT INTO `dog_park` (`id`, `address_id`, `name`, `description`, `off_leash`, `image_url`) VALUES (2, 2, 'Newtown Dream Dog Park', 'Through the Beneful Dream Dog Park Project, the company built and improved multiple dog parks around the country. Another beneficiary was the dog park in Buchanan Park in Lancaster, Pennsylvania, which was completely revamped in 2013. Fun, high-tech features include splash pads and a tennis ball tree that launches balls for large dogs. It also has turf grass for cleanliness and plenty of structures for dogs to play on.\n\n', 1, 'https://thumbor.thedailymeal.com/9z7PZVszVMYOwjrFw45CtvIl8fQ=/574x366/filters:format(webp)/https://www.theactivetimes.com/sites/default/files/slideshows/104569/106052/bestdogparks1newtown.jpg');
+INSERT INTO `dog_park` (`id`, `address_id`, `name`, `description`, `off_leash`, `image_url`) VALUES (3, 3, 'Montrose Dog Beach', 'Chicagoans and their dogs can escape to this dedicated, fenced in dog beach along Lake Michigan. With stunning views of the skyline and generally courteous owners and furry playmates, the park also has amenities like a dog wash station.\n\n', 1, 'https://thumbor.thedailymeal.com/MXsWEJDC3d_6JiCeY6A2jT6m6b8=/574x366/filters:format(webp)/https://www.theactivetimes.com/sites/default/files/slideshows/104569/106052/bestdogparks3.jpg');
+INSERT INTO `dog_park` (`id`, `address_id`, `name`, `description`, `off_leash`, `image_url`) VALUES (4, 4, 'Bea Arthur Dog Park', 'Named for \"Golden Girls\" actress Bea Arthur, this free, 24/7 dog park is most notable for its access ramp to the Elizabeth River, where pups can doggie paddle to their heart\'s content. The park also provides room to run, several pools and a collection of toys. The park is located behind PETA\'s headquarters, and the organization provides a live camera feed of the park on its website so you can check if the park is crowded or not before leaving home.\n\n', 1, 'https://thumbor.thedailymeal.com/WGQnq5pTchJlHQvTmsPTGtJkvVc=/574x366/filters:format(webp)/https://www.theactivetimes.com/sites/default/files/slideshows/104569/106052/bestdogparks4.jpg');
+INSERT INTO `dog_park` (`id`, `address_id`, `name`, `description`, `off_leash`, `image_url`) VALUES (5, 5, 'Jackass Acres K-9 Korral', 'The members-only Jackass Acres is the nation\'s first green dog park. Its sustainable practices include structures built from recycled materials and fallen trees, solar-powered lights and fountains, biodegradable poop bags and NFL-grade artificial turf. Its attention to dogs, people and the environment have earned it the title of Best Dog Park in America from Dog Fancy magazine twice since its opening.\n\n', 1, 'https://thumbor.thedailymeal.com/HQeGJrlZQia88Qdbn9G88Fz5QIg=/574x366/filters:format(webp)/https://www.theactivetimes.com/sites/default/files/slideshows/104569/106052/bestdogparks5.jpg');
 
 COMMIT;
 
@@ -472,6 +488,10 @@ COMMIT;
 START TRANSACTION;
 USE `dogdb`;
 INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (5, 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555439209/shape/mentalfloss/345eyrhfj.png?itok=WBbnAek5', 1, 1, '2020-10-10 12:30:16');
+INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (3, 'dogs get along just fine', NULL, 2, 2, '2020-12-10 12:30:16');
+INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (1, 'steer clear of this animal!', NULL, 3, 3, '2020-01-10 12:30:16');
+INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (2, 'dog is not friendly to other cats', NULL, 4, 4, '2020-08-10 12:30:16');
+INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (4, 'would love to hang out with this dog again', NULL, 5, 5, '2020-08-14 12:30:16');
 
 COMMIT;
 
@@ -482,6 +502,10 @@ COMMIT;
 START TRANSACTION;
 USE `dogdb`;
 INSERT INTO `user_fav_dog_park` (`user_id`, `dog_park_id`) VALUES (1, 1);
+INSERT INTO `user_fav_dog_park` (`user_id`, `dog_park_id`) VALUES (2, 2);
+INSERT INTO `user_fav_dog_park` (`user_id`, `dog_park_id`) VALUES (3, 3);
+INSERT INTO `user_fav_dog_park` (`user_id`, `dog_park_id`) VALUES (4, 4);
+INSERT INTO `user_fav_dog_park` (`user_id`, `dog_park_id`) VALUES (5, 5);
 
 COMMIT;
 
@@ -492,6 +516,10 @@ COMMIT;
 START TRANSACTION;
 USE `dogdb`;
 INSERT INTO `meetup` (`id`, `title`, `description`, `meetup_date`, `create_date`, `user_id_creator`, `dog_park_id`) VALUES (1, 'dog and chill', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\n\n', '2020-10-10 12:30:16', '2020-09-10 12:30:17', 1, 1);
+INSERT INTO `meetup` (`id`, `title`, `description`, `meetup_date`, `create_date`, `user_id_creator`, `dog_park_id`) VALUES (2, 'love to run with my dog', 'if you like to run with your dog lets do it together!', '2021-10-10 12:30:16', '2020-12-10 12:30:17', 2, 2);
+INSERT INTO `meetup` (`id`, `title`, `description`, `meetup_date`, `create_date`, `user_id_creator`, `dog_park_id`) VALUES (3, 'swimming dogs?', 'looking for companion for my companion', '2021-10-05 12:30:16', '2020-02-10 12:30:17', 3, 3);
+INSERT INTO `meetup` (`id`, `title`, `description`, `meetup_date`, `create_date`, `user_id_creator`, `dog_park_id`) VALUES (4, 'looking for a nice respectable human and dog to meetup with', 'love to swim with my dog, r u interested?', '2022-10-10 12:30:16', '2020-12-10 09:30:17', 4, 4);
+INSERT INTO `meetup` (`id`, `title`, `description`, `meetup_date`, `create_date`, `user_id_creator`, `dog_park_id`) VALUES (5, 'new to this thing', 'never been to a dog meetup, anyone else out there relate?', '2021-10-04 12:30:16', '2020-06-10 12:30:17', 5, 5);
 
 COMMIT;
 
@@ -504,6 +532,8 @@ USE `dogdb`;
 INSERT INTO `meetup_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `meetup_id`, `user_id`) VALUES (1, '2020-10-10 12:30:16', 'Lorem ipsum dolor', 'My Dog has fleas, Help?', NULL, 1, 1);
 INSERT INTO `meetup_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `meetup_id`, `user_id`) VALUES (2, '2020-10-11 12:30:16', 'Lorem ipsum dolor', 'Lets go for a run!', 1, 1, 1);
 INSERT INTO `meetup_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `meetup_id`, `user_id`) VALUES (3, '2020-10-09 12:30:16', 'Lorem ipsum dolor', 'Trails near by?', 2, 1, 1);
+INSERT INTO `meetup_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `meetup_id`, `user_id`) VALUES (4, '2020-10-08 12:30:16', 'id like to join', 'New fun in town', 3, 2, 3);
+INSERT INTO `meetup_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `meetup_id`, `user_id`) VALUES (5, '2020-12-09 12:30:16', 'how is your dog able to do that?', 'doggie tricks', 4, 5, 2);
 
 COMMIT;
 
@@ -514,6 +544,10 @@ COMMIT;
 START TRANSACTION;
 USE `dogdb`;
 INSERT INTO `user_friend_request` (`user_id`, `friend_id`) VALUES (1, 1);
+INSERT INTO `user_friend_request` (`user_id`, `friend_id`) VALUES (2, 3);
+INSERT INTO `user_friend_request` (`user_id`, `friend_id`) VALUES (3, 2);
+INSERT INTO `user_friend_request` (`user_id`, `friend_id`) VALUES (4, 5);
+INSERT INTO `user_friend_request` (`user_id`, `friend_id`) VALUES (5, 4);
 
 COMMIT;
 
@@ -524,6 +558,10 @@ COMMIT;
 START TRANSACTION;
 USE `dogdb`;
 INSERT INTO `route` (`id`, `start_time`, `end_time`, `user_id`) VALUES (1, '2020-10-10 12:30:16', '2020-10-11 12:30:40', 1);
+INSERT INTO `route` (`id`, `start_time`, `end_time`, `user_id`) VALUES (2, '2020-10-07 12:30:16', '2020-10-07 2:30:16', 2);
+INSERT INTO `route` (`id`, `start_time`, `end_time`, `user_id`) VALUES (3, '2020-10-08 12:30:16', '2020-10-08 1:30:16', 3);
+INSERT INTO `route` (`id`, `start_time`, `end_time`, `user_id`) VALUES (4, '2020-10-09 12:30:16', '2020-10-09 12:40:16', 4);
+INSERT INTO `route` (`id`, `start_time`, `end_time`, `user_id`) VALUES (5, '2020-10-11 12:30:16', '2020-10-11 12:50:16', 5);
 
 COMMIT;
 
@@ -534,6 +572,10 @@ COMMIT;
 START TRANSACTION;
 USE `dogdb`;
 INSERT INTO `location` (`id`, `lat`, `lng`, `point_time`, `route_id`, `user_id`) VALUES (1, 33.47532343320456, -117.10128305844954, '2020-10-10 12:30:16', 1, 1);
+INSERT INTO `location` (`id`, `lat`, `lng`, `point_time`, `route_id`, `user_id`) VALUES (2,  -15.74015, -115.54582, '2020-12-10 12:30:16', 2, 2);
+INSERT INTO `location` (`id`, `lat`, `lng`, `point_time`, `route_id`, `user_id`) VALUES (3, 41.69936, 28.15432, '2020-09-10 12:30:16', 3, 3);
+INSERT INTO `location` (`id`, `lat`, `lng`, `point_time`, `route_id`, `user_id`) VALUES (4, 1.54610, 124.56892, '2020-10-02 12:30:16', 4, 4);
+INSERT INTO `location` (`id`, `lat`, `lng`, `point_time`, `route_id`, `user_id`) VALUES (5,  -32.48064, 134.23825, '2020-09-10 12:30:16', 5, 5);
 
 COMMIT;
 
@@ -544,6 +586,10 @@ COMMIT;
 START TRANSACTION;
 USE `dogdb`;
 INSERT INTO `dog_has_meetup` (`dog_id`, `meetup_id`) VALUES (1, 1);
+INSERT INTO `dog_has_meetup` (`dog_id`, `meetup_id`) VALUES (2, 2);
+INSERT INTO `dog_has_meetup` (`dog_id`, `meetup_id`) VALUES (3, 3);
+INSERT INTO `dog_has_meetup` (`dog_id`, `meetup_id`) VALUES (4, 4);
+INSERT INTO `dog_has_meetup` (`dog_id`, `meetup_id`) VALUES (5, 5);
 
 COMMIT;
 
@@ -556,6 +602,8 @@ USE `dogdb`;
 INSERT INTO `dog_park_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `dog_park_id`, `user_id`) VALUES (1, '2020-10-10 ', 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'Big Field', NULL, 1, 1);
 INSERT INTO `dog_park_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `dog_park_id`, `user_id`) VALUES (2, '2020-10-09 12:30:16', 'this is a great coversation', 'Doggie Stations', 1, 1, 1);
 INSERT INTO `dog_park_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `dog_park_id`, `user_id`) VALUES (3, '2020-10-08 12:30:16', 'i love talking soo much!', 'Date night?', 2, 1, 1);
+INSERT INTO `dog_park_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `dog_park_id`, `user_id`) VALUES (4, '2020-10-09 12:30:16', 'That looks awesome!', 'Fun activities near me', 3, 2, 2);
+INSERT INTO `dog_park_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `dog_park_id`, `user_id`) VALUES (5, '2019-10-08 12:30:16', 'So much fun and space there!', 'Parks around here', 4, 3, 3);
 
 COMMIT;
 
@@ -566,6 +614,10 @@ COMMIT;
 START TRANSACTION;
 USE `dogdb`;
 INSERT INTO `dog_park_review` (`rating`, `review`, `img_url`, `user_id`, `review_date`, `dog_park_id`) VALUES (5, 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'https://lh5.googleusercontent.com/p/AF1QipNTi44jKHG3HEtKPMv23pV7LupFneqUtx1MTksO=w408-h306-k-no', 1, '2020-10-10 12:30:16', 1);
+INSERT INTO `dog_park_review` (`rating`, `review`, `img_url`, `user_id`, `review_date`, `dog_park_id`) VALUES (4, 'This park is well-maintained for both dogs and their humans. There\'s water fountains, benches, shade trees and filled doggie bag dispensers with trash cans. The small dog side is very roomy and the large dog side is sectioned off to allow space between the dogs.\n', 'https://s3-media0.fl.yelpcdn.com/bphoto/sb2KT9vHSj6cntKi4eXdtg/180s.jpg', 2, '2019-10-10 12:30:16', 2);
+INSERT INTO `dog_park_review` (`rating`, `review`, `img_url`, `user_id`, `review_date`, `dog_park_id`) VALUES (5, 'The entrance is a little hidden but when you drive up there\'s lots of parking. Dog park is clean and and very spacious. I like that there are different sections for different sized dogs. My dog is small so it\'s nice that she can run around with dogs around her size and not feel intimidated by the larger dogs. Around the park there also an open field, tables, and basketball courts for the community. It\'s nice to go here in the afternoon where you can see lots of different types of dogs\n\n', 'https://s3-media0.fl.yelpcdn.com/bphoto/veheOOxJc1yMVSvVPEVfwA/180s.jpg', 3, '2020-11-10 12:30:16', 3);
+INSERT INTO `dog_park_review` (`rating`, `review`, `img_url`, `user_id`, `review_date`, `dog_park_id`) VALUES (4, 'Loved this little spot to take my bully out and let him play with other dogs! Great maintenance on this place making sure the grass is nice and the trees stay healthy while keeping a clean facility!\n\n', 'https://s3-media0.fl.yelpcdn.com/bphoto/cjO0A8PPR1e1sBZ5ZGGm0w/180s.jpg', 4, '2020-10-12 12:30:16', 4);
+INSERT INTO `dog_park_review` (`rating`, `review`, `img_url`, `user_id`, `review_date`, `dog_park_id`) VALUES (4, 'Of course, the time you go will impact your experience as to how many dogs are there. We went twice. The first time, there were a few dogs, but the. owners were mindful of their own dog\'s personality in relation to the other dogs. The 2nd time, there was only 1 guy thee with 2 huskies. He was sitting on the bench with his iPod and one of his huskies was starting to show some domineering behaviors over my dogs, so we left. It\'s going to happen, so it\'s important to keep an eye on your dogs.\n', 'https://s3-media0.fl.yelpcdn.com/bphoto/BWpUprjuWkCw-KBDzYM1Aw/300s.jpg', 5, '2018-10-10 12:30:16', 5);
 
 COMMIT;
 
@@ -577,6 +629,9 @@ START TRANSACTION;
 USE `dogdb`;
 INSERT INTO `general_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `user_id`) VALUES (1, '2020-10-10 12:30:16', 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'What shampoo to use?', NULL, 1);
 INSERT INTO `general_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `user_id`) VALUES (2, '2020-10-10 12:50:16', 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'Dog Food', 1, 1);
+INSERT INTO `general_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `user_id`) VALUES (3, '2020-08-10 12:50:16', 'Hello everyone. First time dig dad. Wonder daily why I didn\'t get a dog sooner.\n', 'New here & dog breeder question', 3, 2);
+INSERT INTO `general_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `user_id`) VALUES (4, '2020-08-12 12:50:16', 'Anyone have any idea what this could be? It looks like a pimple and the top part that looks like it’s scabbing feels hard. It doesn’t seem to be bothering my dog though.', 'Bump inside of my English Bulldog thigh', 4, 3);
+INSERT INTO `general_comment` (`id`, `comment_date`, `comment_text`, `title`, `reply_to_comment_id`, `user_id`) VALUES (5, '2020-08-04 12:50:16', 'For some background--I have been volunteering at an animal shelter as a dog walker for over ten years. I\'ve worked with a lot of dogs that are challenging--leash biting, jumping, mouthing--and generally I\'m regarded as doing very well handling these dogs. I\'ve also done some fostering. Back in February I fostered a dog who was a Humane Investigations rescue, he\'d been found in a crate in a backyard, severely emaciated. Nothing else was known about his past history. I fostered him for several months and he was a delight, until one day I put a new martingale collar on him (with his weight gain the old one didn\'t fit him), carefully checked if it was the correct size by gently pulling on it and he growled at me. He became increasingly aggressive, never actually biting. I contacted the shelter and they had me bring him back.\n', 'Sometimes I feel afraid of my dog even though he\'s given me no reason so far', 2, 4);
 
 COMMIT;
 
