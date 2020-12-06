@@ -26,10 +26,10 @@ public class UserServiceImpl implements UserService {
 	public User register(User user) {
 		String encodedPW = encoder.encode(user.getPassword());
 		user.setPassword(encodedPW); // only persist encoded password
-
 		// set other fields to default values
-
+		user.setEnabled(true);
 		userRepo.saveAndFlush(user);
+		user.setRole("standard");
 		return user;
 	}
 
@@ -50,7 +50,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User show(String username) {
 		return userRepo.findByUsername(username);
-
 	}
 
 	@Override
@@ -63,7 +62,6 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 		User dbUser = userOpt.get();
-		
 		if (user.getDateOption() != null) { dbUser.setDateOption(user.getDateOption()); }
 		if (user.getFirstName() != null) { dbUser.setFirstName(user.getFirstName()); }
 		if (user.getLastName() != null) { dbUser.setLastName(user.getLastName()); }
@@ -75,20 +73,31 @@ public class UserServiceImpl implements UserService {
 		if (user.getBio() != null) { dbUser.setBio(user.getBio()); }
 		if (user.getProfilePrivate() != null) { dbUser.setProfilePrivate(user.getProfilePrivate()); }
 		if (user.getLocationPrivate() != null) { dbUser.setLocationPrivate(user.getLocationPrivate()); }
-		
-		if (user.getPassword() != null) {
-			String encodedPW = encoder.encode(user.getPassword());
-			dbUser.setPassword(encodedPW);
-		}
-		
-		
-		return dbUser;
+		return userRepo.saveAndFlush(dbUser);
 	}
 
 	@Override
 	public Boolean delete(int id) {
 		userRepo.deleteById(id);
 		return ! userRepo.existsById(id);
+	}
+
+	@Override
+	public User updatePassword(User user, int id) {
+		if (user.getId() != id) {
+			return null;
+		}
+		Optional<User> userOpt = userRepo.findById(id);
+		if (!userOpt.isPresent()) {
+			return null;
+		}
+		User dbUser = userOpt.get();
+		if (user.getPassword() == null) {
+			return null;
+		}
+		String encodedPW = encoder.encode(user.getPassword());
+		dbUser.setPassword(encodedPW);
+		return userRepo.saveAndFlush(dbUser);
 	}
 
 }
