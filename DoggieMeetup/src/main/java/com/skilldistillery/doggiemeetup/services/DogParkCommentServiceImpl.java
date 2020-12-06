@@ -24,7 +24,7 @@ public class DogParkCommentServiceImpl implements DogParkCommentService {
 		if(userRepo.findByUsername(username) == null) {
 			return null;
 		}
-		return dogParkCommentRepo.findbyUser_Username(username);
+		return dogParkCommentRepo.findByUser_Username(username);
 	}
 			
 
