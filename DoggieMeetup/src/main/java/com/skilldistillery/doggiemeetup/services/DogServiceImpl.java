@@ -75,7 +75,7 @@ public class DogServiceImpl implements DogService {
 			dogRepo.delete(dog);
 			deleted = true;
 		}
-		return false;
+		return deleted;
 	}
 	
 
