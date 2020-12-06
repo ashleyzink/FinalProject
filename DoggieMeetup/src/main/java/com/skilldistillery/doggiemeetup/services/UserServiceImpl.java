@@ -76,12 +76,6 @@ public class UserServiceImpl implements UserService {
 		if (user.getProfilePrivate() != null) { dbUser.setProfilePrivate(user.getProfilePrivate()); }
 		if (user.getLocationPrivate() != null) { dbUser.setLocationPrivate(user.getLocationPrivate()); }
 		
-		if (user.getPassword() != null) {
-			String encodedPW = encoder.encode(user.getPassword());
-			dbUser.setPassword(encodedPW);
-		}
-		
-		
 		return dbUser;
 	}
 
@@ -89,6 +83,26 @@ public class UserServiceImpl implements UserService {
 	public Boolean delete(int id) {
 		userRepo.deleteById(id);
 		return ! userRepo.existsById(id);
+	}
+
+	@Override
+	public User updatePassword(User user, int id) {
+		if (user.getId() != id) {
+			return null;
+		}
+		Optional<User> userOpt = userRepo.findById(id);
+		if (!userOpt.isPresent()) {
+			return null;
+		}
+		User dbUser = userOpt.get();
+		if (user.getPassword() == null) {
+			return null;
+		}
+		String encodedPW = encoder.encode(user.getPassword());
+		dbUser.setPassword(encodedPW);
+		
+		
+		return dbUser;
 	}
 
 }
