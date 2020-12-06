@@ -173,4 +173,16 @@ class UserTest {
 		
 	}
 	
+	
+	
+	@Test
+	@DisplayName("test user mapping to user (MTM friend list)")
+	void test10() {
+		// TODO currently user 1 is only friends with self, may want to add another user in db and add to user_friend_request
+		assertNotNull(user);
+		assertNotNull(user.getFriendList());
+		assertTrue(user.getFriendList().size() > 0);
+		assertEquals("admin", user.getFriendList().get(0).getUsername());
+	}
+	
 }

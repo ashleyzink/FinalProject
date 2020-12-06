@@ -8,7 +8,7 @@ public interface DogParkService {
 
 	List<DogPark> index();
 	DogPark show(int id);
-	DogPark create(DogPark dogPark, String username);
-	DogPark update(DogPark dogPark, int id, String username);
-	Boolean delete(int id, String username);
+	DogPark create(DogPark dogPark);
+	DogPark update(DogPark dogPark, int id);
+	Boolean delete(int id);
 }
