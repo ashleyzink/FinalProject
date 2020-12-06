@@ -25,7 +25,7 @@ public class GeneralCommentServiceImpl implements GeneralCommentService {
 		if (userRepo.findByUsername(username) == null) {
 			return null;
 		}
-		return genComRepo.findbyUser_Username(username);
+		return genComRepo.findByUser_Username(username);
 	}
 
 	@Override
