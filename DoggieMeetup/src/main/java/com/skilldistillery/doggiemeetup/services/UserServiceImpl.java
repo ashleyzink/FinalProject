@@ -26,9 +26,7 @@ public class UserServiceImpl implements UserService {
 	public User register(User user) {
 		String encodedPW = encoder.encode(user.getPassword());
 		user.setPassword(encodedPW); // only persist encoded password
-
 		// set other fields to default values
-
 		userRepo.saveAndFlush(user);
 		return user;
 	}
@@ -50,7 +48,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User show(String username) {
 		return userRepo.findByUsername(username);
-
 	}
 
 	@Override
@@ -63,7 +60,6 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 		User dbUser = userOpt.get();
-		
 		if (user.getDateOption() != null) { dbUser.setDateOption(user.getDateOption()); }
 		if (user.getFirstName() != null) { dbUser.setFirstName(user.getFirstName()); }
 		if (user.getLastName() != null) { dbUser.setLastName(user.getLastName()); }
@@ -75,8 +71,7 @@ public class UserServiceImpl implements UserService {
 		if (user.getBio() != null) { dbUser.setBio(user.getBio()); }
 		if (user.getProfilePrivate() != null) { dbUser.setProfilePrivate(user.getProfilePrivate()); }
 		if (user.getLocationPrivate() != null) { dbUser.setLocationPrivate(user.getLocationPrivate()); }
-		
-		return dbUser;
+		return userRepo.saveAndFlush(dbUser);
 	}
 
 	@Override
@@ -100,9 +95,7 @@ public class UserServiceImpl implements UserService {
 		}
 		String encodedPW = encoder.encode(user.getPassword());
 		dbUser.setPassword(encodedPW);
-		
-		
-		return dbUser;
+		return userRepo.saveAndFlush(dbUser);
 	}
 
 }
