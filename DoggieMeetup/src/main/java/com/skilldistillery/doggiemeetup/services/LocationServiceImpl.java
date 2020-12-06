@@ -44,6 +44,7 @@ public class LocationServiceImpl implements LocationService {
 			if (location.getLat() != null) {managedLocation.setLat(location.getLat());}
 			if (location.getLng() != null) {managedLocation.setLng(location.getLng());}
 			if (location.getPointTime() != null) {managedLocation.setPointTime(location.getPointTime());}
+			locRepo.saveAndFlush(managedLocation);
 		}
 		return managedLocation;
 	}
