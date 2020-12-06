@@ -1,7 +1,6 @@
 package com.skilldistillery.doggiemeetup.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.doggiemeetup.entities.User;
@@ -10,8 +9,8 @@ import com.skilldistillery.doggiemeetup.repositories.UserRepository;
 @Service
 public class AuthServiceImpl implements AuthService {
 	
-	@Autowired
-	private PasswordEncoder encoder;
+//	@Autowired
+//	private PasswordEncoder encoder;
 	
 	@Autowired
 	private UserRepository userRepo;
@@ -19,7 +18,7 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public User register(User user) {
 		//encrypt and set the password for the User
-				user.setPassword(encoder.encode(user.getPassword()));
+//				user.setPassword(encoder.encode(user.getPassword()));
 				
 				//set the enabled field of the object to true
 				user.setEnabled(true);
