@@ -27,7 +27,9 @@ public class UserServiceImpl implements UserService {
 		String encodedPW = encoder.encode(user.getPassword());
 		user.setPassword(encodedPW); // only persist encoded password
 		// set other fields to default values
+		user.setEnabled(true);
 		userRepo.saveAndFlush(user);
+		user.setRole("standard");
 		return user;
 	}
 
