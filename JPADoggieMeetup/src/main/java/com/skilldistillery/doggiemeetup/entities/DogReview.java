@@ -17,7 +17,7 @@ public class DogReview {
 	@EmbeddedId
 	private DogReviewId id;
 
-	private int rating;
+	private Integer rating;
 
 	@Column(name = "img_url")
 	private String imgUrl;
@@ -36,6 +36,11 @@ public class DogReview {
 	@MapsId(value = "dogId") // Field in ID class
 	private Dog dog;
 
+	 
+	public DogReview() {
+		super();
+	}
+
 	public DogReviewId getId() {
 		return id;
 	}
@@ -44,11 +49,11 @@ public class DogReview {
 		this.id = id;
 	}
 
-	public int getRating() {
+	public Integer getRating() {
 		return rating;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(Integer rating) {
 		this.rating = rating;
 	}
 
