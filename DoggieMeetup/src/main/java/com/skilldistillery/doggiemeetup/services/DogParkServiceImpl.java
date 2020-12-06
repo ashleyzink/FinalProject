@@ -7,17 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.doggiemeetup.entities.DogPark;
-import com.skilldistillery.doggiemeetup.entities.User;
 import com.skilldistillery.doggiemeetup.repositories.DogParkRepository;
-import com.skilldistillery.doggiemeetup.repositories.UserRepository;
 
 @Service
 public class DogParkServiceImpl implements DogParkService {
 	
 	@Autowired
 	private DogParkRepository dogParkRepo;
-	@Autowired
-	private UserRepository userRepo;
 
 	@Override
 	public List<DogPark> index() {
@@ -34,20 +30,12 @@ public class DogParkServiceImpl implements DogParkService {
 	}
 
 	@Override
-	public DogPark create(DogPark dogPark, String username) {
-		User user = userRepo.findByUsername(username);
-		if (user == null) {
-			return null;
-		}
+	public DogPark create(DogPark dogPark) {
 		return dogParkRepo.saveAndFlush(dogPark);
 	}
 
 	@Override
-	public DogPark update(DogPark dogPark, int id, String username) {
-		User user = userRepo.findByUsername(username);
-		if (user == null) {
-			return null;
-		}
+	public DogPark update(DogPark dogPark, int id) {
 		Optional<DogPark> dogParkOpt = dogParkRepo.findById(id);
 		DogPark dbDogPark = null;
 		if (dogParkOpt.isPresent() && dogParkOpt.get().getId() == id) {
@@ -67,11 +55,7 @@ public class DogParkServiceImpl implements DogParkService {
 	}
 
 	@Override
-	public Boolean delete(int id, String username) {
-		User user = userRepo.findByUsername(username);
-		if (user == null || !user.getRole().equals("ADMIN")) {
-			return false;
-		}
+	public Boolean delete(int id) {
 		dogParkRepo.deleteById(id);
 		return ! dogParkRepo.existsById(id);
 	}
