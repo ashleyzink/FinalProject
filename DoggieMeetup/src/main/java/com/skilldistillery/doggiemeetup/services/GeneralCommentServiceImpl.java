@@ -52,9 +52,9 @@ public class GeneralCommentServiceImpl implements GeneralCommentService {
 	public GeneralComment update(String username, int genComId, GeneralComment genComment) {
 		GeneralComment managedGenCom = genComRepo.findByUser_UsernameAndId(username, genComId);
 		if (managedGenCom != null) {
-			managedGenCom.setCommentDate(genComment.getCommentDate());
 			managedGenCom.setCommentText(genComment.getCommentText());
 			managedGenCom.setTitle(genComment.getTitle());
+			managedGenCom.setReplyToComment(genComment.getReplyToComment());
 			genComRepo.saveAndFlush(managedGenCom);
 		}
 		return managedGenCom;
