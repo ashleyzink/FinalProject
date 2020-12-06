@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -74,6 +76,12 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List <GeneralComment> generalComments;
+	
+	@ManyToMany
+	@JoinTable(name="user_friend_request",
+	joinColumns=@JoinColumn(name="user_id"),
+	inverseJoinColumns=@JoinColumn(name="friend_id"))
+	private List<User> friendList;
 	
 	//CONSTRUCTORS -------------------------------------------------------------------------------------
 	 
@@ -382,6 +390,16 @@ public class User {
 		builder.append(locationPrivate);
 		builder.append("]");
 		return builder.toString();
+	}
+
+
+	public List<User> getFriendList() {
+		return friendList;
+	}
+
+
+	public void setFriendList(List<User> friendList) {
+		this.friendList = friendList;
 	}
 
 }
