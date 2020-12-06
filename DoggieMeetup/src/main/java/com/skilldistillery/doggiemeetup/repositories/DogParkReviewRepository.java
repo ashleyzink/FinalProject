@@ -6,5 +6,6 @@ import com.skilldistillery.doggiemeetup.entities.DogParkReview;
 import com.skilldistillery.doggiemeetup.entities.DogParkReviewId;
 
 public interface DogParkReviewRepository extends JpaRepository<DogParkReview, DogParkReviewId> {
+	DogParkReview findByUser_UsernameAndId(String username, int dogParkId);
 
 }
