@@ -25,7 +25,7 @@ public class MeetupCommentServiceImpl implements MeetupCommentService {
 		if(userRepo.findByUsername(username) == null) {
 			return null;
 		}
-		return meetupComRepo.findbyUser_Username(username);
+		return meetupComRepo.findByUser_Username(username);
 	}
 
 	@Override
