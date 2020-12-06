@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="dog_park_comment")
 public class DogParkComment {
@@ -40,6 +42,7 @@ public class DogParkComment {
 	@JoinColumn(name="reply_to_comment_id")
 	private DogParkComment replyToComment;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="replyToComment")
 	private List<DogParkComment> replies;
 
