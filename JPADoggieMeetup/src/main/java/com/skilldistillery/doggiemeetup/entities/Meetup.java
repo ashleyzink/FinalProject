@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Meetup {
 
@@ -32,6 +34,7 @@ public class Meetup {
 	@Column(name = "create_date")
 	private LocalDateTime createDate;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "meetups")
 	private List<Dog> dogs;
 
