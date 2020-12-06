@@ -66,7 +66,7 @@ public class RouteServiceImpl implements RouteService {
 			routeRepo.delete(route);
 			deleted = true;
 		}
-		return false;
+		return deleted;
 	}
 	
 	
