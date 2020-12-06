@@ -169,7 +169,7 @@ class UserTest {
 		assertNotNull(user.getGeneralComments());
 		assertTrue(user.getGeneralComments().size()>0);
 		assertEquals(2020, user.getGeneralComments().get(0).getCommentDate().getYear());
-		assertEquals("What shampoo to use?", user.getGeneralComments().get(1).getTitle());
+		assertEquals("What shampoo to use?", user.getGeneralComments().get(0).getTitle());
 		
 	}
 	
