@@ -32,14 +32,7 @@ public class GeneralCommentController {
 //	@GetMapping
 //	public List<GeneralComment> index(
 //			HttpServletResponse res,
-//			Principal principal 
-//			){
-//		List<GeneralComment> genCommentsForUser = genCommentService.index(principal.getName());
-//		if(genCommentsForUser == null) {
-//			res.setStatus(404);
-//		}
-//		return genCommentsForUser;
-//	}
+
 	//GET "api/generalcomments"
 	@GetMapping("generalComments")
 	public List<GeneralComment> lists(){
