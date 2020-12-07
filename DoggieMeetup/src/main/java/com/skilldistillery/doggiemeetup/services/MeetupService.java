@@ -10,10 +10,10 @@ public interface MeetupService {
 	
 	Meetup show(int id);
 	
-	Meetup create(Meetup meetup);
+	Meetup create(String username, Meetup meetup);
 	
-	Meetup update(Meetup meetup, int id);
+	Meetup update(String username, Meetup meetup, int id);
 	
-	Boolean delete(int id);
+	Boolean delete(String username, int id);
 
 }

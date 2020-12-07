@@ -29,51 +29,50 @@ public class GeneralCommentController {
 	private GeneralCommentService genCommentService;
 	
 	//GET "api/generalcomments"
-	@GetMapping("generalcomments")
-	public List<GeneralComment> index(
-			HttpServletResponse res,
-			@PathVariable String username,
-			Principal principal 
-			){
-		List<GeneralComment> genCommentsForUser = genCommentService.index(principal.getName());
-		if(genCommentsForUser == null) {
-			res.setStatus(404);
-		}
-		return genCommentsForUser;
-	}
+//	@GetMapping
+//	public List<GeneralComment> index(
+//			HttpServletResponse res,
+//			Principal principal 
+//			){
+//		List<GeneralComment> genCommentsForUser = genCommentService.index(principal.getName());
+//		if(genCommentsForUser == null) {
+//			res.setStatus(404);
+//		}
+//		return genCommentsForUser;
+//	}
 	//GET "api/generalcomments"
-	@GetMapping("generalcomments")
+	@GetMapping("generalComments")
 	public List<GeneralComment> lists(){
 		return genCommentService.getAllGeneralComments();
 	}
 	
 	//GET "api/generalcomments/{genComId}"
-	@GetMapping("generalcomments/{genComId}")
+	@GetMapping("generalComments/{comId}")
 	public GeneralComment show(
 			HttpServletRequest req,
 			HttpServletResponse res, 
-			@PathVariable int genComId,
-			@PathVariable String username,
-			Principal principal) {
-		GeneralComment generalComments = genCommentService.show(username, genComId);
+			@PathVariable int comId 
+			) {
+		GeneralComment generalComments = genCommentService.findByGeneralCommentId(comId);
 		if(generalComments == null) {
 			res.setStatus(404);
 		}
 		return generalComments;
 	}
 	
+	
+	
 	//POST "api/generalcomments"
-	@PostMapping("generalcomments")
+	@PostMapping("auth/generalComments")
 	public GeneralComment create(
 			HttpServletRequest req,
 			HttpServletResponse res,
-			@PathVariable String username,
 			@RequestBody GeneralComment genComment,
 			Principal principal
 			) {
 		
 		try {
-			genComment = genCommentService.create(username, genComment);
+			genComment = genCommentService.create(principal.getName(), genComment);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(genComment.getId());
@@ -86,17 +85,16 @@ public class GeneralCommentController {
 	}
 	
 	//PUT "api/generalcomments/{genComId}"
-	@PutMapping("generalcomments/{genComId}")
+	@PutMapping("auth/generalcomments/{genComId}")
 	public GeneralComment update(
 			HttpServletRequest req,
 			HttpServletResponse res,
-			@PathVariable String username,
 			@PathVariable int genComId,
 			@RequestBody GeneralComment genComment,
 			Principal principal 
 			) {
 		try {
-			genComment = genCommentService.update(username, genComId, genComment);
+			genComment = genCommentService.update(principal.getName(), genComId, genComment);
 			if(genComment == null) {
 				res.setStatus(404);
 			}
@@ -109,16 +107,15 @@ public class GeneralCommentController {
 	}
 	
 	//DELETE "api/generalcomments/{genComId}
-	@DeleteMapping("generalcomments/{genComId}")
+	@DeleteMapping("auth/generalComments/{genComId}")
 	public void destroy(
 			HttpServletRequest req,
 			HttpServletResponse res,
-			@PathVariable String username,
 			@PathVariable int genComId,
 			Principal principal
 			) {
 		try {
-			boolean deleted = genCommentService.destroy(username, genComId);
+			boolean deleted = genCommentService.destroy(principal.getName(), genComId);
 			if(deleted) {
 				res.setStatus(204);
 			}else {

@@ -1,6 +1,7 @@
 package com.skilldistillery.doggiemeetup.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,9 +35,13 @@ public class DogParkCommentServiceImpl implements DogParkCommentService {
 	}
 
 	@Override
-	public DogParkComment show(String username, int dogParkCommentId) {
+	public DogParkComment show(int dogParkCommentId) {
+		Optional<DogParkComment> dogParkCommentOpt = dogParkCommentRepo.findById(dogParkCommentId);
+		if(! dogParkCommentOpt.isPresent()) {
+			return null;
+		}
 		
-		return dogParkCommentRepo.findByUser_UsernameAndId(username, dogParkCommentId);
+		return dogParkCommentOpt.get();
 	}
 
 	@Override
