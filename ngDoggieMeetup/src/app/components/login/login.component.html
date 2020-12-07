@@ -1,1 +1,15 @@
-<p>login works!</p>
+<div>
+  <form class="form-group">
+    <div class="form-row">
+      <label for="registerUsername">Username</label>
+      <input class="form-control" type="text" name="username" id="registerUsername" [(ngModel)]="loginUser.username" placeholder="Username">
+    </div>
+    <div class="form-row">
+      <label for="registerPassword">Password</label>
+      <input class="form-control" type="password" name="password" id="registerPassword" [(ngModel)]="loginUser.password" placeholder="Password">
+    </div>
+    <div>
+      <button class="btn btn-primary" (click)="login()">Login</button>
+    </div>
+  </form>
+</div>
