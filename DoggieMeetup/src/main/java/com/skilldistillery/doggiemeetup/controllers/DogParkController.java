@@ -34,7 +34,6 @@ public class DogParkController {
 		if (dogparks == null) {
 			res.setStatus(404);
 		}
-
 		return dogparks;
 	}
 
