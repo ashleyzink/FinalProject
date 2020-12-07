@@ -31,6 +31,7 @@ public class AuthServiceImpl implements AuthService {
 		userRepo.saveAndFlush(user);
 
 		// return the User object
+		System.out.println(user);
 		return user;
 	}
 
