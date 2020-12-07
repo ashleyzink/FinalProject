@@ -33,7 +33,7 @@ public class DogParkCommentController {
 
 	
 	//GET "api/dogparkcomments"
-	@GetMapping
+	@GetMapping("auth/dogParkComments")
 	public List<DogParkComment> index(
 			HttpServletResponse res,
 			@PathVariable String username,

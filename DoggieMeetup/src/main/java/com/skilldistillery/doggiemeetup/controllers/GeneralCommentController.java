@@ -28,7 +28,7 @@ public class GeneralCommentController {
 	@Autowired
 	private GeneralCommentService genCommentService;
 	
-	//GET "api/generalcomments"
+	//GET "api/generalComments/userId"
 //	@GetMapping
 //	public List<GeneralComment> index(
 //			HttpServletResponse res,
@@ -40,7 +40,7 @@ public class GeneralCommentController {
 //		}
 //		return genCommentsForUser;
 //	}
-	//GET "api/generalcomments"
+	//GET "api/generalComments"
 	@GetMapping("generalComments")
 	public List<GeneralComment> lists(){
 		return genCommentService.getAllGeneralComments();
