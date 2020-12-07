@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="dog_park_comment")
 public class DogParkComment {
@@ -40,8 +42,13 @@ public class DogParkComment {
 	@JoinColumn(name="reply_to_comment_id")
 	private DogParkComment replyToComment;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="replyToComment")
 	private List<DogParkComment> replies;
+	
+	@ManyToOne
+	@JoinColumn(name="dog_park_id")
+	private DogPark dogPark;
 
 	public int getId() {
 		return id;
@@ -97,23 +104,13 @@ public class DogParkComment {
 		return true;
 	}
 
+
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("DogParkComment [id=");
-		builder.append(id);
-		builder.append(", commentDate=");
-		builder.append(commentDate);
-		builder.append(", commentText=");
-		builder.append(commentText);
-		builder.append(", title=");
-		builder.append(title);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append(", replyToComment=");
-		builder.append(replyToComment);
-		builder.append("]");
-		return builder.toString();
+		return "DogParkComment [id=" + id + ", commentDate=" + commentDate + ", commentText=" + commentText + ", title="
+				+ title + ", user=" + user + ", replyToComment=" + replyToComment + ", replies=" + replies
+				+ ", dogPark=" + dogPark + "]";
 	}
 
 	public DogParkComment() {
@@ -143,4 +140,14 @@ public class DogParkComment {
 	public void setReplies(List<DogParkComment> replies) {
 		this.replies = replies;
 	}
+
+	public DogPark getDogPark() {
+		return dogPark;
+	}
+
+	public void setDogPark(DogPark dogPark) {
+		this.dogPark = dogPark;
+	}
+	
+	
 }

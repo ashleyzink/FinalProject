@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.doggiemeetup.entities.Meetup;
+import com.skilldistillery.doggiemeetup.entities.User;
 import com.skilldistillery.doggiemeetup.repositories.MeetupRepository;
 import com.skilldistillery.doggiemeetup.repositories.UserRepository;
 
@@ -33,12 +34,20 @@ public class MeetupServiceImpl implements MeetupService {
 	}
 
 	@Override
-	public Meetup create(Meetup meetup) {
-		return meetupRepo.saveAndFlush(meetup);
+	public Meetup create(String username, Meetup meetup) {
+		User user = userRepo.findByUsername(username);
+		if(user != null) {
+			meetup.setUser(user);
+			meetupRepo.saveAndFlush(meetup);
+		}
+		return meetup;
 	}
 
 	@Override
-	public Meetup update(Meetup meetup, int id) {
+	public Meetup update(String username, Meetup meetup, int id) {
+		if(userRepo.findByUsername(username) == null) {
+			return null;
+		}
 		Optional<Meetup> meetupOpt = meetupRepo.findById(id);
 		Meetup dbMeetup = null;
 		if (meetupOpt.isPresent() && meetupOpt.get().getId() == id) {
@@ -58,9 +67,11 @@ public class MeetupServiceImpl implements MeetupService {
 	}
 
 	@Override
-	public Boolean delete(int id) {
+	public Boolean delete(String username, int id) {
+		User user = userRepo.findByUsername(username);
 		meetupRepo.deleteById(id);
 		return ! meetupRepo.existsById(id);
+			
 	}
 
 }

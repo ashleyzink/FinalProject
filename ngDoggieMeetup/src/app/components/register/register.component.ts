@@ -22,11 +22,11 @@ export class RegisterComponent implements OnInit {
   createUser() {
     this.authService.register(this.newUser).subscribe(
       data => {
+        const loginUser = this.newUser;
         this.newUser = new User();
-        this.loginUser = data;
-        this.authService.login(this.loginUser.username, this.loginUser.password).subscribe(
+        this.authService.login(loginUser.username, loginUser.password).subscribe(
           good => this.router.navigateByUrl('/home'),
-          bad => console.log('Error in register login')
+          bad => console.log('Error in login after register')
         )
       },
       err => console.log('Error in register')

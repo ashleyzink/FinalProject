@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="general_comment")
 public class GeneralComment {
@@ -40,6 +42,7 @@ public class GeneralComment {
 	@JoinColumn(name="reply_to_comment_id")
 	private GeneralComment replyToComment;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="replyToComment")
 	private List<GeneralComment> replies;
 

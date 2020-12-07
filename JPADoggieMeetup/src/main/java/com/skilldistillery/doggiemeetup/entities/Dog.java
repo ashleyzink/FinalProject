@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Dog {
 	
@@ -52,9 +54,11 @@ public class Dog {
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="dog")
 	private List<DogReview> dogReviews;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="dog_has_meetup",
 	joinColumns=@JoinColumn(name="dog_id"),

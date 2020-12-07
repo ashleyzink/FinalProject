@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -56,27 +58,35 @@ public class User {
 	@JoinColumn(name="address_id")
 	private Address address;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <Route> routes;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <MeetupComment> meetupComments;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <Meetup> meetups;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Dog> dogs;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <DogReview> dogReviews;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <DogParkReview> dogParkReviews;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <GeneralComment> generalComments;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="user_friend_request",
 	joinColumns=@JoinColumn(name="user_id"),
