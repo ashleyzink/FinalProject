@@ -1,11 +1,11 @@
 package com.skilldistillery.doggiemeetup.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.doggiemeetup.entities.Dog;
 import com.skilldistillery.doggiemeetup.entities.GeneralComment;
 import com.skilldistillery.doggiemeetup.entities.User;
 import com.skilldistillery.doggiemeetup.repositories.GeneralCommentRepository;
@@ -36,6 +36,16 @@ public class GeneralCommentServiceImpl implements GeneralCommentService {
 	@Override
 	public GeneralComment show(String username, int genComId) {
 		return genComRepo.findByUser_UsernameAndId(username, genComId);
+	}
+	
+	@Override
+	public GeneralComment findByGeneralCommentId(int genComId) {
+		Optional<GeneralComment> genCommentOpt = genComRepo.findById(genComId);
+		if( ! genCommentOpt.isPresent()) {
+			return null;
+		}
+		
+		return genCommentOpt.get();
 	}
 
 	@Override
