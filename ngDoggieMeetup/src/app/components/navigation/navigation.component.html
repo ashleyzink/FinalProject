@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" [routerLink]="['/home']">Home</a>
-  <a class="navbar-brand" [routerLink]="['/register']">Register</a>
-  <a class="navbar-brand" [routerLink]="['/login']">Login</a>
-  <a class="navbar-brand" [routerLink]="['/logout']">Logout</a>
+  <a *ngIf="!checkLogin()" class="navbar-brand" [routerLink]="['/register']">Register</a>
+  <a *ngIf="!checkLogin()" class="navbar-brand" [routerLink]="['/login']">Login</a>
+  <app-logout *ngIf="checkLogin()"></app-logout>
 </nav>
