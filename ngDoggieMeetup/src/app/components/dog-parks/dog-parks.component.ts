@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DogParksComponent implements OnInit {
 
-  selected: DogPark;
+  selected: DogPark = null;
   newDogPark: DogPark = new DogPark();
   dogParks: DogPark[] = [];
 

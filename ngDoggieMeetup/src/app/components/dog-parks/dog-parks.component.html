@@ -1,20 +1,24 @@
-<div class="col">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th><th>Image</th><th>Off Leash</th><th>Address</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let dogPark of dogParks">
-        <td>{{dogPark.name}}</td>
-        <td><img [src]="dogPark.imageUrl" [alt]="'Picture for ' + dogPark.name"></td>
-        <td>{{dogPark.offLeash}}</td>
-        <td>address here</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div *ngIf="selected" class="col">
-  item selected
+<div class="row">
+
+  <div class="col">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th><th>Image</th><th>Off Leash</th><th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dogPark of dogParks">
+          <td>{{dogPark.name}}</td>
+          <td><img [src]="dogPark.imageUrl" [alt]="'Picture for ' + dogPark.name"></td>
+          <td>{{dogPark.offLeash}}</td>
+          <td>address here</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="selected" class="col">
+    item selected
+  </div>
+
 </div>
