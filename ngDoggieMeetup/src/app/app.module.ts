@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { FormsModule } from '@angular/forms';
+import { DogParksComponent } from './components/dog-parks/dog-parks.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     NotFoundComponent,
     RegisterComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    DogParksComponent
   ],
   imports: [
     BrowserModule,
