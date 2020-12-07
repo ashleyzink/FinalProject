@@ -17,21 +17,30 @@ public class AuthServiceImpl implements AuthService {
 	private UserRepository userRepo;
 
 	@Override
-	public User register(User user) {
-		// encrypt and set the password for the User
-		user.setPassword(encoder.encode(user.getPassword()));
+	public User register(User user) throws Exception {
 
-		// set the enabled field of the object to true
-		user.setEnabled(true);
+		
+		if (userRepo.findByEmail(user.getEmail()) != null) {
+			throw new Exception("Email already in use");
+		} else if (userRepo.findByUsername(user.getUsername()) != null) {
+			throw new Exception("Username already in use");
+		} else {
 
-		// set the role field of the object to "standard"
-		user.setRole("standard");
+			// encrypt and set the password for the User
+			user.setPassword(encoder.encode(user.getPassword()));
 
-		// saveAndFlush the user using the UserRepo
-		userRepo.saveAndFlush(user);
+			// set the enabled field of the object to true
+			user.setEnabled(true);
 
-		// return the User object
-		System.out.println(user);
+			// set the role field of the object to "standard"
+			user.setRole("standard");
+
+			// saveAndFlush the user using the UserRepo
+			userRepo.saveAndFlush(user);
+
+			// return the User object
+			System.out.println(user);
+		}
 		return user;
 	}
 

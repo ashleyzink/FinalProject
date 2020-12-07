@@ -1,5 +1,6 @@
 package com.skilldistillery.doggiemeetup.controllers;
 
+import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,11 @@ public class AuthController {
 	    if (user == null) {
 	        res.setStatus(400);
 	    }
-	    user = authService.register(user);
+	    try {
+			user = authService.register(user);
+		} catch (Exception e) {
+			res.setStatus(400);
+		}
 	    return user;
 	}
 

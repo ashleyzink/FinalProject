@@ -1,6 +1,7 @@
 package com.skilldistillery.doggiemeetup.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,17 +35,26 @@ public class DogServiceImpl implements DogService {
 	}
 
 	@Override
-	public Dog show(String username, int dogId) {
-		return dogRepo.findByUser_UsernameAndId(username, dogId);
+	public Dog show(int userId, int dogId) {
+		Optional<Dog> dogOpt = dogRepo.findById(dogId);
+		Dog dog = null;
+		if (dogOpt.isPresent()) {
+			dog = dogOpt.get();
+		}
+		else return null;
+		if  (dog.getUser().getId() != userId) {
+			return null;
+		}
+			
+		return dog;
 	}
 
 	@Override
-	public Dog create(String username, Dog dog) {
-		User user = userRepo.findByUsername(username);
-		if (user != null) {
-			dog.setUser(user);
-			dogRepo.saveAndFlush(dog);
+	public Dog create(int userId, Dog dog) {
+		if  (dog.getUser().getId() != userId) {
+			return null;
 		}
+		dogRepo.saveAndFlush(dog);
 		return dog;
 	}
 
