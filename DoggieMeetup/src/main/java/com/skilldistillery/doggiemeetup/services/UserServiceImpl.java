@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User update(User user, int id) {
+	public User update(String username, User user, int id) {
 		if (user.getId() != id) {
 			return null;
 		}
@@ -62,6 +62,8 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 		User dbUser = userOpt.get();
+		if (dbUser.getUsername().equals(username)) {
+			
 		if (user.getDateOption() != null) { dbUser.setDateOption(user.getDateOption()); }
 		if (user.getFirstName() != null) { dbUser.setFirstName(user.getFirstName()); }
 		if (user.getLastName() != null) { dbUser.setLastName(user.getLastName()); }
@@ -74,13 +76,10 @@ public class UserServiceImpl implements UserService {
 		if (user.getProfilePrivate() != null) { dbUser.setProfilePrivate(user.getProfilePrivate()); }
 		if (user.getLocationPrivate() != null) { dbUser.setLocationPrivate(user.getLocationPrivate()); }
 		return userRepo.saveAndFlush(dbUser);
+		}
+		else { return null;}
 	}
-
-	@Override
-	public Boolean delete(int id) {
-		userRepo.deleteById(id);
-		return ! userRepo.existsById(id);
-	}
+	
 
 	@Override
 	public User updatePassword(User user, int id) {
@@ -100,4 +99,39 @@ public class UserServiceImpl implements UserService {
 		return userRepo.saveAndFlush(dbUser);
 	}
 
+	//Deleting would create issue with foriegn key relationship // See disabled()
+	@Override
+	public Boolean delete(String username, int id) {
+		userRepo.deleteById(id);
+		return ! userRepo.existsById(id);
+	}
+
+
+	@Override
+	public Boolean disable(String username, int id) {
+		Optional<User> userOpt = userRepo.findById(id);
+		if (userOpt.isPresent()) {
+			User dbUser = userOpt.get();
+			if (dbUser.getUsername().equals(username)) {
+				dbUser.setEnabled(false);
+				userRepo.saveAndFlush(dbUser);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public Boolean enable(String username, int id) {
+		Optional<User> userOpt = userRepo.findById(id);
+		if (userOpt.isPresent()) {
+			User dbUser = userOpt.get();
+			if (dbUser.getUsername().equals(username)) {
+				dbUser.setEnabled(true);
+				userRepo.saveAndFlush(dbUser);
+				return false;
+			}
+		}
+		return false;
+	}
 }
