@@ -31,7 +31,6 @@ public class DogParkController {
 	@GetMapping("dogparks")
 	public List<DogPark> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		List<DogPark> dogparks = dogparkSvc.index();
-		principal.getName();
 		if (dogparks == null) {
 			res.setStatus(404);
 		}
