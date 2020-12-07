@@ -21,6 +21,41 @@ public class MeetupCommentServiceImpl implements MeetupCommentService {
 	private UserRepository userRepo;
 
 	@Override
+	public MeetupComment show(int meetupId, int meetupComId) {
+		Optional<MeetupComment> meetupOpt = meetupComRepo.findById(meetupComId);
+		MeetupComment meetupComment = null;
+		if (meetupOpt.isPresent()) {
+			meetupComment = meetupOpt.get();
+		} else {
+			return null;
+		}
+		if (meetupId == meetupComment.getMeetup().getId()) {
+			return meetupComment;
+		} else {
+			return null;
+		}
+
+	}
+
+	@Override
+	public MeetupComment findByMeetupCommentId(int meetupCommentId) {
+		Optional<MeetupComment> meetupCommentOpt = meetupComRepo.findById(meetupCommentId);
+		if (!meetupCommentOpt.isPresent()) {
+			return null;
+		}
+
+		return meetupCommentOpt.get();
+	}
+
+//	@Override
+//	public List<MeetupComment> index(int userId) {
+//		if (meetupComRepo.findById(userId) == null) {
+//			return null;
+//		}
+//		return meetupComRepo.findById(userId).get();
+//	}
+
+	@Override
 	public List<MeetupComment> getAllMeetupComments() {
 		return meetupComRepo.findAll();
 	}
@@ -57,34 +92,6 @@ public class MeetupCommentServiceImpl implements MeetupCommentService {
 			deleted = true;
 		}
 		return deleted;
-	}
-
-	@Override
-	public List<MeetupComment> findByMeetupId(int id) {
-		return meetupComRepo.findByMeetup_Id(id);
-	}
-
-	@Override
-	public MeetupComment show(int meetupId, int meetupComId) {
-		Optional<MeetupComment> meetupOpt = meetupComRepo.findById(meetupComId);
-		MeetupComment meetupComment = null;
-		if (meetupOpt.isPresent()) {
-			meetupComment = meetupOpt.get();
-		} else {
-			return null;
-		}
-		if (meetupId == meetupComment.getMeetup().getId()) {
-			return meetupComment;
-		} else {
-			return null;
-		}
-
-	}
-
-	@Override
-	public List<MeetupComment> findByMeetupCommentLike(String commentText) {
-		String meetupComContaining = "%" + commentText + "%";
-		return meetupComRepo.findByMeetup__Id_CommentLike(meetupComContaining);
 	}
 
 }

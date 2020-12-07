@@ -19,44 +19,48 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.doggiemeetup.entities.MeetupComment;
 import com.skilldistillery.doggiemeetup.services.MeetupCommentService;
-import com.skilldistillery.doggiemeetup.services.UserService;
+//import com.skilldistillery.doggiemeetup.services.UserService;
 
 @CrossOrigin({ "*", "http://localhost:4210" })
 @RequestMapping("api")
 @RestController
 public class MeetupCommentController {
 
-	@Autowired
-	private UserService uSvc;
+//	@Autowired
+//	private UserService uSvc;
 	@Autowired
 	private MeetupCommentService mcs;
+
+//	@GetMapping("meetupComments/userId")
+//	public List<MeetupComment> index(HttpServletResponse res, @PathVariable int userId) {
+//		List<MeetupComment> meetupCommentsForUser = mcs.index(userId);
+//		if (meetupCommentsForUser == null) {
+//			res.setStatus(404);
+//		}
+//		return meetupCommentsForUser;
+//	}
+
+	@GetMapping("meetupComments")
+	public List<MeetupComment> lists() {
+		return mcs.getAllMeetupComments();
+	}
 
 	@GetMapping("meetups/{meetupId}/meetupComments/{meetupCommentId}")
 	public MeetupComment show(HttpServletRequest req, HttpServletResponse res, @PathVariable int meetupId,
 			@PathVariable int meetupCommentId) {
-		MeetupComment meetupComment = mcs.show(meetupId, meetupCommentId);
+		MeetupComment meetupComment = mcs.findByMeetupCommentId(meetupCommentId);
 		if (meetupComment == null) {
 			res.setStatus(404);
 		}
 		return meetupComment;
 	}
 
-	@GetMapping("meetupComments/search/{keyword}")
-	public List<MeetupComment> findByMeetupCommentLike(HttpServletRequest req, HttpServletResponse res,
-			@PathVariable String commentText) {
-		return mcs.findByMeetupCommentLike(commentText);
-
-	}
-
-//	@GetMapping("meetupComments/search/{keyword}")
-	// List <MeetupComment>
-
 	@PostMapping("auth/meetups/{meetupId}/meetupComments")
-	public MeetupComment create(HttpServletRequest req, HttpServletResponse res, @PathVariable String username,
+	public MeetupComment create(HttpServletRequest req, HttpServletResponse res,
 			@RequestBody MeetupComment meetupComment, Principal principal) {
 
 		try {
-			meetupComment = mcs.create(username, meetupComment);
+			meetupComment = mcs.create(principal.getName(), meetupComment);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(meetupComment.getId());
@@ -69,10 +73,10 @@ public class MeetupCommentController {
 	}
 
 	@PutMapping("auth/meetups/{meetupId}/meetupComments/{meetupCommentId}")
-	public MeetupComment update(HttpServletRequest req, HttpServletResponse res, @PathVariable String username,
-			@PathVariable int meetupCommentId, @RequestBody MeetupComment meetupComment, Principal principal) {
+	public MeetupComment update(HttpServletRequest req, HttpServletResponse res, @PathVariable int meetupCommentId,
+			@RequestBody MeetupComment meetupComment, Principal principal) {
 		try {
-			meetupComment = mcs.update(username, meetupCommentId, meetupComment);
+			meetupComment = mcs.update(principal.getName(), meetupCommentId, meetupComment);
 			if (meetupComment == null) {
 				res.setStatus(404);
 			}
@@ -84,11 +88,11 @@ public class MeetupCommentController {
 		return meetupComment;
 	}
 
-	@DeleteMapping("auth/meetups/{meetupId}/meetupComments}")
-	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable String username,
-			@PathVariable int meetupCommentId, Principal principal) {
+	@DeleteMapping("auth/meetups/{meetupId}/meetupComments/{meetupCommentId}")
+	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int meetupCommentId,
+			Principal principal) {
 		try {
-			boolean deleted = mcs.destroy(username, meetupCommentId);
+			boolean deleted = mcs.destroy(principal.getName(), meetupCommentId);
 			if (deleted) {
 				res.setStatus(204);
 			} else {

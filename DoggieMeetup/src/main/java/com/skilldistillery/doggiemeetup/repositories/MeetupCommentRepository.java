@@ -12,8 +12,9 @@ public interface MeetupCommentRepository extends JpaRepository<MeetupComment, In
 
 	MeetupComment findByUser_UsernameAndId(String username, int meetupComId);
 
-	List<MeetupComment> findByMeetup_Id(int meetupId);
 
-	public List<MeetupComment> findByMeetup_Id_CommentLike(String commentText);
+//	List<MeetupComment> findByMeetup_Id(int meetupId);
+
+//	public List<MeetupComment> findByMeetup_Id_CommentLike(String commentText);
 
 }
