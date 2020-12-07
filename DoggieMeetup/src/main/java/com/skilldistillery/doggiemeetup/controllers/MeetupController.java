@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.skilldistillery.doggiemeetup.entities.Meetup;
 import com.skilldistillery.doggiemeetup.services.MeetupService;
 
+
 @CrossOrigin({"*", "http://localhost:4210" })
 @RequestMapping("api")
 @RestController
@@ -34,8 +35,8 @@ public class MeetupController {
 	public Meetup show(
 			HttpServletRequest req,
 			HttpServletResponse res, 
-			@PathVariable int id,
-			Principal principal) {
+			@PathVariable int id
+			) {
 		Meetup meetups = meetupService.show(id);
 		if(meetups == null) {
 			res.setStatus(404);
@@ -44,7 +45,7 @@ public class MeetupController {
 	}
 	
 //| `Meetup`|`POST api/meetups`| Creates a new meetup|
-	@PostMapping("meetups")
+	@PostMapping("auth/meetups")
 	public Meetup create(
 			HttpServletRequest req,
 			HttpServletResponse res,
@@ -53,7 +54,7 @@ public class MeetupController {
 			) {
 		
 		try {
-			meetup = meetupService.create(meetup);
+			meetup = meetupService.create(principal.getName(),meetup);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(meetup.getId());
@@ -67,7 +68,7 @@ public class MeetupController {
 		
 	
 //| `Meetup`|`PUT api/meetups/{id}`| Replaces an existing meetup by id|
-	@PutMapping("meetups/{id}")
+	@PutMapping("auth/meetups/{id}")
 	public Meetup update(
 			HttpServletRequest req,
 			HttpServletResponse res,
@@ -76,7 +77,7 @@ public class MeetupController {
 			Principal principal 
 			) {
 		try {
-			meetup = meetupService.update(meetup, id);
+			meetup = meetupService.update(principal.getName(),meetup, id);
 			if(meetup == null) {
 				res.setStatus(404);
 			}
@@ -89,7 +90,7 @@ public class MeetupController {
 	}
 	
 //| `void`|`DELETE api/meetups/{id}`| Deletes an existing meetup by id|
-	@DeleteMapping("meetups/{id}")
+	@DeleteMapping("auth/meetups/{id}")
 	public void destroy(
 			HttpServletRequest req,
 			HttpServletResponse res,
@@ -97,7 +98,7 @@ public class MeetupController {
 			Principal principal
 			) {
 		try {
-			boolean deleted = meetupService.delete(id);
+			boolean deleted = meetupService.delete(principal.getName(),id);
 			if(deleted) {
 				res.setStatus(204);
 			}else {

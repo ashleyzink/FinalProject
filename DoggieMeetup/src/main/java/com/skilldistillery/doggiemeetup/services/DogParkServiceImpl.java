@@ -31,6 +31,7 @@ public class DogParkServiceImpl implements DogParkService {
 
 	@Override
 	public DogPark create(DogPark dogPark) {
+		// DogPark.address has cascade.ALL
 		return dogParkRepo.saveAndFlush(dogPark);
 	}
 
@@ -43,7 +44,7 @@ public class DogParkServiceImpl implements DogParkService {
 			if (dbDogPark == null) {
 				return null;
 			}
-		}
+		} else { return null; }
 		if (dogPark.getOffLeash() != null) { dbDogPark.setOffLeash(dogPark.getOffLeash()); }
 		if (dogPark.getAddress() != null) { dbDogPark.setAddress(dogPark.getAddress()); }
 		if (dogPark.getName() != null) { dbDogPark.setName(dogPark.getName()); }

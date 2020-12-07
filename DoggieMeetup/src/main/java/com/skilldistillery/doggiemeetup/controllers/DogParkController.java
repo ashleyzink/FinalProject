@@ -34,7 +34,6 @@ public class DogParkController {
 		if (dogparks == null) {
 			res.setStatus(404);
 		}
-
 		return dogparks;
 	}
 
@@ -47,7 +46,7 @@ public class DogParkController {
 		return dogpark;
 	}
 
-	@PostMapping("dogParks")
+	@PostMapping("auth/dogParks")
 	public DogPark create(HttpServletRequest req, HttpServletResponse res, @RequestBody DogPark dogpark,
 			Principal principal) {
 		try {
@@ -67,7 +66,7 @@ public class DogParkController {
 		return dogpark;
 	}
 
-	@PutMapping("dogParks/{id}")
+	@PutMapping("auth/dogParks/{id}")
 	public DogPark update(HttpServletRequest req, HttpServletResponse res, @PathVariable int id,
 			@RequestBody DogPark dogpark, Principal principal) {
 		try {
@@ -82,7 +81,7 @@ public class DogParkController {
 		return dogpark;
 	}
 
-	@DeleteMapping("dogParks/{id}")
+	@DeleteMapping("auth/dogParks/{id}")
 	public void destroy(HttpServletResponse res, HttpServletRequest req, @PathVariable int id, Principal principal) {
 		try {
 			boolean deleted = dogparkSvc.delete(id);
