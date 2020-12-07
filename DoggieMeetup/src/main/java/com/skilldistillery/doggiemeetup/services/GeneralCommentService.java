@@ -20,4 +20,6 @@ public interface GeneralCommentService {
 		
 		public boolean destroy(String username, int genComId);
 
+		GeneralComment findByGeneralCommentId(int genComId);
+
 }

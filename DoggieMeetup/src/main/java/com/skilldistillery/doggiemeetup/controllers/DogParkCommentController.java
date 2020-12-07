@@ -33,49 +33,47 @@ public class DogParkCommentController {
 
 	
 	//GET "api/dogparkcomments"
-	@GetMapping("dogparkcomments")
+	@GetMapping
 	public List<DogParkComment> index(
 			HttpServletResponse res,
 			@PathVariable String username,
 			Principal principal 
 			){
-		List<DogParkComment> dogParkCommentsForUser = dogParkCommentService.index(principal.getName());
+		List<DogParkComment> dogParkCommentsForUser = dogParkCommentService.index(username);
 		if(dogParkCommentsForUser == null) {
 			res.setStatus(404);
 		}
 		return dogParkCommentsForUser;
 	}
 	//GET "api/dogparkcomments"
-	@GetMapping("dogparkcomments")
+	@GetMapping("dogParkComments")
 	public List<DogParkComment> lists(){
 		return dogParkCommentService.getAllDogParkComments();
 	}
-	//GET "api/dogparkcomments/{dogParkCommentId}"
-	@GetMapping("dogparkcomments/{dogParkCommentId}")
+	//GET "api/dogpark/{dogParkId}/dogParkComments/{comId}"
+	@GetMapping("dogParks/{dogParkId}/dogParkComments/{comId}")
 	public DogParkComment show(
 			HttpServletRequest req,
 			HttpServletResponse res, 
-			@PathVariable int dogParkCommentId,
-			@PathVariable String username,
-			Principal principal) {
-		DogParkComment dogParkComments = dogParkCommentService.show(username, dogParkCommentId);
+			@PathVariable int comId
+		) {
+		DogParkComment dogParkComments = dogParkCommentService.show(comId);
 		if(dogParkComments == null) {
 			res.setStatus(404);
 		}
 		return dogParkComments;
 	}
 	//POST "api/dogparkcomments"
-	@PostMapping("dogparkcomments")
+	@PostMapping("auth/dogParks/{dogParkId}/dogParkComments")
 	public DogParkComment create(
 			HttpServletRequest req,
 			HttpServletResponse res,
-			@PathVariable String username,
 			@RequestBody DogParkComment dogParkComment,
 			Principal principal
 			) {
 		
 		try {
-			dogParkComment = dogParkCommentService.create(username, dogParkComment);
+			dogParkComment = dogParkCommentService.create(principal.getName(), dogParkComment);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(dogParkComment.getId());
@@ -88,17 +86,16 @@ public class DogParkCommentController {
 	}
 	
 //PUT "api/dogparkcomments/{dogParkCommentId}"
-		@PutMapping("dogparkcomments/{dogParkCommentId}")
+		@PutMapping("auth/dogparks/{dogParkId}/dogParkComments/{comId}")
 		public DogParkComment update(
 				HttpServletRequest req,
 				HttpServletResponse res,
-				@PathVariable String username,
-				@PathVariable int dogParkCommentId,
+				@PathVariable int comId,
 				@RequestBody DogParkComment dogParkComment,
 				Principal principal 
 				) {
 			try {
-				dogParkComment = dogParkCommentService.update(username, dogParkCommentId, dogParkComment);
+				dogParkComment = dogParkCommentService.update(principal.getName(), comId, dogParkComment);
 				if(dogParkComment == null) {
 					res.setStatus(404);
 				}
@@ -111,16 +108,15 @@ public class DogParkCommentController {
 		}
 		
 //DELETE "api/dogparkcomments/{dogParkCommentId}"	
-		@DeleteMapping("dogparkcomments/{dogParkCommentId}")
+		@DeleteMapping("auth/dogparks/{dogParkId}/dogParkComments/{comId}")
 		public void destroy(
 				HttpServletRequest req,
 				HttpServletResponse res,
-				@PathVariable String username,
-				@PathVariable int dogParkCommentId,
+				@PathVariable int comId,
 				Principal principal
 				) {
 			try {
-				boolean deleted = dogParkCommentService.destroy(username, dogParkCommentId);
+				boolean deleted = dogParkCommentService.destroy(principal.getName(), comId);
 				if(deleted) {
 					res.setStatus(204);
 				}else {
