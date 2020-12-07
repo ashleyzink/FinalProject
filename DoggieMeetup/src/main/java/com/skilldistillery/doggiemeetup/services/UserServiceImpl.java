@@ -6,7 +6,6 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.skilldistillery.doggiemeetup.entities.User;
@@ -19,13 +18,13 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepo;
 
-	@Autowired
-	private PasswordEncoder encoder;
+//	@Autowired
+//	private PasswordEncoder encoder;
 	
 	@Override
 	public User register(User user) {
-		String encodedPW = encoder.encode(user.getPassword());
-		user.setPassword(encodedPW); // only persist encoded password
+//		String encodedPW = encoder.encode(user.getPassword());
+//		user.setPassword(encodedPW); // only persist encoded password
 		// set other fields to default values
 		user.setEnabled(true);
 		userRepo.saveAndFlush(user);
@@ -95,8 +94,8 @@ public class UserServiceImpl implements UserService {
 		if (user.getPassword() == null) {
 			return null;
 		}
-		String encodedPW = encoder.encode(user.getPassword());
-		dbUser.setPassword(encodedPW);
+//		String encodedPW = encoder.encode(user.getPassword());
+//		dbUser.setPassword(encodedPW);
 		return userRepo.saveAndFlush(dbUser);
 	}
 
