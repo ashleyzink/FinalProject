@@ -44,6 +44,8 @@ export class AuthService {
     return this.http.post<User>(this.baseUrl + 'register', user)
     .pipe(
       catchError((err: any) => {
+        console.log('Error in AuthService.register(): User: ')
+        console.log(user)
         console.log(err);
         return throwError('AuthService.register(): error registering user.');
       })

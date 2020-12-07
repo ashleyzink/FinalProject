@@ -12,27 +12,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.doggiemeetup.entities.User;
-import com.skilldistillery.doggiemeetup.services.UserService;
+import com.skilldistillery.doggiemeetup.services.AuthService;
 
 @CrossOrigin({ "*", "http://localhost:4210" })
 @RestController
 public class AuthController {
 	
 	@Autowired
-	private UserService userService;
+	private AuthService authService;
 
 	@PostMapping(path = "/register")
 	public User register(@RequestBody User user, HttpServletResponse res) {
+		System.out.println("----- in /register");
 	    if (user == null) {
 	        res.setStatus(400);
 	    }
-	    user = userService.register(user);
+	    user = authService.register(user);
 	    return user;
 	}
 
 	@GetMapping(path = "/authenticate")
 	public User authenticate(Principal principal) {
-	    return userService.show(principal.getName());
+		System.out.println("----- in /authenticate");
+	    return authService.getUser(principal.getName());
 	}
 	
 	
