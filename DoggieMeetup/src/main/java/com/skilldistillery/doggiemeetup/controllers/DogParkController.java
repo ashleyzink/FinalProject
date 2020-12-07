@@ -28,8 +28,8 @@ public class DogParkController {
 	@Autowired
 	private DogParkService dogparkSvc;
 
-	@GetMapping("dogparks")
-	public List<DogPark> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
+	@GetMapping("dogParks")
+	public List<DogPark> index(HttpServletRequest req, HttpServletResponse res) {
 		List<DogPark> dogparks = dogparkSvc.index();
 		if (dogparks == null) {
 			res.setStatus(404);
@@ -38,8 +38,8 @@ public class DogParkController {
 		return dogparks;
 	}
 
-	@GetMapping("dogparks/{id}")
-	public DogPark show(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, Principal principal) {
+	@GetMapping("dogParks/{id}")
+	public DogPark show(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
 		DogPark dogpark = dogparkSvc.show(id);
 		if (dogpark == null) {
 			res.setStatus(404);
@@ -47,7 +47,7 @@ public class DogParkController {
 		return dogpark;
 	}
 
-	@PostMapping("dogparks")
+	@PostMapping("dogParks")
 	public DogPark create(HttpServletRequest req, HttpServletResponse res, @RequestBody DogPark dogpark,
 			Principal principal) {
 		try {
@@ -67,7 +67,7 @@ public class DogParkController {
 		return dogpark;
 	}
 
-	@PutMapping("dogparks/{id}")
+	@PutMapping("dogParks/{id}")
 	public DogPark update(HttpServletRequest req, HttpServletResponse res, @PathVariable int id,
 			@RequestBody DogPark dogpark, Principal principal) {
 		try {
@@ -82,7 +82,7 @@ public class DogParkController {
 		return dogpark;
 	}
 
-	@DeleteMapping("dogparks/{id}")
+	@DeleteMapping("dogParks/{id}")
 	public void destroy(HttpServletResponse res, HttpServletRequest req, @PathVariable int id, Principal principal) {
 		try {
 			boolean deleted = dogparkSvc.delete(id);
@@ -96,5 +96,8 @@ public class DogParkController {
 			res.setStatus(400);
 		}
 	}
+	
+	//TODO `List<DogPark>` \|`GET api/dogParks/search/{keyword}` 
+	//TODO \| `List<DogPark>` \|`GET api/dogParks/search/{zipcode}` 
 
 }
