@@ -1,3 +1,4 @@
+import { DogParkService } from './services/dog-park.service';
 import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -34,7 +35,8 @@ import { DogParksComponent } from './components/dog-parks/dog-parks.component';
     HttpClientModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    DogParkService
   ],
   bootstrap: [AppComponent]
 })

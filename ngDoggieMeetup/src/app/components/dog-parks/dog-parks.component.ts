@@ -1,3 +1,4 @@
+import { DogParkService } from './../../services/dog-park.service';
 import { DogPark } from './../../models/dog-park';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,9 +13,10 @@ export class DogParksComponent implements OnInit {
   newDogPark: DogPark = new DogPark();
   dogParks: DogPark[] = [];
 
-  constructor() { }
+  constructor(private dogParkService: DogParkService) { }
 
   ngOnInit(): void {
+    this.reload();
   }
 
   deselect() {
@@ -22,6 +24,13 @@ export class DogParksComponent implements OnInit {
   }
   select(item: DogPark) {
     this.selected = item;
+  }
+
+  reload():void {
+    this.dogParkService.index().subscribe(
+      data => this.dogParks = data,
+      err => console.error('Observer got an error from reload: ' + err)
+    )
   }
 
 
