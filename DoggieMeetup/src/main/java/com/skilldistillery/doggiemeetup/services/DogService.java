@@ -12,9 +12,9 @@ public interface DogService {
 	//To search for all dogs regardless of user
 	public List<Dog> getAllDogs();
 	
-	public Dog show(String username, int dogId);
+	public Dog show(int userId, int dogId);
 	
-	public Dog create(String username, Dog dog);
+	public Dog create(int userId, Dog dog);
 	
 	public Dog update(String username, int dogId, Dog dog);
 	
