@@ -28,12 +28,19 @@ public class GeneralCommentController {
 	@Autowired
 	private GeneralCommentService genCommentService;
 	
-	//GET "api/generalcomments"
+	//GET "api/generalComments/userId"
 //	@GetMapping
 //	public List<GeneralComment> index(
 //			HttpServletResponse res,
-
-	//GET "api/generalcomments"
+//			Principal principal 
+//			){
+//		List<GeneralComment> genCommentsForUser = genCommentService.index(principal.getName());
+//		if(genCommentsForUser == null) {
+//			res.setStatus(404);
+//		}
+//		return genCommentsForUser;
+//	}
+	//GET "api/generalComments"
 	@GetMapping("generalComments")
 	public List<GeneralComment> lists(){
 		return genCommentService.getAllGeneralComments();

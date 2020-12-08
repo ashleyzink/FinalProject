@@ -31,10 +31,15 @@ public class DogParkCommentController {
 	@Autowired
 	private DogParkCommentService dogParkCommentService;
 
-	// GET "api/dogparkcomments"
-	@GetMapping
-	public List<DogParkComment> index(HttpServletResponse res, @PathVariable String username, Principal principal) {
-		List<DogParkComment> dogParkCommentsForUser = dogParkCommentService.index(username);
+
+	
+	//GET "api/dogparkcomments"
+	@GetMapping("auth/dogParkComments")
+	public List<DogParkComment> index(
+			HttpServletResponse res,
+			Principal principal 
+			){
+		List<DogParkComment> dogParkCommentsForUser = dogParkCommentService.index(principal.getName());
 		if (dogParkCommentsForUser == null) {
 			res.setStatus(404);
 		}
