@@ -113,35 +113,49 @@ public class ProfileController {
 		}
 	}
 
-//	@GetMapping("dogs/{dogId}")
-//	public Dog show(HttpServletRequest req, 
-//			HttpServletResponse res, 
-//			Principal principal, @PathVariable int dogId) {
-//		Dog dog = dogSvc.show(principal.getName(), dogId);
-//		if (dog == null) {
-//			res.setStatus(404);
-//		}
-//		return dog;
-//	}
-//	@GetMapping("/profile/dogs/")
-//	public Dog show(HttpServletRequest req, 
-//			HttpServletResponse res, 
-//			Principal principal, @PathVariable int dogId) {
-//		Dog dog = dogSvc.show(principal.getName(), dogId);
-//		if (dog == null) {
-//			res.setStatus(404);
-//		}
-//		return dog;
-//	}
+	//To see your own dogs //Possibly to access dog update information?
+	@GetMapping("profile/dogs/{dogId}")
+	public Dog showUserDog(HttpServletRequest req, 
+			HttpServletResponse res, 
+			Principal principal, @PathVariable int dogId) {
+		Dog dog = dogSvc.showUserDog(principal.getName(), dogId);
+		if (dog == null) {
+			res.setStatus(404);
+		}
+		return dog;
+	}
 	
-	@PostMapping("users/{userId}/dogs")
-	public Dog create(HttpServletRequest req, HttpServletResponse res, @RequestBody Dog dog, @PathVariable int userId) {
+	//Owner able to see all their dogs on THEIR profile before selecting one
+	@GetMapping("profile/dogs")
+	public List<Dog> showAllUserDogs(HttpServletRequest req, 
+			HttpServletResponse res, 
+			Principal principal) {
+		List<Dog> dog = dogSvc.index(principal.getName());
+		if (dog == null) {
+			res.setStatus(404);
+		}
+		return dog;
+	}
+	
+	//See ANY dog by ID (Option to scrub info later to block view from others)
+	@GetMapping("dogs/{dogId}")
+	public Dog showDogById(HttpServletRequest req, 
+			HttpServletResponse res, 
+			@PathVariable int dogId) {
+		Dog dog = dogSvc.showDogById(dogId);
+		if (dog == null) {
+			res.setStatus(404);
+		}
+		return dog;
+	}
+	
+	@PostMapping("auth/profile/dogs")
+	public Dog create(HttpServletRequest req, HttpServletResponse res, @RequestBody Dog dog, Principal principal) {
 		try {
-			dog = dogSvc.create(userId, dog);
+			dog = dogSvc.create(principal.getName(), dog);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
-//			url.append("/").append(cookie.getId()); //The append("/") is adding an extra / to the URL 
-			url.append(dog.getId());
+			url.append("/").append(dog.getId());
 			String urlstr = url.toString();
 			res.setHeader("Location", urlstr);
 		} catch (Exception e) {
