@@ -1,3 +1,4 @@
+import { DogParkService } from './services/dog-park.service';
 import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { FormsModule } from '@angular/forms';
+import { DogParksComponent } from './components/dog-parks/dog-parks.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     NotFoundComponent,
     RegisterComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    DogParksComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    DogParkService
   ],
   bootstrap: [AppComponent]
 })
