@@ -18,40 +18,104 @@
     </table>
   </div>
 
-  <div class="col-8">
+
+  <div class="col ">
     <div class="sticky-top">
-      <div style="padding-top: 50px;"></div>
-      <div class="row">
-        <div *ngIf="selected" class="col">
-          <h3 class="text-center">{{selected.name}}</h3>
-        </div>
+      <div style="padding-top: 60px;"></div>
+      <div>
+        Map Goes Here
       </div>
-      <div class="row">
-        <div class="col">
-          <div *ngIf="selected" class="">
-            <img class="img-thumbnail mw-100" [src]="selected.imageUrl" [alt]="'Picture for ' + selected.name">
-          </div>
-
-
-        </div>
-
-        <div class="col">
-
-          <div *ngIf="selected" class="">
-
-            <p>{{selected.description}}</p>
-            <p>{{selected.address.street}}</p>
-            <p>{{selected.address.city}}, {{selected.address.stateAbbrv}}</p>
-            <p>{{selected.address.zipcode}}</p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-
     </div>
   </div>
-</div>
+  <div class="col ">
+    <div class="sticky-top">
+      <div style="padding-top: 60px;"></div>
+      <!-- selected -->
+      <div *ngIf="selected">
+        <div class="row">
+          <div class="col">
+            <h3 class="text-center">{{selected.name}}</h3>
+            <img class="img-thumbnail mw-100" [src]="selected.imageUrl" [alt]="'Picture for ' + selected.name">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="">
+              <p>{{selected.description}}</p>
+              <p>{{selected.address.street}}</p>
+              <p>{{selected.address.city}}, {{selected.address.stateAbbrv}}</p>
+              <p>{{selected.address.zipcode}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="button-group">
+            <button>Update //Admin only?</button>
+            <button>Delete //Admin only</button>
+            <button (click)="deselect()">Add New</button>
+          </div>
+        </div>
+      </div>
+      <!-- unselected -->
+      <div *ngIf="!selected">
+        <div class="row">
+
+          <div>
+            <button (click)="create(newDogPark, newAddress)">Add Park</button>
+          </div>
+          <div class="form-group">
+
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="new-dog-park-name">Name</label>
+                <input class="form-control" type="text" name="name" id="new-dog-park-name" [(ngModel)]="newDogPark.name" placeholder="Name">
+              </div>
+              <div>
+                <label for="new-dog-park-off-leash">Off Leash</label>
+                <input type="checkbox" name="offLeash" id="new-dog-park-off-leash" [(ngModel)]="newDogPark.offLeash">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="new-dog-park-description">Description</label>
+                <textarea class="form-control" name="description" id="new-dog-park-description" cols="25" rows="5" [(ngModel)]="newDogPark.description"></textarea>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="new-dog-park-image-url">Name</label>
+                <input class="form-control" type="text" name="imageUrl" id="new-dog-park-image-url" [(ngModel)]="newDogPark.imageUrl" placeholder="Image Url">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="new-address-street">Street Address</label>
+                <input class="form-control" type="text" name="street" id="new-address-street" [(ngModel)]="newAddress.street" placeholder="Street Address">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="new-address-city">City</label>
+                <input class="form-control" type="text" name="city" id="new-address-city" [(ngModel)]="newAddress.city" placeholder="City">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="new-address-state-abbrv">State</label>
+                <input class="form-control" type="text" name="stateAbbrv" id="new-address-state-abbrv" [(ngModel)]="newAddress.stateAbbrv" placeholder="State">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="new-address-zipcode">Zip Code</label>
+                <input class="form-control" type="text" name="zipcode" id="new-address-zipcode" [(ngModel)]="newAddress.zipcode" placeholder="Zip Code">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>

@@ -16,6 +16,7 @@ export class DogParkService {
     private authService: AuthService,
     private router: Router) { }
     private url = environment.baseUrl + 'api/dogParks'
+    private authUrl = environment.baseUrl + 'api/auth/dogParks'
 
     getAuthHttpOptions(): Object {
       const credentials = this.authService.getCredentials();
@@ -65,7 +66,7 @@ export class DogParkService {
         this.router.navigateByUrl('/login');
       }
       const httpOptions = this.getAuthHttpOptions();
-      return this.http.post<DogPark>(this.url, newDogPark, httpOptions).pipe(
+      return this.http.post<DogPark>(this.authUrl, newDogPark, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError('error creating dog park');
@@ -79,7 +80,7 @@ export class DogParkService {
         this.router.navigateByUrl('/login');
       }
       const httpOptions = this.getAuthHttpOptions();
-      return this.http.put<DogPark>(this.url + '/' + dogPark.id, dogPark, httpOptions).pipe(
+      return this.http.put<DogPark>(this.authUrl + dogPark.id, dogPark, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError('error updating dog park id: ' + dogPark.id);
@@ -94,7 +95,7 @@ export class DogParkService {
       this.router.navigateByUrl('/login');
     }
     const httpOptions = this.getAuthHttpOptions();
-    return this.http.delete(this.url + '/' + id, httpOptions).pipe(
+    return this.http.delete(this.authUrl + id, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error deleting dog park id: ' + id);
