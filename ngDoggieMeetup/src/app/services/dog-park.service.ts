@@ -15,8 +15,8 @@ export class DogParkService {
   constructor(private http: HttpClient,
     private authService: AuthService,
     private router: Router) { }
-    private url = environment.baseUrl + 'api/dogParks'
-    private authUrl = environment.baseUrl + 'api/auth/dogParks'
+    private url = environment.baseUrl + 'api/dogParks/'
+    private authUrl = environment.baseUrl + 'api/auth/dogParks/'
 
     getAuthHttpOptions(): Object {
       const credentials = this.authService.getCredentials();

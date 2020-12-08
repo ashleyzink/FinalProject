@@ -14,6 +14,8 @@ export class DogParksComponent implements OnInit {
   newDogPark: DogPark = new DogPark();
   newAddress: Address = new Address();
   dogParks: DogPark[] = [];
+  updateDogPark: DogPark = null;
+  updateAddress: Address = new Address();
 
   constructor(private dogParkService: DogParkService) { }
 
@@ -23,9 +25,21 @@ export class DogParksComponent implements OnInit {
 
   deselect() {
     this.selected = null;
+    this.updateDogPark = null;
+    this.updateAddress = null;
   }
   select(item: DogPark) {
     this.selected = item;
+    this.updateDogPark = null;
+    this.updateAddress = null;
+  }
+  toggleUpdate() {
+    if (this.updateDogPark) {
+      this.updateDogPark = null;
+    } else {
+      this.updateDogPark = this.selected;
+      this.updateAddress = this.selected.address;
+    }
   }
 
 
@@ -49,6 +63,22 @@ export class DogParksComponent implements OnInit {
   create(dogPark: DogPark, address: Address) {
     dogPark.address = address;
     this.dogParkService.create(dogPark).subscribe(
+      data => {
+        this.reload();
+        this.selected = data;
+      },
+      err => {
+        console.error('Error creating dogPark: ');
+        console.error(dogPark);
+      }
+    )
+  }
+
+  update(dogPark: DogPark, address?: Address) {
+    if (address) {
+      dogPark.address = address;
+    }
+    this.dogParkService.update(dogPark).subscribe(
       data => {
         this.reload();
         this.selected = data;
