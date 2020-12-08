@@ -1,24 +1,56 @@
 <div class="row">
 
-  <div class="col">
-    <table class="table">
-      <thead>
+  <div class="col-4">
+    <table class="table table-light table-sm table-hover">
+      <thead class="thead-dark">
         <tr>
           <th>Name</th><th>Image</th><th>Off Leash</th><th>Address</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let dogPark of dogParks">
+        <tr *ngFor="let dogPark of dogParks" (click)="select(dogPark)">
           <td>{{dogPark.name}}</td>
-          <td><img [src]="dogPark.imageUrl" [alt]="'Picture for ' + dogPark.name"></td>
+          <td><img class="img-thumbnail" [src]="dogPark.imageUrl" [alt]="'Picture for ' + dogPark.name"></td>
           <td>{{dogPark.offLeash}}</td>
           <td>address here</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div *ngIf="selected" class="col">
-    item selected
-  </div>
 
+  <div class="col-8">
+    <div class="sticky-top">
+      <div class="row">
+        <div *ngIf="selected" class="col">
+          <h3 class="text-center">{{selected.name}}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div *ngIf="selected" class="">
+            <img class="img-thumbnail mw-100" [src]="selected.imageUrl" [alt]="'Picture for ' + selected.name">
+          </div>
+
+
+        </div>
+
+        <div class="col">
+
+          <div *ngIf="selected" class="">
+
+            <p>{{selected.description}}</p>
+            <p>{{selected.address.street}}</p>
+            <p>{{selected.address.city + ', ' + selected.address.stateAbbrv}}</p>
+            <p>{{selected.address.zipcode}}</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </div>
 </div>
