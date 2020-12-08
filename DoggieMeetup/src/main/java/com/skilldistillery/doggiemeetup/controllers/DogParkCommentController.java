@@ -21,57 +21,52 @@ import com.skilldistillery.doggiemeetup.entities.DogParkComment;
 import com.skilldistillery.doggiemeetup.services.DogParkCommentService;
 import com.skilldistillery.doggiemeetup.services.UserService;
 
-@CrossOrigin({"*", "http://localhost:4210" })
+@CrossOrigin({ "*", "http://localhost:4210" })
 @RequestMapping("api")
 @RestController
 public class DogParkCommentController {
-	
+
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private DogParkCommentService dogParkCommentService;
+
 
 	
 	//GET "api/dogparkcomments"
 	@GetMapping("auth/dogParkComments")
 	public List<DogParkComment> index(
 			HttpServletResponse res,
-			@PathVariable String username,
 			Principal principal 
 			){
-		List<DogParkComment> dogParkCommentsForUser = dogParkCommentService.index(username);
-		if(dogParkCommentsForUser == null) {
+		List<DogParkComment> dogParkCommentsForUser = dogParkCommentService.index(principal.getName());
+		if (dogParkCommentsForUser == null) {
 			res.setStatus(404);
 		}
 		return dogParkCommentsForUser;
 	}
-	//GET "api/dogparkcomments"
+
+	// GET "api/dogparkcomments"
 	@GetMapping("dogParkComments")
-	public List<DogParkComment> lists(){
+	public List<DogParkComment> lists() {
 		return dogParkCommentService.getAllDogParkComments();
 	}
-	//GET "api/dogpark/{dogParkId}/dogParkComments/{comId}"
+
+	// GET "api/dogpark/{dogParkId}/dogParkComments/{comId}"
 	@GetMapping("dogParks/{dogParkId}/dogParkComments/{comId}")
-	public DogParkComment show(
-			HttpServletRequest req,
-			HttpServletResponse res, 
-			@PathVariable int comId
-		) {
+	public DogParkComment show(HttpServletRequest req, HttpServletResponse res, @PathVariable int comId) {
 		DogParkComment dogParkComments = dogParkCommentService.show(comId);
-		if(dogParkComments == null) {
+		if (dogParkComments == null) {
 			res.setStatus(404);
 		}
 		return dogParkComments;
 	}
-	//POST "api/dogparkcomments"
+
+	// POST "api/dogparkcomments"
 	@PostMapping("auth/dogParks/{dogParkId}/dogParkComments")
-	public DogParkComment create(
-			HttpServletRequest req,
-			HttpServletResponse res,
-			@RequestBody DogParkComment dogParkComment,
-			Principal principal
-			) {
-		
+	public DogParkComment create(HttpServletRequest req, HttpServletResponse res,
+			@RequestBody DogParkComment dogParkComment, Principal principal) {
+
 		try {
 			dogParkComment = dogParkCommentService.create(principal.getName(), dogParkComment);
 			res.setStatus(201);
@@ -84,47 +79,37 @@ public class DogParkCommentController {
 		}
 		return dogParkComment;
 	}
-	
+
 //PUT "api/dogparkcomments/{dogParkCommentId}"
-		@PutMapping("auth/dogparks/{dogParkId}/dogParkComments/{comId}")
-		public DogParkComment update(
-				HttpServletRequest req,
-				HttpServletResponse res,
-				@PathVariable int comId,
-				@RequestBody DogParkComment dogParkComment,
-				Principal principal 
-				) {
-			try {
-				dogParkComment = dogParkCommentService.update(principal.getName(), comId, dogParkComment);
-				if(dogParkComment == null) {
-					res.setStatus(404);
-				}
-				
-			} catch (Exception e) {
-				res.setStatus(400);
-				dogParkComment = null;
+	@PutMapping("auth/dogparks/{dogParkId}/dogParkComments/{comId}")
+	public DogParkComment update(HttpServletRequest req, HttpServletResponse res, @PathVariable int comId,
+			@RequestBody DogParkComment dogParkComment, Principal principal) {
+		try {
+			dogParkComment = dogParkCommentService.update(principal.getName(), comId, dogParkComment);
+			if (dogParkComment == null) {
+				res.setStatus(404);
 			}
-			return dogParkComment;
+
+		} catch (Exception e) {
+			res.setStatus(400);
+			dogParkComment = null;
 		}
-		
+		return dogParkComment;
+	}
+
 //DELETE "api/dogparkcomments/{dogParkCommentId}"	
-		@DeleteMapping("auth/dogparks/{dogParkId}/dogParkComments/{comId}")
-		public void destroy(
-				HttpServletRequest req,
-				HttpServletResponse res,
-				@PathVariable int comId,
-				Principal principal
-				) {
-			try {
-				boolean deleted = dogParkCommentService.destroy(principal.getName(), comId);
-				if(deleted) {
-					res.setStatus(204);
-				}else {
-					res.setStatus(404);
-				}
-			} catch (Exception e) {
-				res.setStatus(400);
+	@DeleteMapping("auth/dogparks/{dogParkId}/dogParkComments/{comId}")
+	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int comId, Principal principal) {
+		try {
+			boolean deleted = dogParkCommentService.destroy(principal.getName(), comId);
+			if (deleted) {
+				res.setStatus(204);
+			} else {
+				res.setStatus(404);
 			}
+		} catch (Exception e) {
+			res.setStatus(400);
 		}
-	
+	}
+
 }

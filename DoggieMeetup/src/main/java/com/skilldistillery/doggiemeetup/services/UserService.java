@@ -14,9 +14,13 @@ public interface UserService {
 	
 	User show(String username);
 	
-	User update(User user, int id);
+	User update(String username, User user, int id);
 	
-	Boolean delete(int id);
+	Boolean delete(String username, int id);
+	
+	Boolean disable(String username, int id);
+	
+	Boolean enable(String username, int id);
 	
 	User updatePassword(User user, int id);
 

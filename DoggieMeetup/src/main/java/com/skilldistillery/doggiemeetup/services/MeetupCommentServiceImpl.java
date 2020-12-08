@@ -1,6 +1,7 @@
 package com.skilldistillery.doggiemeetup.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,23 +11,49 @@ import com.skilldistillery.doggiemeetup.entities.User;
 import com.skilldistillery.doggiemeetup.repositories.MeetupCommentRepository;
 import com.skilldistillery.doggiemeetup.repositories.UserRepository;
 
-
 @Service
 public class MeetupCommentServiceImpl implements MeetupCommentService {
-	
+
 	@Autowired
 	private MeetupCommentRepository meetupComRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
 
 	@Override
-	public List<MeetupComment> index(String username) {
-		if(userRepo.findByUsername(username) == null) {
+	public MeetupComment show(int meetupId, int meetupComId) {
+		Optional<MeetupComment> meetupOpt = meetupComRepo.findById(meetupComId);
+		MeetupComment meetupComment = null;
+		if (meetupOpt.isPresent()) {
+			meetupComment = meetupOpt.get();
+		} else {
 			return null;
 		}
-		return meetupComRepo.findByUser_Username(username);
+		if (meetupId == meetupComment.getMeetup().getId()) {
+			return meetupComment;
+		} else {
+			return null;
+		}
+
 	}
+
+	@Override
+	public MeetupComment findByMeetupCommentId(int meetupCommentId) {
+		Optional<MeetupComment> meetupCommentOpt = meetupComRepo.findById(meetupCommentId);
+		if (!meetupCommentOpt.isPresent()) {
+			return null;
+		}
+
+		return meetupCommentOpt.get();
+	}
+
+//	@Override
+//	public List<MeetupComment> index(int userId) {
+//		if (meetupComRepo.findById(userId) == null) {
+//			return null;
+//		}
+//		return meetupComRepo.findById(userId).get();
+//	}
 
 	@Override
 	public List<MeetupComment> getAllMeetupComments() {
@@ -34,14 +61,9 @@ public class MeetupCommentServiceImpl implements MeetupCommentService {
 	}
 
 	@Override
-	public MeetupComment show(String username, int meetupComId) {
-		return meetupComRepo.findByUser_UsernameAndId(username, meetupComId);
-	}
-
-	@Override
 	public MeetupComment create(String username, MeetupComment meetupCom) {
 		User user = userRepo.findByUsername(username);
-		if(user != null) {
+		if (user != null) {
 			meetupCom.setUser(user);
 			meetupComRepo.saveAndFlush(meetupCom);
 		}
@@ -51,12 +73,12 @@ public class MeetupCommentServiceImpl implements MeetupCommentService {
 	@Override
 	public MeetupComment update(String username, int meetupComId, MeetupComment meetupCom) {
 		MeetupComment managedMeetupComment = meetupComRepo.findByUser_UsernameAndId(username, meetupComId);
-		if(managedMeetupComment != null) {
+		if (managedMeetupComment != null) {
 			managedMeetupComment.setCommentText(meetupCom.getCommentText());
 			managedMeetupComment.setTitle(meetupCom.getTitle());
 			managedMeetupComment.setReplyToComment(meetupCom.getReplyToComment());
 			meetupComRepo.saveAndFlush(managedMeetupComment);
-			
+
 		}
 		return managedMeetupComment;
 	}
@@ -72,5 +94,4 @@ public class MeetupCommentServiceImpl implements MeetupCommentService {
 		return deleted;
 	}
 
-	
 }
