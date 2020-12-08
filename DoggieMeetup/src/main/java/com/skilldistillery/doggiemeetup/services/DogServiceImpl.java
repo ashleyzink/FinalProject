@@ -13,13 +13,12 @@ import com.skilldistillery.doggiemeetup.repositories.UserRepository;
 
 @Service
 public class DogServiceImpl implements DogService {
-	
+
 	@Autowired
 	private DogRepository dogRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
-	
 
 	@Override
 	public List<Dog> index(String username) {
@@ -35,26 +34,37 @@ public class DogServiceImpl implements DogService {
 	}
 
 	@Override
-	public Dog show(int userId, int dogId) {
+	public Dog showUserDog(String username, int dogId) {
+		if (userRepo.findByUsername(username) == null) {
+			return null;
+		}
+		 dogRepo.findByUser_Username(username);
+		 Optional<Dog> dogOpt = dogRepo.findById(dogId);
+		 Dog dog = null;
+		 if (dogOpt.isPresent()) {
+			 dog = dogOpt.get();
+		 }
+		return dog;
+	}
+	@Override
+	public Dog showDogById(int dogId) {
 		Optional<Dog> dogOpt = dogRepo.findById(dogId);
 		Dog dog = null;
 		if (dogOpt.isPresent()) {
 			dog = dogOpt.get();
 		}
-		else return null;
-		if  (dog.getUser().getId() != userId) {
-			return null;
-		}
-			
 		return dog;
 	}
 
+	
+	
 	@Override
-	public Dog create(int userId, Dog dog) {
-		if  (dog.getUser().getId() != userId) {
-			return null;
+	public Dog create(String username, Dog dog) {
+		User user = userRepo.findByUsername(username);
+		if (user != null) {
+			dog.setUser(user);
+			dogRepo.saveAndFlush(dog);
 		}
-		dogRepo.saveAndFlush(dog);
 		return dog;
 	}
 
@@ -87,7 +97,5 @@ public class DogServiceImpl implements DogService {
 		}
 		return deleted;
 	}
-	
-
 
 }

@@ -11,15 +11,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.doggiemeetup.entities.Dog;
 import com.skilldistillery.doggiemeetup.entities.User;
-import com.skilldistillery.doggiemeetup.services.DogService;
 import com.skilldistillery.doggiemeetup.services.UserService;
 
 @CrossOrigin({"*", "http://localhost:4201"})
@@ -30,8 +27,6 @@ public class ProfileController {
 	@Autowired
 	private UserService userSvc;
 	
-	@Autowired
-	private DogService dogSvc;
 	
 	@GetMapping("users")
 	private List<User> index() {
@@ -78,6 +73,12 @@ public class ProfileController {
 		return user;
 	}
 
+	
+	//Does not work for general user because once disabled, there is no access to login to re-enable.
+	//Maybe we can use the code and link it to an enable button when they try to log in (unsure of how
+	//hard that would be) Or might be able to use this as beginning code for admin to reenable users.
+	
+	
 	@PutMapping("auth/users/{userId}/enable")
 	public void enable(HttpServletRequest req, 
 						HttpServletResponse res, 
@@ -112,42 +113,5 @@ public class ProfileController {
 			res.setStatus(400);			
 		}
 	}
-
-//	@GetMapping("dogs/{dogId}")
-//	public Dog show(HttpServletRequest req, 
-//			HttpServletResponse res, 
-//			Principal principal, @PathVariable int dogId) {
-//		Dog dog = dogSvc.show(principal.getName(), dogId);
-//		if (dog == null) {
-//			res.setStatus(404);
-//		}
-//		return dog;
-//	}
-//	@GetMapping("/profile/dogs/")
-//	public Dog show(HttpServletRequest req, 
-//			HttpServletResponse res, 
-//			Principal principal, @PathVariable int dogId) {
-//		Dog dog = dogSvc.show(principal.getName(), dogId);
-//		if (dog == null) {
-//			res.setStatus(404);
-//		}
-//		return dog;
-//	}
 	
-	@PostMapping("users/{userId}/dogs")
-	public Dog create(HttpServletRequest req, HttpServletResponse res, @RequestBody Dog dog, @PathVariable int userId) {
-		try {
-			dog = dogSvc.create(userId, dog);
-			res.setStatus(201);
-			StringBuffer url = req.getRequestURL();
-//			url.append("/").append(cookie.getId()); //The append("/") is adding an extra / to the URL 
-			url.append(dog.getId());
-			String urlstr = url.toString();
-			res.setHeader("Location", urlstr);
-		} catch (Exception e) {
-			res.setStatus(400);
-			dog = null;
-		}
-		return dog;
-	}
 }
