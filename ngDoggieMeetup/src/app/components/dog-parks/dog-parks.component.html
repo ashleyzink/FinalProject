@@ -12,7 +12,7 @@
           <td>{{dogPark.name}}</td>
           <td><img class="img-thumbnail" [src]="dogPark.imageUrl" [alt]="'Picture for ' + dogPark.name"></td>
           <td>{{dogPark.offLeash}}</td>
-          <td>address here</td>
+          <td>{{dogPark.address}}</td>
         </tr>
       </tbody>
     </table>
@@ -20,6 +20,7 @@
 
   <div class="col-8">
     <div class="sticky-top">
+      <div style="padding-top: 50px;"></div>
       <div class="row">
         <div *ngIf="selected" class="col">
           <h3 class="text-center">{{selected.name}}</h3>
@@ -40,7 +41,7 @@
 
             <p>{{selected.description}}</p>
             <p>{{selected.address.street}}</p>
-            <p>{{selected.address.city + ', ' + selected.address.stateAbbrv}}</p>
+            <p>{{selected.address.city}}, {{selected.address.stateAbbrv}}</p>
             <p>{{selected.address.zipcode}}</p>
 
           </div>
