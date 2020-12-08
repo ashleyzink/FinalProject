@@ -92,7 +92,7 @@ export class DogParksComponent implements OnInit {
 
   delete(id: number) {
     this.dogParkService.delete(id).subscribe(
-      good => this.reload,
+      good => {this.reload(); this.deselect();},
       err => console.error('Error deleting dogPark with id: ' + id)
     )
   }
