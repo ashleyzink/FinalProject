@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.skilldistillery.doggiemeetup.entities.GeneralComment;
+import com.skilldistillery.doggiemeetup.entities.MeetupComment;
 import com.skilldistillery.doggiemeetup.entities.User;
 import com.skilldistillery.doggiemeetup.repositories.DogParkCommentRepository;
 import com.skilldistillery.doggiemeetup.repositories.DogParkRepository;
@@ -105,10 +106,7 @@ public class AdminServiceImpl implements AdminService {
 		return userRepo.saveAndFlush(dbUser);
 	}
 
-//	@Override
-//	public GeneralComment showGenCom(String username, int genComId) {
-//		return genComRepo.findByUser_UsernameAndId(username, genComId);
-//	}
+	// Gencom implementations
 
 	@Override
 	public GeneralComment findByGeneralCommentId(int genComId) {
@@ -121,11 +119,32 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public boolean destroy(String username, int genComId) {
+	public boolean destroyGenCom(String username, int genComId) {
 		boolean deleted = false;
 		GeneralComment genComment = genComRepo.findByUser_UsernameAndId(username, genComId);
 		if (genComment != null) {
 			genComRepo.delete(genComment);
+			deleted = true;
+		}
+		return deleted;
+	}
+
+	// MeetupCom implementations
+	@Override
+	public MeetupComment findByMeetupCommentId(int meetupCommentId) {
+		Optional<MeetupComment> meetupCommentOpt = meetupComRepo.findById(meetupCommentId);
+		if (!meetupCommentOpt.isPresent()) {
+			return null;
+		}
+		return meetupCommentOpt.get();
+	}
+
+	@Override
+	public boolean destroyMeetupComments(String username, int meetupComId) {
+		boolean deleted = false;
+		MeetupComment meetupComment = meetupComRepo.findByUser_UsernameAndId(username, meetupComId);
+		if (meetupComment != null) {
+			meetupComRepo.delete(meetupComment);
 			deleted = true;
 		}
 		return deleted;

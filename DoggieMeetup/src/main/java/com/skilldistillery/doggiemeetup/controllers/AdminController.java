@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.doggiemeetup.entities.GeneralComment;
+import com.skilldistillery.doggiemeetup.entities.MeetupComment;
 import com.skilldistillery.doggiemeetup.entities.User;
 import com.skilldistillery.doggiemeetup.services.AdminService;
 import com.skilldistillery.doggiemeetup.services.GeneralCommentService;
@@ -82,7 +83,7 @@ public class AdminController {
 			Principal principal) {
 		if (userSvc.show(principal.getName()).getRole().equals("admin")) {
 			try {
-				boolean deleted = adminSvc.destroy(principal.getName(), genComId);
+				boolean deleted = adminSvc.destroyGenCom(principal.getName(), genComId);
 				if (deleted) {
 					res.setStatus(204);
 				} else {
@@ -93,4 +94,51 @@ public class AdminController {
 			}
 		}
 	}
+
+	// Admin mapping for Meetup Comments
+	@GetMapping("auth/admin/meetups/{meetupId}/meetupComments/{meetupCommentId}")
+	public MeetupComment show(HttpServletRequest req, HttpServletResponse res, @PathVariable int meetupId,
+			@PathVariable int meetupCommentId) {
+		MeetupComment meetupComments = adminSvc.findByMeetupCommentId(meetupCommentId);
+		if (meetupComments == null) {
+			res.setStatus(404);
+		}
+		return meetupComments;
+	}
+
+	@DeleteMapping("auth/admin/meetups/{meetupId}/meetupComments/{meetupCommentId}")
+	public void destroyMeetupCom(HttpServletRequest req, HttpServletResponse res, @PathVariable int meetupCommentId,
+			Principal principal) {
+		if (userSvc.show(principal.getName()).getRole().equals("admin")) {
+			try {
+				boolean deleted = adminSvc.destroyMeetupComments(principal.getName(), meetupCommentId);
+				if (deleted) {
+					res.setStatus(204);
+				} else {
+					res.setStatus(404);
+				}
+			} catch (Exception e) {
+				res.setStatus(400);
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 }
