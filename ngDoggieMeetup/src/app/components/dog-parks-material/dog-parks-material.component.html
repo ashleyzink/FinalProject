@@ -11,11 +11,11 @@
               <th>Name</th>
               <th>Image</th>
               <th>Off Leash</th>
-              <th>Address</th>
+              <th>Location</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dogPark of dogParks" (click)="select(dogPark)">
+            <tr *ngFor="let dogPark of dogParks" (click)="select(dogPark)" (click)="map.panTo(markerMap[dogPark.name]['position'])">
               <td>{{ dogPark.name }}</td>
               <td>
                 <img
@@ -25,7 +25,7 @@
                 />
               </td>
               <td>{{ dogPark.offLeash }}</td>
-              <td>{{ dogPark.address }}</td>
+              <td>{{ dogPark.address.city }}, {{dogPark.address.stateAbbrv}}</td>
             </tr>
           </tbody>
         </table>
@@ -40,11 +40,14 @@
       </mat-card-header>
       <mat-card-content>
         <google-map
+          #map
           height="500px"
           width="100%"
           [zoom]="zoom"
-          [(center)]="center"
+          [center]="center"
+          mapId="ff79bdf3fe4b810b"
           [options]="options"
+          (mapDblclick)="map.panTo()"
         >
 
         <map-marker
@@ -66,6 +69,7 @@
         [title]="marker.title"
         [(options)]="dogParkMarkerOptions"
         (mapClick)="selectFromMap(marker)"
+        (mapRightclick)="map.panTo(marker.position)"
         (mapDragend)="test3($event)"
         >
       </map-marker>

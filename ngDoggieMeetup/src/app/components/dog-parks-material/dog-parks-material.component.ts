@@ -32,13 +32,13 @@ export class DogParksMaterialComponent implements OnInit {
   zoom = 12
   center: google.maps.LatLngLiteral
   options: google.maps.MapOptions = {
-    zoomControl: false,
-    scrollwheel: false,
-    disableDoubleClickZoom: true,
-    maxZoom: 15,
-    minZoom: 8,
+    zoomControl: true,
+    scrollwheel: true,
+    disableDoubleClickZoom: true
   }
+  mapStyleId = 'ff79bdf3fe4b810b';
   markers = [];
+  markerMap= {};
   dogParkMarkerOptions: google.maps.MarkerOptions = {draggable: false};
 
   currentLocation: google.maps.Marker = new google.maps.Marker();
@@ -90,8 +90,8 @@ export class DogParksMaterialComponent implements OnInit {
   }
   selectFromMap(item) {
     this.selected = this.dogParks[Number.parseInt(item['label']) - 1];
-    this.center = item['position'];
   }
+
   toggleUpdate() {
     if (this.updateDogPark) {
       this.updateDogPark = null;
@@ -110,7 +110,6 @@ export class DogParksMaterialComponent implements OnInit {
         this.dogParks = data;
         for (let i = 0; i < this.dogParks.length; i++) {
           this.geocodeDogPark(this.dogParks[i], i+1+'');
-
         }
       },
       err => console.error('Error reloading dogParks: ')
@@ -133,6 +132,7 @@ export class DogParksMaterialComponent implements OnInit {
       data => {
         this.reload();
         this.selected = data;
+        this.newDogPark = null;
       },
       err => {
         console.error('Error creating dogPark: ');
@@ -149,6 +149,7 @@ export class DogParksMaterialComponent implements OnInit {
       data => {
         this.reload();
         this.selected = data;
+        this.toggleUpdate();
       },
       err => {
         console.error('Error creating dogPark: ');
@@ -175,6 +176,7 @@ export class DogParksMaterialComponent implements OnInit {
           title: dogPark.name
         }
         this.markers.push(marker);
+        this.markerMap[dogPark.name] = marker;
 
       }
     )
