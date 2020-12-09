@@ -38,7 +38,12 @@ export class DogParksMaterialComponent implements OnInit {
     minZoom: 8,
   }
   markers: google.maps.Marker[] = [];
+  dogParkMarkerOptions: google.maps.MarkerOptions = {draggable: false};
+
   currentLocation: google.maps.Marker = new google.maps.Marker();
+
+  markerOptions: google.maps.MarkerOptions = {draggable: true};
+  newLocation = {lat: 0, lng: 0};
 
   constructor(private dogParkService: DogParkService, private mapsService: MapsService) { }
 
@@ -49,9 +54,18 @@ export class DogParksMaterialComponent implements OnInit {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       }
-      this.currentLocation.setPosition(this.center)
-      this.markers.push(this.currentLocation);
+      this.currentLocation.setPosition(this.center);
+      this.currentLocation.setOptions(this.markerOptions);
+      this.newLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      }
+      // this.markers.push(this.currentLocation);
     })
+  }
+
+  test(item) {
+    console.log(item)
   }
 
   deselect() {

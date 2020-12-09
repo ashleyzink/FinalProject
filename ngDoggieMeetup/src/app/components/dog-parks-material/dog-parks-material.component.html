@@ -46,19 +46,33 @@
           [center]="center"
           [options]="options"
         >
+
+        <map-marker
+        #movableMarker
+        [(position)]="newLocation"
+        [title]="'Pointer'"
+        [options]="markerOptions"
+        (mapDragend)="test(newLocation)"
+        ></map-marker>
+
+        <!-- <map-marker [position]="{lat: newLocation.lat, lng: newLocation.lng}"
+        [title]="'Pointer'">
+        </map-marker> -->
+
         <map-marker
         *ngFor="let marker of markers"
-        [position]="marker.position"
-        [label]="marker.label"
-        [title]="marker.title"
-        [options]="marker.options">
+        [position]="marker.getPosition()"
+        [label]="marker.getLabel()"
+        [title]="marker.getTitle()"
+        [options]="dogParkMarkerOptions">
       </map-marker>
+
       </google-map>
       </mat-card-content>
       <mat-card-actions>
         <button
           mat-button
-          (click)="getRevGeocodeAddress(center.lat, center.lng)"
+          (click)="getRevGeocodeAddress(newLocation.lat, newLocation.lng)"
         >
           Reverse Geocode Test
         </button>
