@@ -1,3 +1,4 @@
+import { DogParkReviewService } from './services/dog-park-review.service';
 import { DogParkService } from './services/dog-park.service';
 import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -51,7 +52,8 @@ import { DogComponent } from './components/dog/dog.component';
   ],
   providers: [
     AuthService,
-    DogParkService
+    DogParkService,
+    DogParkReviewService
   ],
   bootstrap: [AppComponent]
 })
