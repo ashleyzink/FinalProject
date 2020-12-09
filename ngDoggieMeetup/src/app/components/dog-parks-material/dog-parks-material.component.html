@@ -1,0 +1,338 @@
+<div class="row">
+  <div class="col-4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Dog Parks</mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="height: 600px; overflow: auto">
+        <table class="table table-light table-sm table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>Name</th>
+              <th>Image</th>
+              <th>Off Leash</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dogPark of dogParks" (click)="select(dogPark)" (click)="map.panTo(markerMap[dogPark.name]['position'])">
+              <td>{{ dogPark.name }}</td>
+              <td>
+                <img
+                  class="img-thumbnail"
+                  [src]="dogPark.imageUrl"
+                  [alt]="'Picture for ' + dogPark.name"
+                />
+              </td>
+              <td>{{ dogPark.offLeash }}</td>
+              <td>{{ dogPark.address.city }}, {{dogPark.address.stateAbbrv}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Map</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <google-map
+          #map
+          height="500px"
+          width="100%"
+          [zoom]="zoom"
+          [center]="center"
+          mapId="ff79bdf3fe4b810b"
+          [options]="options"
+          (mapDblclick)="map.panTo()"
+        >
+
+        <map-marker
+        #movableMarker
+        [(position)]="newLocation"
+        [title]="'Pointer'"
+        [options]="markerOptions"
+        (mapDragend)="test2($event)"
+        ></map-marker>
+
+        <!-- <map-marker [position]="{lat: newLocation.lat, lng: newLocation.lng}"
+        [title]="'Pointer'">
+        </map-marker> -->
+
+        <map-marker
+        *ngFor="let marker of markers"
+        [position]="marker.position"
+        [label]="marker.label"
+        [title]="marker.title"
+        [(options)]="dogParkMarkerOptions"
+        (mapClick)="selectFromMap(marker)"
+        (mapRightclick)="map.panTo(marker.position)"
+        (mapDragend)="test3($event)"
+        >
+      </map-marker>
+
+      </google-map>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-button
+          (click)="getRevGeocodeAddress(newLocation.lat, newLocation.lng)"
+        >
+          Reverse Geocode Test
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+
+  <div class="col-4">
+    <mat-card *ngIf="selected && !updateDogPark">
+      <mat-card-header>
+        <mat-card-title>{{ selected.name }}</mat-card-title>
+      </mat-card-header>
+      <img
+        class="img-thumbnail mw-100"
+        mat-card-image
+        [src]="selected.imageUrl"
+        [alt]="'Picture for ' + selected.name"
+      />
+      <mat-card-content>
+        <p>{{ selected.description }}</p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button (click)="toggleUpdate()">EDIT</button>
+        <button mat-button (click)="delete(selected.id)">DELETE</button>
+        <button mat-button (click)="deselect()">DESELECT</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card *ngIf="!selected && !updateDogPark">
+      <mat-card-header>
+        <mat-card-title>{{ newDogPark.name }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="new-dog-park-name">Name</label>
+              <input
+                class="form-control"
+                type="text"
+                name="name"
+                id="new-dog-park-name"
+                [(ngModel)]="newDogPark.name"
+                placeholder="Name"
+              />
+            </div>
+            <div>
+              <label for="new-dog-park-off-leash">Off Leash</label>
+              <input
+                type="checkbox"
+                name="offLeash"
+                id="new-dog-park-off-leash"
+                [(ngModel)]="newDogPark.offLeash"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="new-dog-park-description">Description</label>
+              <textarea
+                class="form-control"
+                name="description"
+                id="new-dog-park-description"
+                cols="25"
+                rows="5"
+                [(ngModel)]="newDogPark.description"
+              ></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="new-dog-park-image-url">Name</label>
+              <input
+                class="form-control"
+                type="text"
+                name="imageUrl"
+                id="new-dog-park-image-url"
+                [(ngModel)]="newDogPark.imageUrl"
+                placeholder="Image Url"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="new-address-street">Street Address</label>
+              <input
+                class="form-control"
+                type="text"
+                name="street"
+                id="new-address-street"
+                [(ngModel)]="newAddress.street"
+                placeholder="Street Address"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="new-address-city">City</label>
+              <input
+                class="form-control"
+                type="text"
+                name="city"
+                id="new-address-city"
+                [(ngModel)]="newAddress.city"
+                placeholder="City"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="new-address-state-abbrv">State</label>
+              <select class="form-control" name="stateAbbrv" id="new-address-state-abbrv" [(ngModel)]="newAddress.stateAbbrv">
+                <option *ngFor="let abbrev of stateAbbrevs" [value]="abbrev">{{abbrev}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="new-address-zipcode">Zip Code</label>
+              <input
+                class="form-control"
+                type="text"
+                name="zipcode"
+                id="new-address-zipcode"
+                [(ngModel)]="newAddress.zipcode"
+                placeholder="Zip Code"
+              />
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+
+
+
+      <mat-card-actions>
+        <button mat-button (click)="create(newDogPark, newAddress)">ADD</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card *ngIf="selected && updateDogPark">
+      <mat-card-header>
+        <mat-card-title>{{ selected.name }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="update-dog-park-name">Name</label>
+              <input
+                class="form-control"
+                type="text"
+                name="name"
+                id="update-dog-park-name"
+                [(ngModel)]="updateDogPark.name"
+                placeholder="Name"
+              />
+            </div>
+            <div>
+              <label for="update-dog-park-off-leash">Off Leash</label>
+              <input
+                type="checkbox"
+                name="offLeash"
+                id="update-dog-park-off-leash"
+                [(ngModel)]="updateDogPark.offLeash"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="update-dog-park-description">Description</label>
+              <textarea
+                class="form-control"
+                name="description"
+                id="update-dog-park-description"
+                cols="25"
+                rows="5"
+                [(ngModel)]="updateDogPark.description"
+              ></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="update-dog-park-image-url">Image URL</label>
+              <input
+                class="form-control"
+                type="text"
+                name="imageUrl"
+                id="update-dog-park-image-url"
+                [(ngModel)]="updateDogPark.imageUrl"
+                placeholder="Image Url"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="update-address-street">Street Address</label>
+              <input
+                class="form-control"
+                type="text"
+                name="street"
+                id="update-address-street"
+                [(ngModel)]="updateDogPark.address.street"
+                placeholder="Street Address"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="update-address-city">City</label>
+              <input
+                class="form-control"
+                type="text"
+                name="city"
+                id="update-address-city"
+                [(ngModel)]="updateDogPark.address.city"
+                placeholder="City"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="update-address-state-abbrv">State</label>
+              <select class="form-control" name="stateAbbrv" id="update-address-state-abbrv" [(ngModel)]="updateDogPark.address.stateAbbrv">
+                <option *ngFor="let abbrev of stateAbbrevs" [value]="abbrev">{{abbrev}}</option>
+              </select>
+            </div>
+            <div class="form-group col">
+              <label for="update-address-zipcode">Zip Code</label>
+              <input
+                class="form-control"
+                type="text"
+                name="zipcode"
+                id="update-address-zipcode"
+                [(ngModel)]="updateDogPark.address.zipcode"
+                placeholder="Zip Code"
+              />
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+
+
+
+      <mat-card-actions>
+        <button mat-button (click)="update(updateDogPark, updateDogPark.address)">
+          UPDATE
+        </button>
+        <button mat-button (click)="deselect()">
+          DESELECT
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
