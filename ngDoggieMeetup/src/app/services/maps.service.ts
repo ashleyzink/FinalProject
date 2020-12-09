@@ -63,7 +63,11 @@ export class MapsService {
     addr.street = input['results'][0]['address_components'][0]['long_name'];
     addr.street += ' ' + input['results'][0]['address_components'][1]['long_name'];
     addr.city = input['results'][0]['address_components'][2]['long_name'];
-    addr.stateAbbrv = input['results'][0]['address_components'][4]['short_name'];
+    if (input['results'][0]['address_components'][4]['short_name']['length'] === 2) {
+      addr.stateAbbrv = input['results'][0]['address_components'][4]['short_name'];
+    } else {
+      addr.stateAbbrv = input['results'][0]['address_components'][5]['short_name'];
+    }
     addr.zipcode = input['results'][0]['address_components'][6]['long_name'];
     return addr;
   }
