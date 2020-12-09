@@ -91,7 +91,7 @@ public class DogParkCommentController {
 	}
 
 //PUT "api/dogparkcomments/{dogParkCommentId}"
-	@PutMapping("auth/dogparks/{dogParkId}/dogParkComments/{comId}")
+	@PutMapping("auth/dogParks/{dogParkId}/dogParkComments/{comId}")
 	public DogParkComment update(HttpServletRequest req, HttpServletResponse res, @PathVariable int comId,
 			@RequestBody DogParkComment dogParkComment, Principal principal) {
 		try {
@@ -108,7 +108,7 @@ public class DogParkCommentController {
 	}
 
 //DELETE "api/dogparkcomments/{dogParkCommentId}"	
-	@DeleteMapping("auth/dogparks/{dogParkId}/dogParkComments/{comId}")
+	@DeleteMapping("auth/dogParks/{dogParkId}/dogParkComments/{comId}")
 	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int comId, Principal principal) {
 		try {
 			boolean deleted = dogParkCommentService.destroy(principal.getName(), comId);

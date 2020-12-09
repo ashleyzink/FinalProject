@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-4">
+  <div class="col-lg">
     <mat-card>
       <mat-card-header>
         <mat-card-title>Dog Parks</mat-card-title>
@@ -33,7 +33,7 @@
     </mat-card>
   </div>
 
-  <div class="col-4">
+  <div class="col-lg">
     <mat-card>
       <mat-card-header>
         <mat-card-title>Map</mat-card-title>
@@ -57,7 +57,7 @@
         [(position)]="newLocation"
         [title]="'Pointer'"
         [options]="markerOptions"
-        (mapDragend)="test2($event)"
+        (mapDragend)="revGeocodeEvent($event, newAddress)"
         ></map-marker>
 
         <!-- <map-marker [position]="{lat: newLocation.lat, lng: newLocation.lng}"
@@ -71,7 +71,7 @@
         [title]="marker.title"
         [(options)]="dogParkMarkerOptions"
         (mapClick)="selectFromMap(marker)"
-        (mapDragend)="test3($event)"
+        (mapDragend)="revGeocodeEvent($event, updateAddress)"
         >
       </map-marker>
 
@@ -80,16 +80,16 @@
       <mat-card-actions>
         <button
           mat-button
-          (click)="getRevGeocodeAddress(newLocation.lat, newLocation.lng)"
+          (click)="map.panTo(center)"
         >
-          Reverse Geocode Test
+          Center Map
         </button>
       </mat-card-actions>
     </mat-card>
   </div>
 
 
-  <div class="col-4">
+  <div class="col-lg">
     <mat-card *ngIf="selected && !updateDogPark">
       <mat-card-header>
         <mat-card-title>{{ selected.name }}</mat-card-title>
@@ -337,6 +337,7 @@
     </mat-card>
   </div>
 </div>
+
 <div class="row">
   <app-dog-park-comments *ngIf="selected" [dogParkId]="selected.id">
   </app-dog-park-comments>

@@ -1,9 +1,36 @@
-<h4>{{comment.title}}</h4>
-<p>#{{comment.id}}</p>
-<p>{{comment.commentText}}</p>
-<ul>
-  <li *ngFor="let reply of comment.replies">
-    <app-dog-park-comment-display [comment]="reply">
-    </app-dog-park-comment-display>
-  </li>
-</ul>
+<div>
+  <mat-card>
+    <mat-card-header>
+      {{comment.commentDate | date}}
+    </mat-card-header>
+    <mat-card-title>
+      {{comment.title}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      <p>
+        <span>#{{comment.id}}</span>
+        <span> Posted By </span>
+        <span>{{comment.user.username}}</span>
+      </p>
+    </mat-card-subtitle>
+    <mat-card-content>
+      <p>{{comment.commentText}}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button class="btn">Reply</button>
+      <button class="btn" (click)="delete(comment)">Delete</button>
+      <button class="btn" *ngIf="comment.replies.length > 0 && !showReplies" (click)="toggleReplies()">Show Replies</button>
+      <button class="btn" *ngIf="comment.replies.length > 0 && showReplies" (click)="toggleReplies()">Hide Replies</button>
+    </mat-card-actions>
+    <mat-card-footer>
+    </mat-card-footer>
+  </mat-card>
+  <br>
+  <ul *ngIf="showReplies">
+    <li *ngFor="let reply of comment.replies">
+      <app-dog-park-comment-display [comment]="reply">
+      </app-dog-park-comment-display>
+    </li>
+  </ul>
+</div>

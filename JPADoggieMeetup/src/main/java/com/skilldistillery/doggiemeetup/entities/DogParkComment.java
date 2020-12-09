@@ -3,6 +3,7 @@ package com.skilldistillery.doggiemeetup.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,7 +44,7 @@ public class DogParkComment {
 	@JoinColumn(name="reply_to_comment_id")
 	private DogParkComment replyToComment;
 	
-	@OneToMany(mappedBy="replyToComment")
+	@OneToMany(mappedBy="replyToComment", cascade = CascadeType.ALL)
 	private List<DogParkComment> replies;
 	
 	@ManyToOne

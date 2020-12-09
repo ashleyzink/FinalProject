@@ -29,5 +29,35 @@ export class DogParkCommentService {
     );
   }
 
+  create(dogParkId: number, comment: DogParkComment): Observable<DogParkComment> {
+    const httpOptions = this.authService.getAuthHttpOptions();
+    return this.http.post<DogParkComment>(this.authUrl + dogParkId + '/dogParkComments', httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('error creating dog park comment');
+      })
+    );
+  }
+
+  update(dogParkId: number, comment: DogParkComment): Observable<DogParkComment> {
+    const httpOptions = this.authService.getAuthHttpOptions();
+    return this.http.put<DogParkComment>(this.authUrl + dogParkId + '/dogParkComments/' + comment.id, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('error updating dog park comment');
+      })
+    );
+  }
+
+  delete(dogParkId: number, commentId: number): Observable<Boolean> {
+    const httpOptions = this.authService.getAuthHttpOptions();
+    return this.http.delete<Boolean>(this.authUrl + dogParkId + '/dogParkComments/' + commentId, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('error deleting dog park comment');
+      })
+    );
+  }
+
 
 }
