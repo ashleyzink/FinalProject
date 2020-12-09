@@ -48,10 +48,12 @@
           mapId="ff79bdf3fe4b810b"
           [options]="options"
           (mapDblclick)="map.panTo()"
+          (mapRightclick)="map.panTo(movableMarker.position)"
         >
 
         <map-marker
         #movableMarker
+
         [(position)]="newLocation"
         [title]="'Pointer'"
         [options]="markerOptions"
@@ -69,7 +71,6 @@
         [title]="marker.title"
         [(options)]="dogParkMarkerOptions"
         (mapClick)="selectFromMap(marker)"
-        (mapRightclick)="map.panTo(marker.position)"
         (mapDragend)="test3($event)"
         >
       </map-marker>
