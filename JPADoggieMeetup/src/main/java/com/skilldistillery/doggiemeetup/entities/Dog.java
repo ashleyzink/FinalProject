@@ -46,7 +46,7 @@ public class Dog {
 	private LocalDate rainbowBridge;
 	
 	@Column(name="create_date")
-	private LocalDateTime createDate;
+	private LocalDate createDate;
 	
 	private String gender;
 	
@@ -145,11 +145,11 @@ public class Dog {
 		this.rainbowBridge = rainbowBridge;
 	}
 
-	public LocalDateTime getCreateDate() {
+	public LocalDate getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(LocalDateTime createDate) {
+	public void setCreateDate(LocalDate createDate) {
 		this.createDate = createDate;
 	}
 

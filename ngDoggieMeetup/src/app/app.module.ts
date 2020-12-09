@@ -33,12 +33,9 @@ import { DogComponent } from './components/dog/dog.component';
     LoginComponent,
     LogoutComponent,
     DogParksComponent,
-<<<<<<< Updated upstream
     UserProfileComponent,
-    DogParksMaterialComponent
-=======
-    DogComponent,
->>>>>>> Stashed changes
+    DogParksMaterialComponent,
+    DogComponent
   ],
   imports: [
     CommonModule,

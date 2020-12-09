@@ -34,8 +34,8 @@ export class DogComponent implements OnInit {
       fail => console.error('Error reload() dog')
     )
   }
-  select(item: Dog){
-    this.selected = item;
+  select(dog: Dog){
+    this.selected = dog;
     this.editDog = null;
   }
   displayDogDetails(dog: Dog){
@@ -56,8 +56,8 @@ export class DogComponent implements OnInit {
     this.dogService.create(dog).subscribe(
       data => {
         this.newDog = new Dog();
-        this.reload();
         this.selected = data;
+        this.reload();
       },
       fail => {
         console.error(dog);
@@ -65,12 +65,11 @@ export class DogComponent implements OnInit {
       }
       )
     }
-  update(dog: Dog, user?: User){
-    if(user){
-      dog.user = user;
-    }
+  update(dog: Dog){
+    console.log(dog);
     this.dogService.update(dog).subscribe(
       data => {
+        this.editDog = null;
         this.reload();
         this.selected = data;
       },
@@ -80,6 +79,9 @@ export class DogComponent implements OnInit {
 
       }
     )
+  }
+  setEditDog() {
+    this.editDog = Object.assign({}, this.selected);
   }
   delete(id: number){
     this.dogService.destroy(id).subscribe(

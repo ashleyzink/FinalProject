@@ -1,7 +1,7 @@
 
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { environment } from './../../environments/environment.prod';
+import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -20,12 +20,12 @@ export class DogService {
     private router: Router
   ) { }
 
-    private url = environment.baseUrl + 'api/dogProfile'
-    private authUrl = environment.baseUrl + 'api/auth/dogProfile'
+    private url = environment.baseUrl + 'api'
+    private authUrl = environment.baseUrl + 'api/auth/dogs'
 
     public index(): Observable<Dog[]> {
       const httpOptions = this.getHttpOptions();
-      return this.http.get<Dog[]>(this.url, httpOptions).pipe(
+      return this.http.get<Dog[]>(this.url +'/dogs', httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError('DogService.index(): Error retrieving Dog List');
@@ -33,9 +33,9 @@ export class DogService {
       );
     }
 
-      show(id: number): Observable<Dog>{
+      show(dogId: number): Observable<Dog>{
         const httpOptions = this.getHttpOptions();
-        return this.http.get<Dog>(this.url + '/' + id, httpOptions).pipe(
+        return this.http.get<Dog>(`${this.url}` + '/dogs' + `${dogId}`, httpOptions).pipe(
           catchError((err: any) =>{
           console.log(err);
           return throwError('DogService.show(): Error getting dog id');
@@ -47,7 +47,7 @@ export class DogService {
           console.log('User is not logged in at DogService.create()');
           this.router.navigateByUrl('/login');
         }
-        const httpOptions = this.getHttpOptions();
+        const httpOptions = this.getAuthHttpOptions();
         return this.http.post<Dog>(this.authUrl, newDog, httpOptions).pipe(
           catchError((err: any) => {
             console.log(err);
@@ -60,8 +60,10 @@ export class DogService {
         console.log('User is not logged in at DogService.update()');
         this.router.navigateByUrl('/login');
       }
-      const httpOptions = this.getHttpOptions();
-      return this.http.put<Dog>(this.authUrl + dog.id, dog, httpOptions).pipe(
+      const httpOptions = this.getAuthHttpOptions();
+      console.log(dog);
+
+      return this.http.put<Dog>(this.authUrl + '/'+ `${dog.id}`, dog, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError('DogService.update(): Error updating dog');
@@ -74,7 +76,7 @@ export class DogService {
         console.log('User is not logged in at DogService.delete()');
         this.router.navigateByUrl('/login');
       }
-      const httpOptions = this.getHttpOptions();
+      const httpOptions = this.getAuthHttpOptions();
       return this.http.delete<Dog>(this.authUrl + id, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
@@ -90,6 +92,17 @@ export class DogService {
           Authorization: `Basic ${credentials}`,
           'X-Requested-With': 'XMLHttpRequest',
           'Content-type': 'application/json'
+        })
+      };
+      return httpOptions;
+    }
+
+    getAuthHttpOptions() {
+      const credentials = this.authService.getCredentials();
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: `Basic ${credentials}`,
+          'X-Requested-With': 'XMLHttpRequest'
         })
       };
       return httpOptions;
