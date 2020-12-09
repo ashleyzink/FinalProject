@@ -11,4 +11,5 @@ import com.skilldistillery.doggiemeetup.entities.DogParkComment;
 public interface DogParkCommentRepository extends JpaRepository<DogParkComment, Integer> {
 	List<DogParkComment> findByUser_Username(String username);
 	DogParkComment findByUser_UsernameAndId(String username, int dogParkCommentId);
+	List<DogParkComment> findByUser_Id(int userId);
 }

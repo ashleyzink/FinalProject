@@ -21,7 +21,7 @@ import { DogParksComponent } from './components/dog-parks/dog-parks.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CommonModule } from '@angular/common';
 import { DogParksMaterialComponent } from './components/dog-parks-material/dog-parks-material.component';
-
+import { DogComponent } from './components/dog/dog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { DogParksMaterialComponent } from './components/dog-parks-material/dog-p
     LogoutComponent,
     DogParksComponent,
     UserProfileComponent,
-    DogParksMaterialComponent
+    DogParksMaterialComponent,
+    DogComponent
   ],
   imports: [
     CommonModule,
