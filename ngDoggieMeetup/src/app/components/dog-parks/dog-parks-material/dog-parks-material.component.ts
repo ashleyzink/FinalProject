@@ -1,8 +1,9 @@
-import { MapsService } from './../../services/maps.service';
+
 import { Component, OnInit } from '@angular/core';
 import { Address } from 'src/app/models/address';
 import { DogPark } from 'src/app/models/dog-park';
 import { DogParkService } from 'src/app/services/dog-park.service';
+import { MapsService } from 'src/app/services/maps.service';
 
 @Component({
   selector: 'app-dog-parks-material',

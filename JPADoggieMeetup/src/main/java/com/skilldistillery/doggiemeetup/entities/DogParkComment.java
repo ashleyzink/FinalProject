@@ -38,11 +38,11 @@ public class DogParkComment {
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="reply_to_comment_id")
 	private DogParkComment replyToComment;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="replyToComment")
 	private List<DogParkComment> replies;
 	

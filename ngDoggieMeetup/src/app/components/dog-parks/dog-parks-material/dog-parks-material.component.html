@@ -337,3 +337,7 @@
     </mat-card>
   </div>
 </div>
+<div class="row">
+  <app-dog-park-comments *ngIf="selected" [dogParkId]="selected.id">
+  </app-dog-park-comments>
+</div>

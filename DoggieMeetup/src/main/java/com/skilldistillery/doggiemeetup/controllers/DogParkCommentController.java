@@ -51,6 +51,16 @@ public class DogParkCommentController {
 	public List<DogParkComment> lists() {
 		return dogParkCommentService.getAllDogParkComments();
 	}
+	
+	// GET "api/dogpark/{dogParkId}/dogParkComments/"
+	@GetMapping("dogParks/{dogParkId}/dogParkComments")
+	public List<DogParkComment> showByDogPark(HttpServletRequest req, HttpServletResponse res, @PathVariable int dogParkId) {
+		List<DogParkComment> dogParkComments = dogParkCommentService.rootCommentsByDogParkId(dogParkId);
+		if (dogParkComments == null) {
+			res.setStatus(404);
+		}
+		return dogParkComments;
+	}
 
 	// GET "api/dogpark/{dogParkId}/dogParkComments/{comId}"
 	@GetMapping("dogParks/{dogParkId}/dogParkComments/{comId}")

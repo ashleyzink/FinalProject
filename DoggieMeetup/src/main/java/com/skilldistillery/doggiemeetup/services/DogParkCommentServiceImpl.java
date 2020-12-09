@@ -1,5 +1,6 @@
 package com.skilldistillery.doggiemeetup.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,6 +76,19 @@ public class DogParkCommentServiceImpl implements DogParkCommentService {
 			deleted = true;
 		}
 		return deleted;
+	}
+
+
+	@Override
+	public List<DogParkComment> rootCommentsByDogParkId(int dogParkId) {		
+		List<DogParkComment> allComments = dogParkCommentRepo.findByDogPark_Id(dogParkId);
+		List<DogParkComment> rootComments = new ArrayList<>();
+		for (DogParkComment comment : allComments) {
+			if (comment.getReplyToComment() == null) {
+				rootComments.add(comment);
+			}
+		}
+		return rootComments;
 	}
 
 }

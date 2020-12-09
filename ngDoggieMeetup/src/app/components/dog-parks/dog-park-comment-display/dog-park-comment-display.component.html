@@ -1,0 +1,9 @@
+<h4>{{comment.title}}</h4>
+<p>#{{comment.id}}</p>
+<p>{{comment.commentText}}</p>
+<ul>
+  <li *ngFor="let reply of comment.replies">
+    <app-dog-park-comment-display [comment]="reply">
+    </app-dog-park-comment-display>
+  </li>
+</ul>

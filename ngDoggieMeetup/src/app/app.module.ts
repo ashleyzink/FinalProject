@@ -1,3 +1,4 @@
+import { DogParkCommentService } from './services/dog-park-comment.service';
 import { DogParkService } from './services/dog-park.service';
 import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,8 +18,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { FormsModule } from '@angular/forms';
-import { DogParksComponent } from './components/dog-parks/dog-parks.component';
-import { DogParksMaterialComponent } from './components/dog-parks-material/dog-parks-material.component';
+import { DogParksMaterialComponent } from './components/dog-parks/dog-parks-material/dog-parks-material.component';
+import { DogParkCommentsComponent } from './components/dog-parks/dog-park-comments/dog-park-comments.component';
+import { DogParkCommentDisplayComponent } from './components/dog-parks/dog-park-comment-display/dog-park-comment-display.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,9 @@ import { DogParksMaterialComponent } from './components/dog-parks-material/dog-p
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    DogParksComponent,
-    DogParksMaterialComponent
+    DogParksMaterialComponent,
+    DogParkCommentsComponent,
+    DogParkCommentDisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { DogParksMaterialComponent } from './components/dog-parks-material/dog-p
   ],
   providers: [
     AuthService,
-    DogParkService
+    DogParkService,
+    DogParkCommentService
   ],
   bootstrap: [AppComponent]
 })
