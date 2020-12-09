@@ -15,6 +15,8 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { FormsModule } from '@angular/forms';
 import { DogParksComponent } from './components/dog-parks/dog-parks.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,11 @@ import { DogParksComponent } from './components/dog-parks/dog-parks.component';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    DogParksComponent
+    DogParksComponent,
+    UserProfileComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,

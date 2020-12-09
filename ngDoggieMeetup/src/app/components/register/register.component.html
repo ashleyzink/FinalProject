@@ -12,6 +12,14 @@
       <label for="registerPassword">Password</label>
       <input class="form-control" type="password" name="password" id="registerPassword" [(ngModel)]="newUser.password" placeholder="Password">
     </div>
+    <div class="form-row">
+      <label for="registerPassword">First Name</label>
+      <input class="form-control" type="text" name="firstName" id="registerFirstName" [(ngModel)]="newUser.firstName" placeholder="First Name">
+    </div>
+    <div class="form-row">
+      <label for="registerPassword">Last Name</label>
+      <input class="form-control" type="text" name="lastName" id="registerLastName" [(ngModel)]="newUser.lastName" placeholder="Last Name">
+    </div>
     <div>
       <button class="btn btn-primary" (click)="createUser()">Register</button>
     </div>
