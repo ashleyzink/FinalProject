@@ -43,7 +43,7 @@
           height="500px"
           width="100%"
           [zoom]="zoom"
-          [center]="center"
+          [(center)]="center"
           [options]="options"
         >
 
@@ -52,7 +52,7 @@
         [(position)]="newLocation"
         [title]="'Pointer'"
         [options]="markerOptions"
-        (mapDragend)="test(newLocation)"
+        (mapDragend)="test2($event)"
         ></map-marker>
 
         <!-- <map-marker [position]="{lat: newLocation.lat, lng: newLocation.lng}"
@@ -61,10 +61,13 @@
 
         <map-marker
         *ngFor="let marker of markers"
-        [position]="marker.getPosition()"
-        [label]="marker.getLabel()"
-        [title]="marker.getTitle()"
-        [options]="dogParkMarkerOptions">
+        [position]="marker.position"
+        [label]="marker.label"
+        [title]="marker.title"
+        [(options)]="dogParkMarkerOptions"
+        (mapClick)="selectFromMap(marker)"
+        (mapDragend)="test3($event)"
+        >
       </map-marker>
 
       </google-map>
@@ -99,6 +102,7 @@
       <mat-card-actions>
         <button mat-button (click)="toggleUpdate()">EDIT</button>
         <button mat-button (click)="delete(selected.id)">DELETE</button>
+        <button mat-button (click)="deselect()">DESELECT</button>
       </mat-card-actions>
     </mat-card>
 
@@ -318,8 +322,11 @@
 
 
       <mat-card-actions>
-        <button mat-button (click)="update(updateDogPark, updateAddress)">
+        <button mat-button (click)="update(updateDogPark, updateDogPark.address)">
           UPDATE
+        </button>
+        <button mat-button (click)="deselect()">
+          DESELECT
         </button>
       </mat-card-actions>
     </mat-card>

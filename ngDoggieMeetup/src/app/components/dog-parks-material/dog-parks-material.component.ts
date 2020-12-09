@@ -14,6 +14,7 @@ export class DogParksMaterialComponent implements OnInit {
   selected: DogPark = null;
   newDogPark: DogPark = new DogPark();
   newAddress: Address = new Address();
+  dogParksMapToLabels = [];
   dogParks: DogPark[] = [];
   updateDogPark: DogPark = null;
   updateAddress: Address = new Address();
@@ -37,7 +38,7 @@ export class DogParksMaterialComponent implements OnInit {
     maxZoom: 15,
     minZoom: 8,
   }
-  markers: google.maps.Marker[] = [];
+  markers = [];
   dogParkMarkerOptions: google.maps.MarkerOptions = {draggable: false};
 
   currentLocation: google.maps.Marker = new google.maps.Marker();
@@ -60,12 +61,21 @@ export class DogParksMaterialComponent implements OnInit {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       }
+
       // this.markers.push(this.currentLocation);
     })
   }
 
   test(item) {
     console.log(item)
+  }
+  test2(event: google.maps.MouseEvent) {
+    console.log(event.latLng.toJSON());
+    this.getRevGeocodeAddress2(event.latLng.toJSON());
+  }
+  test3(event: google.maps.MouseEvent) {
+    console.log(event.latLng.toJSON());
+    this.getRevGeocodeAddress3(event.latLng.toJSON());
   }
 
   deselect() {
@@ -78,19 +88,31 @@ export class DogParksMaterialComponent implements OnInit {
     this.updateDogPark = null;
     this.updateAddress = null;
   }
+  selectFromMap(item) {
+    this.selected = this.dogParks[Number.parseInt(item['label']) - 1];
+    this.center = item['position'];
+  }
   toggleUpdate() {
     if (this.updateDogPark) {
       this.updateDogPark = null;
+      this.dogParkMarkerOptions = {draggable: false};
     } else {
       this.updateDogPark = this.selected;
       this.updateAddress = this.selected.address;
+      this.dogParkMarkerOptions = {draggable: true};
     }
   }
 
 
   reload():void {
     this.dogParkService.index().subscribe(
-      data => this.dogParks = data,
+      data => {
+        this.dogParks = data;
+        for (let i = 0; i < this.dogParks.length; i++) {
+          this.geocodeDogPark(this.dogParks[i], i+1+'');
+
+        }
+      },
       err => console.error('Error reloading dogParks: ')
     )
   }
@@ -142,14 +164,49 @@ export class DogParksMaterialComponent implements OnInit {
     )
   }
 
-  geocodeTest() {
+  geocodeDogPark(dogPark: DogPark, label: string) {
 
+    let addrStr = `${dogPark.address.street} ${dogPark.address.city}, ${dogPark.address.stateAbbrv}`;
+    this.mapsService.getGeocode(addrStr).subscribe(
+      data => {
+        let marker = {
+          position: data['results'][0]['geometry']['location'],
+          label: label,
+          title: dogPark.name
+        }
+        this.markers.push(marker);
+
+      }
+    )
   }
+
 
   getRevGeocodeAddress(lat: number, lng: number) {
     this.mapsService.getReverseGeocode(lat, lng).subscribe(
       data => {
         this.revGeocodeAddress = this.mapsService.parseReverseGeocode(data);
+        console.log(this.revGeocodeAddress);
+      },
+      err => console.error('Error in getRevGeocodeAddress')
+    )
+  }
+
+  getRevGeocodeAddress2(latLng: google.maps.LatLngLiteral) {
+    this.mapsService.getReverseGeocode(latLng.lat, latLng.lng).subscribe(
+      data => {
+        this.revGeocodeAddress = this.mapsService.parseReverseGeocode(data);
+        this.newAddress = this.revGeocodeAddress;
+        console.log(this.revGeocodeAddress);
+      },
+      err => console.error('Error in getRevGeocodeAddress')
+    )
+  }
+
+  getRevGeocodeAddress3(latLng: google.maps.LatLngLiteral) {
+    this.mapsService.getReverseGeocode(latLng.lat, latLng.lng).subscribe(
+      data => {
+        this.revGeocodeAddress = this.mapsService.parseReverseGeocode(data);
+        this.updateDogPark.address = this.revGeocodeAddress;
         console.log(this.revGeocodeAddress);
       },
       err => console.error('Error in getRevGeocodeAddress')
