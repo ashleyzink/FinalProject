@@ -18,6 +18,14 @@ export class DogParksMaterialComponent implements OnInit {
   updateDogPark: DogPark = null;
   updateAddress: Address = new Address();
   revGeocodeAddress: Address = null;
+  stateAbbrevs: string[] = ['AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT',
+                            'DC', 'DE', 'FL', 'GA', 'GU', 'HI', 'IA', 'ID',
+                            'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME',
+                            'MI', 'MN', 'MO', 'MP', 'MS', 'MT', 'NC', 'ND',
+                            'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK',
+                            'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX',
+                            'UM', 'UT', 'VA', 'VI', 'VT', 'WA', 'WI', 'WV',
+                            'WY'];
 
   // maps
   zoom = 12
@@ -30,6 +38,7 @@ export class DogParksMaterialComponent implements OnInit {
     minZoom: 8,
   }
   markers: google.maps.Marker[] = [];
+  currentLocation: google.maps.Marker = new google.maps.Marker();
 
   constructor(private dogParkService: DogParkService, private mapsService: MapsService) { }
 
@@ -40,6 +49,8 @@ export class DogParksMaterialComponent implements OnInit {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       }
+      this.currentLocation.setPosition(this.center)
+      this.markers.push(this.currentLocation);
     })
   }
 
@@ -115,6 +126,10 @@ export class DogParksMaterialComponent implements OnInit {
       good => {this.reload(); this.deselect();},
       err => console.error('Error deleting dogPark with id: ' + id)
     )
+  }
+
+  geocodeTest() {
+
   }
 
   getRevGeocodeAddress(lat: number, lng: number) {
