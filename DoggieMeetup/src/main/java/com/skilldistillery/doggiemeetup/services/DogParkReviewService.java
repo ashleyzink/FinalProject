@@ -10,6 +10,6 @@ public interface DogParkReviewService {
 	public DogParkReview show(int userId, int dogParkId);
 	public DogParkReview create(String username, DogParkReview dogParkReview);
 	public DogParkReview update(String username, int dogParkId, DogParkReview dogParkReview);
-	public boolean destroy(String username, int dogParkId);
+	boolean destroy(String username, int userId, int dogParkId);
 
 }
