@@ -3,6 +3,9 @@ import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { FormsModule } from '@angular/forms';
 import { DogParksComponent } from './components/dog-parks/dog-parks.component';
+import { DogParksMaterialComponent } from './components/dog-parks-material/dog-parks-material.component';
 
 @NgModule({
   declarations: [
@@ -25,14 +29,18 @@ import { DogParksComponent } from './components/dog-parks/dog-parks.component';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    DogParksComponent
+    DogParksComponent,
+    DogParksMaterialComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    GoogleMapsModule
   ],
   providers: [
     AuthService,
