@@ -33,9 +33,9 @@ export class DogService {
       );
     }
 
-      show(dogId: number): Observable<Dog>{
+      show(id: number): Observable<Dog>{
         const httpOptions = this.getHttpOptions();
-        return this.http.get<Dog>(`${this.url}` + '/dogs' + `${dogId}`, httpOptions).pipe(
+        return this.http.get<Dog>(`${this.url}` + '/dogs' + `${id}`, httpOptions).pipe(
           catchError((err: any) =>{
           console.log(err);
           return throwError('DogService.show(): Error getting dog id');
