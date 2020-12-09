@@ -27,7 +27,11 @@ public class DogParkCommentServiceImpl implements DogParkCommentService {
 		}
 		return dogParkCommentRepo.findByUser_Username(username);
 	}
-			
+	@Override
+	public List<DogParkComment> getCommentsByUserId(int userId) {
+		
+		return dogParkCommentRepo.findByUser_Id(userId);
+	}
 
 	@Override
 	public List<DogParkComment> getAllDogParkComments() {

@@ -6,6 +6,7 @@ import com.skilldistillery.doggiemeetup.entities.DogParkComment;
 
 public interface DogParkCommentService {
 	public List<DogParkComment> index(String username);
+	public List<DogParkComment> getCommentsByUserId(int userId);
 	public List<DogParkComment> getAllDogParkComments(); 
 	public DogParkComment show(int dogParkCommentId);
 	public DogParkComment create(String username, DogParkComment dogParkComment);

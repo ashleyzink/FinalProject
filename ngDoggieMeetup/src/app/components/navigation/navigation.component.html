@@ -4,5 +4,6 @@
   <a *ngIf="checkLogin()" class="navbar-brand" [routerLink]="['/userProfile']">Profile Page</a>
   <a *ngIf="!checkLogin()" class="navbar-brand" [routerLink]="['/register']">Register</a>
   <a *ngIf="!checkLogin()" class="navbar-brand" [routerLink]="['/login']">Login</a>
+  <a *ngIf="checkLogin()" class="navbar-brand" [routerLink]="['/dogProfile']">Dog Profile</a>
   <app-logout *ngIf="checkLogin()"></app-logout>
 </nav>

@@ -46,6 +46,11 @@ public class DogParkCommentController {
 		return dogParkCommentsForUser;
 	}
 
+	@GetMapping("users/{userId}/dogParkComments")
+	public List<DogParkComment> getAllUserComments(
+			@PathVariable int userId){
+		return dogParkCommentService.getCommentsByUserId(userId);
+	}
 	// GET "api/dogparkcomments"
 	@GetMapping("dogParkComments")
 	public List<DogParkComment> lists() {
