@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DogComponent implements OnInit {
 
-  title = 'Dog Profile';
+  title = 'Meet the Doggies!';
 
   selected: Dog = null;
 
