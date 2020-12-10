@@ -26,19 +26,19 @@
       <div *ngIf="editDog">
         <h3>Edit Dog</h3>
         <form>
-          <input type="text" name="name" [(ngModel)]="editDog.name" placeholder="Name"><br>
-          <input type="radio" id="male" name="gender" [(ngModel)]="editDog.gender" value="male">
-          <label for="male">Male</label><br>
+          Name: <input type="text" name="name" [(ngModel)]="editDog.name" placeholder="Name"><br>
+          Gender: <input type="radio" id="male" name="gender" [(ngModel)]="editDog.gender" value="male">
+          <label for="male">Male</label>
           <input type="radio" id="female" name="gender" [(ngModel)]="editDog.gender" value="female">
           <label for="female">Female</label><br>
-          <input type="text" name="breed" [(ngModel)]="editDog.breed" placeholder="Breed"><br>
-          <input type="text" name="size" [(ngModel)]="editDog.size" placeholder="size"><br>
-          <input type="text" name="temperament" [(ngModel)]="editDog.temperament" placeholder="temperament"><br>
-          <input type="text" name="activityLevel" [(ngModel)]="editDog.activityLevel" placeholder="activity level"><br>
-          <textarea [(ngModel)]="editDog.bio" name="bio" cols="30" rows="3" placeholder="Bio"></textarea><br>
+          Breed: <input type="text" name="breed" [(ngModel)]="editDog.breed" placeholder="Breed"><br>
+          Size: <input type="text" name="size" [(ngModel)]="editDog.size" placeholder="size"><br>
+          Temperament: <input type="text" name="temperament" [(ngModel)]="editDog.temperament" placeholder="temperament"><br>
+          Activity Level: <input type="text" name="activityLevel" [(ngModel)]="editDog.activityLevel" placeholder="activity level"><br>
+          Bio: <textarea [(ngModel)]="editDog.bio" name="bio" cols="30" rows="3" placeholder="Bio"></textarea><br>
           Birthday: <input type="date" name="birthday" [(ngModel)]="editDog.birthday" placeholder="birthday"><br>
           Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="editDog.rainbowBridge" placeholder="rainbowBridge"><br>
-          <input type="text" name="image" [(ngModel)]="editDog.profilePicUrl" placeholder="profilePicUrl"><br>
+          Doggie Profile Pic: <input type="text" name="image" [(ngModel)]="editDog.profilePicUrl" placeholder="profilePicUrl"><br>
           <button class="btn btn-success" (click)="update(editDog)">Update Dog</button>
         </form>
       </div>
@@ -70,23 +70,24 @@
     <hr>
     <h3>Add New Doggie:</h3>
     <div *ngIf="!selected">
+      <h3>Add a Dog: </h3>
       <div>
         <form>
-          <input type="text" name="name" [(ngModel)]="newDog.name" placeholder="name"><br>
-          <input type="radio" id="male" name="gender" [(ngModel)]="newDog.gender" value="male">
-          <label for="male">Male</label><br>
+          Name: <input type="text" name="name" [(ngModel)]="newDog.name" placeholder="name"><br>
+          Gender: <input type="radio" id="male" name="gender" [(ngModel)]="newDog.gender" value="male">
+          <label for="male">Male</label>
           <input type="radio" id="female" name="gender" [(ngModel)]="newDog.gender" value="female">
           <label for="female">Female</label><br>
-          <input type="text" name="breed" [(ngModel)]="newDog.breed" placeholder="breed"><br>
-          <input type="text" name="size" [(ngModel)]="newDog.size" placeholder="size"><br>
-          <input type="text" name="temperament" [(ngModel)]="newDog.temperament" placeholder="temperament"><br>
-          <input type="text" name="activityLevel" [(ngModel)]="newDog.activityLevel" placeholder="activity level"><br>
-          <textarea [(ngModel)]="newDog.bio" name="bio" cols="30" rows="3" placeholder="Bio"></textarea><br>
+          Breed: <input type="text" name="breed" [(ngModel)]="newDog.breed" placeholder="breed"><br>
+          Size: <input type="text" name="size" [(ngModel)]="newDog.size" placeholder="size"><br>
+          Temperament: <input type="text" name="temperament" [(ngModel)]="newDog.temperament" placeholder="temperament"><br>
+          Activitly Level: <input type="text" name="activityLevel" [(ngModel)]="newDog.activityLevel" placeholder="activity level"><br>
+          Bio: <textarea [(ngModel)]="newDog.bio" name="bio" cols="30" rows="3" placeholder="Bio"></textarea><br>
           Birthday: <input type="date" name="birthday" [(ngModel)]="newDog.birthday" placeholder="birthday"><br>
           <!-- *this should only appear if they go to edit their dog profile! -->
           Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="newDog.rainbowBridge" placeholder="rainbowBridge"><br>
           Create Date: <input type="date" name="createDate" [(ngModel)]="newDog.createDate" placeholder="createDate"><br>
-          <input type="text" name="image" [(ngModel)]="newDog.profilePicUrl" placeholder="profilePicUrl"><br>
+          Doggie Profile Pic: <input type="text" name="image" [(ngModel)]="newDog.profilePicUrl" placeholder="profilePicUrl"><br>
         </form>
         <button class="btn btn-success" (click)="create(newDog)">Add Dog</button>
       </div>

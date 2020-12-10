@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DogParksMaterialComponent } from './components/dog-parks-material/dog-parks-material.component';
-import { DogParksComponent } from './components/dog-parks/dog-parks.component';
+import { DogParksMaterialComponent } from './components/dog-parks/dog-parks-material/dog-parks-material.component';
 import { DogComponent } from './components/dog/dog.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
