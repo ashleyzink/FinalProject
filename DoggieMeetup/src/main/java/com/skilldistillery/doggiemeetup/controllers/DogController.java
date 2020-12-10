@@ -49,7 +49,7 @@ public class DogController {
 	}
 	
 	//To see your own dogs //Possibly to access dog update information?
-	@GetMapping("profile/dogs/{dogId}")
+	@GetMapping("auth/dogs/{dogId}")
 	public Dog showUserDog(HttpServletRequest req, 
 			HttpServletResponse res, 
 			Principal principal, @PathVariable int dogId) {
@@ -61,7 +61,7 @@ public class DogController {
 	}
 	
 	//Owner able to see all their dogs on THEIR profile before selecting one
-	@GetMapping("profile/dogs")
+	@GetMapping("auth/dogs")
 	public List<Dog> showAllUserDogs(HttpServletRequest req, 
 			HttpServletResponse res, 
 			Principal principal) {

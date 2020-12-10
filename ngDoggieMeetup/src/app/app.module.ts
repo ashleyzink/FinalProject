@@ -22,6 +22,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { CommonModule } from '@angular/common';
 import { DogParksMaterialComponent } from './components/dog-parks-material/dog-parks-material.component';
 import { DogComponent } from './components/dog/dog.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { DogComponent } from './components/dog/dog.component';
     BrowserAnimationsModule,
     MatCardModule,
     GoogleMapsModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    MatFormFieldModule
   ],
   providers: [
     AuthService,
