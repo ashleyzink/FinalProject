@@ -15,10 +15,15 @@ export class DogParkCommentDisplayComponent implements OnInit {
 
   showReplies: boolean = false;
   newReply: DogParkComment = null;
+  updateComment: DogParkComment = null;
 
   constructor(private dogParkCommentService: DogParkCommentService) { }
 
   ngOnInit(): void {
+  }
+
+  setUpdate() {
+    this.updateComment = this.comment;
   }
 
   reply() {
@@ -49,6 +54,7 @@ export class DogParkCommentDisplayComponent implements OnInit {
       data => this.contentChange.emit(true),
       err => console.error('Error in update')
     )
+    this.updateComment = null;
   }
 
   delete(comment: DogParkComment) {
