@@ -30,7 +30,7 @@ export class MeetupService {
         })
       );
     } else {
-      return this.http.get<Meetup[]>(this.url, httpOptions).pipe(
+      return this.http.get<Meetup[]>(environment.baseUrl + 'api/dogParks/' + dogPark.id + '/meetups/', httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError('error getting meetups');
