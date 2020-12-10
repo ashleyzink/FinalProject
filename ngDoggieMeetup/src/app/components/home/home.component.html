@@ -1,6 +1,14 @@
-<div>
-  <div>
-    <h1>Doggie Meetup</h1>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi maxime nesciunt et libero repellat, quia ipsa eaque blanditiis doloremque ea! Dolorem accusamus illum nam facilis quam, distinctio dolorum debitis deserunt!</p>
-  </div>
+
+<div id="carousel">
+<ngb-carousel class="carousel-inner" *ngIf="images">
+  <ng-template ngbSlide *ngFor="let image of images">
+    <div class="picsum-img-wrapper">
+      <img [src]="image" alt="Random first slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>Doggie Meetup!</h3>
+      <p>Take a look around and enjoy!</p>
+    </div>
+  </ng-template>
+</ngb-carousel>
 </div>

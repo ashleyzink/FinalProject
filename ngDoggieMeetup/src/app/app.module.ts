@@ -10,7 +10,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -46,7 +46,8 @@ import { DogComponent } from './components/dog/dog.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    NgbCarouselModule
   ],
   providers: [
     AuthService,
