@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DogParkReviewComponent } from './components/dog-park-review/dog-park-review.component';
 import { DogParksMaterialComponent } from './components/dog-parks-material/dog-parks-material.component';
 import { DogParksComponent } from './components/dog-parks/dog-parks.component';
 import { DogComponent } from './components/dog/dog.component';
@@ -21,13 +22,14 @@ const routes: Routes = [
   { path: 'dogProfile', component: DogComponent },
 
 
+  { path: 'dogParkReview', component: DogParkReviewComponent },
 
   // ---Place all other routes above here---
-  { path: '**', component: NotFoundComponent } //page not found route
+  { path: '**', component: NotFoundComponent }, //page not found route
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,3 +1,4 @@
+import { DogParkReviewComponent } from './components/dog-park-review/dog-park-review.component';
 import { DogParkReviewService } from './services/dog-park-review.service';
 import { DogParkService } from './services/dog-park.service';
 import { AuthService } from './services/auth.service';
@@ -36,7 +37,8 @@ import { DogComponent } from './components/dog/dog.component';
     DogParksComponent,
     UserProfileComponent,
     DogParksMaterialComponent,
-    DogComponent
+    DogComponent,
+    DogParkReviewComponent
   ],
   imports: [
     CommonModule,

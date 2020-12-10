@@ -6,22 +6,21 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-// import { DogPark } from '../models/dog-park';
 import { AuthService } from './auth.service';
 import { DogPark } from '../models/dog-park';
-import { Dog } from '../models/dog';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DogParkReviewService {
+  deleteDogParkReview: any;
   constructor(
     private http: HttpClient,
     private authService: AuthService,
     private router: Router
   ) {}
-  private url = environment.baseUrl + 'api/dogParkReview/';
-  private authUrl = environment.baseUrl + 'api/auth/dogParkReview/';
+  private url = environment.baseUrl + 'api/dogParks/';
+  private authUrl = environment.baseUrl + 'api/auth/dogParks/';
 
   getAuthHttpOptions(): Object {
     const credentials = this.authService.getCredentials();
@@ -44,26 +43,43 @@ export class DogParkReviewService {
     return httpOptions;
   }
 
-  index(): Observable<DogParkReview[]> {
+  index(dogParkId: number): Observable<DogParkReview[]> {
     const httpOptions = this.getHttpOptions();
-    return this.http.get<DogParkReview[]>(this.url, httpOptions).pipe(
+    return this.http.get<DogParkReview[]>(this.url + dogParkId + "/dogParkReviews" , httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('error getting to the dog park review index');
       })
     );
   }
-  show(dog: Dog, user: User): Observable<DogParkReview> {
+  show(dogParkId: number, userId: number): Observable<DogParkReview> {
     const httpOptions = this.getHttpOptions();
     return this.http
-      .get<DogParkReview>(this.url + '/' + dog + user, httpOptions)
+      .get<DogParkReview>(this.url + '/' + dogParkId + "/users/" + userId, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(
-            'error getting reviews for dog parks: ' + dog + user
+            'error getting reviews for dog parks: ' + dogParkId + userId
           );
         })
       );
+  }
+
+  create(dogParkReview: DogParkReview) {
+    console.log(dogParkReview);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    console.log(dogParkReview);
+    return this.http.post<any>(this.url, dogParkReview, httpOptions).pipe(
+      catchError((theError) => {
+        console.error('error creating dog park review');
+        console.error(theError);
+        return throwError('error in creating dog park review');
+      })
+    );
   }
 }

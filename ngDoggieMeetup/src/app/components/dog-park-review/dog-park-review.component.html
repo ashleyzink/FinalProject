@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <table class="table table-light table-sm table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>Rating</th>
+            <th>Review</th>
+            <th>Review Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let dogParkReview of dogParkReviews"
+            (click)="select(dogParkReview)"
+          >
+            <td>{{ dogParkReview.rating }}</td>
+            <td><img class="img-thumbnail" [src]="dogParkReview.imgUrl" /></td>
+            <td>{{ dogParkReview.review }}</td>
+            <td>{{ dogParkReview.reviewDate }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <form *ngIf="!selected" #addDogParkReviewForm="ngForm">
+          <input
+            type="text"
+            name="reviewDate"
+            placeholder="Date"
+            [(ngModel)]="newDogParkReview.reviewDate"
+          />
+          <hr />
+          <input
+            type="number"
+            name="rating"
+            placeholder="Rating"
+            [(ngModel)]="newDogParkReview.rating"
+          />
+          <hr/>
+          <input
+            type="text"
+            name="review"
+            placeholder="Review"
+            [(ngModel)]="newDogParkReview.review"
+          />
+          <hr />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
