@@ -27,7 +27,7 @@
       <mat-card *ngIf="newReply">
         <mat-card-content>
           <div>
-            <textarea type="text" name="commentText" [(ngModel)]="newReply.commentText"></textarea>
+            <textarea type="text" name="commentText" [(ngModel)]="newReply.commentText" cols="30"></textarea>
           </div>
           <div>
             <button (click)="create(newReply)">Submit</button>
