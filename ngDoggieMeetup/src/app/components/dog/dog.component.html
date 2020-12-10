@@ -1,22 +1,22 @@
 
 <div class="container-fluid">
-  <h1 style="text-align: center;">{{title}}</h1>
+  <h1 style="text-align: center;">{{title}} <i class='fas fa-paw'></i></h1>
     <div>
     <div *ngIf="selected && !editDog">
-        <div class="col-xl-5 col-md-4 mb-3 text-center">
+        <div class="text-center">
           <img [src]="selected.profilePicUrl" class="img-fluid z-depth-1 rounded-circle"
           alt="Responsive image" style="height:150px;width:250px;">
         </div>
-        <h3>{{selected.name}}</h3>
-        <p style="text-align: center;">Bio: {{selected.bio}}</p>
+        <h3 style="text-align: center;">{{selected.name}}</h3>
+        <p style="text-align: center;"><strong> Bio: </strong> {{selected.bio}}</p>
           <ul>
-            <li>Gender: {{selected.gender}}</li><br>
-            <li>Breed: {{selected.breed}}</li><br>
-            <li>Size: {{selected.size}}</li><br>
-            <li>Temperament: {{selected.temperament}}</li><br>
-            <li>Activity Level: {{selected.activityLevel}}</li><br>
-            <li>Birthday: {{selected.birthday}}</li><br>
-            <li>Create Date: {{selected.createDate}}</li><br>
+            <i class='fas fa-paw'></i><strong>  Gender: </strong>{{selected.gender}}<br>
+            <i class='fas fa-paw'></i><strong>  Breed: </strong> {{selected.breed}}<br>
+            <i class='fas fa-paw'></i><strong>  Size: </strong> {{selected.size}}<br>
+            <i class='fas fa-paw'></i><strong>  Temperament: </strong> {{selected.temperament}}<br>
+            <i class='fas fa-paw'></i><strong>  Activity Level: </strong> {{selected.activityLevel}}<br>
+            <i class='fas fa-paw'></i><strong>  Birthday: </strong> {{selected.birthday}}<br>
+            <i class='fas fa-paw'></i><strong>  Create Date: </strong> {{selected.createDate | date}}<br>
           </ul>
 
           <button class="btn btn-success" (click)="setEditDog()">Update Dog</button>
@@ -24,7 +24,7 @@
         </div>
     </div>
       <div *ngIf="editDog">
-        <h3>Edit Dog</h3>
+        <h3>Edit Dog <i class='fas fa-paw'></i></h3>
         <form>
           Name: <input type="text" name="name" [(ngModel)]="editDog.name" placeholder="Name"><br>
           Gender: <input type="radio" id="male" name="gender" [(ngModel)]="editDog.gender" value="male">
@@ -62,15 +62,14 @@
             <td>{{dog.gender}}</td>
             <td>{{dog.breed}}</td>
             <td>{{dog.size}}</td>
-            <td>{{dog.birthday}}</td>
+            <td>{{dog.birthday | date}}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <hr>
-    <h3>Add New Doggie:</h3>
     <div *ngIf="!selected">
-      <h3>Add a Dog: </h3>
+      <h3>Add New Doggie <i class='fas fa-paw'></i>:</h3>
       <div>
         <form>
           Name: <input type="text" name="name" [(ngModel)]="newDog.name" placeholder="name"><br>
