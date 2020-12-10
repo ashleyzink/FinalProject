@@ -1,3 +1,4 @@
+import { MeetupService } from './services/meetup.service';
 import { DogParkCommentService } from './services/dog-park-comment.service';
 import { DogParkService } from './services/dog-park.service';
 import { AuthService } from './services/auth.service';
@@ -25,6 +26,7 @@ import { DogParkCommentDisplayComponent } from './components/dog-parks/dog-park-
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CommonModule } from '@angular/common';
 import { DogComponent } from './components/dog/dog.component';
+import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-page.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { DogComponent } from './components/dog/dog.component';
     DogParkCommentsComponent,
     DogParkCommentDisplayComponent,
     UserProfileComponent,
-    DogComponent
+    DogComponent,
+    MeetupsPageComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +59,8 @@ import { DogComponent } from './components/dog/dog.component';
   providers: [
     AuthService,
     DogParkService,
-    DogParkCommentService
+    DogParkCommentService,
+    MeetupService
   ],
   bootstrap: [AppComponent]
 })
