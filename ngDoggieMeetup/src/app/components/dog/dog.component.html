@@ -5,7 +5,7 @@
     <div *ngIf="selected && !editDog">
         <div class="col-xl-5 col-md-4 mb-3 text-center">
           <img [src]="selected.profilePicUrl" class="img-fluid z-depth-1 rounded-circle"
-          alt="Responsive image" style="height:50; width: 50;">
+          alt="Responsive image" style="height:150px;width:250px;">
         </div>
         <h3>{{selected.name}}</h3>
         <p style="text-align: center;">Bio: {{selected.bio}}</p>
@@ -57,7 +57,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let dog of dogs">
-            <td style="text-align: center;"><img [src]="dog.profilePicUrl" height="300" class="center"></td>
+            <td><img [src]="dog.profilePicUrl" style="width:250px;height:150px;" class="center"></td>
             <td (click)="select(dog)">{{dog.name}}</td>
             <td>{{dog.gender}}</td>
             <td>{{dog.breed}}</td>
@@ -68,6 +68,7 @@
       </table>
     </div>
     <hr>
+    <h3>Add New Doggie:</h3>
     <div *ngIf="!selected">
       <h3>Add a Dog: </h3>
       <div>

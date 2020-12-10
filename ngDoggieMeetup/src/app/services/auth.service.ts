@@ -13,6 +13,27 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  getAuthHttpOptions(): Object {
+    const credentials = this.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-type': 'application/json'
+      })
+    };
+    return httpOptions;
+  }
+  getHttpOptions(): Object {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-type': 'application/json'
+      })
+    };
+    return httpOptions;
+  }
+
   login(username: string, password: string): Observable<User> {
     // Make credentials
     const credentials = this.generateBasicAuthCredentials(username, password);

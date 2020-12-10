@@ -1,3 +1,5 @@
+import { MeetupService } from './services/meetup.service';
+import { DogParkCommentService } from './services/dog-park-comment.service';
 import { DogParkService } from './services/dog-park.service';
 import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,12 +19,16 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { FormsModule } from '@angular/forms';
-import { DogParksComponent } from './components/dog-parks/dog-parks.component';
+
+import { DogParksMaterialComponent } from './components/dog-parks/dog-parks-material/dog-parks-material.component';
+import { DogParkCommentsComponent } from './components/dog-parks/dog-park-comments/dog-park-comments.component';
+import { DogParkCommentDisplayComponent } from './components/dog-parks/dog-park-comment-display/dog-park-comment-display.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CommonModule } from '@angular/common';
-import { DogParksMaterialComponent } from './components/dog-parks-material/dog-parks-material.component';
 import { DogComponent } from './components/dog/dog.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-page.component';
+
 
 @NgModule({
   declarations: [
@@ -33,10 +39,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    DogParksComponent,
-    UserProfileComponent,
     DogParksMaterialComponent,
-    DogComponent
+    DogParkCommentsComponent,
+    DogParkCommentDisplayComponent,
+    UserProfileComponent,
+    DogComponent,
+    MeetupsPageComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +61,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   ],
   providers: [
     AuthService,
-    DogParkService
+    DogParkService,
+    DogParkCommentService,
+    MeetupService
   ],
   bootstrap: [AppComponent]
 })

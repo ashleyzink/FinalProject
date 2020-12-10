@@ -1,0 +1,61 @@
+<div>
+  <mat-card>
+    <mat-card-header>
+      {{comment.commentDate | date}}
+    </mat-card-header>
+    <mat-card-title>
+      {{comment.title}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      <p>
+        <span>#{{comment.id}}</span>
+        <span> Posted By </span>
+        <span>{{comment.user.username}}</span>
+      </p>
+    </mat-card-subtitle>
+    <mat-card-content>
+      <p>{{comment.commentText}}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button class="btn" (click)="reply()">Reply</button>
+      <button class="btn" (click)="delete(comment)">Delete</button>
+      <button class="btn" (click)="setUpdate()">Edit</button>
+      <button class="btn" *ngIf="comment.replies.length > 0 && !showReplies" (click)="toggleReplies()">Show Replies</button>
+      <button class="btn" *ngIf="comment.replies.length > 0 && showReplies" (click)="toggleReplies()">Hide Replies</button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <mat-card *ngIf="newReply">
+        <mat-card-content>
+          <div>
+            <textarea type="text" name="commentText" [(ngModel)]="newReply.commentText" cols="30"></textarea>
+          </div>
+          <div>
+            <button (click)="create(newReply)">Submit</button>
+          </div>
+
+        </mat-card-content>
+
+      </mat-card>
+      <mat-card *ngIf="updateComment">
+        <mat-card-content>
+          <div>
+            <textarea type="text" name="commentText" [(ngModel)]="updateComment.commentText" cols="30"></textarea>
+          </div>
+          <div>
+            <button (click)="update(updateComment)">Submit</button>
+          </div>
+
+        </mat-card-content>
+
+      </mat-card>
+    </mat-card-footer>
+  </mat-card>
+  <br>
+  <ul *ngIf="showReplies">
+    <li *ngFor="let reply of comment.replies">
+      <app-dog-park-comment-display [comment]="reply">
+      </app-dog-park-comment-display>
+    </li>
+  </ul>
+</div>

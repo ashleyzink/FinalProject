@@ -1,0 +1,28 @@
+<div class="col-lg">
+
+  <ul>
+    <li *ngFor="let comment of rootComments">
+      <app-dog-park-comment-display [comment]="comment" (contentChange)="onContentChange(true)">
+
+      </app-dog-park-comment-display>
+    </li>
+  </ul>
+
+</div>
+<div class="col-lg">
+  <mat-card>
+    <mat-card-title>
+      {{newComment.title}}
+    </mat-card-title>
+    <mat-card-content>
+          <div class="form-group">
+            <label for="new-dog-park-comment-title">Title</label>
+            <input class="form-control" type="text" name="title" id="new-dog-park-comment-title" [(ngModel)]="newComment.title">
+          </div>
+      <textarea name="commentText" [(ngModel)]="newComment.commentText" cols="30"></textarea>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="create(newComment)">Post</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
