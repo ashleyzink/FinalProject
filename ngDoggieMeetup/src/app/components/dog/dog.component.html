@@ -1,29 +1,6 @@
 
 <div class="container-fluid">
   <h1 style="text-align: center;">{{title}}</h1>
-    <div *ngIf="!selected">
-      <div>
-        <form>
-          <input type="text" name="name" [(ngModel)]="newDog.name" placeholder="name"><br>
-          <input type="radio" id="male" name="gender" [(ngModel)]="newDog.gender" value="male">
-          <label for="male">Male</label><br>
-          <input type="radio" id="female" name="gender" [(ngModel)]="newDog.gender" value="female">
-          <label for="female">Female</label><br>
-          <input type="text" name="breed" [(ngModel)]="newDog.breed" placeholder="breed"><br>
-          <input type="text" name="size" [(ngModel)]="newDog.size" placeholder="size"><br>
-          <input type="text" name="temperament" [(ngModel)]="newDog.temperament" placeholder="temperament"><br>
-          <input type="text" name="activityLevel" [(ngModel)]="newDog.activityLevel" placeholder="activity level"><br>
-          <textarea [(ngModel)]="newDog.bio" name="bio" cols="30" rows="3" placeholder="Bio"></textarea><br>
-          Birthday: <input type="date" name="birthday" [(ngModel)]="newDog.birthday" placeholder="birthday"><br>
-          <!-- *this should only appear if they go to edit their dog profile! -->
-          Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="newDog.rainbowBridge" placeholder="rainbowBridge"><br>
-          Create Date: <input type="date" name="createDate" [(ngModel)]="newDog.createDate" placeholder="createDate"><br>
-          <input type="text" name="image" [(ngModel)]="newDog.profilePicUrl" placeholder="profilePicUrl"><br>
-        </form>
-        <button class="btn btn-success" (click)="create(newDog)">Create Dog</button>
-      </div>
-    </div>
-
     <div>
     <div *ngIf="selected && !editDog">
         <div class="col-xl-5 col-md-4 mb-3 text-center">
@@ -60,9 +37,8 @@
           <input type="text" name="activityLevel" [(ngModel)]="editDog.activityLevel" placeholder="activity level"><br>
           <textarea [(ngModel)]="editDog.bio" name="bio" cols="30" rows="3" placeholder="Bio"></textarea><br>
           Birthday: <input type="date" name="birthday" [(ngModel)]="editDog.birthday" placeholder="birthday"><br>
-          Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="newDog.rainbowBridge" placeholder="rainbowBridge"><br>
-          Create Date: <input type="date" name="createDate" [(ngModel)]="newDog.createDate" placeholder="createDate"><br>
-          <input type="text" name="image" [(ngModel)]="newDog.profilePicUrl" placeholder="profilePicUrl"><br>
+          Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="editDog.rainbowBridge" placeholder="rainbowBridge"><br>
+          <input type="text" name="image" [(ngModel)]="editDog.profilePicUrl" placeholder="profilePicUrl"><br>
           <button class="btn btn-success" (click)="update(editDog)">Update Dog</button>
         </form>
       </div>
@@ -91,7 +67,29 @@
         </tbody>
       </table>
     </div>
-
+    <hr>
+    <div *ngIf="!selected">
+      <div>
+        <form>
+          <input type="text" name="name" [(ngModel)]="newDog.name" placeholder="name"><br>
+          <input type="radio" id="male" name="gender" [(ngModel)]="newDog.gender" value="male">
+          <label for="male">Male</label><br>
+          <input type="radio" id="female" name="gender" [(ngModel)]="newDog.gender" value="female">
+          <label for="female">Female</label><br>
+          <input type="text" name="breed" [(ngModel)]="newDog.breed" placeholder="breed"><br>
+          <input type="text" name="size" [(ngModel)]="newDog.size" placeholder="size"><br>
+          <input type="text" name="temperament" [(ngModel)]="newDog.temperament" placeholder="temperament"><br>
+          <input type="text" name="activityLevel" [(ngModel)]="newDog.activityLevel" placeholder="activity level"><br>
+          <textarea [(ngModel)]="newDog.bio" name="bio" cols="30" rows="3" placeholder="Bio"></textarea><br>
+          Birthday: <input type="date" name="birthday" [(ngModel)]="newDog.birthday" placeholder="birthday"><br>
+          <!-- *this should only appear if they go to edit their dog profile! -->
+          Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="newDog.rainbowBridge" placeholder="rainbowBridge"><br>
+          Create Date: <input type="date" name="createDate" [(ngModel)]="newDog.createDate" placeholder="createDate"><br>
+          <input type="text" name="image" [(ngModel)]="newDog.profilePicUrl" placeholder="profilePicUrl"><br>
+        </form>
+        <button class="btn btn-success" (click)="create(newDog)">Add Dog</button>
+      </div>
+    </div>
 
 
   </div>
