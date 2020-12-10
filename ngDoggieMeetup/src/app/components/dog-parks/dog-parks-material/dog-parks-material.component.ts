@@ -70,8 +70,8 @@ export class DogParksMaterialComponent implements OnInit {
   test(item) {
     console.log(item)
   }
-  revGeocodeEvent(event: google.maps.MouseEvent, addr: Address) {
-    this.getRevGeocodeAddress(event.latLng.toJSON(), addr);
+  revGeocodeEvent(event: google.maps.MouseEvent, addr: Address, operation: string) {
+    this.getRevGeocodeAddress(event.latLng.toJSON(), addr, operation);
   }
 
   deselect() {
@@ -179,11 +179,20 @@ export class DogParksMaterialComponent implements OnInit {
   }
 
 
-  getRevGeocodeAddress(latLng: google.maps.LatLngLiteral, addr: Address) {
+  getRevGeocodeAddress(latLng: google.maps.LatLngLiteral, addr: Address, operation: string) {
+    let address = addr
     this.mapsService.getReverseGeocode(latLng.lat, latLng.lng).subscribe(
       data => {
-        addr = this.mapsService.parseReverseGeocode(data);
+        this.revGeocodeAddress = this.mapsService.parseReverseGeocode(data);
         console.log(this.revGeocodeAddress);
+        if (operation === 'update') {
+          this.updateAddress = this.revGeocodeAddress;
+          this.updateDogPark.address = this.revGeocodeAddress;
+          console.log(this.updateDogPark.address)
+        } else if (operation === 'new') {
+          this.newAddress = this.revGeocodeAddress;
+          console.log(this.newAddress)
+        }
       },
       err => console.error('Error in getRevGeocodeAddress')
     )

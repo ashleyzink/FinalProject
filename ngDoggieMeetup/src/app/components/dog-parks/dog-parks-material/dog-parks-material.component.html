@@ -57,7 +57,7 @@
         [(position)]="newLocation"
         [title]="'Pointer'"
         [options]="markerOptions"
-        (mapDragend)="revGeocodeEvent($event, newAddress)"
+        (mapDragend)="revGeocodeEvent($event, newAddress, 'new')"
         ></map-marker>
 
         <!-- <map-marker [position]="{lat: newLocation.lat, lng: newLocation.lng}"
@@ -71,7 +71,8 @@
         [title]="marker.title"
         [(options)]="dogParkMarkerOptions"
         (mapClick)="selectFromMap(marker)"
-        (mapDragend)="revGeocodeEvent($event, updateAddress)"
+        (mapDragend)="revGeocodeEvent($event, updateAddress, 'update')"
+
         >
       </map-marker>
 
