@@ -12,4 +12,6 @@ public interface DogParkCommentRepository extends JpaRepository<DogParkComment, 
 	List<DogParkComment> findByUser_Username(String username);
 	DogParkComment findByUser_UsernameAndId(String username, int dogParkCommentId);
 	List<DogParkComment> findByDogPark_Id(int dogParkId);
+	List<DogParkComment> findByUser_Id(int userId);
+
 }

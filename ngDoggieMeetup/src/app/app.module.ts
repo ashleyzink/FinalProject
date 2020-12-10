@@ -18,9 +18,13 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { FormsModule } from '@angular/forms';
+
 import { DogParksMaterialComponent } from './components/dog-parks/dog-parks-material/dog-parks-material.component';
 import { DogParkCommentsComponent } from './components/dog-parks/dog-park-comments/dog-park-comments.component';
 import { DogParkCommentDisplayComponent } from './components/dog-parks/dog-park-comment-display/dog-park-comment-display.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { CommonModule } from '@angular/common';
+import { DogComponent } from './components/dog/dog.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +37,12 @@ import { DogParkCommentDisplayComponent } from './components/dog-parks/dog-park-
     LogoutComponent,
     DogParksMaterialComponent,
     DogParkCommentsComponent,
-    DogParkCommentDisplayComponent
+    DogParkCommentDisplayComponent,
+    UserProfileComponent,
+    DogComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,

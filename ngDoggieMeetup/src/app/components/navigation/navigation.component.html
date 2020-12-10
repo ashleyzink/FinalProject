@@ -1,7 +1,9 @@
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" [routerLink]="['/home']">Home</a>
   <a class="navbar-brand" [routerLink]="['/dogParks']">DogParks</a>
+  <a *ngIf="checkLogin()" class="navbar-brand" [routerLink]="['/userProfile']">Profile Page</a>
   <a *ngIf="!checkLogin()" class="navbar-brand" [routerLink]="['/register']">Register</a>
   <a *ngIf="!checkLogin()" class="navbar-brand" [routerLink]="['/login']">Login</a>
+  <a *ngIf="checkLogin()" class="navbar-brand" [routerLink]="['/dogProfile']">All Doggie Users</a>
   <app-logout *ngIf="checkLogin()"></app-logout>
 </nav>
