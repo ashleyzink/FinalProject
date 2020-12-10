@@ -26,7 +26,9 @@ import { DogParkCommentDisplayComponent } from './components/dog-parks/dog-park-
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CommonModule } from '@angular/common';
 import { DogComponent } from './components/dog/dog.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-page.component';
+
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-
     BrowserAnimationsModule,
     MatCardModule,
     GoogleMapsModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    MatFormFieldModule
   ],
   providers: [
     AuthService,

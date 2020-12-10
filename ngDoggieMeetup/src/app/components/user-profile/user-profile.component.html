@@ -1,19 +1,23 @@
 <h1 style="text-align: center;">Welcome to your Doggie Meetup Beginnings!!</h1>
 
 
-<div *ngIf='selected'>
-    <h1>User Info</h1>
-  <table >
-    <th>{{selected.username}}'s Profile</th>
+<div style="text-align: center" *ngIf='selected'>
+    <h1>{{selected.username}}'s Profile</h1>
 
-    <td> {{selected.username}}</td><br>
-    <td> {{selected.firstName}} </td>
-    <td> {{selected.lastName}}</td>
-    <td> <img [src]="selected.profilePhotoUrl" style="width:250px;height:150px;"></td><br>
-    <td> {{selected.bio}}</td>
 
-  </table>
-  <button (click)='setEditUser()'>Edit</button>
+
+  <div id="profileImg" class="col-xl-5 col-md-4 mb-3 text-center">
+
+    <img [src]="selected.profilePhotoUrl" class="img-fluid z-depth-1 rounded-circle" style="width:250px;height:150px;"
+      alt="Responsive image">
+
+  </div>
+   {{selected.firstName}}
+   {{selected.lastName}}
+    {{selected.bio}}
+
+
+  <button class="btn btn-secondary" (click)='setEditUser()'>Edit User Info</button>
 </div>
 <br>
 <br>
@@ -23,18 +27,33 @@
 <br>
 <br>
 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="card">
+  <div *ngFor="let dog of dogs">
+
+    <img [src]="dog.profilePicUrl" alt="{{dog}}" style="width:100%">
+    <h1>{{dog.name}}</h1>
+    <p class="title">CEO & Founder, Example</p>
+    <p>{{dog.bio}}</p>
+    <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
+    <p><button id="dogProfileButton">Contact</button></p>
+  </div>
+</div>
+
 <div *ngIf='editUser'>
   <!-- TODO: Add a seperate edit funtion to change password, that compares to old password,
   and confirms change before it goes through-->
   <h4>{{selected.username}} Edit Your Profile Information</h4><br>
-  <table >
-  First Name: <input type="text" name="firstName" placeholder="{{selected.firstName}}" [(ngModel)]="editUser.firstName"><br>
-  Last Name: <input type="text" name="lastName" placeholder="{{selected.lastName}}" [(ngModel)]="editUser.lastName"><br>
-  Profile Pic: <input type="text" name="profilePhotoUrl" placeholder="Change Profile Pic Url" [(ngModel)]="editUser.profilePhotoUrl"><br>
+  <mat-form-field>
+  First Name: <input matNativeControl type="text" name="firstName" placeholder="{{selected.firstName}}" [(ngModel)]="editUser.firstName"><br>
+  Last Name: <input matNativeControl type="text" name="lastName" placeholder="{{selected.lastName}}" [(ngModel)]="editUser.lastName"><br>
+  Profile Pic: <input matNativeControl type="text" name="profilePhotoUrl" placeholder="Change Profile Pic Url" [(ngModel)]="editUser.profilePhotoUrl"><br>
   <!-- TODO instead of a text area for bio, maybe add a rich text box so users can add a little flare to their bio -->
-  Bio: <textarea name="bio" cols="40" rows="4" placeholder="{{selected.bio}}" [(ngModel)]="editUser.bio"></textarea><br>
+  Bio: <textarea matNativeControl name="bio" cols="40" rows="4" placeholder="{{selected.bio}}" [(ngModel)]="editUser.bio"></textarea><br>
   <!-- Unsure of where to add the disable funtion for a profile. Seems like it should be a different area -->
-  <button (click)='updateUser(editUser)'>Save</button>
+  <button (click)='updateUser(editUser)'>Save</button><br><br>
   <button (click)='editUser=null'>Cancel</button>
-</table>
-<div>
+  </mat-form-field>
+</div>

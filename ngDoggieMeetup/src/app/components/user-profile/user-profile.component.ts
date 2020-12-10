@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Dog } from 'src/app/models/dog';
 import { User } from 'src/app/models/user';
+import { DogService } from 'src/app/services/dog.service';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 
 @Component({
@@ -9,11 +11,13 @@ import { UserProfileService } from 'src/app/services/user-profile.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  user: User = new User();
+  user = null;
   selected = null;
   editUser: User = null;
   users = [];
-  constructor(private userProfileService: UserProfileService) { }
+  dogs = [];
+  newDog: Dog = new Dog();
+  constructor(private userProfileService: UserProfileService, private dogService: DogService) { }
 
   ngOnInit(): void {
     this.reload();
@@ -22,8 +26,9 @@ this.show();
 
   reload() {
     this.userProfileService.index().subscribe(
-      (users) => {
-        this.users = users;
+      (user) => {
+        this.user = user;
+        this.showAllUserDogs();
       },
       (fail) => {
         console.error('UserProfileComponent.reload(): error getting users')
@@ -32,15 +37,46 @@ this.show();
     );
   }
 
+  create(dog: Dog, user: User){
+    dog.user = user;
+    this.dogService.create(dog).subscribe(
+      data => {
+        this.newDog = new Dog();
+        this.selected = data;
+        this.reload();
+      },
+      fail => {
+        console.error(dog);
+        console.error('Error in create() dog');
+      });
+    }
+
   show() {
     this.userProfileService.show().subscribe(
       (user) => {
         this.reload();
         this.selected = user;
       },
-      (fail) =>
+      (fail) => {
       console.error('UserProfileComponent.show(): error getting user ')
-    );
+      });
+  }
+
+  showUserDog(id: number) {
+    this.dogService.showUserDog(id).subscribe(
+      data => {
+        this.reload();
+        this.selected = data;
+        },
+        fail => {console.error('Error in showUserDog() dog')
+      });
+  }
+
+  showAllUserDogs() {
+    this.dogService.showAllUserDogs().subscribe(
+      data => this.dogs = data,
+      fail => console.error('Error showAllUserDogs() dog')
+    )
   }
 
   updateUser(user: User) {
