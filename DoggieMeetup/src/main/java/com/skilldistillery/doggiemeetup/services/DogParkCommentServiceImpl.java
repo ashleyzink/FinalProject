@@ -50,6 +50,11 @@ public class DogParkCommentServiceImpl implements DogParkCommentService {
 		User user = userRepo.findByUsername(username);
 		if(user != null) {
 			dogParkComment.setUser(user);
+			if (dogParkComment.getTitle().contains("Reply to #")) {
+				int replyToId = Integer.parseInt(dogParkComment.getTitle().replace("Reply to #", ""));
+				DogParkComment parentComment = dogParkCommentRepo.findById(replyToId).get();
+				dogParkComment.setReplyToComment(parentComment);
+			}
 			dogParkCommentRepo.saveAndFlush(dogParkComment);
 		}
 		return dogParkComment;

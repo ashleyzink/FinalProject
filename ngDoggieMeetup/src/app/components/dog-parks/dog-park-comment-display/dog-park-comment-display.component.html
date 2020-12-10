@@ -18,12 +18,24 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button class="btn">Reply</button>
+      <button class="btn" (click)="reply()">Reply</button>
       <button class="btn" (click)="delete(comment)">Delete</button>
       <button class="btn" *ngIf="comment.replies.length > 0 && !showReplies" (click)="toggleReplies()">Show Replies</button>
       <button class="btn" *ngIf="comment.replies.length > 0 && showReplies" (click)="toggleReplies()">Hide Replies</button>
     </mat-card-actions>
     <mat-card-footer>
+      <mat-card *ngIf="newReply">
+        <mat-card-content>
+          <div>
+            <textarea type="text" name="commentText" [(ngModel)]="newReply.commentText"></textarea>
+          </div>
+          <div>
+            <button (click)="create(newReply)">Submit</button>
+          </div>
+
+        </mat-card-content>
+
+      </mat-card>
     </mat-card-footer>
   </mat-card>
   <br>

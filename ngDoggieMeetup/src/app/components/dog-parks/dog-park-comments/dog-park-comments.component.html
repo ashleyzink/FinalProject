@@ -1,7 +1,11 @@
-<ul>
-  <li *ngFor="let comment of rootComments">
-    <app-dog-park-comment-display [comment]="comment" (contentChange)="onContentChange(true)">
+<div class="col-lg">
 
-    </app-dog-park-comment-display>
-  </li>
-</ul>
+  <ul>
+    <li *ngFor="let comment of rootComments">
+      <app-dog-park-comment-display [comment]="comment" (contentChange)="onContentChange(true)">
+
+      </app-dog-park-comment-display>
+    </li>
+  </ul>
+
+</div>

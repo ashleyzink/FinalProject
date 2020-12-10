@@ -14,10 +14,17 @@ export class DogParkCommentDisplayComponent implements OnInit {
   @Output() contentChange = new EventEmitter<boolean>();
 
   showReplies: boolean = false;
+  newReply: DogParkComment = null;
 
   constructor(private dogParkCommentService: DogParkCommentService) { }
 
   ngOnInit(): void {
+  }
+
+  reply() {
+    this.newReply = new DogParkComment();
+    this.newReply.title = 'Reply to #'+this.comment.id;
+    this.newReply.dogPark = this.comment.dogPark;
   }
 
   onContentChange(change: boolean) {
@@ -34,6 +41,7 @@ export class DogParkCommentDisplayComponent implements OnInit {
       data => this.contentChange.emit(true),
       err => console.error('Error in create')
     )
+    this.newReply = null;
   }
 
   update(comment: DogParkComment) {

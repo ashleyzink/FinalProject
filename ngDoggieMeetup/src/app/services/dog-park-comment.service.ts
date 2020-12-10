@@ -31,7 +31,7 @@ export class DogParkCommentService {
 
   create(dogParkId: number, comment: DogParkComment): Observable<DogParkComment> {
     const httpOptions = this.authService.getAuthHttpOptions();
-    return this.http.post<DogParkComment>(this.authUrl + dogParkId + '/dogParkComments', httpOptions).pipe(
+    return this.http.post<DogParkComment>(this.authUrl + dogParkId + '/dogParkComments', comment, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('error creating dog park comment');
@@ -41,7 +41,7 @@ export class DogParkCommentService {
 
   update(dogParkId: number, comment: DogParkComment): Observable<DogParkComment> {
     const httpOptions = this.authService.getAuthHttpOptions();
-    return this.http.put<DogParkComment>(this.authUrl + dogParkId + '/dogParkComments/' + comment.id, httpOptions).pipe(
+    return this.http.put<DogParkComment>(this.authUrl + dogParkId + '/dogParkComments/' + comment.id, comment, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('error updating dog park comment');
@@ -58,6 +58,8 @@ export class DogParkCommentService {
       })
     );
   }
+
+
 
 
 }
