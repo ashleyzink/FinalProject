@@ -15,7 +15,7 @@
             <i class='fas fa-paw'></i><strong>  Size: </strong> {{selected.size}}<br>
             <i class='fas fa-paw'></i><strong>  Temperament: </strong> {{selected.temperament}}<br>
             <i class='fas fa-paw'></i><strong>  Activity Level: </strong> {{selected.activityLevel}}<br>
-            <i class='fas fa-paw'></i><strong>  Birthday: </strong> {{selected.birthday | date}}<br>
+            <i class='fas fa-paw'></i><strong>  Birthday: </strong> {{selected.birthday}}<br>
             <i class='fas fa-paw'></i><strong>  Create Date: </strong> {{selected.createDate | date}}<br>
           </ul>
 
@@ -71,7 +71,7 @@
     </div>
     <hr>
     <div *ngIf="!selected">
-      <h3>Add New Doggie:</h3>
+      <h3>Add New Doggie <i class='fas fa-paw'></i>:</h3>
       <div>
         <form>
           Name: <input type="text" name="name" [(ngModel)]="newDog.name" placeholder="name"><br>
