@@ -8,6 +8,8 @@ public interface MeetupService {
 	
 	List<Meetup> index();
 	
+	List<Meetup> indexByDogParkId(int dogParkId);
+	
 	Meetup show(int id);
 	
 	Meetup create(String username, Meetup meetup);
