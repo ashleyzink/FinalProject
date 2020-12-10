@@ -8,6 +8,7 @@ public interface DogParkCommentService {
 	public List<DogParkComment> index(String username);
 	public List<DogParkComment> getCommentsByUserId(int userId);
 	public List<DogParkComment> getAllDogParkComments(); 
+	public List<DogParkComment> rootCommentsByDogParkId(int dogParkId); 
 	public DogParkComment show(int dogParkCommentId);
 	public DogParkComment create(String username, DogParkComment dogParkComment);
 	public DogParkComment update(String username, int dogParkCommentId, DogParkComment dogParkComment);

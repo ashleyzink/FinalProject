@@ -6,7 +6,7 @@ export class DogParkComment {
   commentText: string;
   title: string;
   user: User;
-  replyToComment: DogParkComment;
+  replies: DogParkComment[];
   dogPark: DogPark;
   constructor(
     id?: number,
@@ -14,7 +14,7 @@ export class DogParkComment {
     commentText?: string,
     title?: string,
     user?: User,
-    replyToComment?: DogParkComment,
+    replies?: DogParkComment[],
     dogPark?: DogPark,
   ) {
     this.id = id;
@@ -22,7 +22,7 @@ export class DogParkComment {
     this.commentText = commentText;
     this.title = title;
     this.user = user;
-    this.replyToComment = replyToComment;
+    this.replies = replies;
     this.dogPark = dogPark;
   }
 }

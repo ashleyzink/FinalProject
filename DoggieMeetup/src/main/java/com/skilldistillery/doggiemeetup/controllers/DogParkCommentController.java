@@ -56,6 +56,16 @@ public class DogParkCommentController {
 	public List<DogParkComment> lists() {
 		return dogParkCommentService.getAllDogParkComments();
 	}
+	
+	// GET "api/dogpark/{dogParkId}/dogParkComments/"
+	@GetMapping("dogParks/{dogParkId}/dogParkComments")
+	public List<DogParkComment> showByDogPark(HttpServletRequest req, HttpServletResponse res, @PathVariable int dogParkId) {
+		List<DogParkComment> dogParkComments = dogParkCommentService.rootCommentsByDogParkId(dogParkId);
+		if (dogParkComments == null) {
+			res.setStatus(404);
+		}
+		return dogParkComments;
+	}
 
 	// GET "api/dogpark/{dogParkId}/dogParkComments/{comId}"
 	@GetMapping("dogParks/{dogParkId}/dogParkComments/{comId}")
@@ -86,7 +96,7 @@ public class DogParkCommentController {
 	}
 
 //PUT "api/dogparkcomments/{dogParkCommentId}"
-	@PutMapping("auth/dogparks/{dogParkId}/dogParkComments/{comId}")
+	@PutMapping("auth/dogParks/{dogParkId}/dogParkComments/{comId}")
 	public DogParkComment update(HttpServletRequest req, HttpServletResponse res, @PathVariable int comId,
 			@RequestBody DogParkComment dogParkComment, Principal principal) {
 		try {
@@ -103,7 +113,7 @@ public class DogParkCommentController {
 	}
 
 //DELETE "api/dogparkcomments/{dogParkCommentId}"	
-	@DeleteMapping("auth/dogparks/{dogParkId}/dogParkComments/{comId}")
+	@DeleteMapping("auth/dogParks/{dogParkId}/dogParkComments/{comId}")
 	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int comId, Principal principal) {
 		try {
 			boolean deleted = dogParkCommentService.destroy(principal.getName(), comId);
