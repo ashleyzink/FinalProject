@@ -2,6 +2,7 @@ package com.skilldistillery.doggiemeetup.services;
 
 import java.util.List;
 
+import com.skilldistillery.doggiemeetup.entities.Dog;
 import com.skilldistillery.doggiemeetup.entities.Meetup;
 
 public interface MeetupService {
@@ -17,5 +18,7 @@ public interface MeetupService {
 	Meetup update(String username, Meetup meetup, int id);
 	
 	Boolean delete(String username, int id);
+	
+	List<Dog> getDogsByMeetup(int meetupId);
 
 }

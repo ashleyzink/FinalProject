@@ -11,5 +11,7 @@ public interface DogRepository extends JpaRepository<Dog, Integer> {
 	List<Dog> findByUser_Username(String username);
 	
 	Dog findByUser_UsernameAndId(String username, int dogId);
+	
+	List<Dog> findByMeetups_Id(int meetupId);
 
 }

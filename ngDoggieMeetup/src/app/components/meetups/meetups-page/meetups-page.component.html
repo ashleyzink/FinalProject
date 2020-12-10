@@ -1,8 +1,10 @@
-<div>
-  <ul>
-    <li *ngFor="let meetup of meetups">
-      {{meetup.title}}
-    </li>
-  </ul>
-
+<div *ngFor="let meetup of meetups">
+  <app-meetup-details [meetup]="meetup"></app-meetup-details>
+</div>
+<div *ngIf="newMeetup">
+  <div>
+    <input type="text" name="title" [(ngModel)]="newMeetup.title" placeholder="Title">
+    <textarea type="text" name="description" [(ngModel)]="newMeetup.description" placeholder="Description"></textarea>
+    <input name="meetupDate" [(ngModel)]="newMeetup.meetupDate">
+  </div>
 </div>

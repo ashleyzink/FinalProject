@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.doggiemeetup.entities.Dog;
 import com.skilldistillery.doggiemeetup.entities.Meetup;
 import com.skilldistillery.doggiemeetup.services.MeetupService;
 
@@ -67,6 +68,20 @@ public class MeetupController {
 			res.setStatus(404);
 		}
 		return meetups;
+	}
+	@GetMapping("meetups/{id}/dogs")
+	public List<Dog> getDogsForMeetup(
+			HttpServletRequest req,
+			HttpServletResponse res, 
+			@PathVariable int id
+			) {
+		Meetup meetup = meetupService.show(id);
+		if(meetup == null) {
+			res.setStatus(404);
+		}
+		List<Dog> dogs = null;
+		dogs = meetupService.getDogsByMeetup(id);
+		return dogs;
 	}
 	
 //| `Meetup`|`POST api/meetups`| Creates a new meetup|
