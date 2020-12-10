@@ -74,4 +74,9 @@ public class MeetupServiceImpl implements MeetupService {
 			
 	}
 
+	@Override
+	public List<Meetup> indexByDogParkId(int dogParkId) {
+		return meetupRepo.findByDogPark_id(dogParkId);
+	}
+
 }

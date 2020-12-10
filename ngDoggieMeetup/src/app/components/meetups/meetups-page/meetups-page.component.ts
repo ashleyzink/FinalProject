@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { MeetupService } from './../../../services/meetup.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Meetup } from 'src/app/models/meetup';
+import { DogPark } from 'src/app/models/dog-park';
 
 @Component({
   selector: 'app-meetups-page',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MeetupsPageComponent implements OnInit {
 
-  constructor() { }
+  meetups: Meetup[];
+  @Input() dogPark: DogPark;
+
+  constructor(private meetupService: MeetupService) { }
 
   ngOnInit(): void {
+    this.index();
+  }
+
+  index() {
+    this.meetupService.index().subscribe(
+      data => this.meetups = data,
+      err => console.error('error in meetups page index')
+    )
   }
 
 }

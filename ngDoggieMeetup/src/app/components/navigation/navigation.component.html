@@ -1,6 +1,7 @@
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" [routerLink]="['/home']">Home <i class='fas fa-paw'></i></a>
   <a class="navbar-brand" [routerLink]="['/dogParks']">DogParks <i class='fas fa-paw'></i></a>
+  <a class="navbar-brand" [routerLink]="['/meetups']">Meetups <i class='fas fa-paw'></i></a>
   <a *ngIf="checkLogin()" class="navbar-brand" [routerLink]="['/userProfile']">Profile Page <i class='fas fa-paw'></i></a>
   <a *ngIf="!checkLogin()" class="navbar-brand" [routerLink]="['/register']">Register <i class='fas fa-paw'></i></a>
   <a *ngIf="!checkLogin()" class="navbar-brand" [routerLink]="['/login']">Login <i class='fas fa-paw'></i></a>

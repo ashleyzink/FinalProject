@@ -30,6 +30,31 @@ public class MeetupController {
 	private MeetupService meetupService;
 	
 	
+	@GetMapping("meetups/")
+	public List<Meetup> index(
+			HttpServletRequest req,
+			HttpServletResponse res
+			) {
+		List<Meetup> meetups = meetupService.index();
+		if(meetups == null) {
+			res.setStatus(404);
+		}
+		return meetups;
+	}
+	
+	@GetMapping("dogParks/{dogParkId}/meetups/")
+	public List<Meetup> indexByDogPark(
+			HttpServletRequest req,
+			HttpServletResponse res, 
+			@PathVariable int dogParkId
+			) {
+		List<Meetup> meetups = meetupService.indexByDogParkId(dogParkId);
+		if(meetups == null) {
+			res.setStatus(404);
+		}
+		return meetups;
+	}
+	
 //| `Meetup`|`GET api/meetups/{id}`| Gets one meetup by id|
 	@GetMapping("meetups/{id}")
 	public Meetup show(

@@ -1,3 +1,4 @@
+import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DogParksMaterialComponent } from './components/dog-parks/dog-parks-material/dog-parks-material.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'userProfile', component: UserProfileComponent },
   { path: 'dogParks', component: DogParksMaterialComponent },
   { path: 'dogProfile', component: DogComponent },
+  { path: 'meetups', component: MeetupsPageComponent },
 
 
 
