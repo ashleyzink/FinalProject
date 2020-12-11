@@ -36,6 +36,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-page.component';
 import { MeetupDetailsComponent } from './components/meetups/meetup-details/meetup-details.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatListModule,
     MatDatepickerModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule
   ],
   providers: [
     AuthService,

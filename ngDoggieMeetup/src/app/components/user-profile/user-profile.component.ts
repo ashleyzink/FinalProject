@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Dog } from 'src/app/models/dog';
 import { User } from 'src/app/models/user';
 import { DogService } from 'src/app/services/dog.service';
@@ -17,7 +18,7 @@ export class UserProfileComponent implements OnInit {
   users = [];
   dogs = [];
   newDog: Dog = null;
-  constructor(private userProfileService: UserProfileService, private dogService: DogService) { }
+  constructor(private userProfileService: UserProfileService, private dogService: DogService, private router: Router) { }
 
   ngOnInit(): void {
     this.reload();
@@ -97,6 +98,17 @@ this.show();
         console.error(fail);
       }
     );
+  }
+
+  disableUser(id: number): void {
+    this.userProfileService.disable(id).subscribe(
+      (data) => {
+        this.router.navigateByUrl('/home');
+      },
+      (fail) => {
+        console.error('UserProfileComponent.disableUser(): error disabling user');
+        console.error(fail);
+      });
   }
 
   setEditUser() {
