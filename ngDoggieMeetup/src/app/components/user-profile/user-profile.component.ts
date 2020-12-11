@@ -16,7 +16,7 @@ export class UserProfileComponent implements OnInit {
   editUser: User = null;
   users = [];
   dogs = [];
-  newDog: Dog = new Dog();
+  newDog: Dog = null;
   constructor(private userProfileService: UserProfileService, private dogService: DogService) { }
 
   ngOnInit(): void {
@@ -49,6 +49,10 @@ this.show();
         console.error(dog);
         console.error('Error in create() dog');
       });
+    }
+
+    addDog() {
+      this.newDog = Object.assign({});
     }
 
   show() {

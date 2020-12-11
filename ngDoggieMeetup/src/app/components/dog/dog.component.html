@@ -15,7 +15,8 @@
             <i class='fas fa-paw'></i><strong>  Size: </strong> {{selected.size}}<br>
             <i class='fas fa-paw'></i><strong>  Temperament: </strong> {{selected.temperament}}<br>
             <i class='fas fa-paw'></i><strong>  Activity Level: </strong> {{selected.activityLevel}}<br>
-            <i class='fas fa-paw'></i><strong>  Birthday: </strong> {{selected.birthday}}<br>
+            <i class='fas fa-paw'></i><strong>  Birthday: </strong> {{selected.birthday | date}}<br>
+            <i class="fas fa-rainbow"></i><strong>  Rainbow Bridge Date: </strong> {{selected.rainbowBridge | date}}<br>
             <i class='fas fa-paw'></i><strong>  Create Date: </strong> {{selected.createDate | date}}<br>
           </ul>
 
@@ -40,6 +41,7 @@
           Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="editDog.rainbowBridge" placeholder="rainbowBridge"><br>
           Doggie Profile Pic: <input type="text" name="image" [(ngModel)]="editDog.profilePicUrl" placeholder="profilePicUrl"><br>
           <button class="btn btn-success" (click)="update(editDog)">Update Dog</button>
+          <button (click)='editDog=null'>Cancel</button>
         </form>
       </div>
     <div id="dogList" *ngIf="!selected">
@@ -70,8 +72,9 @@
       </table>
     </div>
     <hr>
-    <div *ngIf="!selected">
-      <h3>Add New Doggie <i class='fas fa-paw'></i>:</h3>
+    <!-- <button class="btn btn-secondary" (click)='addDog()'>Add Dog to Pack</button>
+    <div *ngIf='newDog'>
+      <h3>Add New Doggie :</h3>
       <div>
         <form>
           Name: <input type="text" name="name" [(ngModel)]="newDog.name" placeholder="name"><br>
@@ -85,14 +88,12 @@
           Activitly Level: <input type="text" name="activityLevel" [(ngModel)]="newDog.activityLevel" placeholder="activity level"><br>
           Bio: <textarea [(ngModel)]="newDog.bio" name="bio" cols="30" rows="3" placeholder="Bio"></textarea><br>
           Birthday: <input type="date" name="birthday" [(ngModel)]="newDog.birthday" placeholder="birthday"><br>
-          <!-- *this should only appear if they go to edit their dog profile! -->
           Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="newDog.rainbowBridge" placeholder="rainbowBridge"><br>
-          Create Date: <input type="date" name="createDate" [(ngModel)]="newDog.createDate" placeholder="createDate"><br>
           Doggie Profile Pic: <input type="text" name="image" [(ngModel)]="newDog.profilePicUrl" placeholder="profilePicUrl"><br>
         </form>
         <button class="btn btn-success" (click)="create(newDog)">Add Dog</button>
       </div>
-    </div>
+    </div> -->
 
 
   </div>
