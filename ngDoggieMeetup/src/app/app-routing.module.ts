@@ -2,7 +2,6 @@ import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DogParkReviewComponent } from './components/dog-park-review/dog-park-review.component';
-import { DogParksComponent } from './components/dog-parks/dog-parks.component';
 import { DogParksMaterialComponent } from './components/dog-parks/dog-parks-material/dog-parks-material.component';
 import { DogComponent } from './components/dog/dog.component';
 import { HomeComponent } from './components/home/home.component';

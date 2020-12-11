@@ -48,7 +48,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     LoginComponent,
     LogoutComponent,
     DogParksMaterialComponent,
-    DogParkReviewComponent
+    DogParkReviewComponent,
     DogParkCommentsComponent,
     DogParkCommentDisplayComponent,
     UserProfileComponent,
@@ -77,7 +77,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   providers: [
     AuthService,
     DogParkService,
-    DogParkReviewService
+    DogParkReviewService,
     DogParkCommentService,
     MeetupService
   ],
