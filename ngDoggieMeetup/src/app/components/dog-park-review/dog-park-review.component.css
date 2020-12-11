@@ -4,13 +4,14 @@ h3 {
 h4 {
   font-family: cursive;
 }
-img:hover {
+
+.img-thumbnail {
+  border-radius: 8px;
+  width: 500px;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
-  width: 150px;
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
+
 input[type="submit"] {
   background-color: #4caf50;
   border: none;

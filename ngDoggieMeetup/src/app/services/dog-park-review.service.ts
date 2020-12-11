@@ -87,4 +87,30 @@ export class DogParkReviewService {
         })
       );
   }
+
+  //auth/dogParks/{dogParkId}/dogParkReviews/{userId}
+  update(
+    dogParkReview: DogParkReview,
+    dogParkId: number
+  ): Observable<DogParkReview> {
+    if (!this.authService.checkLogin) {
+      console.log(
+        'not logged in at DogParkReview.update() : redirect to /login'
+      );
+      this.router.navigateByUrl('/login');
+    }
+    const httpOptions = this.getAuthHttpOptions();
+    return this.http
+      .put<DogParkReview>(
+        this.authUrl + dogParkId + '/dogParkReviews',
+        dogParkReview,
+        httpOptions
+      )
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('error updating dog park review: ' + dogParkReview);
+        })
+      );
+  }
 }

@@ -1,3 +1,4 @@
+import { DogParkReviewId } from './../../models/dog-park-review-id';
 import { DogParkReview } from './../../models/dog-park-review';
 import { DogParkReviewService } from './../../services/dog-park-review.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,14 +15,15 @@ export class DogParkReviewComponent implements OnInit {
   selected: DogParkReview = null;
   newDogParkReview: DogParkReview = new DogParkReview();
   dogParkReviews: DogParkReview[] = [];
-  updateDogParkReview: DogParkReview = null;
+  editDogParkReview: DogParkReview = null;
   dogParkId: number = 1;
-
-  constructor(private dogParkReviewService: DogParkReviewService) {}
-
   displayTable() {
     this.selected = null;
   }
+
+  constructor(private dogParkReviewService: DogParkReviewService) {}
+
+
 
   displayDogParkReview(dogparkReview) {
     this.selected = dogparkReview;
@@ -29,23 +31,6 @@ export class DogParkReviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.reload();
-  }
-
-  deselect() {
-    this.selected = null;
-    this.updateDogParkReview = null;
-  }
-
-  select(item: DogParkReview) {
-    this.selected = item;
-    this.updateDogParkReview = null;
-  }
-  toggleUpdateReview() {
-    if (this.updateDogParkReview) {
-      this.updateDogParkReview = null;
-    } else {
-      this.updateDogParkReview = this.selected;
-    }
   }
 
   reload(): void {
@@ -61,6 +46,8 @@ export class DogParkReviewComponent implements OnInit {
   getNumOfReviews = function () {
     return this.dogParkReviews.length;
   };
+
+
   addDogParkReview(addDogParkReviewForm: NgForm) {
     console.log(addDogParkReviewForm.value);
     this.dogParkReviews.push(this.newDogParkReview);
@@ -86,6 +73,25 @@ export class DogParkReviewComponent implements OnInit {
     addDogParkReviewForm.reset();
     console.log(addDogParkReviewForm.value);
     console.log('Dog Park Review Added!!+++++****');
+  }
+
+  updateDogParkReview(dogParkReview: DogParkReview, dogParkId: number) {
+    this.dogParkReviewService.update(dogParkReview, dogParkId).subscribe(
+      (good) => {
+        this.dogParkReviewService.index(this.dogParkId);
+        if (this.selected != null) {
+          this.selected = Object.assign({}, dogParkReview);
+        }
+      },
+      (bad) => {
+        console.error(bad);
+      }
+    );
+    this.editDogParkReview = null;
+  }
+
+  setEditDogParkReview() {
+    this.editDogParkReview = Object.assign({}, this.selected);
   }
 
   deleteDogParkReview(user: User, dogParkReview: DogParkReview): void {
