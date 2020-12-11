@@ -74,8 +74,7 @@ import { DogProfileComponent } from './components/dog-profile/dog-profile.compon
     MatListModule,
     MatDatepickerModule,
     MatInputModule,
-    MatNativeDateModule,
-    MatMenuModule
+    MatNativeDateModule
   ],
   providers: [
     AuthService,
