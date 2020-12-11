@@ -54,8 +54,10 @@ export class DogService {
       }
 
       showUserDog(id: number): Observable<Dog>{
+        console.log('dogService - show use dog - user dogid ' + id);
+
         const httpOptions = this.getAuthHttpOptions();
-        return this.http.get<Dog>(`${this.authUrl}` + `${id}`, httpOptions).pipe(
+        return this.http.get<Dog>(`${this.authUrl}` + '/'+ `${id}`, httpOptions).pipe(
           catchError((err: any) =>{
           console.log(err);
           return throwError('DogService.showUserDog(): Error getting user by dog id');

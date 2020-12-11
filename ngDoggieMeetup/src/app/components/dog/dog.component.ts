@@ -1,3 +1,4 @@
+import { UserProfileService } from './../../services/user-profile.service';
 import { User } from './../../models/user';
 import { DogService } from './../../services/dog.service';
 import { Dog } from './../../models/dog';
@@ -17,7 +18,7 @@ export class DogComponent implements OnInit {
   editDog: Dog = null;
   dogs: Dog[] = [];
   newUser: User = new User();
-  constructor(private dogService: DogService) { }
+  constructor(private dogService: DogService, private userProfileService: UserProfileService) { }
 
   ngOnInit(): void {
     this.reload();
@@ -94,17 +95,6 @@ export class DogComponent implements OnInit {
     );
   }
 
-  // deleteDog(id: number){
-  //   this.dogService.destroy(id).subscribe(
-  //     data =>{
-  //       this.reload();
-
-  //     },
-  //     fail =>{
-  //       console.error('Error in destroy() of dog');
-  //     }
-  //   );
-  // }
 
 
 }

@@ -36,7 +36,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-page.component';
 import { MeetupDetailsComponent } from './components/meetups/meetup-details/meetup-details.component';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatMenuModule} from '@angular/material/menu';
+import { DogProfileComponent } from './components/dog-profile/dog-profile.component';
 
 
 @NgModule({
@@ -55,7 +55,8 @@ import {MatMenuModule} from '@angular/material/menu';
     UserProfileComponent,
     DogComponent,
     MeetupsPageComponent,
-    MeetupDetailsComponent
+    MeetupDetailsComponent,
+    DogProfileComponent
   ],
   imports: [
     CommonModule,
