@@ -45,8 +45,8 @@
           <input matInput type="datetime-local" name="meetupDate" [(ngModel)]="editMeetup.meetupDate">
         </mat-form-field>
         <br>
-        <button (click)="update(editMeetup)">Update</button>
-        <button (click)="editMeetup = null;">Cancel</button>
+        <button class="btn" (click)="update(editMeetup)">Update</button>
+        <button class="btn" (click)="editMeetup = null;">Cancel</button>
       </div>
 
     </mat-card-content>
@@ -55,8 +55,8 @@
       <div>
         <button class="btn">Join</button>
         <button class="btn">Comment</button>
-        <button *ngIf="checkLoginMatchesUser(meetup.user)" (click)="setEdit()">Edit</button>
-        <button *ngIf="checkLoginIsAdmin()" (click)="setEdit()">Edit (Admin)</button>
+        <button class="btn" *ngIf="checkLoginMatchesUser(meetup.user)" (click)="setEdit()">Edit</button>
+        <button class="btn" *ngIf="checkLoginIsAdmin()" (click)="setEdit()">Edit (Admin)</button>
       </div>
     </mat-card-actions>
 
