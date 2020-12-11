@@ -1,3 +1,4 @@
+import { UserProfileService } from 'src/app/services/user-profile.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -11,7 +12,7 @@ import { User } from '../models/user';
 export class AuthService {
   private baseUrl = environment.baseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: UserProfileService) { }
 
   getAuthHttpOptions(): Object {
     const credentials = this.getCredentials();
@@ -91,4 +92,11 @@ export class AuthService {
   getCredentials() {
     return localStorage.getItem('credentials');
   }
+
+  checkUserLoggedIn(user: User): boolean {
+    let credentials = atob(this.getCredentials());
+    let username = credentials.split(':')[0];
+    return username === user.username;
+  }
+
 }
