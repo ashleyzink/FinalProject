@@ -1,10 +1,14 @@
 <div *ngFor="let meetup of meetups">
   <app-meetup-details [meetup]="meetup"></app-meetup-details>
 </div>
+<div>
+  <button (click)="setNewMeetup()">Create New Meetup</button>
+</div>
 <div *ngIf="newMeetup">
   <div>
     <input type="text" name="title" [(ngModel)]="newMeetup.title" placeholder="Title">
     <textarea type="text" name="description" [(ngModel)]="newMeetup.description" placeholder="Description"></textarea>
-    <input name="meetupDate" [(ngModel)]="newMeetup.meetupDate">
+    <p>{{newMeetup.meetupDate}}</p>
+    <input name="meetupDate" [(ngModel)]="newMeetup.meetupDate" type="datetime">
   </div>
 </div>
