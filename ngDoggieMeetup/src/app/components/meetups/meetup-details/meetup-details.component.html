@@ -41,7 +41,8 @@
       <div>
         <button class="btn">Join</button>
         <button class="btn">Comment</button>
-        <button *ngIf="checkLogin(meetup.user)" class="btn">Edit</button>
+        <button *ngIf="checkLoginMatchesUser(meetup.user)">Edit</button>
+        <button *ngIf="checkLoginIsAdmin()">Edit (Admin)</button>
       </div>
     </mat-card-actions>
 
