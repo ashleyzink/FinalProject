@@ -11,6 +11,7 @@ import { User } from '../models/user';
 })
 export class AuthService {
   private baseUrl = environment.baseUrl;
+  private user: User = null;
 
   constructor(private http: HttpClient) { }
 
@@ -52,6 +53,8 @@ export class AuthService {
       .pipe(
         tap((res) => {
           localStorage.setItem('credentials' , credentials);
+          this.user = res;
+          console.log(this.user);
           return res;
         }),
         catchError((err: any) => {
@@ -97,6 +100,17 @@ export class AuthService {
     let credentials = atob(this.getCredentials());
     let username = credentials.split(':')[0];
     return username === user.username;
+  }
+
+  checkLoggedInUserIsAdmin(): boolean {
+    let lazyLoadUser = this.user;
+    let isAdmin = false;
+    if (lazyLoadUser !== null) {
+      if (lazyLoadUser.role === 'admin') {
+        isAdmin = true;
+      }
+    }
+    return isAdmin
   }
 
 }
