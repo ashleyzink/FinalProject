@@ -28,8 +28,12 @@ export class MeetupDetailsComponent implements OnInit {
     )
   }
 
-  checkLogin(user: User): boolean {
+  checkLoginMatchesUser(user: User): boolean {
     return this.authService.checkUserLoggedIn(user);
+  }
+
+  checkLoginIsAdmin(): boolean {
+    return this.authService.checkLoggedInUserIsAdmin();
   }
 
 }
