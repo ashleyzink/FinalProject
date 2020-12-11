@@ -1,3 +1,5 @@
+import { DogParkReviewComponent } from './components/dog-park-review/dog-park-review.component';
+import { DogParkReviewService } from './services/dog-park-review.service';
 import { MeetupService } from './services/meetup.service';
 import { DogParkCommentService } from './services/dog-park-comment.service';
 import { DogParkService } from './services/dog-park.service';
@@ -46,6 +48,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     LoginComponent,
     LogoutComponent,
     DogParksMaterialComponent,
+    DogParkReviewComponent
     DogParkCommentsComponent,
     DogParkCommentDisplayComponent,
     UserProfileComponent,
@@ -74,6 +77,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   providers: [
     AuthService,
     DogParkService,
+    DogParkReviewService
     DogParkCommentService,
     MeetupService
   ],

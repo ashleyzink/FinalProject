@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.doggiemeetup.entities.DogParkReview;
 import com.skilldistillery.doggiemeetup.entities.DogParkReviewId;
 import com.skilldistillery.doggiemeetup.entities.User;
+import com.skilldistillery.doggiemeetup.repositories.DogParkRepository;
 import com.skilldistillery.doggiemeetup.repositories.DogParkReviewRepository;
 import com.skilldistillery.doggiemeetup.repositories.UserRepository;
 
@@ -20,6 +21,9 @@ public class DogParkReviewServiceImpl implements DogParkReviewService {
 
 	@Autowired
 	private UserRepository userRepo;
+
+	@Autowired
+	private DogParkRepository dogParkRepo;
 
 	@Override
 	public List<DogParkReview> index() {
@@ -37,12 +41,17 @@ public class DogParkReviewServiceImpl implements DogParkReviewService {
 	}
 
 	@Override
-	public DogParkReview create(String username, DogParkReview dogParkReview) {
+	public DogParkReview create(String username, DogParkReview dogParkReview, int dogParkId) {
 		User user = userRepo.findByUsername(username);
 		if (user != null) {
 			dogParkReview.setUser(user);
+			dogParkReview.setDogPark(dogParkRepo.findById(dogParkId).get());
+			System.out.println(dogParkReview);
 			dogParkReviewRepo.saveAndFlush(dogParkReview);
 		}
+		System.out.println("*********");
+		System.out.println(dogParkReview);
+		System.out.println("*********");
 		return dogParkReview;
 	}
 
@@ -73,7 +82,7 @@ public class DogParkReviewServiceImpl implements DogParkReviewService {
 		}
 		return managedDogParkReview;
 	}
- 
+
 	@Override
 	public boolean destroy(String username, int userId, int dogParkId) {
 		boolean deleted = false;
