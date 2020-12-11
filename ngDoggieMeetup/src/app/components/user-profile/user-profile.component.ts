@@ -4,6 +4,7 @@ import { Dog } from 'src/app/models/dog';
 import { User } from 'src/app/models/user';
 import { DogService } from 'src/app/services/dog.service';
 import { UserProfileService } from 'src/app/services/user-profile.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,7 +20,7 @@ export class UserProfileComponent implements OnInit {
   dogs = [];
   newDog: Dog = null;
   editDogProfile: Dog = null;
-  constructor(private userProfileService: UserProfileService, private dogService: DogService, private router: Router) { }
+  constructor(private userProfileService: UserProfileService, private dogService: DogService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.reload();
@@ -115,6 +116,7 @@ this.show();
   disableUser(id: number): void {
     this.userProfileService.disable(id).subscribe(
       (data) => {
+        this.authService.logout();
         this.router.navigateByUrl('/home');
       },
       (fail) => {
