@@ -11,6 +11,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ import { DogComponent } from './components/dog/dog.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-page.component';
 import { MeetupDetailsComponent } from './components/meetups/meetup-details/meetup-details.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -66,6 +68,8 @@ import { MeetupDetailsComponent } from './components/meetups/meetup-details/meet
     MatExpansionModule,
     MatListModule,
     MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
   ],
   providers: [
     AuthService,

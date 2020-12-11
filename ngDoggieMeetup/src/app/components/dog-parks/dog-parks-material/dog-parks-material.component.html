@@ -340,6 +340,14 @@
 </div>
 
 <div class="row">
-  <app-dog-park-comments *ngIf="selected" [dogPark]="selected">
-  </app-dog-park-comments>
+
+  <div class="col-lg">
+    <app-dog-park-comments *ngIf="selected" [dogPark]="selected">
+    </app-dog-park-comments>
+  </div>
+
+  <div class="col-lg">
+    <app-meetups-page *ngIf="selected" [dogPark]="selected">
+    </app-meetups-page>
+  </div>
 </div>

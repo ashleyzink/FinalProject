@@ -1,14 +1,20 @@
 <div *ngFor="let meetup of meetups">
   <app-meetup-details [meetup]="meetup"></app-meetup-details>
 </div>
-<div>
+<div *ngIf="dogPark">
   <button (click)="setNewMeetup()">Create New Meetup</button>
 </div>
 <div *ngIf="newMeetup">
   <div>
     <input type="text" name="title" [(ngModel)]="newMeetup.title" placeholder="Title">
+    <br>
     <textarea type="text" name="description" [(ngModel)]="newMeetup.description" placeholder="Description"></textarea>
-    <p>{{newMeetup.meetupDate}}</p>
-    <input name="meetupDate" [(ngModel)]="newMeetup.meetupDate" type="datetime">
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput type="datetime-local" name="meetupDate" [(ngModel)]="newMeetup.meetupDate">
+    </mat-form-field>
+    <br>
+    <button (click)="create(newMeetup)">Create</button>
   </div>
 </div>

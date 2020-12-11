@@ -28,7 +28,7 @@ export class MeetupsPageComponent implements OnInit {
   }
 
   index() {
-    this.meetupService.index().subscribe(
+    this.meetupService.index(this.dogPark).subscribe(
       data => this.meetups = data,
       err => console.error('error in meetups page index')
     )
