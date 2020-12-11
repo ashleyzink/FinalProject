@@ -8,6 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import { GoogleMapsModule } from '@angular/google-maps';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatListModule} from '@angular/material/list';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +32,8 @@ import { CommonModule } from '@angular/common';
 import { DogComponent } from './components/dog/dog.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-page.component';
+import { MeetupDetailsComponent } from './components/meetups/meetup-details/meetup-details.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -44,7 +50,8 @@ import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-
     DogParkCommentDisplayComponent,
     UserProfileComponent,
     DogComponent,
-    MeetupsPageComponent
+    MeetupsPageComponent,
+    MeetupDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +64,12 @@ import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-
     MatCardModule,
     GoogleMapsModule,
     NgbCarouselModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatExpansionModule,
+    MatListModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
   ],
   providers: [
     AuthService,

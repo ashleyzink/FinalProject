@@ -12,6 +12,7 @@ export class MeetupsPageComponent implements OnInit {
 
   meetups: Meetup[];
   @Input() dogPark: DogPark;
+  newMeetup: Meetup;
 
   constructor(private meetupService: MeetupService) { }
 
@@ -19,10 +20,26 @@ export class MeetupsPageComponent implements OnInit {
     this.index();
   }
 
+  setNewMeetup() {
+    this.newMeetup = new Meetup();
+    if (this.dogPark) {
+      this.newMeetup.dogPark = this.dogPark;
+    }
+  }
+
   index() {
-    this.meetupService.index().subscribe(
+    this.meetupService.index(this.dogPark).subscribe(
       data => this.meetups = data,
       err => console.error('error in meetups page index')
+    )
+  }
+
+  create(meetup: Meetup) {
+    this.meetupService.create(meetup).subscribe(
+      data => {
+        this.index();
+      },
+      err => console.error('error creating meetup')
     )
   }
 
