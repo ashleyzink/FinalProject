@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Dog } from 'src/app/models/dog';
 import { User } from 'src/app/models/user';
@@ -17,7 +18,9 @@ export class UserProfileComponent implements OnInit {
   users = [];
   dogs = [];
   newDog: Dog = null;
-  constructor(private userProfileService: UserProfileService, private dogService: DogService) { }
+  selectedDog = null;
+  editDogProfile: Dog = null;
+  constructor(private userProfileService: UserProfileService, private dogService: DogService, private router: Router) { }
 
   ngOnInit(): void {
     this.reload();
@@ -36,6 +39,7 @@ this.show();
       }
     );
   }
+
 
   create(dog: Dog, user: User){
     dog.user = user;
@@ -67,14 +71,24 @@ this.show();
   }
 
   showUserDog(id: number) {
+    console.log('user profile component - show use dog - user dogid ' + id);
+
     this.dogService.showUserDog(id).subscribe(
       data => {
+        this.router.navigateByUrl('/dogUserProfile');
         this.reload();
         this.selected = data;
         },
         fail => {console.error('Error in showUserDog() dog')
       });
   }
+
+  goToDogProfile(id: number){
+    this.router.navigateByUrl('/dogUserProfile/' + id);
+  }
+  // goToDogEditProfile(id: number){
+  //   this.router.navigateByUrl('/dogEditProfile/' + id);
+  // }
 
   showAllUserDogs() {
     this.dogService.showAllUserDogs().subscribe(
@@ -99,8 +113,29 @@ this.show();
     );
   }
 
+  update(dog: Dog){
+    console.log(dog);
+    this.dogService.update(dog).subscribe(
+      data => {
+        this.editDogProfile = null;
+        this.reload();
+        this.selected = data;
+      },
+      fail => {
+        console.error(dog);
+        console.error('Error in update()');
+
+      }
+    )
+  }
   setEditUser() {
     this.editUser = Object.assign({}, this.selected);
   }
+
+  setEditDog(dog: Dog) {
+    this.editDogProfile = new Dog();
+    Object.assign(this.editDogProfile, dog);
+  }
+
 
 }
