@@ -12,7 +12,7 @@ import { User } from '../models/user';
 export class AuthService {
   private baseUrl = environment.baseUrl;
 
-  constructor(private http: HttpClient, private userService: UserProfileService) { }
+  constructor(private http: HttpClient) { }
 
   getAuthHttpOptions(): Object {
     const credentials = this.getCredentials();
