@@ -1,40 +1,79 @@
-<h1 style="text-align: center;">Welcome to your Doggie Meetup Beginnings!!</h1>
+<!-- <h1 style="text-align: center;">Welcome to your Doggie Meetup Beginnings!!</h1> -->
 
 
-<div *ngIf='selected'>
-    <h1>User Info</h1>
-  <table >
-    <th>{{selected.username}}'s Profile</th>
+<div style="text-align: center" *ngIf='selected'>
+    <h1>{{selected.username}}'s Profile</h1>
 
-    <td> {{selected.username}}</td><br>
-    <td> {{selected.firstName}} </td>
-    <td> {{selected.lastName}}</td>
-    <td> <img [src]="selected.profilePhotoUrl" style="width:250px;height:150px;"></td><br>
-    <td> {{selected.bio}}</td>
 
-  </table>
-  <button (click)='setEditUser()'>Edit</button>
+
+    <h2> {{selected.firstName}} {{selected.lastName}}</h2>
+    <div id="profileImg" class="text-center">
+      <img [src]="selected.profilePhotoUrl" class="img-fluid z-depth-1 rounded-circle" style="width:250px;height:150px;"
+        alt="Responsive image">
+    </div>
+  <br>
+  <br>
+  <br><h3>A Little About Me: </h3><br>{{selected.bio}}
+
+
 </div>
+<button class="btn btn-secondary" (click)='setEditUser()'>Edit User Info</button><br><br>
+<button class="btn btn-secondary" (click)='addDog()'>Add Dog to Pack</button>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
 <div *ngIf='editUser'>
   <!-- TODO: Add a seperate edit funtion to change password, that compares to old password,
   and confirms change before it goes through-->
   <h4>{{selected.username}} Edit Your Profile Information</h4><br>
-  <table >
-  First Name: <input type="text" name="firstName" placeholder="{{selected.firstName}}" [(ngModel)]="editUser.firstName"><br>
-  Last Name: <input type="text" name="lastName" placeholder="{{selected.lastName}}" [(ngModel)]="editUser.lastName"><br>
-  Profile Pic: <input type="text" name="profilePhotoUrl" placeholder="Change Profile Pic Url" [(ngModel)]="editUser.profilePhotoUrl"><br>
+  First Name: <input type="text" name="firstName" placeholder="{{selected.firstName}}" [(ngModel)]="editUser.firstName"><br><br>
+  Last Name: <input type="text" name="lastName" placeholder="{{selected.lastName}}" [(ngModel)]="editUser.lastName"><br><br>
+  Profile Pic: <input type="text" name="profilePhotoUrl" placeholder="Change Profile Pic Url" [(ngModel)]="editUser.profilePhotoUrl"><br><br>
   <!-- TODO instead of a text area for bio, maybe add a rich text box so users can add a little flare to their bio -->
-  Bio: <textarea name="bio" cols="40" rows="4" placeholder="{{selected.bio}}" [(ngModel)]="editUser.bio"></textarea><br>
+  Bio: <textarea name="bio" cols="40" rows="4" placeholder="{{selected.bio}}" [(ngModel)]="editUser.bio"></textarea><br><br>
   <!-- Unsure of where to add the disable funtion for a profile. Seems like it should be a different area -->
-  <button (click)='updateUser(editUser)'>Save</button>
+  <button (click)='updateUser(editUser)'>Save</button><br><br>
   <button (click)='editUser=null'>Cancel</button>
-</table>
-<div>
+</div>
+<br>
+<br>
+<br>
+    <div *ngIf='newDog'>
+      <h3>Add New Doggie</h3>
+      <div>
+          Name: <input type="text" name="name" [(ngModel)]="newDog.name" placeholder="name"><br><br>
+          Gender: <input type="radio" id="male" name="gender" [(ngModel)]="newDog.gender" value="male">
+          <label for="male">Male</label>
+          <input type="radio" id="female" name="gender" [(ngModel)]="newDog.gender" value="female">
+          <label for="female">Female</label><br>
+          Breed: <input type="text" name="breed" [(ngModel)]="newDog.breed" placeholder="breed"><br><br>
+          Size: <input type="text" name="size" [(ngModel)]="newDog.size" placeholder="size"><br><br>
+          Temperament: <input type="text" name="temperament" [(ngModel)]="newDog.temperament" placeholder="temperament"><br><br>
+          Activitly Level: <input type="text" name="activityLevel" [(ngModel)]="newDog.activityLevel" placeholder="activity level"><br><br>
+          Bio: <textarea [(ngModel)]="newDog.bio" name="bio" cols="30" rows="3" placeholder="Bio"></textarea><br><br>
+          Birthday: <input type="date" name="birthday" [(ngModel)]="newDog.birthday" placeholder="birthday"><br><br>
+          <!-- *this should only appear if they go to edit their dog profile! -->
+          Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="newDog.rainbowBridge" placeholder="rainbowBridge"><br><br>
+          Doggie Profile Pic: <input type="text" name="image" [(ngModel)]="newDog.profilePicUrl" placeholder="profilePicUrl"><br><br>
+        <button class="btn btn-success" (click)="create(newDog)">Add Dog</button>
+        <button (click)='newDog=null'>Cancel</button>
+      </div>
+    </div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <div class="flex-container">
+  <div class="card" *ngFor="let dog of dogs">
+
+    <img [src]="dog.profilePicUrl" alt="{{dog}}" style="width:100%;height:200px;">
+    <h1>{{dog.name}}</h1>
+    <p class="title">{{dog.breed}}, {{dog.activityLevel}} </p>
+    <p><textarea style="border: white;" name="bio" cols="30" rows="3" placeholder="{{dog.bio}}"></textarea></p>
+    <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
+    <p [hidden]="!show"><i class="fas fa-rainbow"></i>{{dog.rainbowBridge | date}}</p>
+    <p><button id="dogProfileButton">See More about Me   <i class='fas fa-paw'></i></button></p>
+  </div>
+</div>
+
+
+

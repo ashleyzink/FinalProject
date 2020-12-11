@@ -1,0 +1,49 @@
+<div>
+  <mat-card color="primary">
+    <mat-card-header>
+
+    </mat-card-header>
+
+    <mat-card-title>
+      {{meetup.title}}
+    </mat-card-title>
+
+    <mat-card-subtitle>
+      <p>
+        Hosted by <span>{{meetup.user.username}}</span>
+        At <span>{{meetup.dogPark.name}}</span>
+        On <span>{{meetup.meetupDate | date}}</span>
+      </p>
+    </mat-card-subtitle>
+    <mat-card-content>
+      <div>
+        <h6>Description</h6>
+        <p>{{meetup.description}}</p>
+      </div>
+      <div>
+        <h6>Attendees</h6>
+        <mat-list>
+          <mat-list-item *ngFor="let dog of dogs">
+            <div matLine>
+              <span>{{dog.name}}</span>
+            </div>
+            <div matLine>
+              <span>{{dog.name}}'s Human: {{dog.user.username}}</span>
+            </div>
+
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <div>
+        <button class="btn">Join</button>
+        <button class="btn">Comment</button>
+      </div>
+    </mat-card-actions>
+
+  </mat-card>
+
+</div>

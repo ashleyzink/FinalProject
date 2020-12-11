@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.doggiemeetup.entities.Dog;
 import com.skilldistillery.doggiemeetup.entities.Meetup;
 import com.skilldistillery.doggiemeetup.entities.User;
+import com.skilldistillery.doggiemeetup.repositories.DogRepository;
 import com.skilldistillery.doggiemeetup.repositories.MeetupRepository;
 import com.skilldistillery.doggiemeetup.repositories.UserRepository;
 
@@ -18,6 +20,8 @@ public class MeetupServiceImpl implements MeetupService {
 	private MeetupRepository meetupRepo;
 	@Autowired
 	private UserRepository userRepo;
+	@Autowired
+	private DogRepository dogRepo;
 
 	@Override
 	public List<Meetup> index() {
@@ -72,6 +76,16 @@ public class MeetupServiceImpl implements MeetupService {
 		meetupRepo.deleteById(id);
 		return ! meetupRepo.existsById(id);
 			
+	}
+
+	@Override
+	public List<Meetup> indexByDogParkId(int dogParkId) {
+		return meetupRepo.findByDogPark_id(dogParkId);
+	}
+
+	@Override
+	public List<Dog> getDogsByMeetup(int meetupId) {
+		return dogRepo.findByMeetups_Id(meetupId);
 	}
 
 }

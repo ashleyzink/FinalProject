@@ -42,6 +42,28 @@ export class DogService {
           })
         );
       }
+
+      showAllUserDogs(): Observable<Dog[]> {
+        const httpOptions = this.getAuthHttpOptions();
+        return this.http.get<Dog[]>(this.authUrl, httpOptions).pipe(
+          catchError((err: any) => {
+            console.log(err);
+            return throwError('DogService.showAllUserDogs(): Error retrieving Dog List');
+          })
+        );
+      }
+
+      showUserDog(id: number): Observable<Dog>{
+        const httpOptions = this.getAuthHttpOptions();
+        return this.http.get<Dog>(`${this.authUrl}` + `${id}`, httpOptions).pipe(
+          catchError((err: any) =>{
+          console.log(err);
+          return throwError('DogService.showUserDog(): Error getting user by dog id');
+          })
+        );
+      }
+
+
       create(newDog: Dog): Observable<Dog>{
         if(! this.authService.checkLogin){
           console.log('User is not logged in at DogService.create()');
@@ -77,7 +99,7 @@ export class DogService {
         this.router.navigateByUrl('/login');
       }
       const httpOptions = this.getAuthHttpOptions();
-      return this.http.delete<Dog>(this.authUrl + id, httpOptions).pipe(
+      return this.http.delete<Dog>(this.authUrl + '/'+ id, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError('DogService.destroy(): Error disabling dog');

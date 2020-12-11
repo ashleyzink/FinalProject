@@ -10,18 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DogComponent implements OnInit {
 
-  title = 'Meet the Doggies!';
+  title = 'Meet the Doggies';
 
   selected: Dog = null;
-
-  newDog: Dog = new Dog();
-
+  newDog: Dog = null;
   editDog: Dog = null;
-
   dogs: Dog[] = [];
-
   newUser: User = new User();
-
   constructor(private dogService: DogService) { }
 
   ngOnInit(): void {
@@ -62,8 +57,7 @@ export class DogComponent implements OnInit {
       fail => {
         console.error(dog);
         console.error('Error in create() dog');
-      }
-      )
+      });
     }
   update(dog: Dog){
     console.log(dog);
@@ -80,9 +74,14 @@ export class DogComponent implements OnInit {
       }
     )
   }
+
+  addDog() {
+    this.newDog = Object.assign({});
+  }
   setEditDog() {
     this.editDog = Object.assign({}, this.selected);
   }
+
   delete(id: number){
     this.dogService.destroy(id).subscribe(
       data =>{
@@ -91,10 +90,21 @@ export class DogComponent implements OnInit {
       },
       fail =>{
         console.error('Error in destroy() of dog');
-
       }
-    )
+    );
   }
+
+  // deleteDog(id: number){
+  //   this.dogService.destroy(id).subscribe(
+  //     data =>{
+  //       this.reload();
+
+  //     },
+  //     fail =>{
+  //       console.error('Error in destroy() of dog');
+  //     }
+  //   );
+  // }
 
 
 }
