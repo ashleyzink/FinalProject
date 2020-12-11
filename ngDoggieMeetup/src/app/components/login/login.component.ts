@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  showErrorMessage = null;
   loginUser: User = new User();
 
   constructor(private authService: AuthService,
@@ -19,12 +20,18 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.showErrorMessage = false;
     this.authService.login(this.loginUser.username, this.loginUser.password).subscribe(
       data => {
         this.router.navigateByUrl('/home')
       },
-      err => console.log('Error in login')
-    )
+      err => {console.log('Error in login')
+      this.showErrorMessage = true;
+    });
+  }
+
+  registerPage() {
+        this.router.navigateByUrl('/register')
   }
 
 }
