@@ -1,6 +1,5 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Dog } from 'src/app/models/dog';
 import { User } from 'src/app/models/user';
 import { DogService } from 'src/app/services/dog.service';
