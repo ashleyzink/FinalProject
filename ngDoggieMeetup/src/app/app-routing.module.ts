@@ -10,6 +10,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { DogProfileComponent } from './components/dog-profile/dog-profile.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -21,8 +22,9 @@ const routes: Routes = [
   { path: 'dogParks', component: DogParksMaterialComponent },
   { path: 'dogProfile', component: DogComponent },
   { path: 'meetups', component: MeetupsPageComponent },
-
   { path: 'dogParkReview', component: DogParkReviewComponent },
+  { path: 'dogUserProfile/:id', component: DogProfileComponent },
+  // { path: 'dogEditProfile/:id', component: DogProfileComponent },
 
   // ---Place all other routes above here---
   { path: '**', component: NotFoundComponent }, //page not found route

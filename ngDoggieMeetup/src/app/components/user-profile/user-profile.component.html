@@ -62,7 +62,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-  <div class="flex-container">
+<div class="flex-container">
   <div class="card" *ngFor="let dog of dogs">
 
     <img [src]="dog.profilePicUrl" alt="{{dog}}" style="width:100%;height:200px;">
@@ -71,9 +71,34 @@
     <p><textarea style="border: white;" name="bio" cols="30" rows="3" placeholder="{{dog.bio}}"></textarea></p>
     <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
     <p [hidden]="!show"><i class="fas fa-rainbow"></i>{{dog.rainbowBridge | date}}</p>
-    <p><button id="dogProfileButton">See More about Me   <i class='fas fa-paw'></i></button></p>
+    <p><button id="dogProfileButton" (click)="goToDogProfile(dog.id)">See More about Me   <i class='fas fa-paw'></i></button></p>
+    <p><button (click)="setEditDog(dog)">Edit Doggie   <i class='fas fa-paw'></i></button></p>
+
   </div>
+  <div *ngIf="editDogProfile">
+    <h3>Edit Dog <i class='fas fa-paw'></i></h3>
+    <form>
+      Name: <input type="text" name="name" [(ngModel)]="editDogProfile.name" placeholder="{{editDogProfile.name}}"><br>
+      Gender: <input type="radio" id="male" name="gender" [(ngModel)]="editDogProfile.gender" value="male">
+      <label for="male">Male</label>
+      <input type="radio" id="female" name="gender" [(ngModel)]="editDogProfile.gender" value="female">
+      <label for="female">Female</label><br>
+      Breed: <input type="text" name="breed" [(ngModel)]="editDogProfile.breed" placeholder="Breed"><br>
+      Size: <input type="text" name="size" [(ngModel)]="editDogProfile.size" placeholder="size"><br>
+      Temperament: <input type="text" name="temperament" [(ngModel)]="editDogProfile.temperament" placeholder="temperament"><br>
+      Activity Level: <input type="text" name="activityLevel" [(ngModel)]="editDogProfile.activityLevel" placeholder="activity level"><br>
+      Bio: <textarea [(ngModel)]="editDogProfile.bio" name="bio" cols="30" rows="3" placeholder="Bio"></textarea><br>
+      Birthday: <input type="date" name="birthday" [(ngModel)]="editDogProfile.birthday" placeholder="birthday"><br>
+      Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="editDogProfile.rainbowBridge" placeholder="rainbowBridge"><br>
+      Doggie Profile Pic: <input type="text" name="image" [(ngModel)]="editDogProfile.profilePicUrl" placeholder="profilePicUrl"><br>
+      <button class="btn btn-success" (click)="update(editDogProfile)">Update Dog</button>
+      <button (click)='editDogProfile=null'>Cancel</button>
+    </form>
+  </div>
+
 </div>
+
+
 
 
 
