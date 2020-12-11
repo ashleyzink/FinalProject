@@ -3,6 +3,7 @@ import { DogParkReviewService } from './../../services/dog-park-review.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { NgForm } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-dog-park-review',
@@ -14,6 +15,7 @@ export class DogParkReviewComponent implements OnInit {
   newDogParkReview: DogParkReview = new DogParkReview();
   dogParkReviews: DogParkReview[] = [];
   updateDogParkReview: DogParkReview = null;
+  dogParkId: number = 1;
 
   constructor(private dogParkReviewService: DogParkReviewService) {}
 
@@ -47,9 +49,10 @@ export class DogParkReviewComponent implements OnInit {
   }
 
   reload(): void {
-    this.dogParkReviewService.index(1).subscribe(
-      (data) =>{ this.dogParkReviews = data,
-      console.log(data)},
+    this.dogParkReviewService.index(this.dogParkId).subscribe(
+      (data) => {
+        (this.dogParkReviews = data), console.log(data);
+      },
 
       (err) => console.error('Error in reloading the dogParkReviews: ')
     );
@@ -61,15 +64,17 @@ export class DogParkReviewComponent implements OnInit {
   addDogParkReview(addDogParkReviewForm: NgForm) {
     console.log(addDogParkReviewForm.value);
     this.dogParkReviews.push(this.newDogParkReview);
-    this.dogParkReviewService.create(addDogParkReviewForm.value).subscribe(
-      (data) => {
-        this.reload();
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
-    this.dogParkReviewService.index().subscribe(
+    this.dogParkReviewService
+      .create(addDogParkReviewForm.value, this.dogParkId)
+      .subscribe(
+        (data) => {
+          this.reload();
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
+    this.dogParkReviewService.index(this.dogParkId).subscribe(
       (data) => {
         this.dogParkReviews = data;
       },

@@ -8,9 +8,8 @@ describe('DogParkReviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DogParkReviewComponent ]
-    })
-    .compileComponents();
+      declarations: [DogParkReviewComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

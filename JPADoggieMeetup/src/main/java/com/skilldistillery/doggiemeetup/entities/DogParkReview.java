@@ -13,31 +13,31 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name="dog_park_review")
+@Table(name = "dog_park_review")
 public class DogParkReview {
-	
+
 	@EmbeddedId
-	private DogParkReviewId id;
-	
+	private DogParkReviewId id = new DogParkReviewId();
+
 	private Integer rating;
-	
+
 	private String review;
-	
-	@Column(name="img_url")
+
+	@Column(name = "img_url")
 	private String imgUrl;
-	
-	@Column(name="review_date")
+
+	@Column(name = "review_date")
 	@CreationTimestamp
 	private LocalDateTime reviewDate;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_id") // DB column name
-	@MapsId(value = "userId")     // Field in ID class
+	@MapsId(value = "userId") // Field in ID class
 	private User user;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "dog_park_id") // DB column name
-	@MapsId(value = "dogParkId")     // Field in ID class
+	@MapsId(value = "dogParkId") // Field in ID class
 	private DogPark dogPark;
 
 	public DogParkReviewId getId() {

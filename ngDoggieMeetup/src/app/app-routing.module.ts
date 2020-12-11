@@ -21,7 +21,6 @@ const routes: Routes = [
   { path: 'dogParks', component: DogParksMaterialComponent },
   { path: 'dogProfile', component: DogComponent },
 
-
   { path: 'dogParkReview', component: DogParkReviewComponent },
 
   // ---Place all other routes above here---

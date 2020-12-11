@@ -10,7 +10,7 @@ export class DogParkReview {
   reviewDate: string;
   dogPark: DogPark;
   constructor(
-    id?: DogParkReviewId,
+    id?: DogParkReviewId   ,
     rating?: number,
     review?: string,
     imageUrl?: string,

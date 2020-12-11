@@ -1,51 +1,83 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-3">
-      <table class="table table-light table-sm table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th>Rating</th>
-            <th>Review</th>
-            <th>Review Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="let dogParkReview of dogParkReviews"
-            (click)="select(dogParkReview)"
-          >
-            <td>{{ dogParkReview.rating }}</td>
-            <td><img class="img-thumbnail" [src]="dogParkReview.imgUrl" /></td>
-            <td>{{ dogParkReview.review }}</td>
-            <td>{{ dogParkReview.reviewDate }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div>
-        <form *ngIf="!selected" #addDogParkReviewForm="ngForm">
-          <input
-            type="text"
-            name="reviewDate"
-            placeholder="Date"
-            [(ngModel)]="newDogParkReview.reviewDate"
-          />
-          <hr />
-          <input
-            type="number"
-            name="rating"
-            placeholder="Rating"
-            [(ngModel)]="newDogParkReview.rating"
-          />
-          <hr/>
-          <input
-            type="text"
-            name="review"
-            placeholder="Review"
-            [(ngModel)]="newDogParkReview.review"
-          />
-          <hr />
-        </form>
+  <div class="p-3 mb-2 bg-light text-dark">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Rating</th>
+          <th>Dog Park</th>
+          <th>Review</th>
+          <th>Review Date</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let dogParkReview of dogParkReviews">
+        <tr>
+          <td>{{ dogParkReview.rating }}</td>
+          <td><img class="img-thumbnail" [src]="dogParkReview.imgUrl" /></td>
+          <td>{{ dogParkReview.review }}</td>
+          <td>{{ dogParkReview.reviewDate | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr />
+  <div class="p-3 mb-2 bg-info text-white">
+    <form *ngIf="!selected" #addDogParkReviewForm="ngForm">
+      <label for="validationServer01">Enter a Rating</label>
+      <input
+        class="form-control is-valid"
+        type="number"
+        min="1"
+        max="5"
+        name="rating"
+        [(ngModel)]="newDogParkReview.rating"
+        id="validationServer01"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+      <hr />
+      <label for="validationServer02">Upload and Share Your Photo!</label>
+      <br />
+      <input
+        type="text"
+        name="photo"
+        placeholder="photo Url"
+        [(ngModel)]="newDogParkReview.imgUrl"
+      />
+      <div class="valid-feedback">Looks good!</div>
+      <hr />
+      <label for="validationServerReview">Write Your Review!</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend3">🐶</span>
+        </div>
+        <textarea
+          name="review"
+          cols="40"
+          rows="4"
+          wrap="hard"
+          spellcheck="true"
+          autocapitalize="sentences"
+          autocomplete="on"
+          class="form-control is-valid"
+          id="validationServer02"
+          required
+          [(ngModel)]="newDogParkReview.review"
+          class="form-control is-invalid"
+          id="validationServerReview"
+          placeholder="Review..."
+          aria-describedby="inputGroupPrepend3"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Please Write A Review.</div>
       </div>
-    </div>
+      <button
+        value="Add Dog Park Review"
+        (click)="addDogParkReview(addDogParkReviewForm)"
+        class="btn btn-primary"
+        type="submit"
+      >
+        Submit Review
+      </button>
+    </form>
   </div>
 </div>

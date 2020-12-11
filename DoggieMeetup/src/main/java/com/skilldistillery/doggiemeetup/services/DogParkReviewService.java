@@ -8,8 +8,8 @@ public interface DogParkReviewService {
 	
 	public List<DogParkReview> index();
 	public DogParkReview show(int userId, int dogParkId);
-	public DogParkReview create(String username, DogParkReview dogParkReview);
 	public DogParkReview update(String username, int dogParkId, DogParkReview dogParkReview);
 	boolean destroy(String username, int userId, int dogParkId);
+	DogParkReview create(String username, DogParkReview dogParkReview, int dogParkId);
 
 }

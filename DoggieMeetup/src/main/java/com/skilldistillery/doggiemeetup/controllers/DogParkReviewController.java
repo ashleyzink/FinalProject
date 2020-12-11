@@ -52,10 +52,11 @@ public class DogParkReviewController {
 	}
 
 	@PostMapping("auth/dogParks/{dogParkId}/dogParkReviews")
-	public DogParkReview create(HttpServletRequest req, HttpServletResponse res,
+	public DogParkReview create(HttpServletRequest req, HttpServletResponse res, @PathVariable int dogParkId,
 			@RequestBody DogParkReview dogParkReview, Principal principal) {
 		try {
-			dogParkReview = dogParkReviewSvc.create(principal.getName(), dogParkReview);
+			System.out.println(dogParkReview);
+			dogParkReview = dogParkReviewSvc.create(principal.getName(), dogParkReview, dogParkId);
 			if (dogParkReview == null) {
 				res.setStatus(404);
 			} else {
@@ -66,6 +67,7 @@ public class DogParkReviewController {
 		} catch (Exception e) {
 			res.setStatus(400);
 			dogParkReview = null;
+			e.printStackTrace();
 		}
 		return dogParkReview;
 	}
