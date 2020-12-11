@@ -86,9 +86,7 @@ this.show();
   goToDogProfile(id: number){
     this.router.navigateByUrl('/dogUserProfile/' + id);
   }
-  // goToDogEditProfile(id: number){
-  //   this.router.navigateByUrl('/dogEditProfile/' + id);
-  // }
+
 
   showAllUserDogs() {
     this.dogService.showAllUserDogs().subscribe(

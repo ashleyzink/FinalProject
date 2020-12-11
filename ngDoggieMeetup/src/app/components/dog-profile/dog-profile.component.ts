@@ -14,6 +14,7 @@ export class DogProfileComponent implements OnInit {
  @Input() selectedDog: Dog;
 
  editDog: Dog = null;
+ dogs = [];
 
 
   constructor(private dogService: DogService, private router: Router, private currentRoute: ActivatedRoute) { }
@@ -37,6 +38,16 @@ export class DogProfileComponent implements OnInit {
     this.editDog = Object.assign({}, this.selectedDog);
   }
 
+  showAllUserDogs() {
+    this.dogService.showAllUserDogs().subscribe(
+      data => {
+        this.dogs = data;
+          this.router.navigateByUrl('/userProfile');
+      },
+      fail =>
+        console.error('Error showAllUserDogs() dog')
+    );
+  }
 
 
 }
