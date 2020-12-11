@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DogComponent implements OnInit {
 
-  title = 'Meet the Doggies!';
+  title = 'Meet the Doggies';
 
   selected: Dog = null;
 
@@ -83,6 +83,7 @@ export class DogComponent implements OnInit {
   setEditDog() {
     this.editDog = Object.assign({}, this.selected);
   }
+
   delete(id: number){
     this.dogService.destroy(id).subscribe(
       data =>{
@@ -91,10 +92,21 @@ export class DogComponent implements OnInit {
       },
       fail =>{
         console.error('Error in destroy() of dog');
-
       }
-    )
+    );
   }
+
+  // deleteDog(id: number){
+  //   this.dogService.destroy(id).subscribe(
+  //     data =>{
+  //       this.reload();
+
+  //     },
+  //     fail =>{
+  //       console.error('Error in destroy() of dog');
+  //     }
+  //   );
+  // }
 
 
 }

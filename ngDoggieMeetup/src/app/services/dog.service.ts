@@ -99,7 +99,7 @@ export class DogService {
         this.router.navigateByUrl('/login');
       }
       const httpOptions = this.getAuthHttpOptions();
-      return this.http.delete<Dog>(this.authUrl + id, httpOptions).pipe(
+      return this.http.delete<Dog>(this.authUrl + '/'+ id, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError('DogService.destroy(): Error disabling dog');
