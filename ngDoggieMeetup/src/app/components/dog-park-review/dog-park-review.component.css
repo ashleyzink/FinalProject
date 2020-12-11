@@ -21,7 +21,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 .valid-feedback {
-  color: #d9dc35;
+  color: #070707;
 }
 .invalid-feedback {
   color: #1a1818;
