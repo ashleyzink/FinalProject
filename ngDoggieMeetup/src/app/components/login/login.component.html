@@ -1,4 +1,12 @@
+<br>
+<br>
+<br>
+<h3>Login Page</h3>
+
 <div>
+  <div *ngIf="showErrorMessage">
+    <h6 style="color: tomato;">Invalid username and password. Please try again</h6><br>
+  </div>
   <form class="form-group">
     <div class="form-row">
       <label for="registerUsername">Username</label>
@@ -12,4 +20,12 @@
       <button class="btn btn-primary" (click)="login()">Login</button>
     </div>
   </form>
+</div>
+<br>
+<br>
+<br>
+<br>
+<div>
+ <strong>Want to sign up?</strong><br>
+ <button class="btn btn-secondary" (click)="registerPage()">Register</button>
 </div>

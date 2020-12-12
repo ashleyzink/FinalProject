@@ -1,0 +1,22 @@
+<h1>DogProfile Page</h1>
+<div>
+  <div class="text-center">
+    <img [src]="selectedDog.profilePicUrl" class="img-fluid z-depth-1 rounded-circle"
+    alt="Responsive image" style="height:150px;width:250px;">
+  </div>
+  <h3 style="text-align: center;">{{selectedDog.name}}</h3>
+  <p style="text-align: center;"><strong> Bio: </strong> {{selectedDog.bio}}</p>
+    <ul>
+      <i class='fas fa-paw'></i><strong>  Gender: </strong>{{selectedDog.gender}}<br>
+      <i class='fas fa-paw'></i><strong>  Breed: </strong> {{selectedDog.breed}}<br>
+      <i class='fas fa-paw'></i><strong>  Size: </strong> {{selectedDog.size}}<br>
+      <i class='fas fa-paw'></i><strong>  Temperament: </strong> {{selectedDog.temperament}}<br>
+      <i class='fas fa-paw'></i><strong>  Activity Level: </strong> {{selectedDog.activityLevel}}<br>
+      <i class='fas fa-paw'></i><strong>  Birthday: </strong> {{selectedDog.birthday | date}}<br>
+      <i class="fas fa-rainbow"></i><strong>  Rainbow Bridge Date: </strong> {{selectedDog.rainbowBridge | date}}<br>
+      <i class='fas fa-paw'></i><strong>  Create Date: </strong> {{selectedDog.createDate | date}}<br>
+    </ul>
+    <button class="btn btn-primary" (click)="showAllUserDogs()">Back</button>
+  </div>
+
+

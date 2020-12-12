@@ -11,6 +11,7 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "dog_park_review")
@@ -22,6 +23,18 @@ public class DogParkReview {
 	private Integer rating;
 
 	private String review;
+
+	@Column(name = "last_updated")
+	@UpdateTimestamp
+	private LocalDateTime lastUpdated;
+
+	public LocalDateTime getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public void setLastUpdated(LocalDateTime lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
 
 	@Column(name = "img_url")
 	private String imgUrl;
@@ -107,23 +120,8 @@ public class DogParkReview {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("DogParkReview [id=");
-		builder.append(id);
-		builder.append(", rating=");
-		builder.append(rating);
-		builder.append(", review=");
-		builder.append(review);
-		builder.append(", imgUrl=");
-		builder.append(imgUrl);
-		builder.append(", reviewDate=");
-		builder.append(reviewDate);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append(", dogPark=");
-		builder.append(dogPark);
-		builder.append("]");
-		return builder.toString();
+		return "DogParkReview [id=" + id + ", rating=" + rating + ", review=" + review + ", lastUpdated=" + lastUpdated
+				+ ", imgUrl=" + imgUrl + ", reviewDate=" + reviewDate + ", user=" + user + ", dogPark=" + dogPark + "]";
 	}
 
 	public DogParkReview() {

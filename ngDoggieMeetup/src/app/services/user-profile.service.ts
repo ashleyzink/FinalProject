@@ -52,6 +52,16 @@ export class UserProfileService {
     );
   }
 
+  disable(id: number): Observable<User> {
+    const httpOptions = this.getAuthHttpOptions()
+    return this.http.delete<User>(`${this.authUrl}` + "/users/" + `${id}`, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('UserProfileService.disable(): Error disabling user profile');
+      })
+    );
+  }
+
 
 
   getAuthHttpOptions() {

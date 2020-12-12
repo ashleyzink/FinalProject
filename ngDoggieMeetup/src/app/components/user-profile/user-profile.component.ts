@@ -1,8 +1,10 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Dog } from 'src/app/models/dog';
 import { User } from 'src/app/models/user';
 import { DogService } from 'src/app/services/dog.service';
 import { UserProfileService } from 'src/app/services/user-profile.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,7 +19,8 @@ export class UserProfileComponent implements OnInit {
   users = [];
   dogs = [];
   newDog: Dog = null;
-  constructor(private userProfileService: UserProfileService, private dogService: DogService) { }
+  editDogProfile: Dog = null;
+  constructor(private userProfileService: UserProfileService, private dogService: DogService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.reload();
@@ -36,6 +39,7 @@ this.show();
       }
     );
   }
+
 
   create(dog: Dog, user: User){
     dog.user = user;
@@ -67,14 +71,22 @@ this.show();
   }
 
   showUserDog(id: number) {
+    console.log('user profile component - show use dog - user dogid ' + id);
+
     this.dogService.showUserDog(id).subscribe(
       data => {
+        this.router.navigateByUrl('/dogUserProfile');
         this.reload();
         this.selected = data;
         },
         fail => {console.error('Error in showUserDog() dog')
       });
   }
+
+  goToDogProfile(id: number){
+    this.router.navigateByUrl('/dogUserProfile/' + id);
+  }
+
 
   showAllUserDogs() {
     this.dogService.showAllUserDogs().subscribe(
@@ -99,8 +111,41 @@ this.show();
     );
   }
 
+  disableUser(id: number): void {
+    this.userProfileService.disable(id).subscribe(
+      (data) => {
+        this.authService.logout();
+        this.router.navigateByUrl('/home');
+      },
+      (fail) => {
+        console.error('UserProfileComponent.disableUser(): error disabling user');
+        console.error(fail);
+      });
+  }
+
+  update(dog: Dog){
+    console.log(dog);
+    this.dogService.update(dog).subscribe(
+      data => {
+        this.editDogProfile = null;
+        this.reload();
+        this.selected = data;
+      },
+      fail => {
+        console.error(dog);
+        console.error('Error in update()');
+
+      }
+    )
+  }
   setEditUser() {
     this.editUser = Object.assign({}, this.selected);
   }
+
+  setEditDog(dog: Dog) {
+    this.editDogProfile = new Dog();
+    Object.assign(this.editDogProfile, dog);
+  }
+
 
 }
