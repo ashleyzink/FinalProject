@@ -8,7 +8,7 @@
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th width="5%">Rating</th>
+          <th width="5%">Rating ⭐️'s</th>
           <th width="15%">Dog Park Name</th>
           <th width="30%">Dog Park Photo</th>
           <th width="40%">Review</th>
@@ -18,7 +18,7 @@
       <tbody *ngFor="let dogParkReview of dogParkReviews">
         <tr>
           <td (click)="displayDogParkReview(dogParkReview)">
-            {{ dogParkReview.rating }}
+            {{ dogParkReview.rating }} ⭐️'s
           </td>
           <td (click)="displayDogParkReview(dogParkReview)">
             {{ dogParkReview.dogPark.name }}
@@ -39,7 +39,7 @@
 
   <div *ngIf="selected && !editDogParkReview">
     <p>
-      Rating: <strong>{{ selected.rating }}</strong>
+      Rating: <strong>{{ selected.rating }}⭐️'s</strong>
     </p>
     <p>
       Review: <strong>{{ selected.review }}</strong>
@@ -48,7 +48,7 @@
       Dog Park: <strong>{{ selected.dogPark.name }}</strong>
     </p>
     <p>
-      Image: <strong>{{ selected.dogPark.imageUrl }}</strong>
+      Image: <strong> {{ selected.dogPark.imageUrl }}</strong>
     </p>
     <button (click)="displayTable()">Back</button>
     <button (click)="setEditDogParkReview()">Edit</button>
