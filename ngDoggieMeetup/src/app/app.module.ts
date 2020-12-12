@@ -38,6 +38,7 @@ import { MeetupDetailsComponent } from './components/meetups/meetup-details/meet
 import { MatNativeDateModule } from '@angular/material/core';
 import { DogProfileComponent } from './components/dog-profile/dog-profile.component';
 import { FriendProfileComponent } from './components/friend-profile/friend-profile.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { FriendProfileComponent } from './components/friend-profile/friend-profi
     MeetupsPageComponent,
     MeetupDetailsComponent,
     DogProfileComponent,
-    FriendProfileComponent
+    FriendProfileComponent,
+    AdminComponent
   ],
   imports: [
     CommonModule,
