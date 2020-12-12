@@ -1,0 +1,33 @@
+<h1>Friends Profile Page</h1>
+<div>
+  <div class="text-center">
+    <img
+      [src]="selectedUser.profilePhotoUrl"
+      class="img-fluid z-depth-1 rounded-circle"
+      alt="Responsive image"
+      style="height: 150px; width: 250px"
+    />
+  </div>
+  <h3 style="text-align: center">{{ selectedUser.username }}</h3>
+  <p style="text-align: center">
+    <strong> Bio: </strong> {{ selectedUser.bio }}
+  </p>
+  <ul>
+    <i class="fas fa-paw"></i
+    ><strong> First Name: </strong
+    >{{
+      selectedUser.firstName
+    }}<br />
+    <i class="fas fa-paw"></i
+    ><strong> Last Name: </strong>
+    {{
+      selectedUser.lastName
+    }}<br />
+    <i class="fas fa-paw"></i
+    ><strong> Email: </strong>
+    {{
+      selectedUser.email
+    }}<br />
+  </ul>
+  <button class="btn btn-dark" (click)="userProfilePage()">Back</button>
+</div>
