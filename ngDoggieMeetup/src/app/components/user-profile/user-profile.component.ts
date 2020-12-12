@@ -87,6 +87,10 @@ this.show();
     this.router.navigateByUrl('/dogUserProfile/' + id);
   }
 
+  goToFriendProfile(id: number){
+    this.router.navigateByUrl('/friendProfile/' + id);
+  }
+
 
   showAllUserDogs() {
     this.dogService.showAllUserDogs().subscribe(
