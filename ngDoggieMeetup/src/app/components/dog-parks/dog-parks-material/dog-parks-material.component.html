@@ -15,7 +15,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dogPark of dogParks" (click)="select(dogPark)" (click)="map.panTo(markerMap[dogPark.name]['position'])">
+            <tr
+              *ngFor="let dogPark of dogParks"
+              (click)="select(dogPark)"
+              (click)="map.panTo(markerMap[dogPark.name]['position'])"
+            >
               <td>{{ dogPark.name }}</td>
               <td>
                 <img
@@ -25,7 +29,9 @@
                 />
               </td>
               <td>{{ dogPark.offLeash }}</td>
-              <td>{{ dogPark.address.city }}, {{dogPark.address.stateAbbrv}}</td>
+              <td>
+                {{ dogPark.address.city }}, {{ dogPark.address.stateAbbrv }}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -50,45 +56,35 @@
           (mapDblclick)="map.panTo()"
           (mapRightclick)="map.panTo(movableMarker.position)"
         >
+          <map-marker
+            #movableMarker
+            [(position)]="newLocation"
+            [title]="'Pointer'"
+            [options]="markerOptions"
+            (mapDragend)="revGeocodeEvent($event, newAddress, 'new')"
+          ></map-marker>
 
-        <map-marker
-        #movableMarker
-
-        [(position)]="newLocation"
-        [title]="'Pointer'"
-        [options]="markerOptions"
-        (mapDragend)="revGeocodeEvent($event, newAddress, 'new')"
-        ></map-marker>
-
-        <!-- <map-marker [position]="{lat: newLocation.lat, lng: newLocation.lng}"
+          <!-- <map-marker [position]="{lat: newLocation.lat, lng: newLocation.lng}"
         [title]="'Pointer'">
         </map-marker> -->
 
-        <map-marker
-        *ngFor="let marker of markers"
-        [position]="marker.position"
-        [label]="marker.label"
-        [title]="marker.title"
-        [(options)]="dogParkMarkerOptions"
-        (mapClick)="selectFromMap(marker)"
-        (mapDragend)="revGeocodeEvent($event, updateAddress, 'update')"
-
-        >
-      </map-marker>
-
-      </google-map>
+          <map-marker
+            *ngFor="let marker of markers"
+            [position]="marker.position"
+            [label]="marker.label"
+            [title]="marker.title"
+            [(options)]="dogParkMarkerOptions"
+            (mapClick)="selectFromMap(marker)"
+            (mapDragend)="revGeocodeEvent($event, updateAddress, 'update')"
+          >
+          </map-marker>
+        </google-map>
       </mat-card-content>
       <mat-card-actions>
-        <button
-          mat-button
-          (click)="map.panTo(center)"
-        >
-          Center Map
-        </button>
+        <button mat-button (click)="map.panTo(center)">Center Map</button>
       </mat-card-actions>
     </mat-card>
   </div>
-
 
   <div class="col-lg">
     <mat-card *ngIf="selected && !updateDogPark">
@@ -195,8 +191,15 @@
           <div class="form-row">
             <div class="form-group col">
               <label for="new-address-state-abbrv">State</label>
-              <select class="form-control" name="stateAbbrv" id="new-address-state-abbrv" [(ngModel)]="newAddress.stateAbbrv">
-                <option *ngFor="let abbrev of stateAbbrevs" [value]="abbrev">{{abbrev}}</option>
+              <select
+                class="form-control"
+                name="stateAbbrv"
+                id="new-address-state-abbrv"
+                [(ngModel)]="newAddress.stateAbbrv"
+              >
+                <option *ngFor="let abbrev of stateAbbrevs" [value]="abbrev">
+                  {{ abbrev }}
+                </option>
               </select>
             </div>
           </div>
@@ -215,8 +218,6 @@
           </div>
         </div>
       </mat-card-content>
-
-
 
       <mat-card-actions>
         <button mat-button (click)="create(newDogPark, newAddress)">ADD</button>
@@ -306,8 +307,15 @@
           <div class="form-row">
             <div class="form-group col">
               <label for="update-address-state-abbrv">State</label>
-              <select class="form-control" name="stateAbbrv" id="update-address-state-abbrv" [(ngModel)]="updateDogPark.address.stateAbbrv">
-                <option *ngFor="let abbrev of stateAbbrevs" [value]="abbrev">{{abbrev}}</option>
+              <select
+                class="form-control"
+                name="stateAbbrv"
+                id="update-address-state-abbrv"
+                [(ngModel)]="updateDogPark.address.stateAbbrv"
+              >
+                <option *ngFor="let abbrev of stateAbbrevs" [value]="abbrev">
+                  {{ abbrev }}
+                </option>
               </select>
             </div>
             <div class="form-group col">
@@ -325,29 +333,26 @@
         </div>
       </mat-card-content>
 
-
-
       <mat-card-actions>
-        <button mat-button (click)="update(updateDogPark, updateDogPark.address)">
+        <button
+          mat-button
+          (click)="update(updateDogPark, updateDogPark.address)"
+        >
           UPDATE
         </button>
-        <button mat-button (click)="deselect()">
-          DESELECT
-        </button>
+        <button mat-button (click)="deselect()">DESELECT</button>
       </mat-card-actions>
     </mat-card>
   </div>
 </div>
 
 <div class="row">
-
   <div class="col-lg">
     <app-dog-park-comments *ngIf="selected" [dogPark]="selected">
     </app-dog-park-comments>
   </div>
 
   <div class="col-lg">
-    <app-meetups-page *ngIf="selected" [dogPark]="selected">
-    </app-meetups-page>
+    <app-meetups-page *ngIf="selected" [dogPark]="selected"> </app-meetups-page>
   </div>
 </div>
