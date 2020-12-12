@@ -49,16 +49,16 @@
           <input matInput type="datetime-local" name="meetupDate" [(ngModel)]="editMeetup.meetupDate">
         </mat-form-field>
         <br>
-        <button class="btn" (click)="update(editMeetup)">Update</button>
-        <button class="btn" (click)="editMeetup = null;">Cancel</button>
+        <button class="btn btn-secondary" (click)="update(editMeetup)">Update</button>
+        <button class="btn btn-danger" (click)="editMeetup = null;">Cancel</button>
       </div>
 
     </mat-card-content>
 
     <mat-card-actions *ngIf="getLoggedInUser()">
       <div>
-        <button class="btn" (click)="setJoin()">Attend</button>
-
+        <button class="btn btn-secondary" (click)="setJoin()">Attend</button><br>
+        <hr>
         <div class="form-group col">
           <label for="add-dog-to-meetup">Dog</label>
           <!-- <select #selector class="form-control" id="add-dog-to-meetup" (change)="setSelectedDog(selector.value)" [(ngModel)]="selectedDog"> -->
@@ -68,11 +68,14 @@
             <option [value]="null">Select</option>
             <option *ngFor="let dog of getLoggedInUser().dogs" [value]="dog.id">{{dog.name}}</option>
           </select>
-          <button class="btn" (click)="addDogToMeetup(meetup, selectedDog)">Join</button>
+          <br>
+          <br>
+          <button class="btn btn-secondary" (click)="addDogToMeetup(meetup, selectedDog)">Join</button><br><br>
+
+          <button class="btn btn-secondary">Comment</button>
         </div>
-        <button class="btn">Comment</button>
-        <button class="btn" *ngIf="checkLoginMatchesUser(meetup.user)" (click)="setEdit()">Edit</button>
-        <button class="btn" *ngIf="checkLoginIsAdmin()" (click)="setEdit()">Edit (Admin)</button>
+        <button class="btn btn-secondary" *ngIf="checkLoginMatchesUser(meetup.user)" (click)="setEdit()">Edit</button>
+        <button class="btn btn-secondary" *ngIf="checkLoginIsAdmin()" (click)="setEdit()">Edit (Admin)</button>
       </div>
     </mat-card-actions>
 

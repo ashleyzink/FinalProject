@@ -1,4 +1,4 @@
-<h1>DogProfile Page</h1>
+<h1>Dog Profile Page</h1>
 <div>
   <div class="text-center">
     <img [src]="selectedDog.profilePicUrl" class="img-fluid z-depth-1 rounded-circle"
@@ -16,7 +16,7 @@
       <i class="fas fa-rainbow"></i><strong>  Rainbow Bridge Date: </strong> {{selectedDog.rainbowBridge | date}}<br>
       <i class='fas fa-paw'></i><strong>  Create Date: </strong> {{selectedDog.createDate | date}}<br>
     </ul>
-    <button class="btn btn-primary" (click)="showAllUserDogs()">Back</button>
+    <button class="btn btn-dark" (click)="showAllUserDogs()">Back</button>
   </div>
 
 

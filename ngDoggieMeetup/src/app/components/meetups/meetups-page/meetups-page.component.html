@@ -1,8 +1,12 @@
+<div class="container-fluid">
+
+
+<h4>Meetups: </h4>
 <div *ngFor="let meetup of meetups">
   <app-meetup-details [meetup]="meetup" (contentChange)="index()"></app-meetup-details>
 </div>
 <div *ngIf="dogPark">
-  <button (click)="setNewMeetup()">Create New Meetup</button>
+  <button class="btn btn-secondary" (click)="setNewMeetup()">Create New Meetup</button>
 </div>
 <div *ngIf="newMeetup">
   <div>
@@ -17,4 +21,6 @@
     <br>
     <button (click)="create(newMeetup)">Create</button>
   </div>
+</div>
+
 </div>

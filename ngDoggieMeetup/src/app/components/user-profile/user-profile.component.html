@@ -17,8 +17,10 @@
 
 
 </div>
+<hr>
 <button class="btn btn-secondary" (click)='setEditUser()'>Edit User Info</button><br><br>
 <button class="btn btn-secondary" (click)='addDog()'>Add Dog to Pack</button>
+<hr>
 <br>
 <br>
 <div *ngIf='editUser'>
@@ -73,7 +75,7 @@
     <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
     <p [hidden]="!show"><i class="fas fa-rainbow"></i>{{dog.rainbowBridge | date}}</p>
     <p><button id="dogProfileButton" (click)="goToDogProfile(dog.id)">See More about Me   <i class='fas fa-paw'></i></button></p>
-    <p><button (click)="setEditDog(dog)">Edit Doggie   <i class='fas fa-paw'></i></button></p>
+    <p><button class="btn btn-secondary" (click)="setEditDog(dog)">Edit Doggie   <i class='fas fa-paw'></i></button></p>
 
   </div>
   <div *ngIf="editDogProfile">
@@ -92,8 +94,8 @@
       Birthday: <input type="date" name="birthday" [(ngModel)]="editDogProfile.birthday" placeholder="birthday"><br>
       Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="editDogProfile.rainbowBridge" placeholder="rainbowBridge"><br>
       Doggie Profile Pic: <input type="text" name="image" [(ngModel)]="editDogProfile.profilePicUrl" placeholder="profilePicUrl"><br>
-      <button class="btn btn-success" (click)="update(editDogProfile)">Update Dog</button>
-      <button (click)='editDogProfile=null'>Cancel</button>
+      <button class="btn btn-secondary" (click)="update(editDogProfile)">Update Dog</button><br>
+      <button class="btn btn-dark" (click)='editDogProfile=null'>Cancel</button>
     </form>
   </div>
 
