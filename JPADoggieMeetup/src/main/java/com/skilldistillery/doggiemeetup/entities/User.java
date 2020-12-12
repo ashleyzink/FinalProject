@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class User {
@@ -70,7 +71,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List <Meetup> meetups;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"user"})
 	@OneToMany(mappedBy="user")
 	private List<Dog> dogs;
 	

@@ -17,6 +17,8 @@ public interface MeetupService {
 	
 	Meetup update(String username, Meetup meetup, int id);
 	
+	Meetup join(Meetup meetup, int id, int DogId);
+	
 	Boolean delete(String username, int id);
 	
 	List<Dog> getDogsByMeetup(int meetupId);

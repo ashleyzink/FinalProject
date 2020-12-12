@@ -113,4 +113,9 @@ export class AuthService {
     return isAdmin
   }
 
+  getLoggedInUser(): User {
+    let lazyLoadUser = this.user;
+    return this.user;
+  }
+
 }

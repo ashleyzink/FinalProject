@@ -3,6 +3,7 @@ package com.skilldistillery.doggiemeetup.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Meetup {
@@ -34,8 +35,10 @@ public class Meetup {
 	@Column(name = "create_date")
 	private LocalDateTime createDate;
 
-	@JsonIgnore
-	@ManyToMany(mappedBy = "meetups")
+	@JsonIgnoreProperties({"meetups"})
+	@ManyToMany(mappedBy = "meetups"
+//	, cascade = CascadeType.ALL
+	)
 	private List<Dog> dogs;
 
 	@ManyToOne

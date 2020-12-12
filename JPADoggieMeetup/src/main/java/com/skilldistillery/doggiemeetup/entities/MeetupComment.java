@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "meetup_comment")
@@ -44,7 +44,7 @@ public class MeetupComment {
 	@JoinColumn(name = "reply_to_comment_id")
 	private MeetupComment replyToComment;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"replyToComment", "meetup"})
 	@OneToMany(mappedBy = "replyToComment")
 	private List<MeetupComment> replies;
 

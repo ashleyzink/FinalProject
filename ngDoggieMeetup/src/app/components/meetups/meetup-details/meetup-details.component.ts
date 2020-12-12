@@ -16,6 +16,9 @@ export class MeetupDetailsComponent implements OnInit {
   dogs: Dog[];
   editMeetup: Meetup = null;
   @Output() contentChange = new EventEmitter<boolean>();
+  join: boolean = false;
+  selectedDog: Dog = null;
+  selectedDogId: number = null;
 
   constructor(private meetupService: MeetupService, private authService: AuthService) { }
 
@@ -42,6 +45,18 @@ export class MeetupDetailsComponent implements OnInit {
     )
   }
 
+  joinUpdate(meetup: Meetup, dog: Dog) {
+    this.meetupService.join(meetup, dog).subscribe(
+      data => {
+        console.log(data);
+        this.meetup = data;
+        this.editMeetup = null;
+        this.sendContentChange(true);
+      },
+      err => console.error('error in update')
+    )
+  }
+
   loadDogs() {
     this.meetupService.getDogs(this.meetup).subscribe(
       data => this.dogs = data,
@@ -55,6 +70,33 @@ export class MeetupDetailsComponent implements OnInit {
 
   checkLoginIsAdmin(): boolean {
     return this.authService.checkLoggedInUserIsAdmin();
+  }
+
+  getLoggedInUser(): User {
+    return this.authService.getLoggedInUser();
+  }
+
+  addDogToMeetup(meetup: Meetup, dog: Dog) {
+    console.log(this.selectedDog)
+    meetup.dogs.push(this.selectedDog);
+    this.join = false;
+    this.joinUpdate(meetup, dog);
+  }
+
+  setJoin() {
+    this.join = true;
+    this.selectedDog = null;
+  }
+
+  setSelectedDog(id: number) {
+    // this.selectedDog = new Dog(dog.id);
+    let userDogs = this.getLoggedInUser().dogs;
+    for(let i = 0; i < userDogs.length; i++) {
+      if (userDogs[i].id == id) {
+        this.selectedDog = userDogs[i];
+        console.log(this.selectedDog)
+      }
+    }
   }
 
 }
