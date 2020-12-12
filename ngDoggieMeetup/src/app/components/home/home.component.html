@@ -1,13 +1,13 @@
 <div id="carousel">
-<ngb-carousel class="carousel-inner" *ngIf="images">
-  <ng-template ngbSlide *ngFor="let image of images">
-    <div class="picsum-img-wrapper">
-      <img [src]="image" alt="Random first slide">
-    </div>
-    <div class="carousel-caption">
-      <h3>Doggie Meetup!</h3>
-      <p>Take a look around and enjoy!</p>
-    </div>
-  </ng-template>
-</ngb-carousel>
+  <ngb-carousel class="carousel-inner" *ngIf="images">
+    <ng-template ngbSlide *ngFor="let image of images">
+      <div class="picsum-img-wrapper">
+        <img [src]="image" alt="Random first slide" />
+      </div>
+      <div class="carousel-caption">
+        <h3>Doggie Meetup!</h3>
+        <p>Take a look around and enjoy!</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
 </div>

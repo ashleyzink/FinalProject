@@ -48,7 +48,7 @@
       Dog Park: <strong>{{ selected.dogPark.name }}</strong>
     </p>
     <p>
-      Image: <strong> {{ selected.dogPark.imageUrl }}</strong>
+      Image: <strong> <img [src]="selected.dogPark.imageUrl"> </strong>
     </p>
     <button (click)="displayTable()">Back</button>
     <button (click)="setEditDogParkReview()">Edit</button>
@@ -118,50 +118,60 @@
         id="validationServer01"
         required
       />
-      <hr />
-      <label>Upload and Share Your Photo!</label>
-      <br />
-      <input
-        type="text"
-        name="photo"
-        placeholder="photo Url"
-        [(ngModel)]="newDogParkReview.imgUrl"
-      />
-      <div class="valid-feedback">Looks good!</div>
-      <hr />
-      <label for="validationServerReview">Write Your Review!</label>
-      <div class="input-group">
-        <div class="input-group-prepend"></div>
-        <textarea
-          name="review"
-          cols="40"
-          rows="4"
-          wrap="hard"
-          spellcheck="true"
-          autocapitalize="sentences"
-          autocomplete="on"
-          class="form-control is-valid"
-          id="validationServer02"
+      <form *ngIf="!selected" #addDogParkReviewForm="ngForm">
+        Dog Park Name:
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="newDogParkReview.dogPark"
+          id="validationServer01"
           required
-          [(ngModel)]="newDogParkReview.review"
-          class="form-control is-invalid"
-          id="validationServerReview"
-          placeholder="Review..."
-          aria-describedby="inputGroupPrepend3"
-          required
+        />
+        <hr />
+        <label>Upload and Share Your Photo!</label>
+        <br />
+        <input
+          type="text"
+          name="photo"
+          placeholder="photo Url"
+          [(ngModel)]="newDogParkReview.imgUrl"
+        />
+        <div class="valid-feedback">Looks good!</div>
+        <hr />
+        <label for="validationServerReview">Write Your Review!</label>
+        <div class="input-group">
+          <div class="input-group-prepend"></div>
+          <textarea
+            name="review"
+            cols="40"
+            rows="4"
+            wrap="hard"
+            spellcheck="true"
+            autocapitalize="sentences"
+            autocomplete="on"
+            class="form-control is-valid"
+            id="validationServer02"
+            required
+            [(ngModel)]="newDogParkReview.review"
+            class="form-control is-invalid"
+            id="validationServerReview"
+            placeholder="Review..."
+            aria-describedby="inputGroupPrepend3"
+            required
+          >
+          </textarea>
+          <div class="invalid-feedback">Please Write A Review.</div>
+        </div>
+        <button
+          type="submit"
+          name="submit"
+          value="Add Dog Park Review Form"
+          (click)="addDogParkReview(addDogParkReviewForm)"
+          class="btn btn-primary"
         >
-        </textarea>
-        <div class="invalid-feedback">Please Write A Review.</div>
-      </div>
-      <button
-        type="submit"
-        name="submit"
-        value="Add Dog Park Review Form"
-        (click)="addDogParkReview(addDogParkReviewForm)"
-        class="btn btn-primary"
-      >
-        Submit Review
-      </button>
+          Submit Review
+        </button>
+      </form>
     </form>
   </div>
 </div>
