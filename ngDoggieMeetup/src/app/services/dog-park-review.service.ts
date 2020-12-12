@@ -8,6 +8,7 @@ import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { DogPark } from '../models/dog-park';
+import { DogParkReviewId } from '../models/dog-park-review-id';
 
 @Injectable({
   providedIn: 'root',
@@ -87,11 +88,15 @@ export class DogParkReviewService {
         })
       );
   }
+  // auth/dogParks/{dogParkId}/dogParkReviews"
 
   //auth/dogParks/{dogParkId}/dogParkReviews/{userId}
+
+  // auth/dogParks/{dogParkId}/dogParkReviews/{userId}
   update(
     dogParkReview: DogParkReview,
-    dogParkId: number
+    dogParkId: number,
+    dogPark: DogPark
   ): Observable<DogParkReview> {
     if (!this.authService.checkLogin) {
       console.log(
@@ -102,7 +107,10 @@ export class DogParkReviewService {
     const httpOptions = this.getAuthHttpOptions();
     return this.http
       .put<DogParkReview>(
-        this.authUrl + dogParkId + '/dogParkReviews',
+        this.authUrl +
+          dogParkId +
+          '/dogParkReviews/' +
+          dogParkReview.id.userId,
         dogParkReview,
         httpOptions
       )
@@ -112,5 +120,25 @@ export class DogParkReviewService {
           return throwError('error updating dog park review: ' + dogParkReview);
         })
       );
+  }
+  destroy(
+    dogParkReview: DogParkReview,
+    // dogParkId: number,
+    // dogPark: DogPark,
+  ): Observable<boolean> {
+    if (!this.authService.checkLogin) {
+      console.log('not logged in');
+      this.router.navigateByUrl('/login');
+    }
+    const httpOptions = this.getAuthHttpOptions();
+    return this.http.delete<boolean>(this.authUrl + dogParkReview.id.dogParkId + '/dogParkReviews/' + dogParkReview.id.userId, httpOptions ).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          'dogParkReviewService.destroy(): Error deleting Review'
+        );
+
+      })
+    );
   }
 }

@@ -1,19 +1,27 @@
-<!-- <div class="container-fluid"> -->
+<div class="container-fluid">
+  <link
+    rel="stylesheet"
+    href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+  />
 
   <div class="p-3 mb-2 bg-light text-dark">
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th>Rating</th>
-          <th>Dog Park</th>
-          <th>Review</th>
-          <th>Review Date</th>
+          <th width="5%">Rating</th>
+          <th width="15%">Dog Park Name</th>
+          <th width="30%">Dog Park Photo</th>
+          <th width="40%">Review</th>
+          <th width="10%">Review Date</th>
         </tr>
       </thead>
       <tbody *ngFor="let dogParkReview of dogParkReviews">
         <tr>
           <td (click)="displayDogParkReview(dogParkReview)">
             {{ dogParkReview.rating }}
+          </td>
+          <td (click)="displayDogParkReview(dogParkReview)">
+            {{ dogParkReview.dogPark.name }}
           </td>
           <td (click)="displayDogParkReview(dogParkReview)">
             <img class="img-thumbnail" [src]="dogParkReview.imgUrl" />
@@ -29,7 +37,7 @@
     </table>
   </div>
 
-  <!-- <div *ngIf="selected && !editDogParkReview">
+  <div *ngIf="selected && !editDogParkReview">
     <p>
       Rating: <strong>{{ selected.rating }}</strong>
     </p>
@@ -37,89 +45,67 @@
       Review: <strong>{{ selected.review }}</strong>
     </p>
     <p>
-      Dog Park: <strong>{{ selected.dogPark }}</strong>
+      Dog Park: <strong>{{ selected.dogPark.name }}</strong>
     </p>
     <p>
-      Image: <strong>{{ selected.imgUrl }}</strong>
-    </p>
-    <p>
-      Review Date: <strong>{{ selected.reviewDate }}</strong>
+      Image: <strong>{{ selected.dogPark.imageUrl }}</strong>
     </p>
     <button (click)="displayTable()">Back</button>
     <button (click)="setEditDogParkReview()">Edit</button>
-  </div> -->
+    <button (click)="deleteDogParkReview(selected)">Delete</button>
+  </div>
 
-  <!-- <form>
-    <div class="form-row">
-      <div class="col-md-4 mb-3">
-        <label>Rating: </label>
-        <input
-          type="number"
-          placeholder="Rating"
-          name="rating"
-          required
-          [(ngModel)]="editDogParkReview.rating"
-        />
-      </div>
-      <div class="col-md-4 mb-3">
-        <label>Dog Park: </label>
-        <input
-          type="text"
-          name="dogPark"
-          placeholder="Dog Park"
-          required
-          [(ngModel)]="editDogParkReview.dogPark"
-        />
-      </div>
-      <div class="col-md-4 mb-3">
-        <label>Review: </label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-          </div>
-          <textarea
-          name="review"
-          cols="40"
-          rows="4"
-          wrap="hard"
-          spellcheck="true"
-          autocapitalize="sentences"
-          autocomplete="on"
-          [(ngModel)]="editDogParkReview.review"
-          placeholder="Review..."
-          aria-describedby="inputGroupPrepend3"
-          required>
-        </div>
-      </div>
+  <div class="stars">
+    <div *ngIf="editDogParkReview">
+      <label>Rating: </label>
+      <input
+        type="number"
+        min="1"
+        max="5"
+        name="rating"
+        [(ngModel)]="editDogParkReview.rating"
+      />
+      <label>Dog Park: </label>
+      <input
+        type="text"
+        name="dogPark"
+        [(ngModel)]="editDogParkReview.dogPark.name"
+      />
+      <br />
+      <label>Review: </label>
+      <textarea
+        name="review"
+        cols="100"
+        rows="4"
+        wrap="hard"
+        spellcheck="true"
+        autocapitalize="sentences"
+        autocomplete="on"
+        [(ngModel)]="editDogParkReview.review"
+        placeholder="Review..."
+        aria-describedby="inputGroupPrepend3"
+        required
+      ></textarea>
+      <!-- <hr /> -->
+      <!-- <label> Park Photo: </label>
+      <input type="image" [(ngModel)]="editDogParkReview.imgUrl" /> -->
+      <hr />
+      <button
+        class="btn button2"
+        (click)="
+          updateDogParkReview(editDogParkReview, editDogParkReview.dogPark.id)
+        "
+      >
+        Save
+      </button>
+      <br />
+      <button class="btn button3" (click)="editDogParkReview = null">
+        Cancel Changes
+      </button>
     </div>
-    <div class="form-row">
-      <div class="col-md-6 mb-3">
-        <label></label>Dog Park Photo: </label>
-        <input
-          type="image"
-          [(ngModel)]="editDogParkReview.imgUrl"
-        />
-      </div>
-      <div class="col-md-3 mb-3">
-        <label>Review Date: </label>
-        <input
-          type="date"
-          class="form-control"
-          required
-        />
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-        <label class="form-check-label" for="invalidCheck2">
-          Agree to terms and conditions
-        </label>
-      </div>
-    </div>
-    <button (click)="updateDogParkReview(dogParkReview)">Save</button>
-  <button (click)="editDogParkReview = null">Cancel Changes</button>
-    <button class="btn btn-primary" type="submit">Submit form</button>
-  </form> -->
+  </div>
 
-  <hr />
+  <br />
   <div class="p-1 mb-1 bg-info text-white">
     <form *ngIf="!selected" #addDogParkReviewForm="ngForm">
       Rating:
@@ -145,8 +131,7 @@
       <hr />
       <label for="validationServerReview">Write Your Review!</label>
       <div class="input-group">
-        <div class="input-group-prepend">
-        </div>
+        <div class="input-group-prepend"></div>
         <textarea
           name="review"
           cols="40"
@@ -163,17 +148,20 @@
           id="validationServerReview"
           placeholder="Review..."
           aria-describedby="inputGroupPrepend3"
-          required>
+          required
+        >
+        </textarea>
         <div class="invalid-feedback">Please Write A Review.</div>
       </div>
       <button
-        value="Add Dog Park Review"
+        type="submit"
+        name="submit"
+        value="Add Dog Park Review Form"
         (click)="addDogParkReview(addDogParkReviewForm)"
         class="btn btn-primary"
-        type="submit"
       >
         Submit Review
       </button>
     </form>
   </div>
-<!-- </div> -->
+</div>

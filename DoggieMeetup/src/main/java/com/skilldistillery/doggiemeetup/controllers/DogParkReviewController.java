@@ -74,13 +74,14 @@ public class DogParkReviewController {
 
 	@PutMapping("auth/dogParks/{dogParkId}/dogParkReviews/{userId}")
 	public DogParkReview update(HttpServletResponse res, HttpServletRequest req, @PathVariable int userId,
-			@RequestBody DogParkReview dogParkReview, Principal principal) {
+			@PathVariable int dogParkId, @RequestBody DogParkReview dogParkReview, Principal principal) {
 		try {
-			dogParkReview = dogParkReviewSvc.update(principal.getName(), userId, dogParkReview);
+			dogParkReview = dogParkReviewSvc.update(principal.getName(), dogParkId, dogParkReview);
 			if (dogParkReview == null) {
 				res.setStatus(404);
 			}
 		} catch (Exception e) {
+			System.err.println(e);
 			res.setStatus(400);
 			dogParkReview = null;
 		}

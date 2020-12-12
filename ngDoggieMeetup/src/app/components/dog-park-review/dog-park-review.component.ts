@@ -1,3 +1,4 @@
+import { DogPark } from 'src/app/models/dog-park';
 import { DogParkReviewId } from './../../models/dog-park-review-id';
 import { DogParkReview } from './../../models/dog-park-review';
 import { DogParkReviewService } from './../../services/dog-park-review.service';
@@ -23,8 +24,6 @@ export class DogParkReviewComponent implements OnInit {
 
   constructor(private dogParkReviewService: DogParkReviewService) {}
 
-
-
   displayDogParkReview(dogparkReview) {
     this.selected = dogparkReview;
   }
@@ -36,7 +35,8 @@ export class DogParkReviewComponent implements OnInit {
   reload(): void {
     this.dogParkReviewService.index(this.dogParkId).subscribe(
       (data) => {
-        (this.dogParkReviews = data), console.log(data);
+        this.dogParkReviews = data;
+        console.log(data);
       },
 
       (err) => console.error('Error in reloading the dogParkReviews: ')
@@ -46,7 +46,6 @@ export class DogParkReviewComponent implements OnInit {
   getNumOfReviews = function () {
     return this.dogParkReviews.length;
   };
-
 
   addDogParkReview(addDogParkReviewForm: NgForm) {
     console.log(addDogParkReviewForm.value);
@@ -75,18 +74,24 @@ export class DogParkReviewComponent implements OnInit {
     console.log('Dog Park Review Added!!+++++****');
   }
 
-  updateDogParkReview(dogParkReview: DogParkReview, dogParkId: number) {
-    this.dogParkReviewService.update(dogParkReview, dogParkId).subscribe(
-      (good) => {
-        this.dogParkReviewService.index(this.dogParkId);
-        if (this.selected != null) {
-          this.selected = Object.assign({}, dogParkReview);
+  updateDogParkReview(
+    dogParkReview: DogParkReview,
+    dogParkId: number,
+    dogPark: DogPark
+  ) {
+    this.dogParkReviewService
+      .update(dogParkReview, dogParkId, dogPark)
+      .subscribe(
+        (good) => {
+          this.dogParkReviewService.index(this.dogParkId);
+          if (this.selected != null) {
+            this.selected = Object.assign({}, dogParkReview);
+          }
+        },
+        (bad) => {
+          console.error(bad);
         }
-      },
-      (bad) => {
-        console.error(bad);
-      }
-    );
+      );
     this.editDogParkReview = null;
   }
 
@@ -94,13 +99,16 @@ export class DogParkReviewComponent implements OnInit {
     this.editDogParkReview = Object.assign({}, this.selected);
   }
 
-  deleteDogParkReview(user: User, dogParkReview: DogParkReview): void {
-    this.dogParkReviewService
-      .deleteDogParkReview(user, dogParkReview)
-      .subscribe((data) => {
-        this.dogParkReviews = this.dogParkReviews.filter(
-          (dogParkReview) => dogParkReview !== dogParkReview
-        );
-      });
+  deleteDogParkReview(
+    dogParkReview: DogParkReview
+    // dogParkId: number,
+    // dogPark: DogPark
+  ) {
+    this.dogParkReviewService.destroy(dogParkReview).subscribe(
+      (good) => {
+        this.reload();
+      },
+      (err) => console.error('Error deleting Review')
+    );
   }
 }
