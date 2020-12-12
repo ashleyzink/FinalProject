@@ -63,6 +63,40 @@ export class MeetupService {
     );
   }
 
+  update(meetup: Meetup, dogPark?: DogPark): Observable<Meetup> {
+    const httpOptions = this.authService.getAuthHttpOptions();
+    if (dogPark) {
+      meetup.dogPark = dogPark;
+    }
+    return this.http.put<Meetup>(this.authUrl + meetup.id, meetup, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('error creating meetup');
+      })
+    );
+  }
+
+  join(meetup: Meetup, dog: Dog): Observable<Meetup> {
+    const httpOptions = this.authService.getAuthHttpOptions();
+    console.log(meetup)
+    return this.http.put<Meetup>(this.authUrl + meetup.id + '/join/' + dog.id, meetup, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('error joining meetup');
+      })
+    );
+  }
+
+  delete(meetup: Meetup, dogPark?: DogPark): Observable<boolean> {
+    const httpOptions = this.authService.getAuthHttpOptions();
+    return this.http.delete<boolean>(this.authUrl + meetup.id, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('error deleting meetup');
+      })
+    );
+  }
+
 
 
 }

@@ -88,4 +88,41 @@ public class MeetupServiceImpl implements MeetupService {
 		return dogRepo.findByMeetups_Id(meetupId);
 	}
 
+	@Override
+	public Meetup join(Meetup meetup, int id, int dogId) {
+		System.out.println("-------------------IN MEETUP SERVICE IMPL-------------------------");
+		System.out.println("DOGS FOR MEETUP:");
+		System.out.println(meetup.getDogs());
+		Optional<Meetup> meetupOpt = meetupRepo.findById(id);
+		Meetup dbMeetup = null;
+		if (meetupOpt.isPresent() && meetupOpt.get().getId() == id) {
+			dbMeetup = meetupOpt.get();
+			if (dbMeetup == null) {
+				return null;
+			}
+		}
+		if (meetup.getDogs() != null) { dbMeetup.setDogs(meetup.getDogs()); }
+		
+		dbMeetup = meetupRepo.save(dbMeetup);
+		Dog dog = dogRepo.findById(dogId).get();
+		dog.getMeetups().add(dbMeetup);
+		dogRepo.saveAndFlush(dog);
+		meetupRepo.saveAndFlush(dbMeetup);
+		System.out.println("------------------------------------------------------------------");
+		System.out.println("------------------------------------------------------------------");
+		System.out.println("------------------------------------------------------------------");
+		System.out.println(dbMeetup);
+		System.out.println(dbMeetup.getDogs().size());
+		if (dbMeetup.getDogs().size() > 1) {
+			System.out.println(dbMeetup.getDogs().get(1));			
+		}
+		
+		System.out.println(dogRepo.findByMeetups_Id(meetup.getId()));
+		System.out.println("------------------------------------------------------------------");
+		System.out.println("------------------------------------------------------------------");
+		System.out.println("------------------------------------------------------------------");
+		
+		return dbMeetup;
+	}
+
 }

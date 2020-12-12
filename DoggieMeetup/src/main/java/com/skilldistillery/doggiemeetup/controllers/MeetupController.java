@@ -123,6 +123,32 @@ public class MeetupController {
 			}
 			
 		} catch (Exception e) {
+			System.err.println(e);
+			res.setStatus(400);
+			meetup = null;
+		}
+		return meetup;
+	}
+	
+	@PutMapping("auth/meetups/{id}/join/{dogId}")
+	public Meetup join(
+			HttpServletRequest req,
+			HttpServletResponse res,
+			@PathVariable int id,
+			@PathVariable int dogId,
+			@RequestBody Meetup meetup 
+			) {
+		System.out.println("----------------------------");
+		System.out.println(meetup);
+		System.out.println("----------------------------");
+		try {
+			meetup = meetupService.join(meetup, id, dogId);
+			if(meetup == null) {
+				res.setStatus(404);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 			res.setStatus(400);
 			meetup = null;
 		}

@@ -35,14 +35,44 @@
         </mat-list>
       </div>
 
+      <div *ngIf="editMeetup">
+        <mat-form-field>
+          <input matInput type="text" name="title" [(ngModel)]="editMeetup.title" placeholder="Title">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <textarea cdkTextareaAutosize cdkAutosizeMaxRows="5" cols='50' matInput type="text" name="description" [(ngModel)]="editMeetup.description" placeholder="Description"></textarea>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input matInput type="datetime-local" name="meetupDate" [(ngModel)]="editMeetup.meetupDate">
+        </mat-form-field>
+        <br>
+        <button class="btn" (click)="update(editMeetup)">Update</button>
+        <button class="btn" (click)="editMeetup = null;">Cancel</button>
+      </div>
+
     </mat-card-content>
 
-    <mat-card-actions>
+    <mat-card-actions *ngIf="getLoggedInUser()">
       <div>
-        <button class="btn">Join</button>
+        <button class="btn" (click)="setJoin()">Attend</button>
+
+        <div class="form-group col">
+          <label for="add-dog-to-meetup">Dog</label>
+          <!-- <select #selector class="form-control" id="add-dog-to-meetup" (change)="setSelectedDog(selector.value)" [(ngModel)]="selectedDog"> -->
+            <!-- <option *ngFor="let dog of getLoggedInUser().dogs" [value]="dog">{{dog.name}}</option>
+          </select> -->
+          <select #selector class="form-control" name="select" id="add-dog-to-meetup" (change)="setSelectedDog(selector.value)" [(ngModel)]="selectedDogId">
+            <option [value]="null">Select</option>
+            <option *ngFor="let dog of getLoggedInUser().dogs" [value]="dog.id">{{dog.name}}</option>
+          </select>
+          <button class="btn" (click)="addDogToMeetup(meetup, selectedDog)">Join</button>
+        </div>
         <button class="btn">Comment</button>
-        <button *ngIf="checkLoginMatchesUser(meetup.user)">Edit</button>
-        <button *ngIf="checkLoginIsAdmin()">Edit (Admin)</button>
+        <button class="btn" *ngIf="checkLoginMatchesUser(meetup.user)" (click)="setEdit()">Edit</button>
+        <button class="btn" *ngIf="checkLoginIsAdmin()" (click)="setEdit()">Edit (Admin)</button>
       </div>
     </mat-card-actions>
 

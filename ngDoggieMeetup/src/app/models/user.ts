@@ -1,3 +1,5 @@
+import { Dog } from './dog';
+
 export class User {
   id: number;
   username: string;
@@ -10,6 +12,7 @@ export class User {
   dateOption: boolean;
   profilePhotoUrl: string;
   bio: string;
+  dogs: Dog[];
   // TODO address, createDate, profilePrivate, locationPrivate
   // TODO relationships?
 
@@ -25,6 +28,7 @@ export class User {
     dateOption?: boolean,
     profilePhotoUrl?: string,
     bio?: string,
+    dogs?: Dog[]
   ) {
     this.id = id;
     this.username = username;
@@ -37,5 +41,6 @@ export class User {
     this.dateOption = dateOption;
     this.profilePhotoUrl = profilePhotoUrl;
     this.bio = bio;
+    this.dogs = dogs;
   }
 }

@@ -1,3 +1,4 @@
+import { Dog } from './dog';
 import { DogPark } from './dog-park';
 import { User } from './user';
 
@@ -9,6 +10,7 @@ export class Meetup {
   createDate: string;
   user: User;
   dogPark: DogPark;
+  dogs: Dog[];
   constructor(
     id?: number,
     title?: string,
@@ -17,6 +19,7 @@ export class Meetup {
     createDate?: string,
     user?: User,
     dogPark?: DogPark,
+    dogs?: Dog[],
   ) {
     this.id = id;
     this.title = title;
@@ -25,6 +28,7 @@ export class Meetup {
     this.createDate = createDate;
     this.user = user;
     this.dogPark = dogPark;
+    this.dogs = dogs;
   }
 
 }

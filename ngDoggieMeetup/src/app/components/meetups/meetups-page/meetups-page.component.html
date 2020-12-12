@@ -1,5 +1,5 @@
 <div *ngFor="let meetup of meetups">
-  <app-meetup-details [meetup]="meetup"></app-meetup-details>
+  <app-meetup-details [meetup]="meetup" (contentChange)="index()"></app-meetup-details>
 </div>
 <div *ngIf="dogPark">
   <button (click)="setNewMeetup()">Create New Meetup</button>
