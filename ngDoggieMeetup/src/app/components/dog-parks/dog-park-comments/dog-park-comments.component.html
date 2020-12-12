@@ -1,5 +1,5 @@
 <div class="col-lg">
-
+<h4>Comments:</h4>
   <ul>
     <li *ngFor="let comment of rootComments">
       <app-dog-park-comment-display [comment]="comment" (contentChange)="onContentChange(true)">
@@ -10,6 +10,7 @@
 
 </div>
 <div class="col-lg">
+  <h4>Add New Comment:</h4>
   <mat-card>
     <mat-card-title>
       {{newComment.title}}
@@ -22,7 +23,7 @@
       <textarea name="commentText" [(ngModel)]="newComment.commentText" cols="30"></textarea>
     </mat-card-content>
     <mat-card-actions>
-      <button (click)="create(newComment)">Post</button>
+      <button class="btn btn-secondary" (click)="create(newComment)">Post</button>
     </mat-card-actions>
   </mat-card>
 </div>

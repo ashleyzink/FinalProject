@@ -79,7 +79,7 @@
       </google-map>
       </mat-card-content>
       <mat-card-actions>
-        <button
+        <button class="btn btn-secondary"
           mat-button
           (click)="map.panTo(center)"
         >
@@ -106,9 +106,9 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-button (click)="toggleUpdate()">EDIT</button>
-        <button mat-button (click)="delete(selected.id)">DELETE</button>
-        <button mat-button (click)="deselect()">DESELECT</button>
+        <button class="btn btn-secondary" mat-button (click)="toggleUpdate()">EDIT</button>
+        <button class="btn btn-danger" ngbPopover="Clicking here permanently deletes the Dog Park" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?" mat-button (click)="delete(selected.id)">DELETE</button>
+        <button class="btn btn-secondary" mat-button (click)="deselect()">DESELECT</button>
       </mat-card-actions>
     </mat-card>
 
@@ -219,7 +219,7 @@
 
 
       <mat-card-actions>
-        <button mat-button (click)="create(newDogPark, newAddress)">ADD</button>
+        <button class="btn btn-secondary" mat-button (click)="create(newDogPark, newAddress)">ADD</button>
       </mat-card-actions>
     </mat-card>
 
@@ -328,10 +328,10 @@
 
 
       <mat-card-actions>
-        <button mat-button (click)="update(updateDogPark, updateDogPark.address)">
+        <button class="btn btn-secondary" mat-button (click)="update(updateDogPark, updateDogPark.address)">
           UPDATE
         </button>
-        <button mat-button (click)="deselect()">
+        <button class="btn btn-secondary" mat-button (click)="deselect()">
           DESELECT
         </button>
       </mat-card-actions>
