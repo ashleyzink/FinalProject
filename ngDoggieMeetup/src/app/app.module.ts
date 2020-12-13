@@ -40,6 +40,7 @@ import { DogProfileComponent } from './components/dog-profile/dog-profile.compon
 import { FriendProfileComponent } from './components/friend-profile/friend-profile.component';
 import { TrackerComponent } from './components/maps/tracker/tracker.component';
 import { MapDisplayComponent } from './components/maps/map-display/map-display.component';
+import { WalksComponent } from './components/maps/walks/walks.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { MapDisplayComponent } from './components/maps/map-display/map-display.c
     DogProfileComponent,
     FriendProfileComponent,
     TrackerComponent,
-    MapDisplayComponent
+    MapDisplayComponent,
+    WalksComponent
   ],
   imports: [
     CommonModule,

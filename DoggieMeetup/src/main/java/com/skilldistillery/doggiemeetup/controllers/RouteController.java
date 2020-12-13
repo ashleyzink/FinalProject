@@ -45,18 +45,24 @@ public class RouteController {
 	
 
 	@PostMapping("auth/profile/routes")
-	public void enable(HttpServletRequest req, 
+	public Route enable(HttpServletRequest req, 
 						HttpServletResponse res, 
 						@RequestBody Route route,
 						Principal principal) {
 		try {
-			routeSvc.create(principal.getName(), route);
+			route = routeSvc.create(principal.getName(), route);
 			if (route == null) {
-				res.setStatus(404);			
+				res.setStatus(400);	
+				return null;
+			} else {
+				res.setStatus(201);
+				return route;
 			}
 		} catch (Exception e) {
-			res.setStatus(400);			
+			res.setStatus(400);
+			return null;
 		}
+		
 	}
 	
 }
