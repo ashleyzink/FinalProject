@@ -23,6 +23,7 @@ export class MeetupDetailsComponent implements OnInit {
   constructor(private meetupService: MeetupService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.reloadUserInMemory();
     this.loadDogs();
   }
 

@@ -12,6 +12,7 @@ import { User } from '../models/user';
 export class AuthService {
   private baseUrl = environment.baseUrl;
   private user: User = null;
+  private authUrl = environment.baseUrl + 'api/auth';
 
   constructor(private http: HttpClient) { }
 
@@ -116,6 +117,23 @@ export class AuthService {
   getLoggedInUser(): User {
     let lazyLoadUser = this.user;
     return this.user;
+  }
+
+  reloadUserInMemory() {
+    this.show().subscribe(
+      data => this.user = data,
+      err => 'error reloading user'
+    )
+  }
+
+  show(): Observable<User> {
+    const httpOptions = this.getAuthHttpOptions();
+    return this.http.get<User>(this.authUrl + '/profile', httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('UserProfileService.show(): Error retrieving user');
+      })
+    );
   }
 
 }
