@@ -20,6 +20,10 @@ export class MeetupsPageComponent implements OnInit {
     this.index();
   }
 
+  ngOnChanges(): void {
+    this.index();
+  }
+
   setNewMeetup() {
     this.newMeetup = new Meetup();
     if (this.dogPark) {

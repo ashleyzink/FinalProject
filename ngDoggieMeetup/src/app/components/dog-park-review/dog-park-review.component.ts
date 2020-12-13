@@ -40,6 +40,15 @@ export class DogParkReviewComponent implements OnInit {
     return null;
   }
 
+  ngOnChanges(): void {
+    if (this.dogParkId && this.dogParkSelected) {
+      this.dogParks.push(this.dogParkSelected)
+    } else {
+      this.loadDogParks();
+    }
+    this.reload();
+  }
+
   ngOnInit(): void {
     if (this.dogParkId && this.dogParkSelected) {
       this.dogParks.push(this.dogParkSelected)

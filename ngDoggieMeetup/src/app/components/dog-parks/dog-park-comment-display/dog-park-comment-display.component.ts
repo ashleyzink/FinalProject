@@ -13,6 +13,8 @@ export class DogParkCommentDisplayComponent implements OnInit {
 
   @Output() contentChange = new EventEmitter<boolean>();
 
+  @Output('contentHasChanged') contentChange2 = new EventEmitter<boolean>();
+
   showReplies: boolean = false;
   newReply: DogParkComment = null;
   updateComment: DogParkComment = null;
@@ -35,6 +37,7 @@ export class DogParkCommentDisplayComponent implements OnInit {
   onContentChange(change: boolean) {
     console.log('in onContentChange()')
     this.contentChange.emit(change);
+    this.contentChange2.emit(change);
   }
 
   toggleReplies() {
