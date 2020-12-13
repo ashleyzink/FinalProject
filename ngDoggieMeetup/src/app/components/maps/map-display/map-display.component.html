@@ -10,7 +10,11 @@ mapId="ff79bdf3fe4b810b"
 (mapDblclick)="myMap.panTo()"
 >
 
-<map-polyline [path]="myLocArr">
+<map-polyline [path]="myLocArr"
+geodesic="true"
+    strokeColor="#FF0000"
+    strokeOpacity="1.0"
+    strokeWeight="2">
 </map-polyline>
 
 </google-map>

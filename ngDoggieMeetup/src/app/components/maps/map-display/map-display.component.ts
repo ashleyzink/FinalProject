@@ -17,14 +17,15 @@ export class MapDisplayComponent implements OnInit {
     scrollwheel: true,
     disableDoubleClickZoom: true
   }
-  myPath = new google.maps.Polyline({
+  myLocArr = []
+  myPathOptions: google.maps.PolylineOptions = {
     geodesic: true,
     strokeColor: "#FF0000",
     strokeOpacity: 1.0,
     strokeWeight: 2,
-    path: []
-  });
-  myLocArr = []
+    path: this.myLocArr,
+  };
+
 
   constructor(private authService: AuthService) { }
 
@@ -49,8 +50,6 @@ export class MapDisplayComponent implements OnInit {
       locArr.push(loc)
     }
     this.myLocArr = locArr;
-    this.myPath.setPath(locArr)
-    console.log(this.myPath);
   }
 
 
