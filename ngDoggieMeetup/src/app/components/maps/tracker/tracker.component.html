@@ -1,0 +1,8 @@
+<div>
+  <button class="btn" *ngIf="!route" (click)="newRoute()">
+    Start a walk
+  </button>
+  <button class="btn" *ngIf="route" (click)="endRoute()">
+    End walk
+  </button>
+</div>

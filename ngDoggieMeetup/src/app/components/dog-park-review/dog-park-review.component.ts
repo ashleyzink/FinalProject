@@ -1,8 +1,9 @@
+import { DogParkService } from './../../services/dog-park.service';
 import { DogPark } from 'src/app/models/dog-park';
 import { DogParkReviewId } from './../../models/dog-park-review-id';
 import { DogParkReview } from './../../models/dog-park-review';
 import { DogParkReviewService } from './../../services/dog-park-review.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
@@ -17,19 +18,51 @@ export class DogParkReviewComponent implements OnInit {
   newDogParkReview: DogParkReview = new DogParkReview();
   dogParkReviews: DogParkReview[] = [];
   editDogParkReview: DogParkReview = null;
-  dogParkId: number = 1;
+  dogParks: DogPark[] = [];
+  @Input() dogParkId: number;
+  @Input() dogParkSelected: DogPark;
   displayTable() {
     this.selected = null;
   }
 
-  constructor(private dogParkReviewService: DogParkReviewService) {}
+  constructor(private dogParkReviewService: DogParkReviewService, private dogParkService: DogParkService) {}
 
   displayDogParkReview(dogparkReview) {
     this.selected = dogparkReview;
   }
 
-  ngOnInit(): void {
+  getDogParkIdFromName(input: string): number {
+    for (let i = 0; i < this.dogParks.length; i++) {
+      if (this.dogParks[i].name == input) {
+        return this.dogParks[i].id;
+      }
+    }
+    return null;
+  }
+
+  ngOnChanges(): void {
+    if (this.dogParkId && this.dogParkSelected) {
+      this.dogParks.push(this.dogParkSelected)
+    } else {
+      this.loadDogParks();
+    }
     this.reload();
+  }
+
+  ngOnInit(): void {
+    if (this.dogParkId && this.dogParkSelected) {
+      this.dogParks.push(this.dogParkSelected)
+    } else {
+      this.loadDogParks();
+    }
+    this.reload();
+  }
+
+  loadDogParks() {
+    this.dogParkService.index().subscribe(
+      data => this.dogParks = data,
+      error => console.error('error loading dog parks for dog park reviews')
+    )
   }
 
   reload(): void {
@@ -49,11 +82,18 @@ export class DogParkReviewComponent implements OnInit {
 
   addDogParkReview(addDogParkReviewForm: NgForm) {
     console.log(addDogParkReviewForm.value);
+    let id;
+    if (!this.dogParkId) {
+      id = this.getDogParkIdFromName(addDogParkReviewForm.value['name']);
+    } else {
+      id = this.dogParkId;
+    }
     this.dogParkReviews.push(this.newDogParkReview);
     this.dogParkReviewService
-      .create(addDogParkReviewForm.value, this.dogParkId)
+      .create(addDogParkReviewForm.value, id)
       .subscribe(
         (data) => {
+
           this.reload();
         },
         (err) => {

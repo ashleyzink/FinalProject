@@ -54,7 +54,7 @@
   <br>
   <ul *ngIf="showReplies">
     <li *ngFor="let reply of comment.replies">
-      <app-dog-park-comment-display [comment]="reply">
+      <app-dog-park-comment-display (contentHasChanged)="onContentChange(true)" (contentChange)="onContentChange(true)" [comment]="reply">
       </app-dog-park-comment-display>
     </li>
   </ul>

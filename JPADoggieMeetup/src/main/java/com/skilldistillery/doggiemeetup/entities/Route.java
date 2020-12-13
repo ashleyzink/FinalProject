@@ -3,6 +3,7 @@ package com.skilldistillery.doggiemeetup.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Route {
@@ -31,8 +32,8 @@ public class Route {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "route")
+	@JsonIgnoreProperties({"route"})
+	@OneToMany(mappedBy = "route", cascade = CascadeType.PERSIST)
 	private List<Location> locations;
 
 	// CONSTRUCTORS

@@ -1,3 +1,4 @@
+import { WalksComponent } from './components/maps/walks/walks.component';
 import { MeetupsPageComponent } from './components/meetups/meetups-page/meetups-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'meetups', component: MeetupsPageComponent },
   { path: 'dogParkReview', component: DogParkReviewComponent },
   { path: 'dogUserProfile/:id', component: DogProfileComponent },
+  { path: 'walks', component: WalksComponent },
   // { path: 'dogEditProfile/:id', component: DogProfileComponent },
 
   // ---Place all other routes above here---

@@ -351,3 +351,7 @@
     <app-meetups-page *ngIf="selected" [dogPark]="selected"> </app-meetups-page>
   </div>
 </div>
+
+<div *ngIf="selected">
+  <app-dog-park-review [dogParkId]="selected.id" [dogParkSelected]="selected"></app-dog-park-review>
+</div>
