@@ -1,3 +1,4 @@
+import { RouteService } from './../../../services/route.service';
 import { TrackerService } from './../../../services/tracker.service';
 import { Route } from './../../../models/route';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -15,8 +16,9 @@ export class TrackerComponent implements OnInit {
   route: Route;
   tracker;
   @Output('updatedPostion') updatePostion = new EventEmitter<Route>()
+  @Output('submittedRoute') submitRoute = new EventEmitter<Route>()
 
-  constructor() { }
+  constructor(private routeService: RouteService) { }
 
   ngOnInit(): void {
   }
@@ -50,6 +52,13 @@ export class TrackerComponent implements OnInit {
     navigator.geolocation.clearWatch(this.tracker);
     console.log(this.route)
     // Should push to DB at this point
+    this.routeService.addRoute(this.route).subscribe(
+      data => {
+        console.log(data);
+        this.submitRoute.emit(data);
+      },
+      err => console.error(err)
+    )
   }
 
 }

@@ -1,3 +1,4 @@
+import { RouteService } from './../../../services/route.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
@@ -25,9 +26,17 @@ export class MapDisplayComponent implements OnInit {
     strokeWeight: 2,
     path: this.myLocArr,
   };
+  testCoords = [
+    { lat: 37.772, lng: -122.214 },
+    { lat: 21.291, lng: -157.821 },
+    { lat: -18.142, lng: 178.431 },
+    { lat: -27.467, lng: 153.027 },
+  ];
+  myRoutes: Route[] = [];
+  allMyPolylines: google.maps.Polyline[] = [];
 
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private routeService: RouteService) { }
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition(
@@ -38,6 +47,7 @@ export class MapDisplayComponent implements OnInit {
     )
     this.authService.reloadUserInMemory()
     this.user = this.authService.getLoggedInUser();
+
   }
 
   drawRoute(route: Route) {
@@ -50,6 +60,33 @@ export class MapDisplayComponent implements OnInit {
       locArr.push(loc)
     }
     this.myLocArr = locArr;
+    // this.myLocArr = this.testCoords;
+  }
+
+  drawAllRoutes(routes: Route[]) {
+    for (let i = 0; i < routes.length; i++) {
+      let poly = new google.maps.Polyline();
+      let path: google.maps.LatLngLiteral[] = [];
+      routes[i].locations.forEach(element => {
+        path.push({
+          lat: element.lat,
+          lng: element.lng
+        })
+      });
+      poly.setPath(path);
+      this.allMyPolylines.push(poly);
+    }
+  }
+
+
+  getUserRoutes() {
+    this.routeService.getUserRoutes().subscribe(
+      data => {
+        this.myRoutes = data
+        console.log(this.myRoutes)
+      },
+      err => console.log(err)
+    )
   }
 
 
