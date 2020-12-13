@@ -128,7 +128,7 @@ export class DogParksMaterialComponent implements OnInit {
       data => {
         this.reload();
         this.selected = data;
-        this.newDogPark = null;
+        this.newDogPark = new DogPark();
       },
       err => {
         console.error('Error creating dogPark: ');
