@@ -17,4 +17,8 @@ export class NavigationComponent implements OnInit {
     return this.authService.checkLogin();
   }
 
+  checkLoginIsAdmin(): boolean {
+    return this.authService.checkLoggedInUserIsAdmin();
+  }
+
 }

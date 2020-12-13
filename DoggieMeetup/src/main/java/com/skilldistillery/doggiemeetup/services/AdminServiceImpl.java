@@ -70,40 +70,43 @@ public class AdminServiceImpl implements AdminService {
 		}
 		User dbUser = userOpt.get();
 
-		if (user.getDateOption() != null) {
-			dbUser.setDateOption(user.getDateOption());
-		}
-		if (user.getFirstName() != null) {
-			dbUser.setFirstName(user.getFirstName());
-		}
-		if (user.getLastName() != null) {
-			dbUser.setLastName(user.getLastName());
-		}
-		if (user.getUsername() != null) {
-			dbUser.setUsername(user.getUsername());
-		}
-		if (user.getEmail() != null) {
-			dbUser.setEmail(user.getEmail());
-		}
-		if (user.getRole() != null) {
-			dbUser.setRole(user.getRole());
-		}
-		if (user.getEnabled() != null) {
-			dbUser.setEnabled(user.getEnabled());
-		}
-		if (user.getProfilePhotoUrl() != null) {
-			dbUser.setProfilePhotoUrl(user.getProfilePhotoUrl());
-		}
-		if (user.getBio() != null) {
-			dbUser.setBio(user.getBio());
-		}
-		if (user.getProfilePrivate() != null) {
-			dbUser.setProfilePrivate(user.getProfilePrivate());
-		}
-		if (user.getLocationPrivate() != null) {
-			dbUser.setLocationPrivate(user.getLocationPrivate());
-		}
+		if (user.getDateOption() != null) {dbUser.setDateOption(user.getDateOption());}
+		if (user.getFirstName() != null) {dbUser.setFirstName(user.getFirstName());}
+		if (user.getLastName() != null) {dbUser.setLastName(user.getLastName());}
+		if (user.getUsername() != null) {dbUser.setUsername(user.getUsername());}
+		if (user.getEmail() != null) {dbUser.setEmail(user.getEmail());} 
+		if (user.getRole() != null) {dbUser.setRole(user.getRole());}
+		if (user.getEnabled() != null) {dbUser.setEnabled(user.getEnabled());}	
+		if (user.getProfilePhotoUrl() != null) {dbUser.setProfilePhotoUrl(user.getProfilePhotoUrl());}
+		if (user.getBio() != null) {dbUser.setBio(user.getBio());}
+		if (user.getProfilePrivate() != null) {dbUser.setProfilePrivate(user.getProfilePrivate());}
+		if (user.getLocationPrivate() != null) {dbUser.setLocationPrivate(user.getLocationPrivate());}
 		return userRepo.saveAndFlush(dbUser);
+	}
+	
+	@Override
+	public Boolean disable(int id) {
+		Optional<User> userOpt = userRepo.findById(id);
+		if (userOpt.isPresent()) {
+			User dbUser = userOpt.get();
+			
+				dbUser.setEnabled(!dbUser.getEnabled());
+				userRepo.saveAndFlush(dbUser);
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public Boolean enable(int id) {
+		Optional<User> userOpt = userRepo.findById(id);
+		if (userOpt.isPresent()) {
+			User dbUser = userOpt.get();
+				dbUser.setEnabled(true);
+				userRepo.saveAndFlush(dbUser);
+				return true;
+		}
+		return false;
 	}
 
 	// Gencom implementations
