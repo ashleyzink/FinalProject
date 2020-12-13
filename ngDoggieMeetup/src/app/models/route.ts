@@ -1,5 +1,6 @@
 import { strict } from 'assert';
 import { User } from './user';
+import { Location } from './location';
 
 export class Route {
   id: number;
@@ -18,6 +19,6 @@ export class Route {
     this.startTime = startTime;
     this.endTime = endTime;
     this.user = user;
-    this.locations = locations;
+    this.locations = [];
   }
 }
