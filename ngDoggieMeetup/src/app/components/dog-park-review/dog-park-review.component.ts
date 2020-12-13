@@ -110,8 +110,6 @@ export class DogParkReviewComponent implements OnInit {
     );
     this.newDogParkReview = new DogParkReview();
     addDogParkReviewForm.reset();
-    console.log(addDogParkReviewForm.value);
-    console.log('Dog Park Review Added!!+++++****');
   }
 
   updateDogParkReview(
