@@ -4,6 +4,7 @@ import { Route } from './../../../models/route';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Location } from './../../../models/location';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-tracker',
@@ -17,6 +18,7 @@ export class TrackerComponent implements OnInit {
   tracker;
   @Output('updatedPostion') updatePostion = new EventEmitter<Route>()
   @Output('submittedRoute') submitRoute = new EventEmitter<Route>()
+  @Output('positionChanged') posChange = new EventEmitter<Location>()
 
   constructor(private routeService: RouteService) { }
 
@@ -43,6 +45,7 @@ export class TrackerComponent implements OnInit {
         loc.pointTime = d.toISOString();
         this.route.locations.push(loc);
         this.updatePostion.emit(this.route);
+        this.posChange.emit(loc);
       }
     )
   }
@@ -56,6 +59,7 @@ export class TrackerComponent implements OnInit {
       data => {
         console.log(data);
         this.submitRoute.emit(data);
+        this.route = null;
       },
       err => console.error(err)
     )
