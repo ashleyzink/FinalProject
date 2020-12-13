@@ -10,7 +10,7 @@
 
     <mat-card-subtitle>
       <p>
-        Hosted by <span>{{meetup.user.username}}</span>
+        Hosted by <span>{{meetup.user.username}} <img [src]="meetup.user.profilePhotoUrl" class="img-fluid z-depth-1 rounded-circle" style="width:100px;height:100px;"></span>
         At <span>{{meetup.dogPark.name}}</span>
         On <span>{{meetup.meetupDate | date}}</span>
       </p>

@@ -10,7 +10,7 @@
       <p>
         <span>#{{comment.id}}</span>
         <span> Posted By </span>
-        <span>{{comment.user.username}}</span>
+        <span>{{comment.user.username}} <img [src]="comment.user.profilePhotoUrl" class="img-fluid z-depth-1 rounded-circle" style="width:100px;height:100px;"></span>
       </p>
     </mat-card-subtitle>
     <mat-card-content>
