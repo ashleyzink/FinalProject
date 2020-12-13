@@ -1,4 +1,6 @@
 <!-- <h1 style="text-align: center;">Welcome to your Doggie Meetup Beginnings!!</h1> -->
+<div style="background-color: lavender;">
+
 
 
 <div style="text-align: center" *ngIf='selected'>
@@ -19,8 +21,8 @@
 </div>
 <hr>
 <button class="btn btn-secondary" (click)='setEditUser()'>Edit User Info</button><br><br>
-<button class="btn btn-secondary" (click)='addDog()'>Add Dog to Pack</button>
-<p><button id="friendProfileButton" (click)="goToFriendProfile(user.id)">See List of Friends  <i class='fas fa-paw'></i></button></p>
+<button class="btn btn-secondary" (click)='addDog()'>Add Dog to Pack</button><br><br>
+<button class="btn btn-secondary" id="friendProfileButton" (click)="goToFriendProfile(user.id)">See List of Friends  <i class='fas fa-paw'></i></button>
 
 <hr>
 <br>
@@ -102,3 +104,6 @@
   </div>
 
 </div>
+
+</div>
+
