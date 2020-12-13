@@ -5,9 +5,11 @@
 <div *ngFor="let meetup of meetups">
   <app-meetup-details [meetup]="meetup" (contentChange)="index()"></app-meetup-details>
 </div>
+<br>
 <div *ngIf="dogPark">
   <button class="btn btn-secondary" (click)="setNewMeetup()">Create New Meetup</button>
 </div>
+<br>
 <div *ngIf="newMeetup">
   <div>
     <input type="text" name="title" [(ngModel)]="newMeetup.title" placeholder="Title">
@@ -19,7 +21,7 @@
       <input matInput type="datetime-local" name="meetupDate" [(ngModel)]="newMeetup.meetupDate">
     </mat-form-field>
     <br>
-    <button (click)="create(newMeetup)">Create</button>
+    <button class="btn btn-outline-secondary" (click)="create(newMeetup)">Create</button>
   </div>
 </div>
 

@@ -50,9 +50,11 @@
     <p>
       Image: <strong> <img [src]="selected.dogPark.imageUrl"> </strong>
     </p>
-    <button (click)="displayTable()">Back</button>
-    <button (click)="setEditDogParkReview()">Edit</button>
-    <button (click)="deleteDogParkReview(selected)">Delete</button>
+    <div class="btn-group">
+      <button class="btn btn-outline-secondary" (click)="displayTable()">Back</button>
+      <button class="btn btn-outline-secondary"(click)="setEditDogParkReview()">Edit</button>
+      <button class="btn btn-outline-danger"(click)="deleteDogParkReview(selected)">Delete</button>
+    </div>
   </div>
 
   <div class="stars">

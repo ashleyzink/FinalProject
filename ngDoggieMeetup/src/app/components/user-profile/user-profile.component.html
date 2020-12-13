@@ -38,9 +38,11 @@
   <!-- TODO instead of a text area for bio, maybe add a rich text box so users can add a little flare to their bio -->
   Bio: <textarea name="bio" cols="40" rows="4" placeholder="{{selected.bio}}" [(ngModel)]="editUser.bio"></textarea><br><br>
   <!-- Unsure of where to add the disable funtion for a profile. Seems like it should be a different area -->
-  <button (click)='updateUser(editUser)'>Save</button><br><br>
-  <button (click)='editUser=null'>Cancel</button>
-  <button (click)="disableUser(editUser.id)">Disable Account</button>
+  <div class="btn-group">
+    <button class="btn btn-outline-secondary" (click)='updateUser(editUser)'>Save</button>
+    <button class="btn btn-outline-secondary"  (click)='editUser=null'>Cancel</button>
+    <button class="btn btn-outline-secondary"  (click)="disableUser(editUser.id)">Disable Account</button>
+  </div>
 </div>
 <br>
 <br>
@@ -62,8 +64,10 @@
           <!-- *this should only appear if they go to edit their dog profile! -->
           Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="newDog.rainbowBridge" placeholder="rainbowBridge"><br><br>
           Doggie Profile Pic: <input type="text" name="image" [(ngModel)]="newDog.profilePicUrl" placeholder="profilePicUrl"><br><br>
-        <button class="btn btn-success" (click)="create(newDog)">Add Dog</button>
-        <button (click)='newDog=null'>Cancel</button>
+       <div class="btn-group">
+         <button class="btn btn-success" (click)="create(newDog)">Add Dog</button>
+         <button class="btn btn-outline-secondary" (click)='newDog=null'>Cancel</button>
+        </div>
       </div>
     </div>
 
