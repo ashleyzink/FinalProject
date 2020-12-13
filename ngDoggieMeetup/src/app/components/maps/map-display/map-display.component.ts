@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Route } from 'src/app/models/route';
+import { Location } from 'src/app/models/location';
 
 @Component({
   selector: 'app-map-display',
@@ -34,20 +35,44 @@ export class MapDisplayComponent implements OnInit {
   ];
   myRoutes: Route[] = [];
   allMyPolylines: google.maps.Polyline[] = [];
+  hideRoutes: boolean = true;
+  currentLocation = {};
+  routeDistances = {};
+  distanceDisplay = 0;
 
 
   constructor(private authService: AuthService, private routeService: RouteService) { }
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition(
-      position => this.center = {
+      position => { this.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
-      }
+      };
+      this.currentLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+    }
     )
     this.authService.reloadUserInMemory()
     this.user = this.authService.getLoggedInUser();
+    this.getUserRoutes();
+  }
 
+  updateMarker(location: Location) {
+    this.currentLocation['lat'] = location.lat;
+    this.currentLocation['lng'] = location.lng;
+  }
+
+  toggleRoutes(){
+    if (this.hideRoutes) {
+      this.drawAllRoutes(this.myRoutes);
+      this.hideRoutes = false;
+    } else {
+      this.allMyPolylines = [];
+      this.hideRoutes = true
+    }
   }
 
   drawRoute(route: Route) {
@@ -87,6 +112,12 @@ export class MapDisplayComponent implements OnInit {
       },
       err => console.log(err)
     )
+  }
+
+  getDistance(polylinePath) {
+    let len = 0;
+    len = google.maps.geometry.spherical.computeLength(polylinePath);
+    this.distanceDisplay = len;
   }
 
 

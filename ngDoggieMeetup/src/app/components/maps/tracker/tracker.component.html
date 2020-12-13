@@ -1,8 +1,8 @@
 <div>
-  <button (click)="newRoute()">
+  <button class="btn" *ngIf="!route" (click)="newRoute()">
     Start
   </button>
-  <button (click)="endRoute()">
+  <button class="btn" *ngIf="route" (click)="endRoute()">
     End
   </button>
 </div>

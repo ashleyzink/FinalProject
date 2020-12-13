@@ -1,4 +1,7 @@
 
+<div *ngIf="distanceDisplay">
+  <p>Distance: {{distanceDisplay | number : '1.1-1'}} meters</p>
+</div>
 <google-map
 #myMap
 height="500px"
@@ -10,30 +13,40 @@ mapId="ff79bdf3fe4b810b"
 (mapDblclick)="myMap.panTo()"
 >
 
-<map-polyline [path]="myLocArr"
-  geodesic="true"
-  strokeColor="#FF00FF"
-  strokeOpacity="1.0"
-  strokeWeight="2">
-</map-polyline>
+<map-polyline [path]="myLocArr"></map-polyline>
 
 <map-polyline
   *ngFor="let polyLine of allMyPolylines"
   [path]="polyLine.getPath()"
-  geodesic="true"
-  strokeColor="#FFFF00"
-  strokeOpacity="1.0"
-  strokeWeight="2">
-
+  (polylineClick)="getDistance(polyLine.getPath())"
+  >
 </map-polyline>
+<map-marker
+[position]="currentLocation"
+>
+</map-marker>
 
 </google-map>
-<app-tracker [user]="user" (updatedPostion)="drawRoute($event)" (submittedRoute)="drawAllRoutes(myRoutes)">
+<app-tracker [user]="user" (positionChanged)="updateMarker($event)" (updatedPostion)="drawRoute($event)">
 
 </app-tracker>
-<button (click)="getUserRoutes()">
-  Load My Routes
+<button class="btn" *ngIf="hideRoutes" (click)="toggleRoutes()">
+  Show All My Walks
 </button>
-<button (click)="drawAllRoutes(myRoutes)">
-  Draw My Routes
+<button class="btn" *ngIf="!hideRoutes" (click)="toggleRoutes()">
+  Hide All My Walks
 </button>
+
+<div>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>My Walks</mat-expansion-panel-header>
+    <mat-accordion>
+      <mat-list>
+        <mat-list-item *ngFor="let route of myRoutes">
+          {{route.startTime | date : 'medium'}} to {{route.endTime | date : 'medium'}}
+        </mat-list-item>
+      </mat-list>
+    </mat-accordion>
+  </mat-expansion-panel>
+
+</div>
