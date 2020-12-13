@@ -45,9 +45,9 @@ export class RouteService {
     );
   }
 
-  addRoute(route: Route): Observable<Route[]> {
+  addRoute(route: Route): Observable<Route> {
     const httpOptions = this.authService.getAuthHttpOptions();
-    return this.http.post<Route[]>(this.authUrl + 'profile/routes', route, httpOptions).pipe(
+    return this.http.post<Route>(this.authUrl + 'profile/routes', route, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
