@@ -2,7 +2,7 @@
 <h4>Comments:</h4>
   <ul>
     <li *ngFor="let comment of rootComments">
-      <app-dog-park-comment-display [comment]="comment" (contentChange)="onContentChange(true)">
+      <app-dog-park-comment-display [comment]="comment" [user]="user" (contentChange)="onContentChange(true)">
 
       </app-dog-park-comment-display>
     </li>

@@ -18,11 +18,17 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button class="btn btn-secondary" (click)="reply()">Reply</button>
-      <button class="btn btn-danger" ngbPopover="Clicking here permanently deletes your comment" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?" (click)="delete(comment)">Delete</button>
-      <button class="btn btn-secondary" (click)="setUpdate()">Edit</button>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="reply()">Reply</button>
+        <button class="btn btn-secondary" *ngIf="checkLoginMatchesUser(comment.user)" (click)="setUpdate()">Edit</button>
+        <button class="btn btn-danger" *ngIf="checkLoginMatchesUser(comment.user)" ngbPopover="Clicking here permanently deletes your comment" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?" (click)="delete(comment)">Delete</button>
+      </div>
       <button class="btn btn-secondary" *ngIf="comment.replies.length > 0 && !showReplies" (click)="toggleReplies()">Show Replies</button>
       <button class="btn btn-secondary" *ngIf="comment.replies.length > 0 && showReplies" (click)="toggleReplies()">Hide Replies</button>
+      <div class="btn-group">
+        <button class="btn btn-danger" *ngIf="checkLoginIsAdmin()" ngbPopover="Clicking here permanently deletes your comment" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?" (click)="delete(comment)">Delete (Admin)</button>
+        <button class="btn btn-secondary" *ngIf="checkLoginIsAdmin()" (click)="setUpdate()">Edit (Admin)</button>
+      </div>
     </mat-card-actions>
     <mat-card-footer>
       <mat-card *ngIf="newReply">

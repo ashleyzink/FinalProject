@@ -1,6 +1,8 @@
 import { DogParkCommentService } from './../../../services/dog-park-comment.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DogParkComment } from 'src/app/models/dog-park-comment';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-dog-park-comment-display',
@@ -15,17 +17,33 @@ export class DogParkCommentDisplayComponent implements OnInit {
 
   @Output('contentHasChanged') contentChange2 = new EventEmitter<boolean>();
 
+  @Input() user: User;
+
   showReplies: boolean = false;
   newReply: DogParkComment = null;
   updateComment: DogParkComment = null;
 
-  constructor(private dogParkCommentService: DogParkCommentService) { }
+
+  constructor(private dogParkCommentService: DogParkCommentService, private authService: AuthService) { }
 
   ngOnInit(): void {
+
   }
 
   setUpdate() {
     this.updateComment = this.comment;
+  }
+
+  checkLoginMatchesUser(user: User): boolean {
+    return this.authService.checkUserLoggedIn(user);
+  }
+
+  checkLoginIsAdmin(): boolean {
+    return this.authService.checkLoggedInUserIsAdmin();
+  }
+
+  getLoggedInUser(): User {
+    return this.authService.getLoggedInUser();
   }
 
   reply() {

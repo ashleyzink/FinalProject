@@ -80,7 +80,7 @@
           </map-marker>
         </google-map>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions class="text-center">
         <button class="btn btn-secondary" mat-button (click)="map.panTo(center)">Center Map</button>
       </mat-card-actions>
     </mat-card>
@@ -102,8 +102,8 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button class="btn btn-secondary" mat-button (click)="toggleUpdate()">EDIT</button>
-        <button class="btn btn-danger" ngbPopover="Clicking here permanently deletes the Dog Park" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?" mat-button (click)="delete(selected.id)">DELETE</button>
+        <button *ngIf="checkLoginIsAdmin()" class="btn btn-secondary" mat-button (click)="toggleUpdate()">EDIT</button>
+        <button *ngIf="checkLoginIsAdmin()" class="btn btn-danger" ngbPopover="Clicking here permanently deletes the Dog Park" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?" mat-button (click)="delete(selected.id)">DELETE</button>
         <button class="btn btn-secondary" mat-button (click)="deselect()">DESELECT</button>
       </mat-card-actions>
     </mat-card>
@@ -219,8 +219,9 @@
         </div>
       </mat-card-content>
 
-      <mat-card-actions>
-        <button class="btn btn-secondary" mat-button (click)="create(newDogPark, newAddress)">ADD</button>
+      <mat-card-actions class="text-center">
+        <button *ngIf="user" class="btn btn-outline-secondary" mat-button (click)="create(newDogPark, newAddress)">Add Location</button>
+        <button *ngIf="!user" class="btn btn-outline-secondary" mat-button [routerLink]="['/login']">Login to Add Location</button>
       </mat-card-actions>
     </mat-card>
 
@@ -334,8 +335,10 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button class="btn btn-secondary" mat-button (click)="update(updateDogPark, updateDogPark.address)">UPDATE</button>
-        <button class="btn btn-secondary" mat-button (click)="deselect()">DESELECT</button>
+        <div class="btn-group">
+          <button class="btn btn-outline-secondary" mat-button (click)="update(updateDogPark, updateDogPark.address)">Submit</button>
+          <button class="btn btn-outline-secondary" mat-button (click)="deselect()">Cancel</button>
+        </div>
       </mat-card-actions>
     </mat-card>
   </div>
