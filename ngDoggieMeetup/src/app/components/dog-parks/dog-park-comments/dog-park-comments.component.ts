@@ -26,6 +26,10 @@ export class DogParkCommentsComponent implements OnInit {
     this.reload();
   }
 
+  ngOnChanges(): void {
+    this.reload();
+  }
+
   reload() {
     this.dogParkCommentService.index(this.dogPark.id).subscribe(
       data => this.rootComments = data,
