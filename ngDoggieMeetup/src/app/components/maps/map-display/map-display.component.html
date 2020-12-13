@@ -1,0 +1,19 @@
+
+<google-map
+#myMap
+height="500px"
+width="100%"
+[zoom]="zoom"
+[center]="center"
+mapId="ff79bdf3fe4b810b"
+[options]="options"
+(mapDblclick)="myMap.panTo()"
+>
+
+<map-polyline [path]="myLocArr">
+</map-polyline>
+
+</google-map>
+<app-tracker [user]="user" (updatedPostion)="drawRoute($event)">
+
+</app-tracker>
