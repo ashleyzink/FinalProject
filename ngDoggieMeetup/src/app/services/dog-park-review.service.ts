@@ -44,9 +44,10 @@ export class DogParkReviewService {
     return httpOptions;
   }
 
-  index(dogParkId: number): Observable<DogParkReview[]> {
+  index(dogParkId?: number): Observable<DogParkReview[]> {
     const httpOptions = this.getHttpOptions();
-    return this.http
+    if (dogParkId) {
+      return this.http
       .get<DogParkReview[]>(
         this.url + dogParkId + '/dogParkReviews',
         httpOptions
@@ -57,7 +58,21 @@ export class DogParkReviewService {
           return throwError('error getting to the dog park review index');
         })
       );
-  }
+    } else {
+
+      return this.http
+      .get<DogParkReview[]>(
+        environment.baseUrl + 'api/dogParkReviews',
+        httpOptions
+        )
+        .pipe(
+          catchError((err: any) => {
+            console.log(err);
+            return throwError('error getting to the dog park review index');
+          })
+          );
+        }
+      }
   // show(dogParkId: number, userId: number): Observable<DogParkReview> {
   //   const httpOptions = this.getHttpOptions();
   //   return this.http

@@ -1,8 +1,9 @@
+import { DogParkService } from './../../services/dog-park.service';
 import { DogPark } from 'src/app/models/dog-park';
 import { DogParkReviewId } from './../../models/dog-park-review-id';
 import { DogParkReview } from './../../models/dog-park-review';
 import { DogParkReviewService } from './../../services/dog-park-review.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
@@ -17,19 +18,33 @@ export class DogParkReviewComponent implements OnInit {
   newDogParkReview: DogParkReview = new DogParkReview();
   dogParkReviews: DogParkReview[] = [];
   editDogParkReview: DogParkReview = null;
-  dogParkId: number = 1;
+  dogParks: DogPark[] = [];
+  @Input() dogParkId: number;
+  @Input() dogParkSelected: DogPark;
   displayTable() {
     this.selected = null;
   }
 
-  constructor(private dogParkReviewService: DogParkReviewService) {}
+  constructor(private dogParkReviewService: DogParkReviewService, private dogParkService: DogParkService) {}
 
   displayDogParkReview(dogparkReview) {
     this.selected = dogparkReview;
   }
 
   ngOnInit(): void {
+    if (this.dogParkId && this.dogParkSelected) {
+      this.dogParks.push(this.dogParkSelected)
+    } else {
+      this.loadDogParks();
+    }
     this.reload();
+  }
+
+  loadDogParks() {
+    this.dogParkService.index().subscribe(
+      data => this.dogParks = data,
+      error => console.error('error loading dog parks for dog park reviews')
+    )
   }
 
   reload(): void {
