@@ -32,9 +32,18 @@ public class DogParkReviewController {
 	@Autowired
 	private UserService userSvc;
 
-	@GetMapping("dogParks/{dogParkId}/dogParkReviews")
+	@GetMapping("dogParkReviews")
 	public List<DogParkReview> index(HttpServletRequest req, HttpServletResponse res) {
 		List<DogParkReview> dogParkReviews = dogParkReviewSvc.index();
+		if (dogParkReviews == null) {
+			res.setStatus(404);
+		}
+		return dogParkReviews;
+	}
+	
+	@GetMapping("dogParks/{dogParkId}/dogParkReviews")
+	public List<DogParkReview> indexByDogPark(HttpServletRequest req, HttpServletResponse res, @PathVariable int dogParkId) {
+		List<DogParkReview> dogParkReviews = dogParkReviewSvc.index(dogParkId);
 		if (dogParkReviews == null) {
 			res.setStatus(404);
 		}

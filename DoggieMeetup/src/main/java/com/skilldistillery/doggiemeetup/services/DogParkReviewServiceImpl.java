@@ -29,6 +29,11 @@ public class DogParkReviewServiceImpl implements DogParkReviewService {
 	public List<DogParkReview> index() {
 		return dogParkReviewRepo.findAll();
 	}
+	
+	@Override
+	public List<DogParkReview> index(int dogParkId) {
+		return dogParkReviewRepo.findByDogPark_Id(dogParkId);
+	}
 
 	@Override
 	public DogParkReview show(int userId, int dogParkId) {

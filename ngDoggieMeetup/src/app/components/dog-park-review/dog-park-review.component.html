@@ -120,13 +120,34 @@
       />
       <form *ngIf="!selected" #addDogParkReviewForm="ngForm">
         Dog Park Name:
-        <input
+        <input *ngIf="!dogParkSelected"
           type="text"
           name="name"
           [(ngModel)]="newDogParkReview.dogPark"
           id="validationServer01"
           required
         />
+        <div *ngIf="dogParkSelected">
+          {{dogParkSelected.name}}
+          <input
+          hidden
+          readonly
+          [value]="dogParkSelected.name"
+          type="text"
+          name="name"
+          [(ngModel)]="newDogParkReview.dogPark"
+          required
+          />
+        </div>
+
+        <!-- <select name="name" [(ngModel)]="newDogParkReview.dogPark" id="validationServer01" required>
+          <option *ngFor="let dogPark of dogParks" value={{dogPark.name}}>
+            {{dogPark.name}}
+          </option>
+        </select> -->
+
+
+
         <hr />
         <label>Upload and Share Your Photo!</label>
         <br />
