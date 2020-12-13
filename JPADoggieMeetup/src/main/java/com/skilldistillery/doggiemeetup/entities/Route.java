@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Route {
@@ -31,7 +31,7 @@ public class Route {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"route"})
 	@OneToMany(mappedBy = "route")
 	private List<Location> locations;
 
