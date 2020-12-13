@@ -31,6 +31,15 @@ export class DogParkReviewComponent implements OnInit {
     this.selected = dogparkReview;
   }
 
+  getDogParkIdFromName(input: string): number {
+    for (let i = 0; i < this.dogParks.length; i++) {
+      if (this.dogParks[i].name == input) {
+        return this.dogParks[i].id;
+      }
+    }
+    return null;
+  }
+
   ngOnInit(): void {
     if (this.dogParkId && this.dogParkSelected) {
       this.dogParks.push(this.dogParkSelected)
@@ -64,11 +73,18 @@ export class DogParkReviewComponent implements OnInit {
 
   addDogParkReview(addDogParkReviewForm: NgForm) {
     console.log(addDogParkReviewForm.value);
+    let id;
+    if (!this.dogParkId) {
+      id = this.getDogParkIdFromName(addDogParkReviewForm.value['name']);
+    } else {
+      id = this.dogParkId;
+    }
     this.dogParkReviews.push(this.newDogParkReview);
     this.dogParkReviewService
-      .create(addDogParkReviewForm.value, this.dogParkId)
+      .create(addDogParkReviewForm.value, id)
       .subscribe(
         (data) => {
+
           this.reload();
         },
         (err) => {
