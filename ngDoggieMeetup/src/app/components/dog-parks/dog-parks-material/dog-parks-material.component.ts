@@ -1,9 +1,11 @@
+import { AuthService } from 'src/app/services/auth.service';
 
 import { Component, OnInit } from '@angular/core';
 import { Address } from 'src/app/models/address';
 import { DogPark } from 'src/app/models/dog-park';
 import { DogParkService } from 'src/app/services/dog-park.service';
 import { MapsService } from 'src/app/services/maps.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-dog-parks-material',
@@ -47,9 +49,13 @@ export class DogParksMaterialComponent implements OnInit {
   markerOptions: google.maps.MarkerOptions = {draggable: true};
   newLocation = {lat: 0, lng: 0};
 
-  constructor(private dogParkService: DogParkService, private mapsService: MapsService) { }
+  user: User;
+
+  constructor(private dogParkService: DogParkService, private mapsService: MapsService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.reloadUserInMemory;
+    this.user = this.authService.getLoggedInUser();
     this.reload();
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
@@ -65,6 +71,18 @@ export class DogParksMaterialComponent implements OnInit {
 
       // this.markers.push(this.currentLocation);
     })
+  }
+
+  checkLoginMatchesUser(user: User): boolean {
+    return this.authService.checkUserLoggedIn(user);
+  }
+
+  checkLoginIsAdmin(): boolean {
+    return this.authService.checkLoggedInUserIsAdmin();
+  }
+
+  getLoggedInUser(): User {
+    return this.authService.getLoggedInUser();
   }
 
   test(item) {

@@ -1,3 +1,5 @@
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { DogPark } from './../../../models/dog-park';
 import { DogParkCommentService } from './../../../services/dog-park-comment.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -13,8 +15,9 @@ export class DogParkCommentsComponent implements OnInit {
   @Input() dogPark: DogPark;
   rootComments: DogParkComment[];
   newComment: DogParkComment = new DogParkComment();
+  user: User;
 
-  constructor(private dogParkCommentService: DogParkCommentService) { }
+  constructor(private dogParkCommentService: DogParkCommentService, private authService: AuthService) { }
 
   onContentChange(change: boolean) {
     console.log('in onContentChange()')
@@ -24,6 +27,19 @@ export class DogParkCommentsComponent implements OnInit {
   ngOnInit(): void {
     console.log('comments for dog park id: ' + this.dogPark.id)
     this.reload();
+    this.authService.reloadUserInMemory();
+  }
+
+  checkLoginMatchesUser(user: User): boolean {
+    return this.authService.checkUserLoggedIn(user);
+  }
+
+  checkLoginIsAdmin(): boolean {
+    return this.authService.checkLoggedInUserIsAdmin();
+  }
+
+  getLoggedInUser(): User {
+    return this.authService.getLoggedInUser();
   }
 
   ngOnChanges(): void {

@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -44,7 +46,7 @@ public class Dog {
 	
 	@Column(name="rainbow_bridge")
 	private LocalDate rainbowBridge;
-	
+	@CreationTimestamp
 	@Column(name="create_date")
 	private LocalDate createDate;
 	
