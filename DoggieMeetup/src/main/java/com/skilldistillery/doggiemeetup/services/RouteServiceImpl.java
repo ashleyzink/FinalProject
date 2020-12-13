@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.doggiemeetup.entities.Location;
 import com.skilldistillery.doggiemeetup.entities.Route;
 import com.skilldistillery.doggiemeetup.entities.User;
+import com.skilldistillery.doggiemeetup.repositories.LocationRepository;
 import com.skilldistillery.doggiemeetup.repositories.RouteRepository;
 import com.skilldistillery.doggiemeetup.repositories.UserRepository;
 
@@ -17,7 +19,11 @@ public class RouteServiceImpl implements RouteService {
 	private RouteRepository routeRepo;
 	
 	@Autowired
+	private LocationRepository locationRepo;
+	
+	@Autowired
 	private UserRepository userRepo;
+	
 
 	@Override
 	public List<Route> index(String username) {
@@ -42,6 +48,14 @@ public class RouteServiceImpl implements RouteService {
 		User user = userRepo.findByUsername(username);
 		if (user != null) {
 			route.setUser(user);
+			route = routeRepo.save(route);
+			for (Location location : route.getLocations()) {
+				location.setRoute(route);
+				locationRepo.saveAndFlush(location);
+			}
+			System.out.println("--------------------------------");
+			System.out.println(route);
+			System.out.println("--------------------------------");
 			routeRepo.saveAndFlush(route);
 		}
 		return route;

@@ -1,3 +1,11 @@
+<div>
+  <h4>
+    My Walks
+  </h4>
+</div>
+<app-tracker [user]="user" (positionChanged)="updateMarker($event)" (updatedPostion)="drawRoute($event)">
+
+</app-tracker>
 
 <div *ngIf="distanceDisplay">
   <p>Distance: {{distanceDisplay | number : '1.1-1'}} meters</p>
@@ -27,9 +35,7 @@ mapId="ff79bdf3fe4b810b"
 </map-marker>
 
 </google-map>
-<app-tracker [user]="user" (positionChanged)="updateMarker($event)" (updatedPostion)="drawRoute($event)">
 
-</app-tracker>
 <button class="btn" *ngIf="hideRoutes" (click)="toggleRoutes()">
   Show All My Walks
 </button>
