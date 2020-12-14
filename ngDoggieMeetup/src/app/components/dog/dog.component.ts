@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { UserProfileService } from './../../services/user-profile.service';
 import { User } from './../../models/user';
 import { DogService } from './../../services/dog.service';
@@ -18,7 +19,7 @@ export class DogComponent implements OnInit {
   editDog: Dog = null;
   dogs: Dog[] = [];
   newUser: User = new User();
-  constructor(private dogService: DogService, private userProfileService: UserProfileService) { }
+  constructor(private dogService: DogService, private userProfileService: UserProfileService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.reload();
@@ -95,6 +96,15 @@ export class DogComponent implements OnInit {
     );
   }
 
+  checkLoginMatchesUser(user: User): boolean {
+    return this.authService.checkUserLoggedIn(user);
+  }
+  checkLoginIsAdmin(): boolean {
+    return this.authService.checkLoggedInUserIsAdmin();
+  }
+  getLoggedInUser(): User {
+    return this.authService.getLoggedInUser();
+  }
 
 
 }
