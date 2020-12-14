@@ -11,7 +11,7 @@ __________________________________________________________
 
 #### Overview
 
-#### Presentation 
+#### Presentation
 
 #### Trello Board
 [Trello](https://trello.com/invite/b/bPVmplMP/647f6b5cd996f410a3066f02363e27ad/sugar-ribbons)
@@ -68,3 +68,28 @@ __________________________________________________________
 #### User Stories
 __________________________________________________________
 #### User Story 1:
+As a User,  I can create an account profile as an Owner and attach my dogs profile to the account.
+
+#### User Story 2:
+As a User, I can create my dog's profile page for the dog and their dog details that will have a link on their Owner's account page.
+
+#### User Story 3:
+As a User, I  can see dog park locations, connect with other owners, schedule meet up times/group meetups/one on one meet ups, as well as write reviews of the dog parks and rate the dog parks.
+
+#### User Story 5:
+As a User, I can mark the dog parks in the area on the map and leave a review and rating.
+
+#### User Story 6:
+As a User, I can schedule a meet up (scheduled time) with other owners to join that meet up at the dog park/or area.
+
+#### User Story 7:
+As a User they can rate/review the dog parks, etc.
+
+#### User Story 8:
+As a User, I can have a list of friends and see their profile page with their dogs profile as well.
+
+#### User Story 9:
+As an Admin, I can disable/enable accounts, delete user comments if not appropriate, and update.
+
+#### User Story 10: Stretch Goal
+As a User, I can track my route when I walk my dog with the miles/routes. 
