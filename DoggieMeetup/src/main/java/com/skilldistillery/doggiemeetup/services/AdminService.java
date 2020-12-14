@@ -1,5 +1,7 @@
 package com.skilldistillery.doggiemeetup.services;
 
+import java.util.List;
+
 import com.skilldistillery.doggiemeetup.entities.GeneralComment;
 import com.skilldistillery.doggiemeetup.entities.MeetupComment;
 import com.skilldistillery.doggiemeetup.entities.User;
@@ -23,5 +25,9 @@ public interface AdminService {
 	Boolean disable(int id);
 
 	Boolean enable(int id);
+
+	boolean destroyDog(int dogId);
+	
+	List<User> getUsernameEmailFirstNameLastNameBioByKeyword(String keyword);
 
 }
