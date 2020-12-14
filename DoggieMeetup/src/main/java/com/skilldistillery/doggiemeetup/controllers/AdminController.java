@@ -1,6 +1,7 @@
 package com.skilldistillery.doggiemeetup.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +46,11 @@ public class AdminController {
 		}
 		return user;
 	}
+	
+	@GetMapping("admin/search/{keyword}")
+	public List<User> getUserFromKeyword(@PathVariable String keyword) {
+		return adminSvc.getUsernameEmailFirstNameLastNameBioByKeyword(keyword);
+	}
 
 	@PutMapping("auth/admin/users/{userId}")
 	public User update(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,
@@ -75,9 +81,9 @@ public class AdminController {
 	@PutMapping("auth/admin/users/{userId}/enable")
 	public void enable(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId, Principal principal) {
 		try {
-			System.out.println("*********************" +  principal + "************************");
+			System.out.println("*********************" + principal + "************************");
 			if (hasAdminRole(principal)) {
-				System.out.println("*********************" +  principal + "************************");
+				System.out.println("*********************" + principal + "************************");
 				boolean enabled = adminSvc.enable(userId);
 				if (enabled) {
 					res.setStatus(200);
@@ -89,12 +95,14 @@ public class AdminController {
 			res.setStatus(400);
 		}
 	}
+
 	@PutMapping("auth/admin/users/rejoin/{userId}")
-	public void enable2(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId, Principal principal) {
+	public void enable2(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,
+			Principal principal) {
 		try {
-			System.out.println("*********************" +  principal + "************************");
+			System.out.println("*********************" + principal + "************************");
 			if (hasAdminRole(principal)) {
-				System.out.println("*********************" +  principal + "************************");
+				System.out.println("*********************" + principal + "************************");
 				boolean enabled = adminSvc.enable(userId);
 				if (enabled) {
 					res.setStatus(200);
@@ -111,19 +119,35 @@ public class AdminController {
 	public void disable(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,
 			Principal principal) {
 		try {
-			System.out.println("********************" + principal + "********************************");
 			if (hasAdminRole(principal)) {
 				boolean disabled = adminSvc.disable(userId);
 				if (disabled) {
 					res.setStatus(204);
 				} else {
-					System.out.println("*******Something went bad mmmKay***********");
 					res.setStatus(404);
 				}
 			}
 		} catch (Exception e) {
 			res.setStatus(400);
 		}
+	}
+
+	@DeleteMapping("auth/admin/dogs/{dogId}")
+	public void destroyDog(HttpServletRequest req, HttpServletResponse res, @PathVariable int dogId,
+			Principal principal) {
+		try {
+			if (hasAdminRole(principal)) {
+				boolean deleted = adminSvc.destroyDog(dogId);
+				if (deleted) {
+					res.setStatus(204);
+				} else {
+					res.setStatus(404);
+				}
+			}
+		} catch (Exception e) {
+			res.setStatus(400);
+		}
+
 	}
 
 	// Admin mapping for General Comments
