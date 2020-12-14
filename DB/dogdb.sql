@@ -113,34 +113,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `dog_review`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `dog_review` ;
-
-CREATE TABLE IF NOT EXISTS `dog_review` (
-  `rating` INT NULL,
-  `review` TEXT NULL,
-  `img_url` VARCHAR(5000) NULL,
-  `user_id` INT NOT NULL,
-  `dog_id` INT NOT NULL,
-  `review_date` DATETIME NULL,
-  PRIMARY KEY (`dog_id`, `user_id`),
-  INDEX `fk_review_user1_idx` (`user_id` ASC),
-  INDEX `fk_review_dog1_idx` (`dog_id` ASC),
-  CONSTRAINT `fk_review_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_review_dog1`
-    FOREIGN KEY (`dog_id`)
-    REFERENCES `dog` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `user_fav_dog_park`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `user_fav_dog_park` ;
@@ -498,25 +470,6 @@ INSERT INTO `dog_park` (`id`, `address_id`, `name`, `description`, `off_leash`, 
 INSERT INTO `dog_park` (`id`, `address_id`, `name`, `description`, `off_leash`, `image_url`) VALUES (8, 8, 'Shaggy Pines Dog Park\n', ' This 15-acre, fenced-in paradise is like a spa resort for dogs. Rolling hills, open green spaces and towering pines give it a secluded feeling despite being close to downtown Cascade Township. The park boasts a pristine doggy swimming pond, separate areas for small and large dogs, and an events space that also hosts agility and training classes. And then there\'s Doggy Mountain, a large sand pile specifically designed for dogs who can’t get enough of climbing and digging.', 1, 'https://photos.bringfido.com/photo/2019/06/17/Shaggy_Pines_2.jpg?size=entry&density=2x');
 INSERT INTO `dog_park` (`id`, `address_id`, `name`, `description`, `off_leash`, `image_url`) VALUES (9, 9, 'Hugh Rogers WAG Park\n', ' Location isn’t everything but it’s certainly helped this scenic dog park make our list. While your pooch plays and makes new friends, you can enjoy panoramic views of the soaring peaks (dotted with skiers in the snowy months) and watch for the occasional train trundling by on the nearby track. Named after the Whitefish Animal Group, the WAG park contains separate areas for small and large dogs, an agility course and a large pond with an adjacent dog beach. ', 1, 'https://photos.bringfido.com/photo/2019/06/17/Hugh_Rogers_Wag_Park.jpg?size=entry&density=2x');
 INSERT INTO `dog_park` (`id`, `address_id`, `name`, `description`, `off_leash`, `image_url`) VALUES (10, 10, 'Warren G. Magnuson Park Off-Leash Dog Area\n', 'At a whopping 8.6 acres, this fully fenced-in area is the only park inside city limits that has water access, and it\'s no mere splash pool. You and your dog get to enjoy Lake Washington, the second largest lake in the state. Stroll the paved trails with your pup, let her burn off some energy in the park\'s open spaces, and take her to the sloped shoreline where she can dip her paws in the water. The park has a separate area for small dogs who prefer their own company to the raucous bunch in the large dog area.', 2, 'https://photos.bringfido.com/photo/2019/06/17/Magnuson_Bark_Park.jpg?size=entry&density=2x');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `dog_review`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dogdb`;
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (5, 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555439209/shape/mentalfloss/345eyrhfj.png?itok=WBbnAek5', 1, 1, '2020-10-10 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (3, 'dogs get along just fine', NULL, 2, 2, '2020-12-10 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (1, 'steer clear of this animal!', NULL, 3, 3, '2020-01-10 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (2, 'dog is not friendly to other cats', NULL, 4, 4, '2020-08-10 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (4, 'would love to hang out with this dog again', NULL, 5, 5, '2020-08-14 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (4, 'Fun dog and experience', NULL, 6, 6, '2020-08-14 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (5, 'learned more than i though i already knew', NULL, 7, 7, '2020-08-14 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (3, 'nice change of pace', NULL, 8, 8, '2020-08-14 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (4, 'our dogs connected on so many different levels', NULL, 9, 9, '2020-08-14 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (5, 'i dont think my dog wanted to leave the park ', NULL, 10, 10, '2020-08-14 12:30:16');
 
 COMMIT;
 
