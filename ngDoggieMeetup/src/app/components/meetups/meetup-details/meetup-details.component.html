@@ -79,6 +79,7 @@
           </div>
         </div>
 
+
         <div class="btn-group">
           <button class="btn btn-outline-secondary" *ngIf="checkLoginMatchesUser(meetup.user)" (click)="setEdit()">Edit</button>
           <button class="btn btn-outline-secondary" *ngIf="checkLoginIsAdmin()" (click)="setEdit()">Edit (Admin)</button>
@@ -87,5 +88,7 @@
     </mat-card-actions>
 
   </mat-card>
+  <br>
+  <br>
 
 </div>
