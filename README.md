@@ -71,7 +71,7 @@ __________________________________________________________
 As a User,  I can create an account profile as an Owner and attach my dogs profile to the account.
 
 #### User Story 2:
-As a User, I can create my dog's profile page for the dog and their dog details that will have a link on their Owner's account page.
+As a User, I can create my dog's profile page for the dog and their dog details that will have a link on their Owner's account page. They also can update their profile pages including the dogs profile page as well and/or remove a dog if they have passed.
 
 #### User Story 3:
 As a User, I  can see dog park locations, connect with other owners, schedule meet up times/group meetups/one on one meet ups, as well as write reviews of the dog parks and rate the dog parks.
@@ -92,4 +92,4 @@ As a User, I can have a list of friends and see their profile page with their do
 As an Admin, I can disable/enable accounts, delete user comments if not appropriate, and update.
 
 #### User Story 10: Stretch Goal
-As a User, I can track my route when I walk my dog with the miles/routes.
+As a User, I can track my route when I walk my dog via Google Maps, it will also track the total walks, and show all of my walks.

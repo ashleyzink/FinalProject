@@ -15,7 +15,7 @@
       <button class="btn btn-outline-secondary" *ngIf="hideRoutes" (click)="toggleRoutes()">
         Show All My Walks
       </button>
-      <button class="btn btn-secondary" *ngIf="!hideRoutes" (click)="toggleRoutes()">
+      <button class="btn btn-outline-secondary" *ngIf="!hideRoutes" (click)="toggleRoutes()">
         Hide All My Walks
       </button>
       <span *ngIf="distanceDisplay"><p>Distance: <span class="text-info font-weight-bold">{{distanceDisplay | number : '1.1-1'}}</span> meters</p></span>

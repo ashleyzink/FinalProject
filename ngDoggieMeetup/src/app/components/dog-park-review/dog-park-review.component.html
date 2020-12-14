@@ -92,18 +92,12 @@
       <!-- <label> Park Photo: </label>
       <input type="image" [(ngModel)]="editDogParkReview.imgUrl" /> -->
       <hr />
-      <button
-        class="btn button2"
-        (click)="
-          updateDogParkReview(editDogParkReview, editDogParkReview.dogPark.id)
-        "
-      >
-        Save
-      </button>
-      <br />
-      <button class="btn button3" (click)="editDogParkReview = null">
-        Cancel Changes
-      </button>
+
+      <div class="btn-group">
+        <button class="btn btn-outline-secondary"(click)="updateDogParkReview(editDogParkReview, editDogParkReview.dogPark.id)">Save</button>
+        <!-- <br /> -->
+        <button class="btn btn-outline-danger" (click)="editDogParkReview = null">Cancel Changes</button>
+      </div>
     </div>
   </div>
 
@@ -190,7 +184,7 @@
           name="submit"
           value="Add Dog Park Review Form"
           (click)="addDogParkReview(addDogParkReviewForm)"
-          class="btn btn-primary"
+          class="btn btn-outline-primary"
         >
           Submit Review
         </button>

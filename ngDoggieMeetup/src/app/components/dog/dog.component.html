@@ -21,7 +21,7 @@
           </ul>
 
           <!-- <button class="btn btn-success" (click)="setEditDog()">Update Dog</button> -->
-          <button class="btn btn-primary" (click)="displayDogDetails()">Dog Table</button>
+          <button class="btn btn-outline-primary" (click)="displayDogDetails()">Dog Table</button>
         </div>
     </div>
       <div *ngIf="editDog">
@@ -41,7 +41,7 @@
           Rainbow Bridge<input type="date" name="rainbowBridge" [(ngModel)]="editDog.rainbowBridge" placeholder="rainbowBridge"><br>
           Doggie Profile Pic: <input type="text" name="image" [(ngModel)]="editDog.profilePicUrl" placeholder="profilePicUrl"><br>
           <!-- <button class="btn btn-success" (click)="update(editDog)">Update Dog</button> -->
-          <button (click)='editDog=null'>Cancel</button>
+          <button class="btn btn-outline-danger" (click)='editDog=null'>Cancel</button>
         </form>
       </div>
     <div id="dogList" *ngIf="!selected">
