@@ -81,9 +81,7 @@ public class AdminController {
 	@PutMapping("auth/admin/users/{userId}/enable")
 	public void enable(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId, Principal principal) {
 		try {
-			System.out.println("*********************" + principal + "************************");
 			if (hasAdminRole(principal)) {
-				System.out.println("*********************" + principal + "************************");
 				boolean enabled = adminSvc.enable(userId);
 				if (enabled) {
 					res.setStatus(200);
@@ -100,9 +98,7 @@ public class AdminController {
 	public void enable2(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,
 			Principal principal) {
 		try {
-			System.out.println("*********************" + principal + "************************");
 			if (hasAdminRole(principal)) {
-				System.out.println("*********************" + principal + "************************");
 				boolean enabled = adminSvc.enable(userId);
 				if (enabled) {
 					res.setStatus(200);
