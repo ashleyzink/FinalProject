@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Dog } from 'src/app/models/dog';
 import { User } from 'src/app/models/user';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { DogService } from 'src/app/services/dog.service';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 
 @Component({
@@ -22,8 +19,6 @@ export class AdminComponent implements OnInit {
 
   constructor(private adminService: AdminService,
               private userProfileService: UserProfileService,
-              private dogService: DogService,
-              private router: Router,
               private authService: AuthService) { }
 
   ngOnInit(): void {
