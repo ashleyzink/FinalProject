@@ -1,9 +1,16 @@
 <h2 style="text-align: center;">Doggie <i class='fas fa-paw'></i> Meetup!</h2>
+<!-- <style>
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style> -->
 <div id="carousel">
   <ngb-carousel class="carousel-inner" *ngIf="images">
     <ng-template ngbSlide *ngFor="let image of images">
       <div class="picsum-img-wrapper">
-        <img [src]="image" alt="Random first slide"/>
+        <img [src]="image" alt="Random first slide" class="center" />
       </div>
       <div class="carousel-caption">
         <h3>Doggie <i class='fas fa-paw'></i> Meetup!</h3>

@@ -1,14 +1,27 @@
-#carousel {
-  margin-left: auto;
+ #carousel {
+   width: 100%;
+  /* margin-left: auto;
   margin-right: auto;
-  width:75%;
+  width:65%;
   height: 75vh;
   border-radius: 100%;
-  margin-bottom: 150px;
+  margin-bottom: 150px; */
 }
 
 .carousel-inner{
-  display: block;
+  width: 100%;
+  /* display: block;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; */
+}
+
+.picsum-img-wrapper {
+  width: 100%;
+  text-align: center;
+}
+.picsum-img-wrapper > img {
+  display: inline-block;
+  margin: 10px;
+  min-height: 599px;
+  max-height: 600px;
 }
