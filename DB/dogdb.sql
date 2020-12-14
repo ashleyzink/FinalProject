@@ -113,6 +113,34 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `dog_review`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `dog_review` ;
+
+CREATE TABLE IF NOT EXISTS `dog_review` (
+  `rating` INT NULL,
+  `review` TEXT NULL,
+  `img_url` VARCHAR(5000) NULL,
+  `user_id` INT NOT NULL,
+  `dog_id` INT NOT NULL,
+  `review_date` DATETIME NULL,
+  PRIMARY KEY (`dog_id`, `user_id`),
+  INDEX `fk_review_user1_idx` (`user_id` ASC),
+  INDEX `fk_review_dog1_idx` (`dog_id` ASC),
+  CONSTRAINT `fk_review_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_review_dog1`
+    FOREIGN KEY (`dog_id`)
+    REFERENCES `dog` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `user_fav_dog_park`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `user_fav_dog_park` ;
