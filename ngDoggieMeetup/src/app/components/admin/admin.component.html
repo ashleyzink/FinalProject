@@ -4,8 +4,8 @@
   Last Name: <input type="text" name="lastName" placeholder="{{editUser.lastName}}" [(ngModel)]="editUser.lastName"><br><br>
   Profile Pic: <input type="text" name="profilePhotoUrl" placeholder="Change Profile Pic Url" [(ngModel)]="editUser.profilePhotoUrl"><br><br>
   Bio: <textarea name="bio" cols="40" rows="4" placeholder="{{editUser.bio}}" [(ngModel)]="editUser.bio"></textarea><br><br>
-  <button class="btn btn-secondary" (click)='updateUser(editUser)'>Save</button>
-  <button class="btn btn-secondary" (click)='editUser=null'>Cancel</button>
+  <button class="btn btn-outline-secondary" (click)='updateUser(editUser)'>Save</button>
+  <button class="btn btn-outline-secondary" (click)='editUser=null'>Cancel</button>
 </div>
 
 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
