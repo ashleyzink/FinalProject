@@ -1,8 +1,6 @@
-<div>
-  <button class="btn" *ngIf="!route" (click)="newRoute()">
+  <button class="btn btn-outline-success" *ngIf="!route" (click)="newRoute()">
     Start a walk
   </button>
-  <button class="btn" *ngIf="route" (click)="endRoute()">
+  <button class="btn btn-outline-danger" *ngIf="route" (click)="endRoute()">
     End walk
   </button>
-</div>

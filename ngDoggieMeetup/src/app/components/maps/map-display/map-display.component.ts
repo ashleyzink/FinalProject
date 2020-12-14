@@ -12,7 +12,7 @@ import { Location } from 'src/app/models/location';
 })
 export class MapDisplayComponent implements OnInit {
   user: User;
-  zoom = 12
+  zoom = 15
   center: google.maps.LatLngLiteral
   options: google.maps.MapOptions = {
     zoomControl: true,
@@ -39,6 +39,7 @@ export class MapDisplayComponent implements OnInit {
   currentLocation = {};
   routeDistances = {};
   distanceDisplay = 0;
+  routePolyMapping = {};
 
 
   constructor(private authService: AuthService, private routeService: RouteService) { }
@@ -102,7 +103,6 @@ export class MapDisplayComponent implements OnInit {
       this.allMyPolylines.push(poly);
     }
   }
-
 
   getUserRoutes() {
     this.routeService.getUserRoutes().subscribe(
