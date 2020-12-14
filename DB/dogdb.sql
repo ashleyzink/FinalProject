@@ -503,25 +503,6 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `dog_review`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dogdb`;
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (5, 'Nam semper maximus elit id porta. Phasellus eu velit purus.', 'https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555439209/shape/mentalfloss/345eyrhfj.png?itok=WBbnAek5', 1, 1, '2020-10-10 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (3, 'dogs get along just fine', NULL, 2, 2, '2020-12-10 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (1, 'steer clear of this animal!', NULL, 3, 3, '2020-01-10 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (2, 'dog is not friendly to other cats', NULL, 4, 4, '2020-08-10 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (4, 'would love to hang out with this dog again', NULL, 5, 5, '2020-08-14 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (4, 'Fun dog and experience', NULL, 6, 6, '2020-08-14 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (5, 'learned more than i though i already knew', NULL, 7, 7, '2020-08-14 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (3, 'nice change of pace', NULL, 8, 8, '2020-08-14 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (4, 'our dogs connected on so many different levels', NULL, 9, 9, '2020-08-14 12:30:16');
-INSERT INTO `dog_review` (`rating`, `review`, `img_url`, `user_id`, `dog_id`, `review_date`) VALUES (5, 'i dont think my dog wanted to leave the park ', NULL, 10, 10, '2020-08-14 12:30:16');
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `user_fav_dog_park`
 -- -----------------------------------------------------
 START TRANSACTION;

@@ -20,6 +20,10 @@ export class UserProfileComponent implements OnInit {
   dogs = [];
   newDog: Dog = null;
   editDogProfile: Dog = null;
+  showFriendList: Boolean = false;
+
+  userForFriends: User = null;
+
   constructor(private userProfileService: UserProfileService, private dogService: DogService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -40,6 +44,12 @@ this.show();
     );
   }
 
+  showUserFriends() {
+    this.showFriendList = true;
+    console.log(this.userForFriends.friendList);
+
+
+  }
 
   create(dog: Dog, user: User){
     dog.user = user;
@@ -64,6 +74,7 @@ this.show();
       (user) => {
         this.reload();
         this.selected = user;
+        this.userForFriends = user;
       },
       (fail) => {
       console.error('UserProfileComponent.show(): error getting user ')
@@ -89,6 +100,13 @@ this.show();
 
   goToFriendProfile(id: number){
     this.router.navigateByUrl('/friendProfile/' + id);
+  }
+
+  showAllUsers() {
+    this.userProfileService.showAllUsers().subscribe(
+      data => this.users = data,
+      fail => console.error('Error showing showAllUsers()')
+    );
   }
 
 

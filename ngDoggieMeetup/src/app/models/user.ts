@@ -13,6 +13,7 @@ export class User {
   profilePhotoUrl: string;
   bio: string;
   dogs: Dog[];
+  friendList: User[];
   // TODO address, createDate, profilePrivate, locationPrivate
   // TODO relationships?
 
@@ -28,7 +29,8 @@ export class User {
     dateOption?: boolean,
     profilePhotoUrl?: string,
     bio?: string,
-    dogs?: Dog[]
+    dogs?: Dog[],
+    friendList?: User[]
   ) {
     this.id = id;
     this.username = username;
@@ -42,5 +44,6 @@ export class User {
     this.profilePhotoUrl = profilePhotoUrl;
     this.bio = bio;
     this.dogs = dogs;
+    this.friendList = friendList;
   }
 }

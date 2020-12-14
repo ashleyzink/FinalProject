@@ -87,7 +87,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List <GeneralComment> generalComments;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties("friendList")
 	@ManyToMany
 	@JoinTable(name="user_friend_request",
 	joinColumns=@JoinColumn(name="user_id"),
