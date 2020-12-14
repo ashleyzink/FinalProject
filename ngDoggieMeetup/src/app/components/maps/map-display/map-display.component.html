@@ -1,29 +1,44 @@
-<div>
-  <h4>
-    My Walks
-  </h4>
-</div>
-<app-tracker [user]="user" (positionChanged)="updateMarker($event)" (updatedPostion)="drawRoute($event)">
+<mat-card>
 
-</app-tracker>
+<mat-card-header>
+    <h4 class="text-center">
+      My Walks
+      <span class="badge badge-info">{{myRoutes.length}}</span>
+    </h4>
+</mat-card-header>
 
-<div *ngIf="distanceDisplay">
-  <p>Distance: {{distanceDisplay | number : '1.1-1'}} meters</p>
-</div>
-<google-map
-#myMap
-height="500px"
-width="100%"
-[zoom]="zoom"
-[center]="center"
-mapId="ff79bdf3fe4b810b"
-[options]="options"
-(mapDblclick)="myMap.panTo()"
->
+<mat-card-actions>
 
-<map-polyline [path]="myLocArr"></map-polyline>
+  <div class="text-center">
+    <app-tracker  [user]="user" (positionChanged)="updateMarker($event)" (updatedPostion)="drawRoute($event)"></app-tracker>
+    <div>
+      <button class="btn btn-outline-secondary" *ngIf="hideRoutes" (click)="toggleRoutes()">
+        Show All My Walks
+      </button>
+      <button class="btn btn-secondary" *ngIf="!hideRoutes" (click)="toggleRoutes()">
+        Hide All My Walks
+      </button>
+      <span *ngIf="distanceDisplay"><p>Distance: <span class="text-info font-weight-bold">{{distanceDisplay | number : '1.1-1'}}</span> meters</p></span>
+    </div>
+  </div>
+</mat-card-actions>
 
-<map-polyline
+<mat-card-content>
+
+  <google-map
+  #myMap
+  height="500px"
+  width="100%"
+  [zoom]="zoom"
+  [center]="center"
+  mapId="ff79bdf3fe4b810b"
+  [options]="options"
+  (mapDblclick)="myMap.panTo()"
+  >
+
+  <map-polyline [path]="myLocArr"></map-polyline>
+
+  <map-polyline
   *ngFor="let polyLine of allMyPolylines"
   [path]="polyLine.getPath()"
   (polylineClick)="getDistance(polyLine.getPath())"
@@ -35,13 +50,9 @@ mapId="ff79bdf3fe4b810b"
 </map-marker>
 
 </google-map>
+</mat-card-content>
 
-<button class="btn" *ngIf="hideRoutes" (click)="toggleRoutes()">
-  Show All My Walks
-</button>
-<button class="btn" *ngIf="!hideRoutes" (click)="toggleRoutes()">
-  Hide All My Walks
-</button>
+</mat-card>
 
 <div>
   <mat-expansion-panel>
@@ -49,7 +60,9 @@ mapId="ff79bdf3fe4b810b"
     <mat-accordion>
       <mat-list>
         <mat-list-item *ngFor="let route of myRoutes">
-          {{route.startTime | date : 'medium'}} to {{route.endTime | date : 'medium'}}
+          <span class="text-info">{{route.startTime | date : 'short'}}</span>
+          <span class="text-secondary"> - </span>
+          <span class="text-info">{{route.endTime | date : 'shortTime'}}</span>
         </mat-list-item>
       </mat-list>
     </mat-accordion>
