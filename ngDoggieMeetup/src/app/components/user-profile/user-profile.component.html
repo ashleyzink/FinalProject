@@ -28,19 +28,21 @@
 </div>
 </div>
 <hr>
+
+
 <div *ngIf='showFriendList'>
-<div *ngFor="let friend of userForFriends.friendList">
-First Name: {{friend.firstName}}
-<br>
-Last Name:  {{friend.lastName}}
-<br>
-Username:  {{friend.username}}
-<br>
-<img class="img-thumbnail" [src]="friend.profilePhotoUrl" />
+  <h3>List of Friends:</h3>
+  <br>
+  <div *ngFor="let friend of userForFriends.friendList">
+    <div class="container">
+      <img [src]="friend.profilePhotoUrl" class="img-fluid z-depth-1 rounded-circle" style="width:100px;height:100px;">  Username:  {{friend.username}}
+    </div>
+    <br>
+  </div>
 </div>
-</div>
 <br>
 <br>
+<hr>
 <div *ngIf='editUser'>
   <!-- TODO: Add a seperate edit funtion to change password, that compares to old password,
   and confirms change before it goes through-->
@@ -55,8 +57,6 @@ Username:  {{friend.username}}
   <div class="btn-group">
     <button class="btn btn-outline-secondary" (click)='updateUser(editUser)'>Save</button>
     <button class="btn btn-outline-secondary"  (click)='editUser=null'>Cancel</button>
-
-
     <button class="btn btn-outline-secondary"  (click)="disableUser(editUser.id)">Disable Account</button>
   </div>
 </div>

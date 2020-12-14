@@ -15,6 +15,7 @@ export class FriendProfileComponent implements OnInit {
   editFriend: User = null;
   friends = [];
 
+
   constructor(
     private userProfileService: UserProfileService,
     private router: Router,
