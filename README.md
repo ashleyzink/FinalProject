@@ -1,4 +1,4 @@
-# FinalProject: Doggie Meetup
+# FinalProject: Doggie :paw_prints: Meetup
 
 [DoggieMeetup](http://3.131.11.111:8080/DoggieMeetup/#/home)
 
@@ -92,4 +92,4 @@ As a User, I can have a list of friends and see their profile page with their do
 As an Admin, I can disable/enable accounts, delete user comments if not appropriate, and update.
 
 #### User Story 10: Stretch Goal
-As a User, I can track my route when I walk my dog with the miles/routes. 
+As a User, I can track my route when I walk my dog with the miles/routes.
