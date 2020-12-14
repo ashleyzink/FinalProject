@@ -1,5 +1,6 @@
 package com.skilldistillery.doggiemeetup.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.skilldistillery.doggiemeetup.entities.Dog;
 import com.skilldistillery.doggiemeetup.entities.GeneralComment;
 import com.skilldistillery.doggiemeetup.entities.MeetupComment;
 import com.skilldistillery.doggiemeetup.entities.User;
@@ -109,6 +111,18 @@ public class AdminServiceImpl implements AdminService {
 		return false;
 	}
 
+	@Override
+	public boolean destroyDog(int dogId) {
+		boolean deleted = false;
+		Optional<Dog> dogOpt = dogRepo.findById(dogId);
+		if (dogOpt.isPresent()) {
+			Dog dog = dogOpt.get();
+			dogRepo.delete(dog);
+			deleted = true;
+		}
+		return deleted;
+	}
+	
 	// Gencom implementations
 
 	@Override
@@ -151,6 +165,12 @@ public class AdminServiceImpl implements AdminService {
 			deleted = true;
 		}
 		return deleted;
+	}
+
+	@Override
+	public List<User> getUsernameEmailFirstNameLastNameBioByKeyword(String keyword) {
+//		keyword = "%" + keyword + "%";
+		return userRepo.findByUsernameOrEmailOrFirstNameOrLastNameOrBioLike(keyword, keyword, keyword, keyword, keyword);
 	}
 
 }

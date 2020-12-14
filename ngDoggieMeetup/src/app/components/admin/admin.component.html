@@ -1,3 +1,13 @@
+<div *ngIf='editUser'>
+  <h4>{{editUser.username}} Edit Your Profile Information</h4><br>
+  First Name: <input type="text" name="firstName" placeholder="{{editUser.firstName}}" [(ngModel)]="editUser.firstName"><br><br>
+  Last Name: <input type="text" name="lastName" placeholder="{{editUser.lastName}}" [(ngModel)]="editUser.lastName"><br><br>
+  Profile Pic: <input type="text" name="profilePhotoUrl" placeholder="Change Profile Pic Url" [(ngModel)]="editUser.profilePhotoUrl"><br><br>
+  Bio: <textarea name="bio" cols="40" rows="4" placeholder="{{editUser.bio}}" [(ngModel)]="editUser.bio"></textarea><br><br>
+  <button class="btn btn-outline-secondary" (click)='updateUser(editUser)'>Save</button>
+  <button class="btn btn-outline-secondary" (click)='editUser=null'>Cancel</button>
+</div>
+
 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
   <ngb-panel title="Display All Users">
     <ng-template ngbPanelContent>
@@ -20,23 +30,40 @@
               <td>{{user.username}}</td>
               <td>{{user.firstName}}</td>
               <td>{{user.lastName}}</td>
-              <button class="btn btn-secondary" (click)='setEditUser(user)'>Edit User Info</button>
-                <td><button *ngIf="user.enabled" (click)="disableUser(user.id)" type="button" class="btn btn-danger" ngbPopover="Clicking here disables user profile" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?">Disable</button></td>
-                <td><button *ngIf="!user.enabled" (click)="disableUser(user.id)" type="button" class="btn btn-success" ngbPopover="Clicking here activates user profile" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?">Enable</button></td>
+              <button class="btn btn-outline-secondary" (click)='setEditUser(user)'>Edit User Info</button>
+                <td><button *ngIf="user.enabled" (click)="disableUser(user.id)" type="button" class="btn btn-outline-danger" ngbPopover="Clicking here disables user profile" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?">Disable</button></td>
+                <td><button *ngIf="!user.enabled" (click)="disableUser(user.id)" type="button" class="btn btn-outline-success" ngbPopover="Clicking here activates user profile" triggers="mouseenter:mouseleave" popoverTitle="Enable">Enable</button></td>
             </tr>
           </tbody>
         </table>
       </div>
     </ng-template>
   </ngb-panel>
+
+  <ngb-panel title="Display All Dogs">
+    <ng-template ngbPanelContent>
+      <div>
+        <table *ngIf="!selected" class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Dog ID#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Breed</th>
+              <th scope="col">Delete Dog</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dog of dogs" >
+              <td>{{dog.id}}</td>
+              <td>{{dog.name}}</td>
+              <td>{{dog.breed}}</td>
+                <td><button (click)="deleteDog(dog.id)" type="button" class="btn btn-outline-danger" ngbPopover="Clicking here deletes dog permanently" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?">X</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </ngb-panel>
+
 </ngb-accordion>
-    <div *ngIf='editUser'>
-      <h4>{{editUser.username}} Edit Your Profile Information</h4><br>
-      First Name: <input type="text" name="firstName" placeholder="{{editUser.firstName}}" [(ngModel)]="editUser.firstName"><br><br>
-      Last Name: <input type="text" name="lastName" placeholder="{{editUser.lastName}}" [(ngModel)]="editUser.lastName"><br><br>
-      Profile Pic: <input type="text" name="profilePhotoUrl" placeholder="Change Profile Pic Url" [(ngModel)]="editUser.profilePhotoUrl"><br><br>
-      Bio: <textarea name="bio" cols="40" rows="4" placeholder="{{editUser.bio}}" [(ngModel)]="editUser.bio"></textarea><br><br>
-      <button class="btn btn-secondary" (click)='updateUser(editUser)'>Save</button>
-      <button class="btn btn-secondary" (click)='editUser=null'>Cancel</button>
-    </div>
 

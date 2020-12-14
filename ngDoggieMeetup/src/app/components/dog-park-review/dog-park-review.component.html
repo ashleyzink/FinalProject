@@ -111,18 +111,12 @@
       <!-- <label> Park Photo: </label>
       <input type="image" [(ngModel)]="editDogParkReview.imgUrl" /> -->
       <hr />
-      <button
-        class="btn button2"
-        (click)="
-          updateDogParkReview(editDogParkReview, editDogParkReview.dogPark.id)
-        "
-      >
-        Save
-      </button>
-      <br />
-      <button class="btn button3" (click)="editDogParkReview = null">
-        Cancel Changes
-      </button>
+
+      <div class="btn-group">
+        <button class="btn btn-outline-secondary"(click)="updateDogParkReview(editDogParkReview, editDogParkReview.dogPark.id)">Save</button>
+        <!-- <br /> -->
+        <button class="btn btn-outline-danger" (click)="editDogParkReview = null">Cancel Changes</button>
+      </div>
     </div>
   </div>
 
@@ -168,38 +162,47 @@
           </option>
         </select> -->
 
-      <hr />
-      <label>Upload and Share Your Photo!</label>
-      <br />
-      <input
-        type="text"
-        name="photo"
-        placeholder="photo Url"
-        [(ngModel)]="newDogParkReview.imgUrl"
-      />
-      <div class="valid-feedback">Looks good!</div>
-      <hr />
-      <label for="validationServerReview">Write Your Review!</label>
-      <div class="input-group">
-        <div class="input-group-prepend"></div>
-        <textarea
-          name="review"
-          cols="40"
-          rows="4"
-          wrap="hard"
-          spellcheck="true"
-          autocapitalize="sentences"
-          autocomplete="on"
-          class="form-control is-valid"
-          id="validationServer02"
-          required
-          [(ngModel)]="newDogParkReview.review"
-          class="form-control is-invalid"
-          id="validationServerReview"
-          placeholder="Review..."
-          aria-describedby="inputGroupPrepend3"
-          required
-        >
+        <hr />
+        <label>Upload and Share Your Photo!</label>
+        <br />
+        <input
+          type="text"
+          name="photo"
+          placeholder="photo Url"
+          [(ngModel)]="newDogParkReview.imgUrl"
+        />
+        <div class="valid-feedback">Looks good!</div>
+        <hr />
+        <label for="validationServerReview">Write Your Review!</label>
+        <div class="input-group">
+          <div class="input-group-prepend"></div>
+          <textarea
+            name="review"
+            cols="40"
+            rows="4"
+            wrap="hard"
+            spellcheck="true"
+            autocapitalize="sentences"
+            autocomplete="on"
+            class="form-control is-valid"
+            id="validationServer02"
+            required
+            [(ngModel)]="newDogParkReview.review"
+            class="form-control is-invalid"
+            id="validationServerReview"
+            placeholder="Review..."
+            aria-describedby="inputGroupPrepend3"
+            required
+          >
+          </textarea>
+          <div class="invalid-feedback">Please Write A Review.</div>
+        </div>
+        <button
+          type="submit"
+          name="submit"
+          value="Add Dog Park Review Form"
+          (click)="addDogParkReview(addDogParkReviewForm)"
+          class="btn btn-outline-primary">
         </textarea>
         <div class="invalid-feedback">Please Write A Review.</div>
       </div>

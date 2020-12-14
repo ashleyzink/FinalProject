@@ -19,15 +19,15 @@
 
     <mat-card-actions>
       <div class="btn-group">
-        <button class="btn btn-secondary" (click)="reply()">Reply</button>
-        <button class="btn btn-secondary" *ngIf="checkLoginMatchesUser(comment.user)" (click)="setUpdate()">Edit</button>
-        <button class="btn btn-danger" *ngIf="checkLoginMatchesUser(comment.user)" ngbPopover="Clicking here permanently deletes your comment" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?" (click)="delete(comment)">Delete</button>
+        <button class="btn btn-outline-secondary" (click)="reply()">Reply</button>
+        <button class="btn btn-outline-secondary" *ngIf="checkLoginMatchesUser(comment.user)" (click)="setUpdate()">Edit</button>
+        <button class="btn btn-outline-danger" *ngIf="checkLoginMatchesUser(comment.user)" ngbPopover="Clicking here permanently deletes your comment" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?" (click)="delete(comment)">Delete</button>
+        <button class="btn btn-outline-secondary" *ngIf="comment.replies.length > 0 && !showReplies" (click)="toggleReplies()">Show Replies</button>
+        <button class="btn btn-outline-secondary" *ngIf="comment.replies.length > 0 && showReplies" (click)="toggleReplies()">Hide Replies</button>
       </div>
-      <button class="btn btn-secondary" *ngIf="comment.replies.length > 0 && !showReplies" (click)="toggleReplies()">Show Replies</button>
-      <button class="btn btn-secondary" *ngIf="comment.replies.length > 0 && showReplies" (click)="toggleReplies()">Hide Replies</button>
       <div class="btn-group">
-        <button class="btn btn-danger" *ngIf="checkLoginIsAdmin()" ngbPopover="Clicking here permanently deletes your comment" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?" (click)="delete(comment)">Delete (Admin)</button>
-        <button class="btn btn-secondary" *ngIf="checkLoginIsAdmin()" (click)="setUpdate()">Edit (Admin)</button>
+        <button class="btn btn-outline-danger" *ngIf="checkLoginIsAdmin()" ngbPopover="Clicking here permanently deletes your comment" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?" (click)="delete(comment)">Delete (Admin)</button>
+        <button class="btn btn-outline-secondary" *ngIf="checkLoginIsAdmin()" (click)="setUpdate()">Edit (Admin)</button>
       </div>
     </mat-card-actions>
     <mat-card-footer>
@@ -37,7 +37,7 @@
             <textarea type="text" name="commentText" [(ngModel)]="newReply.commentText" cols="30"></textarea>
           </div>
           <div>
-            <button class="btn btn-secondary" (click)="create(newReply)">Submit</button>
+            <button class="btn btn-outline-secondary" (click)="create(newReply)">Submit</button>
           </div>
 
         </mat-card-content>
@@ -49,7 +49,7 @@
             <textarea type="text" name="commentText" [(ngModel)]="updateComment.commentText" cols="30"></textarea>
           </div>
           <div>
-            <button class="btn btn-secondary" (click)="update(updateComment)">Submit</button>
+            <button class="btn btn-outline-secondary" (click)="update(updateComment)">Submit</button>
           </div>
 
         </mat-card-content>

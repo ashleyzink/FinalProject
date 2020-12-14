@@ -25,7 +25,7 @@
         <mat-list>
           <mat-list-item *ngFor="let dog of dogs">
             <div matLine>
-              <span>{{dog.name}}</span>
+              <span>{{dog.name}} <img [src]="dog.profilePicUrl" class="img-fluid z-depth-1 rounded-circle" style="width:50px;height:50px;"> </span>
             </div>
             <div matLine>
               <span>{{dog.name}}'s Human: {{dog.user.username}}</span>
@@ -49,8 +49,11 @@
           <input matInput type="datetime-local" name="meetupDate" [(ngModel)]="editMeetup.meetupDate">
         </mat-form-field>
         <br>
-        <button class="btn btn-secondary" (click)="update(editMeetup)">Update</button>
-        <button class="btn btn-danger" (click)="editMeetup = null;">Cancel</button>
+
+        <div class="btn-group">
+          <button class="btn btn-outline-secondary" (click)="update(editMeetup)">Update</button>
+          <button class="btn btn-outline-danger" (click)="editMeetup = null;">Cancel</button>
+        </div>
       </div>
 
     </mat-card-content>
@@ -70,15 +73,22 @@
           </select>
           <br>
           <br>
-          <button class="btn btn-secondary" (click)="addDogToMeetup(meetup, selectedDog)">Join</button><br><br>
 
-          <button class="btn btn-secondary">Comment</button>
+          <div class="btn-group">
+            <button class="btn btn-outline-secondary" (click)="addDogToMeetup(meetup, selectedDog)">Join</button>
+          </div>
         </div>
-        <button class="btn btn-secondary" *ngIf="checkLoginMatchesUser(meetup.user)" (click)="setEdit()">Edit</button>
-        <button class="btn btn-secondary" *ngIf="checkLoginIsAdmin()" (click)="setEdit()">Edit (Admin)</button>
+
+
+        <div class="btn-group">
+          <button class="btn btn-outline-secondary" *ngIf="checkLoginMatchesUser(meetup.user)" (click)="setEdit()">Edit</button>
+          <button class="btn btn-outline-secondary" *ngIf="checkLoginIsAdmin()" (click)="setEdit()">Edit (Admin)</button>
+        </div>
       </div>
     </mat-card-actions>
 
   </mat-card>
+  <br>
+  <br>
 
 </div>

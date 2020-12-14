@@ -81,7 +81,7 @@
         </google-map>
       </mat-card-content>
       <mat-card-actions class="text-center">
-        <button class="btn btn-secondary" mat-button (click)="map.panTo(center)">Center Map</button>
+        <button class="btn btn-outline-secondary" mat-button (click)="map.panTo(center)">Center Map</button>
       </mat-card-actions>
     </mat-card>
   </div>
@@ -102,9 +102,11 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button *ngIf="checkLoginIsAdmin()" class="btn btn-secondary" mat-button (click)="toggleUpdate()">EDIT</button>
-        <button *ngIf="checkLoginIsAdmin()" class="btn btn-danger" ngbPopover="Clicking here permanently deletes the Dog Park" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?" mat-button (click)="delete(selected.id)">DELETE</button>
-        <button class="btn btn-secondary" mat-button (click)="deselect()">DESELECT</button>
+        <div class="btn-group">
+          <button *ngIf="checkLoginIsAdmin()" class="btn btn-outline-secondary" mat-button (click)="toggleUpdate()">EDIT</button>
+          <button *ngIf="checkLoginIsAdmin()" class="btn btn-outline-danger" ngbPopover="Clicking here permanently deletes the Dog Park" triggers="mouseenter:mouseleave" popoverTitle="Are you sure?" mat-button (click)="delete(selected.id)">DELETE</button>
+          <button class="btn btn-outline-secondary" mat-button (click)="deselect()">DESELECT</button>
+        </div>
       </mat-card-actions>
     </mat-card>
 
