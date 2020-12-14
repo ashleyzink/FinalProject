@@ -56,8 +56,8 @@ export class UserProfileService {
   }
 
   showAllUsers(): Observable<User[]> {
-    const httpOptions = this.getAuthHttpOptions();
-    return this.http.get<User[]>(this.authUrl, httpOptions).pipe(
+    const httpOptions = this.getHttpOptions();
+    return this.http.get<User[]>(this.url, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('UserService.showAllUsers(): Error getting list');

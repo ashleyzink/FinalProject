@@ -19,12 +19,25 @@
 
 
 </div>
-<hr>
+<div class="wrapper text-center">
+<div id="button-container" class="btn-group">
 <button class="btn btn-secondary" (click)='setEditUser()'>Edit User Info</button><br><br>
 <button class="btn btn-secondary" (click)='addDog()'>Add Dog to Pack</button><br><br>
-<button class="btn btn-secondary" id="friendProfileButton" (click)="goToFriendProfile(user.id)">See List of Friends  <i class='fas fa-paw'></i></button>
-
+<button class="btn btn-secondary" id="friendProfileButton" (click)="showUserFriends()">See List of Friends  <i class='fas fa-paw'></i></button>
+</div>
+</div>
 <hr>
+<div *ngIf='showFriendList'>
+<div *ngFor="let friend of userForFriends.friendList">
+First Name: {{friend.firstName}}
+<br>
+Last Name:  {{friend.lastName}}
+<br>
+Username:  {{friend.username}}
+<br>
+<img class="img-thumbnail" [src]="friend.profilePhotoUrl" />
+</div>
+</div>
 <br>
 <br>
 <div *ngIf='editUser'>
@@ -41,6 +54,8 @@
   <div class="btn-group">
     <button class="btn btn-outline-secondary" (click)='updateUser(editUser)'>Save</button>
     <button class="btn btn-outline-secondary"  (click)='editUser=null'>Cancel</button>
+
+
     <button class="btn btn-outline-secondary"  (click)="disableUser(editUser.id)">Disable Account</button>
   </div>
 </div>
