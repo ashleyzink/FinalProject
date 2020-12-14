@@ -1,3 +1,4 @@
+import { UserProfileService } from 'src/app/services/user-profile.service';
 import { DogParkService } from './../../services/dog-park.service';
 import { DogPark } from 'src/app/models/dog-park';
 import { DogParkReviewId } from './../../models/dog-park-review-id';
@@ -25,7 +26,7 @@ export class DogParkReviewComponent implements OnInit {
     this.selected = null;
   }
 
-  constructor(private dogParkReviewService: DogParkReviewService, private dogParkService: DogParkService) {}
+  constructor(private dogParkReviewService: DogParkReviewService, private dogParkService: DogParkService, private userProfileService: UserProfileService) {}
 
   displayDogParkReview(dogparkReview) {
     this.selected = dogparkReview;

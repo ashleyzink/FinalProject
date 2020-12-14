@@ -12,7 +12,8 @@
           <th width="15%">Dog Park Name</th>
           <th width="30%">Dog Park Photo</th>
           <th width="40%">Review</th>
-          <th width="10%">Review Date</th>
+          <th width="5%">Review Date</th>
+          <th width="5%">User</th>
         </tr>
       </thead>
       <tbody *ngFor="let dogParkReview of dogParkReviews">
@@ -24,13 +25,16 @@
             {{ dogParkReview.dogPark.name }}
           </td>
           <td (click)="displayDogParkReview(dogParkReview)">
-            <img class="img-thumbnail" [src]="dogParkReview.imgUrl" />
+            <img class="img-thumbnail" style= "width:300px; height:300px;" [src]="dogParkReview.imgUrl" />
           </td>
           <td (click)="displayDogParkReview(dogParkReview)">
             {{ dogParkReview.review }}
           </td>
           <td (click)="displayDogParkReview(dogParkReview)">
             {{ dogParkReview.reviewDate | date }}
+          </td>
+          <td (click)="displayDogParkReview(dogParkReview)">
+            {{ dogParkReview.user.username }}
           </td>
         </tr>
       </tbody>
@@ -42,18 +46,33 @@
       Rating: <strong>{{ selected.rating }}⭐️'s</strong>
     </p>
     <p>
-      Review: <strong>{{ selected.review }}</strong>
+      Review: <strong>{{ selected.review }}  </strong>
+    </p>
+    <p>
+      User: <strong>{{ selected.user.username }} <img class="img-thumbnail" style="width:100px; height:100px;" [src]="selected.user.profilePhotoUrl"></strong>
     </p>
     <p>
       Dog Park: <strong>{{ selected.dogPark.name }}</strong>
     </p>
     <p>
-      Image: <strong> <img [src]="selected.dogPark.imageUrl"> </strong>
+      Image: <strong> <img style= "width:500px; height:500px;" [src]="selected.dogPark.imageUrl" /> </strong>
     </p>
     <div class="btn-group">
-      <button class="btn btn-outline-secondary" (click)="displayTable()">Back</button>
-      <button class="btn btn-outline-secondary"(click)="setEditDogParkReview()">Edit</button>
-      <button class="btn btn-outline-danger"(click)="deleteDogParkReview(selected)">Delete</button>
+      <button class="btn btn-outline-secondary" (click)="displayTable()">
+        Back
+      </button>
+      <button
+        class="btn btn-outline-secondary"
+        (click)="setEditDogParkReview()"
+      >
+        Edit
+      </button>
+      <button
+        class="btn btn-outline-danger"
+        (click)="deleteDogParkReview(selected)"
+      >
+        Delete
+      </button>
     </div>
   </div>
 
@@ -115,17 +134,18 @@
         required
       />
 
-        Dog Park Name:
-        <input *ngIf="!dogParkSelected"
-          type="text"
-          name="name"
-          [(ngModel)]="newDogParkReview.dogPark"
-          id="validationServer01"
-          required
-        />
-        <div *ngIf="dogParkSelected">
-          {{dogParkSelected.name}}
-          <input
+      Dog Park Name:
+      <input
+        *ngIf="!dogParkSelected"
+        type="text"
+        name="name"
+        [(ngModel)]="newDogParkReview.dogPark"
+        id="validationServer01"
+        required
+      />
+      <div *ngIf="dogParkSelected">
+        {{ dogParkSelected.name }}
+        <input
           hidden
           readonly
           [value]="dogParkSelected.name"
@@ -133,16 +153,14 @@
           name="name"
           [(ngModel)]="newDogParkReview.dogPark"
           required
-          />
-        </div>
+        />
+      </div>
 
-        <!-- <select name="name" [(ngModel)]="newDogParkReview.dogPark" id="validationServer01" required>
+      <!-- <select name="name" [(ngModel)]="newDogParkReview.dogPark" id="validationServer01" required>
           <option *ngFor="let dogPark of dogParks" value={{dogPark.name}}>
             {{dogPark.name}}
           </option>
         </select> -->
-
-
 
         <hr />
         <label>Upload and Share Your Photo!</label>
@@ -184,11 +202,19 @@
           name="submit"
           value="Add Dog Park Review Form"
           (click)="addDogParkReview(addDogParkReviewForm)"
-          class="btn btn-outline-primary"
-        >
-          Submit Review
-        </button>
-
+          class="btn btn-outline-primary">
+        </textarea>
+        <div class="invalid-feedback">Please Write A Review.</div>
+      </div>
+      <button
+        type="submit"
+        name="submit"
+        value="Add Dog Park Review Form"
+        (click)="addDogParkReview(addDogParkReviewForm)"
+        class="btn btn-primary"
+      >
+        Submit Review
+      </button>
     </form>
   </div>
 </div>
