@@ -50,7 +50,7 @@ public class AdminController {
 	public User update(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,
 			@RequestBody User user, Principal principal) {
 
-		if (userSvc.show(principal.getName()).getRole().equals("admin")) {
+		if (hasAdminRole(principal)) {
 			try {
 				user = adminSvc.update(user, userId);
 				res.setStatus(200);
@@ -68,6 +68,64 @@ public class AdminController {
 		}
 	}
 
+	private boolean hasAdminRole(Principal principal) {
+		return userSvc.show(principal.getName()).getRole().equals("admin");
+	}
+
+	@PutMapping("auth/admin/users/{userId}/enable")
+	public void enable(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId, Principal principal) {
+		try {
+			System.out.println("*********************" +  principal + "************************");
+			if (hasAdminRole(principal)) {
+				System.out.println("*********************" +  principal + "************************");
+				boolean enabled = adminSvc.enable(userId);
+				if (enabled) {
+					res.setStatus(200);
+				} else {
+					res.setStatus(404);
+				}
+			}
+		} catch (Exception e) {
+			res.setStatus(400);
+		}
+	}
+	@PutMapping("auth/admin/users/rejoin/{userId}")
+	public void enable2(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId, Principal principal) {
+		try {
+			System.out.println("*********************" +  principal + "************************");
+			if (hasAdminRole(principal)) {
+				System.out.println("*********************" +  principal + "************************");
+				boolean enabled = adminSvc.enable(userId);
+				if (enabled) {
+					res.setStatus(200);
+				} else {
+					res.setStatus(404);
+				}
+			}
+		} catch (Exception e) {
+			res.setStatus(400);
+		}
+	}
+
+	@DeleteMapping("auth/admin/users/{userId}")
+	public void disable(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,
+			Principal principal) {
+		try {
+			System.out.println("********************" + principal + "********************************");
+			if (hasAdminRole(principal)) {
+				boolean disabled = adminSvc.disable(userId);
+				if (disabled) {
+					res.setStatus(204);
+				} else {
+					System.out.println("*******Something went bad mmmKay***********");
+					res.setStatus(404);
+				}
+			}
+		} catch (Exception e) {
+			res.setStatus(400);
+		}
+	}
+
 	// Admin mapping for General Comments
 	@GetMapping("auth/admin/generalComments/{genComId}")
 	public GeneralComment show(HttpServletResponse res, HttpServletRequest req, @PathVariable int genComId) {
@@ -81,7 +139,7 @@ public class AdminController {
 	@DeleteMapping("auth/admin/generalComments/{genComId}")
 	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int genComId,
 			Principal principal) {
-		if (userSvc.show(principal.getName()).getRole().equals("admin")) {
+		if (hasAdminRole(principal)) {
 			try {
 				boolean deleted = adminSvc.destroyGenCom(principal.getName(), genComId);
 				if (deleted) {
@@ -109,7 +167,7 @@ public class AdminController {
 	@DeleteMapping("auth/admin/meetups/{meetupId}/meetupComments/{meetupCommentId}")
 	public void destroyMeetupCom(HttpServletRequest req, HttpServletResponse res, @PathVariable int meetupCommentId,
 			Principal principal) {
-		if (userSvc.show(principal.getName()).getRole().equals("admin")) {
+		if (hasAdminRole(principal)) {
 			try {
 				boolean deleted = adminSvc.destroyMeetupComments(principal.getName(), meetupCommentId);
 				if (deleted) {
@@ -122,23 +180,5 @@ public class AdminController {
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

@@ -41,6 +41,8 @@ import { FriendProfileComponent } from './components/friend-profile/friend-profi
 import { TrackerComponent } from './components/maps/tracker/tracker.component';
 import { MapDisplayComponent } from './components/maps/map-display/map-display.component';
 import { WalksComponent } from './components/maps/walks/walks.component';
+import { AdminComponent } from './components/admin/admin.component';
+
 
 
 @NgModule({
@@ -64,7 +66,8 @@ import { WalksComponent } from './components/maps/walks/walks.component';
     FriendProfileComponent,
     TrackerComponent,
     MapDisplayComponent,
-    WalksComponent
+    WalksComponent,
+    AdminComponent
   ],
   imports: [
     CommonModule,

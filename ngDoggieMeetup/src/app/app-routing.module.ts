@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { DogProfileComponent } from './components/dog-profile/dog-profile.component';
 import { FriendProfileComponent } from './components/friend-profile/friend-profile.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'dogUserProfile/:id', component: DogProfileComponent },
   { path: 'walks', component: WalksComponent },
   // { path: 'dogEditProfile/:id', component: DogProfileComponent },
+  { path: 'admin', component: AdminComponent},
 
   // ---Place all other routes above here---
   { path: '**', component: NotFoundComponent }, //page not found route

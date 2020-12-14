@@ -20,4 +20,8 @@ public interface AdminService {
 
 	boolean destroyMeetupComments(String username, int meetupComId);
 
+	Boolean disable(int id);
+
+	Boolean enable(int id);
+
 }
