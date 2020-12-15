@@ -13,7 +13,7 @@ export class DogParkReview {
     id?: DogParkReviewId   ,
     rating?: number,
     review?: string,
-    imageUrl?: string,
+    imgUrl?: string,
     user?: User,
     reviewDate?: string,
     dogPark?: DogPark
@@ -21,7 +21,7 @@ export class DogParkReview {
     this.id = id;
     this.rating = rating;
     this.review = review;
-    this.imgUrl = imageUrl;
+    this.imgUrl = imgUrl;
     this.user = user;
     this.reviewDate = reviewDate;
     this.dogPark = dogPark;
