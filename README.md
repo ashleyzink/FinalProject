@@ -10,6 +10,7 @@ __________________________________________________________
 * Jourdan Rentschler(Developer)
 
 #### Overview
+Our application is designed for Dog Owner's to be able to connect with other Dog Owner's in their area by scheduling their own meetups or joining already existing meetups. This helps to build a bond and a community with other owners to be to ask for advice about their dogs, etc. You are able to read/write reviews of the Dog Parks and add Dog Parks you have visited that aren't already there! You can track your walks with your dogs to see how far your doggie can travel! Check out site for much much more! 
 
 #### Presentation
 
