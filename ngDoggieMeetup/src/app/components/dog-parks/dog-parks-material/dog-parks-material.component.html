@@ -28,7 +28,8 @@
                   [alt]="'Picture for ' + dogPark.name"
                 />
               </td>
-              <td>{{ dogPark.offLeash }}</td>
+              <td *ngIf="dogPark.offLeash">Yes</td>
+              <td *ngIf="!dogPark.offLeash">No</td>
               <td>
                 {{ dogPark.address.city }}, {{ dogPark.address.stateAbbrv }}
               </td>
@@ -80,6 +81,7 @@
           </map-marker>
         </google-map>
       </mat-card-content>
+      <p *ngIf="!selected || updateDogPark">Drag marker to set address</p>
       <mat-card-actions class="text-center">
         <button class="btn btn-outline-secondary" mat-button (click)="map.panTo(center)">Center Map</button>
       </mat-card-actions>
