@@ -108,8 +108,8 @@
         required
       ></textarea>
       <!-- <hr /> -->
-      <!-- <label> Park Photo: </label>
-      <input type="image" [(ngModel)]="editDogParkReview.imgUrl" /> -->
+      <label> Park Photo: </label>
+      <input type="text" name="imgUrl" [(ngModel)]="editDogParkReview.imgUrl" />
       <hr />
 
       <div class="btn-group">
@@ -124,36 +124,13 @@
   <div class="p-1 mb-1 bg-info text-white">
     <form *ngIf="!selected" #addDogParkReviewForm="ngForm">
       Rating:
-      <input
-        type="number"
-        min="1"
-        max="5"
-        name="rating"
-        [(ngModel)]="newDogParkReview.rating"
-        id="validationServer01"
-        required
-      />
+      <input type="number" min="1" max="5" name="rating" [(ngModel)]="newDogParkReview.rating" id="validationServer01" required/>
 
       Dog Park Name:
-      <input
-        *ngIf="!dogParkSelected"
-        type="text"
-        name="name"
-        [(ngModel)]="newDogParkReview.dogPark"
-        id="validationServer01"
-        required
-      />
+      <input *ngIf="!dogParkSelected" type="text" name="name" [(ngModel)]="newDogParkReview.dogPark" id="validationServer01" required/>
       <div *ngIf="dogParkSelected">
         {{ dogParkSelected.name }}
-        <input
-          hidden
-          readonly
-          [value]="dogParkSelected.name"
-          type="text"
-          name="name"
-          [(ngModel)]="newDogParkReview.dogPark"
-          required
-        />
+        <input hidden readonly [value]="dogParkSelected.name" type="text" name="name" [(ngModel)]="newDogParkReview.dogPark" required/>
       </div>
 
       <!-- <select name="name" [(ngModel)]="newDogParkReview.dogPark" id="validationServer01" required>
@@ -167,7 +144,7 @@
         <br />
         <input
           type="text"
-          name="photo"
+          name="imgUrl"
           placeholder="photo Url"
           [(ngModel)]="newDogParkReview.imgUrl"
         />
@@ -195,14 +172,8 @@
             required
           >
           </textarea>
-          <div class="invalid-feedback">Please Write A Review.</div>
         </div>
-        <button
-          type="submit"
-          name="submit"
-          value="Add Dog Park Review Form"
-          (click)="addDogParkReview(addDogParkReviewForm)"
-          class="btn btn-outline-primary">
+        <button type="submit"  name="submit" value="Add Dog Park Review Form" (click)="addDogParkReview(addDogParkReviewForm)" class="btn btn-outline-primary">
         Submit Review
       </button>
     </form>
