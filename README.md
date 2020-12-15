@@ -37,6 +37,7 @@ __________________________________________________________
 
 
 * Jourdan's Lessons Learned:
+During this final project taught me a lot about my self growth from the start of this bootcamp. I have learned so much in the last 16 weeks that I ever thought I was capable of being able to do. Being able to build a Full-Stack Application from start to finish was probably the most rewarding part of this project. I learned a lot about patience, trusting the process, and most importantly communicating with my team. When one of us need assistance we would SWARM/Pair Programming to help keeping moving the project forward. We all worked well as a team and collectively had really good ideas for the end product. I learned that I need to spend a little more time on Angular and that is what I will be doing after graduation. I am very proud of myself for consistently pushing  myself, never giving up, and humbled for how far I have come. Making a complete career change from Sales into Computer Programming has been the best decision I ever made!  
 
 
 
@@ -89,6 +90,9 @@ As a User they can rate/review the dog parks, etc.
 As a User, I can have a list of friends and see their profile page with their dogs profile as well.
 
 #### User Story 9:
+As a User, I can track my walk with my dog and record my routes to see how many walks we went on total.
+
+#### User Story 10:
 As an Admin, I can disable/enable accounts, delete user comments if not appropriate, and update.
 
 #### User Story 10: Stretch Goal
