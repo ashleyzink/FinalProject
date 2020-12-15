@@ -24,7 +24,8 @@
 <div id="button-container" class="btn-group">
 <button class="btn btn-outline-secondary" (click)='setEditUser()'>Edit User Info</button><br><br>
 <button class="btn btn-outline-secondary" (click)='addDog()'>Add Dog to Pack</button><br><br>
-<button class="btn btn-outline-secondary" id="friendProfileButton" (click)="showUserFriends()">See List of Friends  <i class='fas fa-paw'></i></button>
+<button *ngIf='!showFriendList' class="btn btn-outline-secondary" id="friendProfileButton" (click)="showUserFriends()">Show Friends List  <i class='fas fa-paw'></i></button>
+<button *ngIf='showFriendList' class="btn btn-outline-secondary" id="friendProfileButton" (click)="showFriendList = false">Hide Friends List  <i class='fas fa-paw'></i></button>
 </div>
 </div>
 <hr>
