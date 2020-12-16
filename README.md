@@ -10,6 +10,7 @@ __________________________________________________________
 * Jourdan Rentschler(Developer)
 
 #### Overview
+Our application is designed for Dog Owner's to be able to connect with other Dog Owner's in their area by scheduling their own meetups or joining already existing meetups. This helps to build a bond and a community with other owners to be to ask for advice about their dogs, etc. You are able to read/write reviews of the Dog Parks and add Dog Parks you have visited that aren't already there! You can track your walks with your dogs to see how far your doggie can travel! Check out site for much much more! 
 
 #### Presentation
 
@@ -37,6 +38,7 @@ __________________________________________________________
 
 
 * Jourdan's Lessons Learned:
+During this final project taught me a lot about my self growth from the start of this bootcamp. I have learned so much in the last 16 weeks that I ever thought I was capable of being able to do. Being able to build a Full-Stack Application from start to finish was probably the most rewarding part of this project. I learned a lot about patience, trusting the process, and most importantly communicating with my team. When one of us need assistance we would SWARM/Pair Programming to help keeping moving the project forward. We all worked well as a team and collectively had really good ideas for the end product. I learned that I need to spend a little more time on Angular and that is what I will be doing after graduation. I am very proud of myself for consistently pushing  myself, never giving up, and humbled for how far I have come. Making a complete career change from Sales into Computer Programming has been the best decision I ever made!  
 
 
 
@@ -89,6 +91,9 @@ As a User they can rate/review the dog parks, etc.
 As a User, I can have a list of friends and see their profile page with their dogs profile as well.
 
 #### User Story 9:
+As a User, I can track my walk with my dog and record my routes to see how many walks we went on total.
+
+#### User Story 10:
 As an Admin, I can disable/enable accounts, delete user comments if not appropriate, and update.
 
 #### User Story 10: Stretch Goal
